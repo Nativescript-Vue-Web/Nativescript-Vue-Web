@@ -1,16 +1,16 @@
 <template>
-  <img :src="imageSrc"/>
+  <img :src="imageSrc">
 </template>
 
 <script>
 export default {
-  name: 'Img',
-  props: ['src'],
-  data() {
-    return {
-      imageSrc: `${this.src.replace('~', '')}`,
-    };
-  },
+    name: "Img",
+    props: ["src"],
+    data() {
+        return {
+            imageSrc: `${this.src.replace("~", "")}`,
+        };
+    },
 };
 </script>
 

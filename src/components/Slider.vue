@@ -1,20 +1,26 @@
 <template>
-    <div class="slidecontainer">
-        <input v-on:input="valueChange($event)" type="range" :min="minValue"
-               :max="maxValue" :value="value" class="slider" id="myRange" />
-    </div>
+  <div class="slidecontainer">
+    <input 
+      id="myRange" 
+      :min="minValue" 
+      :max="maxValue"
+      :value="value" 
+      type="range" 
+      class="slider" 
+      @input="valueChange($event)" >
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Slider',
-  props: [
-    'value',
-    'model', // using :model="model" could not succeed to update the value. the value can be updated using the valueChange event: this.value = event.target.value;
-    'minValue',
-    'maxValue',
-    'valueChange', // an event.
-  ],
+    name: "Slider",
+    props: [
+        "value",
+        "model", // using :model="model" could not succeed to update the value. the value can be updated using the valueChange event: this.value = event.target.value;
+        "minValue",
+        "maxValue",
+        "valueChange", // an event.
+    ],
 };
 </script>
 

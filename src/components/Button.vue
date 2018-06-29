@@ -1,16 +1,19 @@
 <template>
-  <input type="button" @click="onClick" :value="text" />
+  <input 
+    :value="text" 
+    type="button" 
+    @click="onClick" >
 </template>
 
 <script>
 export default {
-  name: 'Button',
-  props: ['tap', 'text'],
-  methods: {
-    onClick() {
-      this.$emit('tap');
+    name: "Button",
+    props: ["tap", "text"],
+    methods: {
+        onClick() {
+            this.$emit("tap");
+        },
     },
-  },
 };
 </script>
 

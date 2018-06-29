@@ -1,11 +1,11 @@
 <template>
-  <span>{{text}}</span>
+  <span>{{ text }}</span>
 </template>
 
 <script>
 export default {
-  name: 'Label',
-  props: ['text'],
+    name: "Label",
+    props: ["text"],
 };
 </script>
 

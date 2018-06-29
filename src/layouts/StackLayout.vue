@@ -1,13 +1,13 @@
 <template>
   <div :class="{ 'stack-layout': true }">
-    <slot></slot>
+    <slot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'StackLayout',
-  props: ['tap', 'text'],
+    name: "StackLayout",
+    props: ["tap", "text"],
 };
 </script>
 
