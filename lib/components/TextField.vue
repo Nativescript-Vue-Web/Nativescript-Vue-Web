@@ -1,9 +1,5 @@
 <template>
-  <input 
-    :placeholder="text" 
-    :model="model" 
-    :maxlength="maxLength"
-    :type="secure ? 'password' : keyboardType" >
+    <input :placeholder="text" :model="model" :maxlength="maxLength" :type="secure ? 'password' : keyboardType" />
 </template>
 
 <script>

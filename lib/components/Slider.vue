@@ -1,14 +1,7 @@
 <template>
-  <div class="slidecontainer">
-    <input 
-      id="myRange" 
-      :min="minValue" 
-      :max="maxValue"
-      :value="value" 
-      type="range" 
-      class="slider" 
-      @input="valueChange($event)" >
-  </div>
+    <div class="slidecontainer">
+        <input v-on:input="valueChange($event)" type="range" :min="minValue" :max="maxValue" :value="value" class="slider" id="myRange" />
+    </div>
 </template>
 
 <script>

@@ -1,8 +1,5 @@
 <template>
-  <input 
-    :value="text" 
-    type="button" 
-    @click="onClick" >
+  <input type="button" @click="onClick" :value="text" />
 </template>
 
 <script>

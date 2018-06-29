@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'stack-layout': true }">
-    <slot/>
+    <slot></slot>
   </div>
 </template>
 

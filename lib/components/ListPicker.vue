@@ -1,15 +1,10 @@
 <template>
-  <select :model="selectedIndex">
-    <option 
-      :value="disabledVal" 
-      disabled>{{ disabledVal }}</option>
-    <option 
-      v-for="item in items" 
-      :key="item[valueProp]" 
-      :value="selectedIndex">
-      {{ item[labelProp] }}
-    </option>
-  </select>
+    <select :model="selectedIndex">
+        <option disabled :value="disabledVal">{{ disabledVal }}</option>
+        <option v-for="item in items" v-bind:key="item[valueProp]" v-bind:value="selectedIndex">
+                {{ item[labelProp] }}
+        </option>
+    </select>
 </template>
 
 <script>

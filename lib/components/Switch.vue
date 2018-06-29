@@ -1,9 +1,7 @@
 <template>
-  <label class="switch">
-    <span 
-      :value="checked" 
-      class="slider round" />
-  </label>
+    <label class="switch">
+        <span :value="checked" class="slider round" />
+    </label>
 </template>
 
 <script>
