@@ -4,15 +4,15 @@
 
 <script>
 export default {
-    name: "Label",
-    props: ["text", "left", "top"],
+    name: 'Label',
+    props: ['text', 'left', 'top'],
     data () {
         return {
-            style: "",  
+            style: '',  
         };
     },
     mounted () {
-        if (Number.isInteger(parseInt(this.left)) && Number.isInteger(parseInt(this.top)) && this.$parent.$options._componentTag == "AbsoluteLayout") {
+        if (Number.isInteger(parseInt(this.left)) && Number.isInteger(parseInt(this.top)) && this.$parent.$options._componentTag == 'AbsoluteLayout') {
             this.style = `left: ${this.left}px; top: ${this.top}px; background-color: blue;`;
         }
     },

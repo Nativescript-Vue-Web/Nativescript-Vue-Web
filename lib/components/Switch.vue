@@ -6,10 +6,10 @@
 
 <script>
 export default {
-    name: "Switch",
+    name: 'Switch',
     props: [
-        "checked",
-        "itemEnabled",
+        'checked',
+        'itemEnabled',
     ],
 };
 </script>

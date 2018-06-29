@@ -4,13 +4,13 @@
 
 <script>
 export default {
-    name: "TextField",
+    name: 'TextField',
     props: [
-        "model",
-        "maxLength",
-        "keyboardType",
-        "secure",
-        "text",
+        'model',
+        'maxLength',
+        'keyboardType',
+        'secure',
+        'text',
     ],
 };
 </script>

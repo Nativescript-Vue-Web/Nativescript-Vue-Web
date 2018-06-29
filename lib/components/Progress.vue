@@ -8,9 +8,9 @@
 
 <script>
 export default {
-    name: "Progress",
+    name: 'Progress',
     props: [
-        "value"
+        'value'
     ],
     data () {
         return {
@@ -24,8 +24,8 @@ export default {
                 return clearInterval(this.id);
             }
             this.progressValue++;
-            this.$refs.myBar.style.width = this.progressValue+ "%";
-            this.$refs.myBar.innerHTML = this.progressValue * 1 + "%";
+            this.$refs.myBar.style.width = this.progressValue+ '%';
+            this.$refs.myBar.innerHTML = this.progressValue * 1 + '%';
         },
     },
 };

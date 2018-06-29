@@ -6,10 +6,10 @@
 
 <script>
 export default {
-    name: "ActivityIndicator",
+    name: 'ActivityIndicator',
     props: [
-        "busy",
-        "busyChange", // an event.
+        'busy',
+        'busyChange', // an event.
     ],
 };
 </script>

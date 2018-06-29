@@ -10,22 +10,22 @@
 
 <script>
 export default {
-    name: "DatePicker",
+    name: 'DatePicker',
     props: [
-        "model",
-        "day",
-        "month",
-        "year",
-        "minDate",
-        "maxDate",
-        "dateChange"
+        'model',
+        'day',
+        'month',
+        'year',
+        'minDate',
+        'maxDate',
+        'dateChange'
     ],
     computed: {
         calcDate: function () {
             if(this.year != undefined && this.month != undefined && this.day != undefined) {
-                return this.year.concat("-").concat(this.month).concat("-").concat(this.day);
+                return this.year.concat('-').concat(this.month).concat('-').concat(this.day);
             }
-            return new Date().toISOString().replace(/T.*/,"").split("-").join("-");
+            return new Date().toISOString().replace(/T.*/,'').split('-').join('-');
         },
     },
 };

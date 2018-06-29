@@ -6,8 +6,8 @@
 
 <script>
 export default {
-    name: "StackLayout",
-    props: ["tap", "text"],
+    name: 'StackLayout',
+    props: ['tap', 'text'],
 };
 </script>
 

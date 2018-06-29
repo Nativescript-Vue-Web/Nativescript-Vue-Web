@@ -4,11 +4,11 @@
 
 <script>
 export default {
-    name: "Button",
-    props: ["tap", "text"],
+    name: 'Button',
+    props: ['tap', 'text'],
     methods: {
         onClick() {
-            this.$emit("tap");
+            this.$emit('tap');
         },
     },
 };
