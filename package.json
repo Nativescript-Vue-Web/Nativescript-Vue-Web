@@ -2,13 +2,13 @@
   "name": "nativescript-vue-web",
   "version": "0.1.0",
   "private": true,
-  "main": "./lib/main.js",
+  "main": "lib/main.js",
   "scripts": {
     "clear": "rimraf dist",
-    "lint": "eslint 'src/**/*.{js,vue}' --fix",
+    "lint": "eslint 'lib/**/*.{js,vue}' --fix",
     "pretest": "npm run lint",
     "test": "npm run test:unit",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "mocha --timeout 1000 tests/unit/*.spec.js",
     "preversion": "npm test",
     "version": "git add -A lib",
     "postversion": "git push && git push --tags"
