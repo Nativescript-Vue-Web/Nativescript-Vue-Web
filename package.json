@@ -8,21 +8,30 @@
     "lint": "eslint --fix lib/**/*.{js,vue}",
     "pretest": "npm run lint",
     "test": "npm run test:unit",
-    "test:unit": "mocha --timeout 1000 tests/unit/*.spec.js",
+    "test:unit": "mocha --compilers js:babel-core/register tests/unit/*.spec.js",
     "preversion": "npm test",
     "version": "git add -A lib",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-eslint": "^8.2.5",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-preset-vue-app": "^2.0.0",
     "chai": "^4.1.2",
     "eslint": "^5.0.1",
     "eslint-plugin-vue": "^4.5.0",
     "lint-staged": "^6.0.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16",
+    "yorkie": "^1.0.3"
   },
   "browserslist": [
     "> 1%",

@@ -9,16 +9,16 @@
 
 <script>
 export default {
-    name: "ListView",
+    name: 'ListView',
     props: [
-        "items",
-        "separatorColor",
-        "valueProp",
-        "labelProp",
+        'items',
+        'separatorColor',
+        'valueProp',
+        'labelProp',
     ],
     data () {
         return {
-            separatorStyle: "",      
+            separatorStyle: '',      
         };
     },
     mounted () {

@@ -10,15 +10,15 @@
 <script>
 
 export default {
-    name: "ListPicker",
+    name: 'ListPicker',
     props: [
-        "disabledVal", // Works only in web.
-        "items",
-        "value",
-        "valueProp",
-        "labelProp",
-        "selectedIndex",
-        "selectedIndexChange", // an event.
+        'disabledVal', // Works only in web.
+        'items',
+        'value',
+        'valueProp',
+        'labelProp',
+        'selectedIndex',
+        'selectedIndexChange', // an event.
     ],
 };
 </script>

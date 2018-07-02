@@ -14,13 +14,13 @@
 
 <script>
 export default {
-    name: "Slider",
+    name: 'Slider',
     props: [
-        "value",
-        "model", // using :model="model" could not succeed to update the value. the value can be updated using the valueChange event: this.value = event.target.value;
-        "minValue",
-        "maxValue",
-        "valueChange", // an event.
+        'value',
+        'model', // using :model="model" could not succeed to update the value. the value can be updated using the valueChange event: this.value = event.target.value;
+        'minValue',
+        'maxValue',
+        'valueChange', // an event.
     ],
 };
 </script>

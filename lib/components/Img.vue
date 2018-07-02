@@ -4,11 +4,11 @@
 
 <script>
 export default {
-    name: "Img",
-    props: ["src"],
+    name: 'Img',
+    props: ['src'],
     data() {
         return {
-            imageSrc: `${this.src.replace("~", "")}`,
+            imageSrc: `${this.src.replace('~', '')}`,
         };
     },
 };

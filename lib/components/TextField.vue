@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    name: "TextField",
+    name: 'TextField',
     props: [
         "model",
         "maxLength",

@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import TextField from "./TextField";
+import TextField from './TextField';
 
 export default {
-    name: "SearchBar",
+    name: 'SearchBar',
     props: [
-        "model",
-        "maxlength",
-        "keyboardType"
+        'model',
+        'maxlength',
+        'keyboardType'
     ],
     components: {
         TextField,
