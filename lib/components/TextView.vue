@@ -1,11 +1,11 @@
 <template>
-    <input 
+    <textarea 
+        :disabled="!editable"
         :placeholder="hint"
         :value="text"
-        :disabled="!editable"
         :model="model"
         :maxlength="maxLength"
-        :type="secure ? 'password' : keyboardType"
+        :type="keyboardType"
         @blur="onBlur($event)"
         @focus="focus($event)"
         @keyup.enter="returnPress($event)"
@@ -15,23 +15,19 @@
 
 <script>
 export default {
-    name: "TextField",
+    name: "TextView",
     props: [
-        "model",
-        "maxLength",
-        "keyboardType",
-        "secure",
         "text",
         "hint",
+        "model",
         "editable",
+        "maxLength",
+        "keyboardType",
         "onBlur",
         "focus",
         "returnPress",
-        "textChange"
+        "textChange",
     ],
 };
 </script>
 
-<style scoped lang="scss">
-
-</style>

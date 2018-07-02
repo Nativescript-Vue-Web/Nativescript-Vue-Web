@@ -10,13 +10,20 @@
 export default {
     name: "Progress",
     props: [
-        "value"
+        "value",
+        "valueChange"
     ],
     data () {
         return {
             progressValue: 0,
             id: setInterval(this.frame,50)
         };
+    },
+    // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
+    watch: {
+        progressValue: function () {
+            this.valueChange(this.progressValue);
+        }  
     },
     methods: {
         frame: function () {
