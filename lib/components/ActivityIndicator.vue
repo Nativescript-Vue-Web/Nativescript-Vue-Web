@@ -1,6 +1,6 @@
 <template>
     <label v-show="busy">
-        Loading label or a spinner gif...
+        <slot></slot>
     </label>
 </template>
 

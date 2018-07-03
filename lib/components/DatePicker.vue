@@ -22,7 +22,7 @@ export default {
     ],
     computed: {
         calcDate: function () {
-            if(this.year != undefined && this.month != undefined && this.day != undefined) {
+            if(this.year && this.month && this.day) {
                 return this.year.concat('-').concat(this.month).concat('-').concat(this.day);
             }
             return new Date().toISOString().replace(/T.*/,'').split('-').join('-');
