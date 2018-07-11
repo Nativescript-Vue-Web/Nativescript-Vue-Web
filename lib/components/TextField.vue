@@ -6,10 +6,10 @@
         :model="model"
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
-        @blur="onBlur($event)"
-        @focus="focus($event)"
-        @keyup.enter="returnPress($event)"
-        @input="textChange($event)"
+        @blur="onBlur ? onBlur($event) : null"
+        @focus="focus ? focus($event) : null"
+        @keyup.enter="returnPress ? returnPress($event) : null"
+        @input="textChange ? textChange($event) : null"
     />
 </template>
 
@@ -17,17 +17,17 @@
 export default {
     name: 'TextField',
     props: [
-        "model",
-        "maxLength",
-        "keyboardType",
-        "secure",
-        "text",
-        "hint",
-        "editable",
-        "onBlur",
-        "focus",
-        "returnPress",
-        "textChange"
+        'model',
+        'maxLength',
+        'keyboardType',
+        'secure',
+        'text',
+        'hint',
+        'editable',
+        'onBlur',
+        'focus',
+        'returnPress',
+        'textChange'
     ],
 };
 </script>

@@ -10,8 +10,8 @@
 export default {
     name: 'Progress',
     props: [
-        "value",
-        "valueChange"
+        'value',
+        'valueChange'
     ],
     data () {
         return {

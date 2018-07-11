@@ -6,18 +6,17 @@
 
 <script>
 export default {
-    name: "DockLayout",
-    props: ["stretchLastChild"],
+    name: 'DockLayout',
+    props: ['stretchLastChild'],
 };
 </script>
 
 <style lang="scss" scoped>
     .container {
-        width: 50%;
+        width: 500px;
         height: 500px;
         background-color: crimson;
         display: inline-flex;
-        position: relative;
-        justify-content: flex-start;
+        flex-flow: column row;
     }
 </style>

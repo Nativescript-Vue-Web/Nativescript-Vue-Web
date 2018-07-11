@@ -15,18 +15,18 @@
 
 <script>
 export default {
-    name: "TextView",
+    name: 'TextView',
     props: [
-        "text",
-        "hint",
-        "model",
-        "editable",
-        "maxLength",
-        "keyboardType",
-        "onBlur",
-        "focus",
-        "returnPress",
-        "textChange",
+        'text',
+        'hint',
+        'model',
+        'editable',
+        'maxLength',
+        'keyboardType',
+        'onBlur',
+        'focus',
+        'returnPress',
+        'textChange',
     ],
 };
 </script>

@@ -6,14 +6,14 @@
 
 <script>
 export default {
-    name: "GridLayout",
+    name: 'GridLayout',
     props: [
-        "columns",
-        "rows",
+        'columns',
+        'rows',
     ],
     data () {
         return {
-            style: "",      
+            style: '',      
         };
     },
     mounted () {

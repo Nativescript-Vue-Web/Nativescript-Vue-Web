@@ -1,5 +1,5 @@
 <template>
-    <select :model="selectedIndex">
+    <select @input="selectedIndexChange($event)" :model="selectedIndex">
         <option disabled :value="disabledVal">{{ disabledVal }}</option>
         <option v-for="item in items" v-bind:key="item[valueProp]" v-bind:value="selectedIndex">
                 {{ item[labelProp] }}

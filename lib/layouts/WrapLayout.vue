@@ -6,19 +6,19 @@
 
 <script>
 export default {
-    name: "WrapLayout",
+    name: 'WrapLayout',
     props: [
-        "orientation",
-        "itemWidth", // These props called itemWidth and itemHeight have to be reviewed in the meeting.
-        "itemHeight",
+        'orientation',
+        'itemWidth', // These props called itemWidth and itemHeight have to be reviewed in the meeting.
+        'itemHeight',
     ],
     data () {
         return {
-            style: "",
+            style: '',
         };
     },
     mounted () {
-        this.style = `flex-direction: ${this.orientation == "horizontal" ? "row" : "column" };`;  
+        this.style = `flex-direction: ${this.orientation == 'horizontal' ? 'row' : 'column' };`;  
     },
 };
 </script>

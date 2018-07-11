@@ -13,9 +13,9 @@
 export default {
     name: 'ScrollView',
     props: [
-        "orientation",
-        "scrollBarIndicatorVisible", // was not included due to the incompatible code between different browsers for now.
-        "scroll",
+        'orientation',
+        'scrollBarIndicatorVisible', // was not included due to the incompatible code between different browsers for now.
+        'scroll',
     ],
 };
 </script>

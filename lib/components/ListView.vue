@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="item in items" v-bind:key="item[valueProp]">
+        <div @click="itemTap(item)" v-for="item in items" v-bind:key="item[valueProp]">
             <Label :text="item[labelProp]" />
             <hr :style="separatorStyle" />
         </div>
@@ -15,6 +15,7 @@ export default {
         'separatorColor',
         'valueProp',
         'labelProp',
+        'itemTap',
     ],
     data () {
         return {

@@ -1,6 +1,6 @@
 <template>
     <label class="switch">
-        <span :value="checked" class="slider round" />
+        <span @input="checkedChange($event)" :value="checked" class="slider round" />
     </label>
 </template>
 
@@ -10,6 +10,7 @@ export default {
     props: [
         'checked',
         'itemEnabled',
+        'checkedChange',
     ],
 };
 </script>

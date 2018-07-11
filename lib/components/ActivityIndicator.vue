@@ -11,6 +11,11 @@ export default {
         'busy',
         'busyChange', // an event.
     ],
+    watch: {
+        busy: function () {
+            this.busyChange();
+        },
+    },
 };
 </script>
 

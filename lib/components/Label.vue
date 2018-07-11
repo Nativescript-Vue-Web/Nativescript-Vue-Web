@@ -6,43 +6,43 @@
 
 <script>
 export default {
-    name: "Label",
+    name: 'Label',
     props: [
-        "text",
-        "left",
-        "top",
-        "dock",
-        "stretchLastChild",
-        "width",
-        "height",
-        "order",
-        "flexGrow",
-        "flexShrink",
-        "alignSelf",
-        "flexWrapBefore",
-        "row",
-        "col",
-        "rowSpan",
-        "colSpan",
+        'text',
+        'left',
+        'top',
+        'dock',
+        'stretchLastChild',
+        'width',
+        'height',
+        'order',
+        'flexGrow',
+        'flexShrink',
+        'alignSelf',
+        'flexWrapBefore',
+        'row',
+        'col',
+        'rowSpan',
+        'colSpan',
     ],
     data () {
         return {
-            labelStyle: "",
-            containerStyle: "",  
+            labelStyle: '',
+            containerStyle: '',  
         };
     },
     mounted () {
         // Find out the parent component is a layout component or not.
-        if (Number.isInteger(parseInt(this.left)) && Number.isInteger(parseInt(this.top)) && this.$parent.$options._componentTag == "AbsoluteLayout") {
+        if (Number.isInteger(parseInt(this.left)) && Number.isInteger(parseInt(this.top)) && this.$parent.$options._componentTag == 'AbsoluteLayout') {
             // AbsoluteLayout does not work as expected thus it only accepts a span element but, here we also have a div component on top of the span element.
             // The div component breaks the view.
             // To observe the AbsoluteLayout, within template tag above leave the span tags alone (exclude divs which are being used in other layouts).
             // Assigning some style to the label.
             this.labelStyle = `left: ${this.left}px; top: ${this.top}px; background-color: blue; text-align: center; `;
-            this.containerStyle = "width: 150px; height: 150px; background-color: crimson; display: inline; ";
-        } else if (this.$parent.$options._componentTag == "DockLayout") {
+            this.containerStyle = '';
+        } else if (this.$parent.$options._componentTag == 'DockLayout') {
             // Dock Layout.
-            this.labelStyle = "text-align: center;";
+            this.labelStyle = 'text-align: center;';
             // Get children components from the parent.
             const { $children } = this.$parent;
             // Map children array to find this component itself.
@@ -50,17 +50,17 @@ export default {
                 if(obj.$el == this.$el) {
                 // Here, we found the component inside the children array.
                     switch (this.dock) {
-                    case "left":
-                        this.containerStyle = `flex-direction: column;  flex: 1; order: ${key};  max-width: ${this.width ? this.width : 40}px; background-color: green;`;
+                    case 'left':
+                        this.containerStyle = `flex-direction: column; flex: 1 1 0; max-width: ${this.width ? this.width : 40}px; background-color: green;`;
                         break;
-                    case "top":
-                        this.containerStyle = `flex-direction: row; flex: 1; display: block; order: ${key}; max-height: ${this.height ? this.height : 40}px; background-color: blue;`;
+                    case 'top':
+                        this.containerStyle = `flex-direction: row; flex: 15 1 0; max-height: ${this.height ? this.height : 40}px; background-color: blue;`;
                         break;
-                    case "right":
-                        this.containerStyle = `flex-direction: column; display: block; flex-end; flex: 1; order: ${key}; max-width: ${this.width ? this.width : 40}px; background-color: cyan;`;
+                    case 'right':
+                        this.containerStyle = `flex-direction: column; flex: 0 auto 0; max-width: ${this.width ? this.width : 40}px; background-color: cyan;`;
                         break;
-                    case "bottom":
-                        this.containerStyle = `flex-direction: row; flex:1; order: ${key}; max-height: ${this.height ? this.height : 40}px; background-color: aquamarine;`;
+                    case 'bottom':
+                        this.containerStyle = `flex-direction: row; flex: 82%; max-height: ${this.height ? this.height : 40}px; background-color: aquamarine;`;
                         break;
                     default:
                         break;
@@ -70,15 +70,15 @@ export default {
                         // Check the given prop called stretchLastChild is true.
                         if(this.stretchLastChild) {
                             // Here we stretch the last component inside the DockLayout.
-                            console.log("Stretch the last child !");
+                            console.log('Stretch the last child !');
                         }
                     }
                     console.log(`${key}`);
                 }
             });
-        } else if (this.$parent.$options._componentTag == "FlexboxLayout") {
+        } else if (this.$parent.$options._componentTag == 'FlexboxLayout') {
             // Flexbox Layout.
-            this.labelStyle = "text-align: center;";
+            this.labelStyle = 'text-align: center;';
             this.containerStyle = `
             flex: 1;
             background-color: green; 
@@ -89,17 +89,17 @@ export default {
             flex-grow: ${this.flexGrow};
             flexShrink: ${this.flexShrink};
             alignSelf: ${this.alignSelf}
-            flex-wrap: ${this.flexWrapBefore ? "wrap" : "nowrap"};
+            flex-wrap: ${this.flexWrapBefore ? 'wrap' : 'nowrap'};
           `;
-        } else if (this.$parent.$options._componentTag == "GridLayout") {
+        } else if (this.$parent.$options._componentTag == 'GridLayout') {
             // Grid Layout.
-            this.labelStyle = "text-align: center;";
+            this.labelStyle = 'text-align: center;';
             // Get children components from the parent.
-            this.containerStyle = "";
-        } else if (this.$parent.$options._componentTag == "WrapLayout") {
+            this.containerStyle = '';
+        } else if (this.$parent.$options._componentTag == 'WrapLayout') {
             console.log(this.$parent.$options._componentTag);
             // Wrap Layout.
-            this.labelStyle = "text-align: center;";
+            this.labelStyle = 'text-align: center;';
             this.containerStyle = `width: ${this.width}; height: ${this.height}; background-color: green;`;
         }
     },

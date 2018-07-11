@@ -1,7 +1,8 @@
 <template>
     <div class="searchBarContainer">
-        <img src="https://image.flaticon.com/icons/png/128/61/61088.png" class="material-icons" />
-        <TextField class="searchBar" text="search" :maxlength="maxlength" :model="model" :type="keyboardType" />
+        <img class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
+        <TextField :textChange="textChange" :returnPress="submit" class="searchBar" hint="search" :maxlength="maxlength" :editable="true" :model="model" :type="keyboardType" />
+        <img @click="clear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
     </div>
 </template>
 
@@ -13,7 +14,10 @@ export default {
     props: [
         'model',
         'maxlength',
-        'keyboardType'
+        'keyboardType',
+        'submit',
+        'clear',
+        'textChange'
     ],
     components: {
         TextField,
@@ -24,23 +28,34 @@ export default {
 <style lang="scss" scoped>
     .searchBarContainer {
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-end;
         position: relative;
-        direction: ltr;
-        img {
-            height: 24px;
-            width: 24px;
-            bottom: 4px;
-            left: 15px;
-            position: absolute;
-        }
+        width: 400px;
+        margin: 0;
+        padding: 0;
+        align-items: stretch;
         .searchBar {
-            width: 20%;
+            width: 70%;
             height: 30px;
             padding-left: 40px;
             margin: 4px 10px 0 10px;
             text-align: left;
             font-weight: bold;
         }
+        .searchIcon {
+            height: 24px;
+            width: 24px;
+            bottom: 4px;
+            left: 15px;
+            position: absolute;
+        }
+        .clearIcon {
+            position: absolute;
+            height: 24px;
+            width: 24px;
+            bottom: 4px;
+            right: 75px;
+        }
     }
+    
 </style>

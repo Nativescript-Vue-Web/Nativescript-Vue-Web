@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    name: "FlexboxLayout",
-    props: ["flexDirection", "flexWrap", "justifyContent", "alignItems", "alignContent"],
+    name: 'FlexboxLayout',
+    props: ['flexDirection', 'flexWrap', 'justifyContent', 'alignItems', 'alignContent'],
     data () {
         return {
-            style: "",      
+            style: '',      
         };
     },
     mounted () {
