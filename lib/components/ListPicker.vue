@@ -1,7 +1,7 @@
 <template>
-    <select @input="selectedIndexChange($event)" :model="selectedIndex">
-        <option disabled :value="disabledVal">{{ disabledVal }}</option>
-        <option v-for="item in items" v-bind:key="item[valueProp]" v-bind:value="selectedIndex">
+    <select :value="value" ref="listpicker" @change="selectedIndexChange($event)" @input="updateValue()">
+        <option v-if="disabledVal" disabled :value="disabledVal">{{ disabledVal }}</option>
+        <option v-for="item in items" :key="item[valueProp]" :value="item[valueProp]">
                 {{ item[labelProp] }}
         </option>
     </select>
@@ -19,7 +19,13 @@ export default {
         'labelProp',
         'selectedIndex',
         'selectedIndexChange', // an event.
+        'value',
     ],
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.listpicker.value);
+        },
+    },
 };
 </script>
 

@@ -1,15 +1,16 @@
 <template>
-    <input 
+    <input
+        ref="textfield" 
         :placeholder="hint"
-        :value="text"
         :disabled="!editable"
-        :model="model"
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
+        :value="value"
         @blur="onBlur ? onBlur($event) : null"
         @focus="focus ? focus($event) : null"
         @keyup.enter="returnPress ? returnPress($event) : null"
-        @input="textChange ? textChange($event) : null"
+        @change="textChange ? textChange($event) : null"
+        @input="updateValue()"
     />
 </template>
 
@@ -17,7 +18,6 @@
 export default {
     name: 'TextField',
     props: [
-        'model',
         'maxLength',
         'keyboardType',
         'secure',
@@ -27,8 +27,14 @@ export default {
         'onBlur',
         'focus',
         'returnPress',
-        'textChange'
+        'textChange',
+        'value',
     ],
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.textfield.value);
+        },
+    },
 };
 </script>
 

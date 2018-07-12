@@ -1,15 +1,16 @@
 <template>
-    <textarea 
+    <textarea
+        ref="textview" 
         :disabled="!editable"
         :placeholder="hint"
-        :value="text"
-        :model="model"
         :maxlength="maxLength"
         :type="keyboardType"
-        @blur="onBlur($event)"
-        @focus="focus($event)"
-        @keyup.enter="returnPress($event)"
-        @input="textChange($event)"
+        :value="value"
+        @blur="onBlur ? onBlur($event) : null"
+        @focus="focus ? focus($event) : null"
+        @keyup.enter="returnPress ? returnPress($event) : null"
+        @input="updateValue()"
+        @change="textChange($event)"
     />
 </template>
 
@@ -19,7 +20,6 @@ export default {
     props: [
         'text',
         'hint',
-        'model',
         'editable',
         'maxLength',
         'keyboardType',
@@ -27,7 +27,21 @@ export default {
         'focus',
         'returnPress',
         'textChange',
+        'value'
     ],
+    computed: {
+        replaceWithCarriageReturn: function () {
+            // do smt...
+            return this.text;
+        }
+    },
+    methods: {
+        updateValue: function () {
+            this.$emit('input', {
+                text: this.$refs.textview.value,
+            });
+        },
+    },
 };
 </script>
 

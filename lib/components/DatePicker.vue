@@ -1,10 +1,12 @@
 <template>
-    <input 
+    <input
+        ref="datepicker"
         :max="maxDate" 
         :min="minDate" 
-        @change="dateChange($event)" 
-        :value="calcDate" 
+        @change="dateChange ? dateChange($event) : null"
         type="date"
+        :value="value"
+        @input="updateValue()"
     />
 </template>
 
@@ -12,20 +14,27 @@
 export default {
     name: 'DatePicker',
     props: [
-        'model',
         'day',
         'month',
         'year',
         'minDate',
         'maxDate',
-        'dateChange'
+        'dateChange',
+        'value',
     ],
     computed: {
         calcDate: function () {
+            console.log('calcDate');
+            console.log(this.$refs.datepicker.value);
             if(this.year && this.month && this.day) {
                 return this.year.concat('-').concat(this.month).concat('-').concat(this.day);
             }
             return new Date().toISOString().replace(/T.*/,'').split('-').join('-');
+        },
+    },
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.datepicker.value);
         },
     },
 };

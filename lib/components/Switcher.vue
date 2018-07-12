@@ -1,17 +1,29 @@
 <template>
     <label class="switch">
-        <span @input="checkedChange($event)" :value="checked" class="slider round" />
+        <input
+          ref="switcher"
+          type="checkbox"
+          :checked="value"
+          @change="checkedChange ? checkedChange($event) : null"
+          @click="updateValue()"
+        />
+        <span class="slider" />
     </label>
 </template>
 
 <script>
 export default {
-    name: 'Switch',
+    name: 'Switcher',
     props: [
         'checked',
-        'itemEnabled',
         'checkedChange',
+        'value',
     ],
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.switcher.checked);
+        },
+    },
 };
 </script>
 
@@ -19,7 +31,7 @@ export default {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 90px;
   height: 34px;
 }
 
@@ -32,9 +44,10 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #ca2222;
   -webkit-transition: .4s;
   transition: .4s;
+   border-radius: 34px;
 }
 
 .slider:before {
@@ -47,10 +60,11 @@ export default {
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #2ab934;
 }
 
 input:focus + .slider {
@@ -60,16 +74,26 @@ input:focus + .slider {
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(55px);
 }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
+/*------ ADDED CSS ---------*/
+.slider:after
+{
+ content:'OFF';
+ color: white;
+ display: block;
+ position: absolute;
+ transform: translate(-50%,-50%);
+ top: 50%;
+ left: 50%;
+ font-size: 10px;
+ font-family: Verdana, sans-serif;
 }
 
-.slider.round:before {
-  border-radius: 50%;
+input:checked + .slider:after
+{  
+  content:'ON';
 }
 </style>
 

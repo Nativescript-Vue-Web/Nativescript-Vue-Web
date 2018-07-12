@@ -1,7 +1,9 @@
 <template>
     <div class="slidecontainer">
-        <input 
-            v-on:input="valueChange($event)"
+        <input
+            ref="slider"
+            @input="updateValue()"
+            @change="valueChange ? valueChange($event) : null"
             type="range"
             :min="minValue"
             :max="maxValue"
@@ -16,12 +18,16 @@
 export default {
     name: 'Slider',
     props: [
-        'value',
-        'model', // using :model="model" could not succeed to update the value. the value can be updated using the valueChange event: this.value = event.target.value;
         'minValue',
         'maxValue',
         'valueChange', // an event.
+        'value',
     ],
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.slider.value);
+        },
+    },
 };
 </script>
 

@@ -1,7 +1,18 @@
 <template>
     <div class="searchBarContainer">
         <img class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
-        <TextField :textChange="textChange" :returnPress="submit" class="searchBar" hint="search" :maxlength="maxlength" :editable="true" :model="model" :type="keyboardType" />
+        <input
+            ref="searchbar" 
+            @change="textChange($event)" 
+            @keyup.enter="submit ? submit($event) : null" 
+            class="searchBar" 
+            hint="search" 
+            :maxlength="maxlength" 
+            :editable="true"
+            :value="value"
+            @input="updateValue()"
+            :type="keyboardType" 
+        />
         <img @click="clear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
     </div>
 </template>
@@ -12,15 +23,20 @@ import TextField from './TextField';
 export default {
     name: 'SearchBar',
     props: [
-        'model',
         'maxlength',
         'keyboardType',
         'submit',
         'clear',
-        'textChange'
+        'textChange',
+        'value',
     ],
     components: {
         TextField,
+    },
+    methods: {
+        updateValue: function () {
+            this.$emit('input', this.$refs.searchbar.value);
+        },
     },
 };
 </script>
