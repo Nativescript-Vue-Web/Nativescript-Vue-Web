@@ -1,11 +1,11 @@
 <template>
     <input
         ref="datepicker"
-        :max="maxDate" 
-        :min="minDate" 
-        @change="dateChange ? dateChange($event) : null"
         type="date"
+        :max="maxDate" 
+        :min="minDate"
         :value="value"
+        @change="onDateChange($event)"
         @input="updateValue()"
     />
 </template>
@@ -35,6 +35,9 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.datepicker.value);
+        },
+        onDateChange: function (event) {
+            this.$emit('dateChange', event);
         },
     },
 };

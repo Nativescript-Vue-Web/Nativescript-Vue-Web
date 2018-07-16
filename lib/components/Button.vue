@@ -1,5 +1,5 @@
 <template>
-  <input type="button" @click="onClick" :value="text" />
+  <input ref="button" type="button" @click="onClick" :value="text" />
 </template>
 
 <script>
@@ -8,6 +8,7 @@ export default {
     props: ['tap', 'text'],
     methods: {
         onClick() {
+            console.log('onTap !');
             this.$emit('tap');
         },
     },

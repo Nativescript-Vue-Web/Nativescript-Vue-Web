@@ -4,7 +4,7 @@
           ref="switcher"
           type="checkbox"
           :checked="value"
-          @change="checkedChange ? checkedChange($event) : null"
+          @change="onCheckedChange($event)"
           @click="updateValue()"
         />
         <span class="slider" />
@@ -22,6 +22,9 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.switcher.checked);
+        },
+        onCheckedChange: function (event) {
+            this.$emit('checkedChange', event);
         },
     },
 };

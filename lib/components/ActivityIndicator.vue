@@ -13,7 +13,7 @@ export default {
     ],
     watch: {
         busy: function () {
-            this.busyChange();
+            this.$emit('busyChange');
         },
     },
 };

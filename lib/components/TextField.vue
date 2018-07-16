@@ -6,10 +6,10 @@
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
         :value="value"
-        @blur="onBlur ? onBlur($event) : null"
-        @focus="focus ? focus($event) : null"
-        @keyup.enter="returnPress ? returnPress($event) : null"
-        @change="textChange ? textChange($event) : null"
+        @blur="onBlur($event)"
+        @focus="onFocus($event)"
+        @keyup.enter="onReturnPress($event)"
+        @change="onTextChange($event)"
         @input="updateValue()"
     />
 </template>
@@ -24,7 +24,7 @@ export default {
         'text',
         'hint',
         'editable',
-        'onBlur',
+        'blur',
         'focus',
         'returnPress',
         'textChange',
@@ -33,6 +33,18 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.textfield.value);
+        },
+        onBlur: function (event) {
+          this.$emit('blur', event);  
+        },
+        onFocus: function (event) {
+          this.$emit('focus', event);
+        },
+        onTextChange: function (event) {
+          this.$emit('textChange', event);
+        },
+        onReturnPress: function (event) {
+          this.$emit('returnPress', event);
         },
     },
 };

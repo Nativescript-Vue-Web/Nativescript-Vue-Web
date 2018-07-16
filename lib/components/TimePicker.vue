@@ -1,12 +1,12 @@
 <template>
     <input
         ref="timepicker"
-        type="time" 
+        type="time"
         :min="getMinTime"
         :max="getMaxTime"
-        @change="timeChange($event)"
-        @input="updateValue()"
         :value="value"
+        @change="onTimeChange($event)"
+        @input="updateValue()"
     />
 </template>
 
@@ -40,6 +40,9 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.timepicker.value);
+        },
+        onTimeChange: function (event) {
+            this.$emit('timeChange', event);
         },
     },
 };

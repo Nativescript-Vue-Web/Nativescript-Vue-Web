@@ -2,18 +2,19 @@
     <div class="searchBarContainer">
         <img class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
         <input
-            ref="searchbar" 
-            @change="textChange($event)" 
-            @keyup.enter="submit ? submit($event) : null" 
-            class="searchBar" 
-            hint="search" 
+            ref="searchbar"
+            class="searchBar"
+            hint="search"
+            :type="keyboardType" 
             :maxlength="maxlength" 
             :editable="true"
             :value="value"
+            @keyup.enter="onSubmit($event)"
             @input="updateValue()"
-            :type="keyboardType" 
+            @change="onTextChange($event)"
+            
         />
-        <img @click="clear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
+        <img @click="onClear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
     </div>
 </template>
 
@@ -36,6 +37,15 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.searchbar.value);
+        },
+        onTextChange: function (event) {
+            this.$emit('textChange', event);
+        },
+        onSubmit: function (event) {
+            this.$emit('submit', event);  
+        },
+        onClear: function (event) {
+            this.$emit('clear', event);
         },
     },
 };

@@ -1,6 +1,6 @@
 <template>
     <div
-    @scroll="scroll($event)"
+    @scroll="onScroll($event)"
     :class="orientation == 'horizontal' ? 'horizontalScroll' : 'verticalScroll'" >
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
@@ -17,6 +17,11 @@ export default {
         'scrollBarIndicatorVisible', // was not included due to the incompatible code between different browsers for now.
         'scroll',
     ],
+    methods: {
+        onScroll: function (event) {
+            this.$emit('scroll', event);
+        }  
+    },
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <select :value="value" ref="listpicker" @change="selectedIndexChange($event)" @input="updateValue()">
+    <select :value="value" ref="listpicker" @change="onSelectedIndexChange($event)" @input="updateValue()">
         <option v-if="disabledVal" disabled :value="disabledVal">{{ disabledVal }}</option>
         <option v-for="item in items" :key="item[valueProp]" :value="item[valueProp]">
                 {{ item[labelProp] }}
@@ -14,7 +14,6 @@ export default {
     props: [
         'disabledVal', // Works only in web.
         'items',
-        'value',
         'valueProp',
         'labelProp',
         'selectedIndex',
@@ -24,6 +23,9 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.listpicker.value);
+        },
+        onSelectedIndexChange: function (event) {
+            this.$emit('selectedIndexChange', event);
         },
     },
 };

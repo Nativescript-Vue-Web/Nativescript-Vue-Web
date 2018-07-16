@@ -2,14 +2,14 @@
     <div class="slidecontainer">
         <input
             ref="slider"
-            @input="updateValue()"
-            @change="valueChange ? valueChange($event) : null"
+            class="slider"
+            id="myRange"
             type="range"
             :min="minValue"
             :max="maxValue"
             :value="value"
-            class="slider"
-            id="myRange"
+            @input="updateValue()"
+            @change="onValueChange($event)"
         />
     </div>
 </template>
@@ -26,6 +26,9 @@ export default {
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.slider.value);
+        },
+        onValueChange: function (event) {
+            this.$emit('valueChange', event);
         },
     },
 };

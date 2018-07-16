@@ -22,8 +22,8 @@ export default {
     // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
     watch: {
         progressValue: function () {
-            this.valueChange(this.progressValue);
-        }  
+            this.$emit('valueChange', this.progressValue);
+        },
     },
     methods: {
         frame: function () {

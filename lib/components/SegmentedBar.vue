@@ -43,15 +43,15 @@ export default {
         };
     },
     mounted () {
-      console.log(this);
-      this.chosenTab = this.value ? this.value : this.items[0];
+        console.log(this);
+        this.chosenTab = this.value ? this.value : this.items[0];
     },
     methods: {
         chooseTab: function (tab) {
             this.chosenTab = tab;
         },
         renderChosenContent: function () {
-            return `This tab content belongs to the ${this.chosenTab}.`
+            return `This tab content belongs to the ${this.chosenTab}.`;
         },
     },
 };
