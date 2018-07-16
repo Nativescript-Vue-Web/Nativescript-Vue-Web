@@ -1,7 +1,7 @@
 <template>
     <iframe 
         :src="src" 
-        @load="loadFinished ? loadFinished($event) : null"
+        @load="onLoadFinished($event)"
     />
 </template>
 
@@ -11,14 +11,19 @@ export default {
     // Event called @loadstart does not get fired in the iframe so, the below method is a temporarily workaround to the problem.
     created () {
         if (this.loadStarted && navigator.onLine) {
-            this.loadStarted();
-        } 
+            this.$emit('loadStarted');
+        }
     },
     props: [
         'src',
         'loadStarted',
         'loadFinished',
     ],
+    methods: {
+        onLoadFinished: function (event) {
+            this.$emit('loadFinished', event);
+        },
+    },
 };
 </script>
 

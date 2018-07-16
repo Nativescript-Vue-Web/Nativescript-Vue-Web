@@ -40,16 +40,16 @@ export default {
             this.$emit('input', this.$refs.textview.value);
         },
         onBlur: function (event) {
-          this.$emit('blur', event);  
+            this.$emit('blur', event);  
         },
         onFocus: function (event) {
-          this.$emit('focus', event);
+            this.$emit('focus', event);
         },
         onTextChange: function (event) {
-          this.$emit('textChange', event);
+            this.$emit('textChange', event);
         },
         onReturnPress: function (event) {
-          this.$emit('returnPress', event);
+            this.$emit('returnPress', event);
         },
     },
 };
