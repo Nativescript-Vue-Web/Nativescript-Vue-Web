@@ -15,7 +15,6 @@
 export default {
     name: 'Switcher',
     props: [
-        'checked',
         'checkedChange',
         'value',
     ],

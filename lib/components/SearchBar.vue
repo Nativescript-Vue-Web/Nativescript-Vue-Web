@@ -1,12 +1,11 @@
 <template>
     <div class="searchBarContainer">
-        <img class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
+        <img @click="onSubmit($event)" class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
         <input
             ref="searchbar"
             class="searchBar"
-            hint="search"
-            :type="keyboardType" 
-            :maxlength="maxlength" 
+            :placeholder="hint"
+            :type="keyboardType"
             :editable="true"
             :value="value"
             @keyup.enter="onSubmit($event)"
@@ -24,9 +23,9 @@ import TextField from './TextField';
 export default {
     name: 'SearchBar',
     props: [
-        'maxlength',
         'keyboardType',
         'submit',
+        'hint',
         'clear',
         'textChange',
         'value',

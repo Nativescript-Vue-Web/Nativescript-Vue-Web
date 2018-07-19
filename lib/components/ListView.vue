@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div @click="onItemTap(item)" v-for="item in items" v-bind:key="item[valueProp]">
+        <div class="listItem" @click="onItemTap(item)" v-for="item in items" v-bind:key="item[valueProp]">
             <Label :text="item[labelProp]" />
             <hr :style="separatorStyle" />
         </div>

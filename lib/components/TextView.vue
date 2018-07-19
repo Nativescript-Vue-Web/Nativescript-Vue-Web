@@ -6,6 +6,7 @@
         :maxlength="maxLength"
         :type="keyboardType"
         :value="value"
+        :spellcheck="autoCorrect"
         @blur="onBlur($event)"
         @focus="onFocus($event)"
         @keyup.enter="onReturnPress($event)"
@@ -23,6 +24,7 @@ export default {
         'editable',
         'maxLength',
         'keyboardType',
+        'autoCorrect',
         'blur',
         'focus',
         'returnPress',

@@ -3,7 +3,6 @@
         <input
             ref="slider"
             class="slider"
-            id="myRange"
             type="range"
             :min="minValue"
             :max="maxValue"

@@ -22,7 +22,7 @@ export default {
     ],
     methods: {
         updateValue: function () {
-            this.$emit('input', this.$refs.listpicker.value);
+            this.$emit('input', parseInt(this.$refs.listpicker.value));
         },
         onSelectedIndexChange: function (event) {
             this.$emit('selectedIndexChange', event);

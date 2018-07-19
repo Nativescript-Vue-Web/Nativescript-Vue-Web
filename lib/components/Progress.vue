@@ -1,6 +1,6 @@
 <template>
-    <div id="myProgress">
-        <div ref="myBar" id="myBar">
+    <div class="progress">
+        <div ref="myBar" class="progressBar">
             {{ progressValue }}
         </div>
     </div>
@@ -15,14 +15,13 @@ export default {
     ],
     data () {
         return {
-            progressValue: 0,
             id: setInterval(this.frame,50)
         };
     },
     // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
-    watch: {
+    computed: {
         progressValue: function () {
-            this.$emit('valueChange', this.progressValue);
+            this.$emit('valueChange', this.value);
         },
     },
     methods: {
@@ -39,12 +38,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#myProgress {
+.progress {
   width: 100%;
   background-color: #ddd;
 }
 
-#myBar {
+.progressBar {
   width: 10%;
   height: 30px;
   background: linear-gradient(#e66465, #9198e5);

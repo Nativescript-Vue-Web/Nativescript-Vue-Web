@@ -8,7 +8,6 @@ export default {
     props: ['tap', 'text'],
     methods: {
         onClick() {
-            console.log('onTap !');
             this.$emit('tap');
         },
     },

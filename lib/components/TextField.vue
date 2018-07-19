@@ -6,6 +6,7 @@
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
         :value="value"
+        :spellcheck="autoCorrect"
         @blur="onBlur($event)"
         @focus="onFocus($event)"
         @keyup.enter="onReturnPress($event)"
@@ -24,6 +25,7 @@ export default {
         'text',
         'hint',
         'editable',
+        'autoCorrect',
         'blur',
         'focus',
         'returnPress',
