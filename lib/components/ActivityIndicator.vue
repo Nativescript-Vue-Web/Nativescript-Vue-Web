@@ -11,7 +11,7 @@ export default {
         'busy',
         'busyChange', // an event.
     ],
-    computed: {
+    watch: {
         busy: function () {
             this.$emit('busyChange');
         },

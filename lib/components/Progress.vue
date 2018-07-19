@@ -19,7 +19,7 @@ export default {
         };
     },
     // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
-    computed: {
+    watch: {
         progressValue: function () {
             this.$emit('valueChange', this.value);
         },
