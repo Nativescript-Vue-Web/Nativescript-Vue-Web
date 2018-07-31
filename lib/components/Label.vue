@@ -9,6 +9,7 @@ export default {
     name: 'Label',
     props: [
         'text',
+        'textWrap',
         'left',
         'top',
         'dock',
@@ -101,6 +102,8 @@ export default {
             // Wrap Layout.
             this.labelStyle = 'text-align: center;';
             this.containerStyle = `width: ${this.width}; height: ${this.height}; background-color: green;`;
+        } else {
+            this.labelStyle = this.textWrap ? 'text-wrap: normal;' : '';
         }
     },
 };

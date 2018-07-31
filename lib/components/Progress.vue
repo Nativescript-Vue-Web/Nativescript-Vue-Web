@@ -11,11 +11,13 @@ export default {
     name: 'Progress',
     props: [
         'value',
-        'valueChange'
+        'valueChange',
+        'maxValue',
     ],
     data () {
         return {
-            id: setInterval(this.frame,50)
+            id: setInterval(this.frame, 50),
+            progressValue: this.value,
         };
     },
     // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
@@ -26,7 +28,7 @@ export default {
     },
     methods: {
         frame: function () {
-            if(this.progressValue >= this.value) {
+            if(this.progressValue >= this.maxValue) {
                 return clearInterval(this.id);
             }
             this.progressValue++;
