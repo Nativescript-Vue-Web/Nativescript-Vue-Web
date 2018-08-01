@@ -1,43 +1,44 @@
 <template>
     <div class="progress">
-        <div ref="myBar" class="progressBar">
-            {{ progressValue }}
-        </div>
+        <div ref="myBar" class="progressBar"></div>
     </div>
 </template>
-
-
-
 
 <script>
 export default {
     name: 'Progress',
-    props: [
-        'value',
-        'valueChange',
-        'maxValue',
-    ],
-    data () {
-        return {
-            id: setInterval(this.frame, 50),
-            progressValue: this.value,
-        };
+    props: {
+        value: {
+            type: Number,
+            default: 0
+        },
+        maxValue: {
+            type: Number,
+            default: 100
+        }
+    },
+    mounted(){
+        setTimeout(this.render, 10);
+    },
+    computed: {
+        progressValue: function(){
+            return (this.value <= this.maxValue) ? Math.floor((this.value / this.maxValue) * 100) : 100;
+        }
     },
     // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
     watch: {
-        progressValue: function () {
+        value: function () {
+            this.render();
             this.$emit('valueChange', this.value);
+        },
+        maxValue: function () {
+            this.render();
         },
     },
     methods: {
-        frame: function () {
-            if(this.progressValue >= this.maxValue) {
-                return clearInterval(this.id);
-            }
-            this.progressValue++;
-            this.$refs.myBar.style.width = this.progressValue+ '%';
-            this.$refs.myBar.innerHTML = this.progressValue * 1 + '%';
-        },
+        render: function () {
+            this.$refs.myBar.style.width = this.progressValue + '%';
+        }
     },
 };
 </script>
@@ -49,11 +50,10 @@ export default {
 }
 
 .progressBar {
-  width: 10%;
-  height: 30px;
+  width: 0%;
+  height: 20px;
   background: linear-gradient(#e66465, #9198e5);
-  text-align: center;
-  line-height: 30px;
+  transition: all 1s ease;
   color: brown;
 }
 </style>
