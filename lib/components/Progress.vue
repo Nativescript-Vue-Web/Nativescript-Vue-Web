@@ -6,6 +6,9 @@
     </div>
 </template>
 
+
+
+
 <script>
 export default {
     name: 'Progress',
