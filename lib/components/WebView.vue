@@ -1,5 +1,6 @@
 <template>
-    <iframe 
+    <iframe
+        class="nvw-webview"
         :src="src" 
         @load="onLoadFinished($event)"
     />
@@ -14,11 +15,9 @@ export default {
             this.$emit('loadStarted');
         }
     },
-    props: [
-        'src',
-        'loadStarted',
-        'loadFinished',
-    ],
+    props: {
+        src: String,
+    },
     methods: {
         onLoadFinished: function (event) {
             this.$emit('loadFinished', event);

@@ -1,37 +1,33 @@
 <template>
-    <div class="searchBarContainer">
-        <img @click="onSubmit($event)" class="searchIcon" src="https://image.flaticon.com/icons/png/128/61/61088.png" />
+    <div :style="{backgroundColor: textFieldBackgroundColor}" class="nvw-searchbar">
+        <span @click="onSubmit($event)" class="nvw-searchbar__searchIcon" />
         <input
             ref="searchbar"
-            class="searchBar"
+            class="nvw-searchbar__searchInput"
             :placeholder="hint"
             :type="keyboardType"
-            :editable="true"
-            :value="value"
+            :value="text"
             @keyup.enter="onSubmit($event)"
             @input="updateValue()"
             @change="onTextChange($event)"
-            
         />
-        <img @click="onClear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
+        <span @click="onClear($event)" class="nvw-searchbar__clearIcon" />
     </div>
 </template>
 
 <script>
-import TextField from './TextField';
-
 export default {
+    model: {
+        event: 'input',
+        prop: 'text',
+    },
     name: 'SearchBar',
-    props: [
-        'keyboardType',
-        'submit',
-        'hint',
-        'clear',
-        'textChange',
-        'value',
-    ],
-    components: {
-        TextField,
+    props: {
+        keyboardType: String,
+        hint: String,
+        text: String,
+        textFieldBackgroundColor: String,
+        textFieldHintColor: String, // TODO
     },
     methods: {
         updateValue: function () {
@@ -51,36 +47,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .searchBarContainer {
+    .nvw-searchbar {
         flex-direction: row;
         justify-content: flex-end;
         position: relative;
         width: 400px;
         margin: 0;
         padding: 0;
-        align-items: stretch;
-        .searchBar {
-            width: 70%;
+        padding-bottom: 4px;
+
+        .nvw-searchbar__searchInput {
+            width: calc(100% - 98px);
             height: 30px;
-            padding-left: 40px;
-            margin: 4px 10px 0 10px;
+            padding: 0px 40px 0px 40px;
+            margin: 4px 10px 0px 7px;
+            background-size: cover;
             text-align: left;
             font-weight: bold;
         }
-        .searchIcon {
+
+        .nvw-searchbar__searchIcon {
+            background: url('https://image.flaticon.com/icons/png/128/61/61088.png');
             height: 24px;
             width: 24px;
-            bottom: 4px;
+            bottom: 10px;
+            background-size: cover;
             left: 15px;
             position: absolute;
         }
-        .clearIcon {
+
+        .nvw-searchbar__clearIcon {
+            background: url('https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png');
             position: absolute;
             height: 24px;
+            background-size: cover;
             width: 24px;
-            bottom: 4px;
-            right: 75px;
+            bottom: 10px;
+            right: 15px;
         }
     }
-    
 </style>

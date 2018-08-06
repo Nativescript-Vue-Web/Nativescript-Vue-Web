@@ -1,37 +1,40 @@
 <template>
     <input
+        class="nvw-textfield"
         ref="textfield" 
         :placeholder="hint"
         :disabled="!editable"
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
-        :value="value"
+        :value="text"
         :spellcheck="autoCorrect"
-        @blur="onBlur($event)"
-        @focus="onFocus($event)"
-        @keyup.enter="onReturnPress($event)"
-        @change="onTextChange($event)"
-        @input="updateValue()"
+        @blur="onBlur"
+        @focus="onFocus"
+        @keyup.enter="onReturnPress"
+        @change="onTextChange"
+        @input="updateValue"
     />
 </template>
 
 <script>
 export default {
+    model: {
+        event: 'input',
+        prop: 'text',
+    },
     name: 'TextField',
-    props: [
-        'maxLength',
-        'keyboardType',
-        'secure',
-        'text',
-        'hint',
-        'editable',
-        'autoCorrect',
-        'blur',
-        'focus',
-        'returnPress',
-        'textChange',
-        'value',
-    ],
+    props: {
+        maxLength: Number,
+        keyboardType: String,
+        secure: {
+            type: Boolean,
+            default: false,
+        },
+        text: String,
+        hint: String,
+        editable: Boolean,
+        autoCorrect: Boolean,
+    },
     methods: {
         updateValue: function () {
             this.$emit('input', this.$refs.textfield.value);
