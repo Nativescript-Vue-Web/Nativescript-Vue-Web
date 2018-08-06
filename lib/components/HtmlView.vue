@@ -5,9 +5,9 @@
 <script>
 export default {
     name: 'HtmlView',
-    props: [
-        'html'
-    ],
+    props: {
+        html: String,
+    },
 };
 </script>
 
