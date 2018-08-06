@@ -11,7 +11,6 @@
             @keyup.enter="onSubmit($event)"
             @input="updateValue()"
             @change="onTextChange($event)"
-            
         />
         <img @click="onClear($event)" class="clearIcon" src="https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png" />
     </div>

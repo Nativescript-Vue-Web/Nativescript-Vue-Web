@@ -1,5 +1,5 @@
 <template>
-    <div :style="style" class="container">
+    <div :style="{gridTemplateColumns: formattedColumns, gridTemplateRows: formattedRows}" class="nvw-grid-layout">
         <slot></slot>
     </div>
 </template>
@@ -7,28 +7,61 @@
 <script>
 export default {
     name: 'GridLayout',
-    props: [
-        'columns',
-        'rows',
-    ],
-    data () {
-        return {
-            style: '',      
-        };
+    props: {
+        columns: {
+            type: String,
+            required: true,
+            default: ''
+        },
+        rows: {
+            type: String,
+            required: true,
+            default: ''
+        },
     },
-    mounted () {
-        // The syntax of the props called columns and rows used in the mobile does not match the css syntax used in the web.
-        // Therefore, editing columns cannot be used for now.
-        this.style = `grid-template-columns: ${this.columns}; grid-template-rows: ${this.rows};`;
+    computed: {
+        formattedColumns: function () {
+            let formattedColumns = [];
+
+            this.columns.split(',').forEach(function (element) {
+                if(element.trim().includes('*')){
+                    const factor = (element.trim().replace('*', '') === '') ? '1' : parseInt(element.trim().replace('*', ''));
+                    formattedColumns.push(factor + 'fr');
+                }
+                else if(element.trim() === 'auto'){
+                    formattedColumns.push('min-content');
+                }
+                else{
+                    formattedColumns.push(parseInt(element.trim()) + 'px');
+                }
+            });
+
+            return formattedColumns.join(' ');
+        },
+        formattedRows: function () {
+            let formattedRows = [];
+
+            this.rows.split(',').forEach(function (element) {
+                if(element.trim().includes('*')){
+                    const factor = (element.trim().replace('*', '') === '') ? '1' : parseInt(element.trim().replace('*', ''));
+                    formattedRows.push(factor + 'fr');
+                }
+                else if(element.trim() === 'auto'){
+                    formattedRows.push('min-content');
+                }
+                else{
+                    formattedRows.push(parseInt(element.trim()) + 'px');
+                }
+            });
+
+            return formattedRows.join(' ');
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    .container {
-        width: 50%;
-        height: 500px;
-        background-color: crimson;
+    .nvw-grid-layout {
         display: grid;
     }
 </style>
