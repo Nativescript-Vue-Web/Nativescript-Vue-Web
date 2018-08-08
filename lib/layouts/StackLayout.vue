@@ -6,14 +6,14 @@
 
 <script>
 export default {
-    name: 'StackLayout',
-    props: ['tap', 'text'],
+  name: 'StackLayout',
+  props: ['tap', 'text'],
 };
 </script>
 
 <style scoped lang="scss">
-  .stack-layout {
-    display: flex;
-    flex-direction: column;
-  }
+.stack-layout {
+  display: flex;
+  flex-direction: column;
+}
 </style>

@@ -6,18 +6,18 @@
 
 <script>
 export default {
-    name: 'AbsoluteLayout',
+  name: 'AbsoluteLayout',
 };
 </script>
 
 <style lang="scss" scoped>
-    .container {
-        width: 500px;
-        height: 500px;
-        background-color: burlywood;
-        position: relative;
-    }
-    .container > * {
-        position: absolute;
-    }
+.container {
+  width: 500px;
+  height: 500px;
+  background-color: burlywood;
+  position: relative;
+}
+.container > * {
+  position: absolute;
+}
 </style>

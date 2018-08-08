@@ -8,30 +8,27 @@
 </template>
 
 <script>
-
 export default {
-    name: 'ListPicker',
-    props: [
-        'disabledVal', // Works only in web.
-        'items',
-        'valueProp',
-        'labelProp',
-        'selectedIndex',
-        'selectedIndexChange', // an event.
-        'value',
-    ],
-    methods: {
-        updateValue: function () {
-            this.$emit('input', parseInt(this.$refs.listpicker.value));
-        },
-        onSelectedIndexChange: function (event) {
-            this.$emit('selectedIndexChange', event);
-        },
+  name: 'ListPicker',
+  props: [
+    'disabledVal', // Works only in web.
+    'items',
+    'valueProp',
+    'labelProp',
+    'selectedIndex',
+    'selectedIndexChange', // an event.
+    'value',
+  ],
+  methods: {
+    updateValue: function() {
+      this.$emit('input', parseInt(this.$refs.listpicker.value));
     },
+    onSelectedIndexChange: function(event) {
+      this.$emit('selectedIndexChange', event);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>
-

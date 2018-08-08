@@ -4,11 +4,10 @@
 
 <script>
 export default {
-    name: 'Img',
-    props: ['src'],
+  name: 'Img',
+  props: ['src'],
 };
 </script>
 
 <style scoped lang="scss">
-
 </style>

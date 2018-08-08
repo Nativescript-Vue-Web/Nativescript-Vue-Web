@@ -8,34 +8,31 @@
 
 <script>
 export default {
-    name: 'Progress',
-    props: [
-        'value',
-        'valueChange',
-        'maxValue',
-    ],
-    data () {
-        return {
-            id: setInterval(this.frame, 50),
-            progressValue: this.value,
-        };
+  name: 'Progress',
+  props: ['value', 'valueChange', 'maxValue'],
+  data() {
+    return {
+      id: setInterval(this.frame, 50),
+      progressValue: this.value,
+    };
+  },
+  // Since the progress bar is made of only css and without input tag,
+  // we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
+  watch: {
+    progressValue: function() {
+      this.$emit('valueChange', this.value);
     },
-    // Since the progress bar is made of only css and without input tag, we have to watch the value of the progress bar(innerHTML) until it reaches the given props.
-    watch: {
-        progressValue: function () {
-            this.$emit('valueChange', this.value);
-        },
+  },
+  methods: {
+    frame: function() {
+      if (this.progressValue >= this.maxValue) {
+        return clearInterval(this.id);
+      }
+      this.progressValue++;
+      this.$refs.myBar.style.width = this.progressValue + '%';
+      this.$refs.myBar.innerHTML = this.progressValue * 1 + '%';
     },
-    methods: {
-        frame: function () {
-            if(this.progressValue >= this.maxValue) {
-                return clearInterval(this.id);
-            }
-            this.progressValue++;
-            this.$refs.myBar.style.width = this.progressValue+ '%';
-            this.$refs.myBar.innerHTML = this.progressValue * 1 + '%';
-        },
-    },
+  },
 };
 </script>
 
@@ -54,4 +51,3 @@ export default {
   color: brown;
 }
 </style>
-

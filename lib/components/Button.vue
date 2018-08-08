@@ -4,16 +4,15 @@
 
 <script>
 export default {
-    name: 'Button',
-    props: ['tap', 'text'],
-    methods: {
-        onClick() {
-            this.$emit('tap');
-        },
+  name: 'Button',
+  props: ['tap', 'text'],
+  methods: {
+    onClick() {
+      this.$emit('tap');
     },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-
 </style>

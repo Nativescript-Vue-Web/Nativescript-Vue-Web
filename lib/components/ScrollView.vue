@@ -11,31 +11,30 @@
 
 <script>
 export default {
-    name: 'ScrollView',
-    props: [
-        'orientation',
-        'scrollBarIndicatorVisible', // was not included due to the incompatible code between different browsers for now.
-        'scroll',
-    ],
-    methods: {
-        onScroll: function (event) {
-            this.$emit('scroll', event);
-        }  
+  name: 'ScrollView',
+  props: [
+    'orientation',
+    'scrollBarIndicatorVisible', // was not included due to the incompatible code between different browsers for now.
+    'scroll',
+  ],
+  methods: {
+    onScroll: function(event) {
+      this.$emit('scroll', event);
     },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-    .horizontalScroll {
-        height: 10%;
-        width: 10%;
-        overflow: auto;
-        white-space: nowrap;
-    }
-    .verticalScroll {
-        width: 110px;
-        height: 110px;
-        overflow-y: scroll;
-    }
+.horizontalScroll {
+  height: 10%;
+  width: 10%;
+  overflow: auto;
+  white-space: nowrap;
+}
+.verticalScroll {
+  width: 110px;
+  height: 110px;
+  overflow-y: scroll;
+}
 </style>
-

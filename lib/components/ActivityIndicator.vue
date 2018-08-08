@@ -6,19 +6,18 @@
 
 <script>
 export default {
-    name: 'ActivityIndicator',
-    props: [
-        'busy',
-        'busyChange', // an event.
-    ],
-    watch: {
-        busy: function () {
-            this.$emit('busyChange');
-        },
+  name: 'ActivityIndicator',
+  props: [
+    'busy',
+    'busyChange', // an event.
+  ],
+  watch: {
+    busy: function() {
+      this.$emit('busyChange');
     },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

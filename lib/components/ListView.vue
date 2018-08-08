@@ -9,30 +9,23 @@
 
 <script>
 export default {
-    name: 'ListView',
-    props: [
-        'items',
-        'separatorColor',
-        'valueProp',
-        'labelProp',
-        'itemTap',
-    ],
-    data () {
-        return {
-            separatorStyle: '',      
-        };
+  name: 'ListView',
+  props: ['items', 'separatorColor', 'valueProp', 'labelProp', 'itemTap'],
+  data() {
+    return {
+      separatorStyle: '',
+    };
+  },
+  mounted() {
+    this.separatorStyle = `background-color: ${this.separatorColor}; height: 1px; border: 0;`;
+  },
+  methods: {
+    onItemTap: function(item) {
+      this.$emit('itemTap', item);
     },
-    mounted () {
-        this.separatorStyle = `background-color: ${this.separatorColor}; height: 1px; border: 0;`;
-    },
-    methods: {
-        onItemTap: function (item) {
-            this.$emit('itemTap', item);  
-        }  
-    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

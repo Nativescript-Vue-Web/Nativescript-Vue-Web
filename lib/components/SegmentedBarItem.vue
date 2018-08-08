@@ -7,13 +7,10 @@
 
 <script>
 export default {
-    name: 'SegmentedBarItem',
-    props: [
-        'title'
-    ],
+  name: 'SegmentedBarItem',
+  props: ['title'],
 };
 </script>
 
 <style lang="scss" scoped>
-
 </style>

@@ -13,19 +13,16 @@
 
 <script>
 export default {
-    name: 'Switcher',
-    props: [
-        'checkedChange',
-        'value',
-    ],
-    methods: {
-        updateValue: function () {
-            this.$emit('input', this.$refs.switcher.checked);
-        },
-        onCheckedChange: function (event) {
-            this.$emit('checkedChange', event);
-        },
+  name: 'Switcher',
+  props: ['checkedChange', 'value'],
+  methods: {
+    updateValue: function() {
+      this.$emit('input', this.$refs.switcher.checked);
     },
+    onCheckedChange: function(event) {
+      this.$emit('checkedChange', event);
+    },
+  },
 };
 </script>
 
@@ -37,7 +34,9 @@ export default {
   height: 34px;
 }
 
-.switch input {display:none;}
+.switch input {
+  display: none;
+}
 
 .slider {
   position: absolute;
@@ -47,21 +46,21 @@ export default {
   right: 0;
   bottom: 0;
   background-color: #ca2222;
-  -webkit-transition: .4s;
-  transition: .4s;
-   border-radius: 34px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -70,7 +69,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
@@ -80,22 +79,19 @@ input:checked + .slider:before {
 }
 
 /*------ ADDED CSS ---------*/
-.slider:after
-{
- content:'OFF';
- color: white;
- display: block;
- position: absolute;
- transform: translate(-50%,-50%);
- top: 50%;
- left: 50%;
- font-size: 10px;
- font-family: Verdana, sans-serif;
+.slider:after {
+  content: 'OFF';
+  color: white;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 10px;
+  font-family: Verdana, sans-serif;
 }
 
-input:checked + .slider:after
-{  
-  content:'ON';
+input:checked + .slider:after {
+  content: 'ON';
 }
 </style>
-
