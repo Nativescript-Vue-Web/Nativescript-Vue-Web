@@ -1,9 +1,8 @@
 <template>
     <input
         v-common-directive
-        v-flexboxlayout-directive
         class="nvw-textfield"
-        ref="textfield" 
+        ref="textfield"
         :placeholder="hint"
         :disabled="!editable"
         :maxlength="maxLength"
@@ -11,16 +10,15 @@
         :value="text"
         :spellcheck="autoCorrect"
         @blur="blur ? blur($event) : null"
+        @change="textChange"
         @focus="focus ? focus($event) : null"
         @keyup.enter="returnPress ? returnPress($event, text) : null"
-        @change="textChange ? textChange($event, text) : null"
         @input="updateValue"
     />
 </template>
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
-import FlexboxLayoutDirective from '../directives/FlexboxLayoutDirective';
 
 export default {
   model: {
@@ -44,14 +42,13 @@ export default {
     focus: Function,
     blur: Function,
   },
-  methods: {
-    updateValue: function() {
-      this.$emit('input', this.$refs.textfield.value);
-    },
-  },
   directives: {
     'common-directive': CommonDirective,
-    'flexboxlayout-directive': FlexboxLayoutDirective,
+  },
+  methods: {
+    updateValue: function($event) {
+      this.$emit('input', $event.target.value);
+    },
   },
 };
 </script>
