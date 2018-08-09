@@ -1,19 +1,21 @@
 /**
  * Debounce function
- * @param callback
- * @param time
+ * @param func
+ * @param wait
+ * @param immediate
  * @returns {Function}
  */
-export function debounce(callback, time) {
-  let interval;
-  return () => {
-    clearTimeout(interval);
-    interval = setTimeout(() => {
-      interval = null;
-
-      // eslint-disable-next-line
-      callback(arguments);
-    }, time);
+export function debounce(func, wait, immediate) {
+  let timeout;
+  return function debounceReturn() {
+    const context = this,
+      args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    }, wait);
+    if (immediate && !timeout) func.apply(context, args);
   };
 }
 
