@@ -1,13 +1,14 @@
-import {expect} from 'chai';
-import {shallow} from '@vue/test-utils';
-import Button from '../../lib/components/Button.vue';
+import { expect } from 'chai';
+import { shallowMount } from '@vue/test-utils';
+
+import Button from '@/components/Button.vue';
 
 describe('Button.vue', () => {
-    it('renders props.msg when passed', () => {
-        const text = 'Name';
-        const wrapper = shallow(Button, {
-            propsData: {text},
-        });
-        expect(wrapper.text()).to.include(text);
+  it('renders props.msg when passed', () => {
+    const text = 'Name';
+    const wrapper = shallowMount(Button, {
+      propsData: { text },
     });
+    expect(wrapper.html()).to.include(text);
+  });
 });
