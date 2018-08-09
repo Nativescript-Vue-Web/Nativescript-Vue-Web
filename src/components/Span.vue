@@ -10,7 +10,6 @@ export default {
   props: {
     text: String,
   },
-  created() {},
 };
 </script>
 

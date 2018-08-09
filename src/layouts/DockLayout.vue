@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="nvw-dock-layout">
         <slot></slot>
     </div>
 </template>
@@ -7,12 +7,14 @@
 <script>
 export default {
   name: 'DockLayout',
-  props: ['stretchLastChild'],
+  props: {
+    stretchLastChild: Boolean,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
+.nvw-dock-layout {
   width: 500px;
   height: 500px;
   background-color: crimson;

@@ -30,10 +30,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-//TODO css will rebuild for stretch.
-.nvw-img {
-}
-
+//TODO css will rebuild
 .nvw-img {
   &--fill {
     width: inherit;

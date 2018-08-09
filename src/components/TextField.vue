@@ -1,5 +1,7 @@
 <template>
     <input
+        v-common-directive
+        v-flexboxlayout-directive
         class="nvw-textfield"
         ref="textfield" 
         :placeholder="hint"
@@ -8,15 +10,18 @@
         :type="secure ? 'password' : keyboardType"
         :value="text"
         :spellcheck="autoCorrect"
-        @blur="onBlur"
-        @focus="onFocus"
-        @keyup.enter="onReturnPress"
-        @change="onTextChange"
+        @blur="blur ? blur($event) : null"
+        @focus="focus ? focus($event) : null"
+        @keyup.enter="returnPress ? returnPress($event, text) : null"
+        @change="textChange ? textChange($event, text) : null"
         @input="updateValue"
     />
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+import FlexboxLayoutDirective from '../directives/FlexboxLayoutDirective';
+
 export default {
   model: {
     event: 'input',
@@ -34,23 +39,19 @@ export default {
     hint: String,
     editable: Boolean,
     autoCorrect: Boolean,
+    textChange: Function,
+    returnPress: Function,
+    focus: Function,
+    blur: Function,
   },
   methods: {
     updateValue: function() {
       this.$emit('input', this.$refs.textfield.value);
     },
-    onBlur: function(event) {
-      this.$emit('blur', event);
-    },
-    onFocus: function(event) {
-      this.$emit('focus', event);
-    },
-    onTextChange: function(event) {
-      this.$emit('textChange', event);
-    },
-    onReturnPress: function(event) {
-      this.$emit('returnPress', event);
-    },
+  },
+  directives: {
+    'common-directive': CommonDirective,
+    'flexboxlayout-directive': FlexboxLayoutDirective,
   },
 };
 </script>
