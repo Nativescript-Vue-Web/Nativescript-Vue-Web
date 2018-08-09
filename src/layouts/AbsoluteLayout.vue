@@ -18,7 +18,7 @@ export default {
   },
   mounted() {
     this.$slots.default.forEach(vnode => {
-      const propsData = vnode.componentOptions.propsData;
+      const { propsData } = vnode.componentOptions.propsData;
 
       for (const prop in propsData) {
         if (!propsData.hasOwnProperty(prop)) continue;
