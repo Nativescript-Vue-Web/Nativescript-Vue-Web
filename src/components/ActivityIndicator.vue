@@ -22,13 +22,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nvw-activity-indicator__loader {
-  border: 5px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 5px solid #3498db;
-  width: 40px;
-  height: 40px;
-  animation: nwv-spin 1s linear infinite;
+.nvw-activity-indicator {
+  &__loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: nwv-spin 1s linear infinite;
+  }
 }
 
 @keyframes nwv-spin {
