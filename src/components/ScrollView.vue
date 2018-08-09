@@ -36,8 +36,7 @@ export default {
   },
   methods: {
     onScroll: debounce(function() {
-      //TODO debounce will be fixed
-      //this.$emit('scroll', event);
+      this.$emit('scroll', event);
     }, 100),
   },
 };
