@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { debounce } from '../helpers/lodash.debounce';
+import { debounce, camelCaseToDash, addPx } from '../helpers/helpers';
 
 export default {
   name: 'ScrollView',
@@ -24,39 +24,40 @@ export default {
   },
   computed: {
     widthStyle: function() {
-      return this.width + 'px';
+      return addPx(this.width);
     },
     heightStyle: function() {
-      return this.height + 'px';
+      return addPx(this.height);
     },
     scrollViewClass: function() {
-      return {
-        'nvw-scrollview nvw-scrollview--horizontal': this.orientation === 'horizontal' ? true : false,
-        'nvw-scrollview nvw-scrollview--vertical': this.orientation === 'vertical' ? true : false,
-        'nvw-scrollview nvw-scrollview--horizontal--hide': this.orientation === 'horizontal' && !this.scrollBarIndicatorVisible ? true : false,
-        'nvw-scrollview nvw-scrollview--vertical--hide': this.orientation === 'vertical' && !this.scrollBarIndicatorVisible ? true : false,
-      };
+      return `nvw-scrollview nvw-scrollview${this.orientation !== 'none' ? '--' + camelCaseToDash(this.orientation) : ''}
+      ${this.scrollBarIndicatorVisible ? '' : '--hide'}`;
     },
   },
   methods: {
     onScroll: debounce(function() {
-      this.$emit('scroll', event);
+      //TODO debounce will be fixed
+      //this.$emit('scroll', event);
     }, 100),
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.nvw-scrollview--horizontal {
-  overflow: auto;
-  white-space: nowrap;
-}
-.nvw-scrollview--vertical {
-  overflow-y: scroll;
-}
+.nvw-scrollview {
+  &--horizontal {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  &--vertical {
+    overflow-y: scroll;
+  }
 
-//TODO Web browsers not supported hidden scrollbar. If overflow set to hidden, scroll on disable. The solution will be found.
-.nvw-scrollview__vertical-scroll--hide,
-.verticalScroll.hideScroll--hide {
+  //TODO Web browsers not supported hidden scrollbar. If overflow set to hidden, scroll on disable. The solution will be found.
+  &--horizontal,
+  &--vertical {
+    &--hide {
+    }
+  }
 }
 </style>
