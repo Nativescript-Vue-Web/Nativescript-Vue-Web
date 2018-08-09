@@ -37,14 +37,14 @@ export default {
 .nvw-progress {
   width: 100%;
   background-color: #ddd;
-}
 
-.nvw-progress__bar {
-  width: 0;
-  height: 20px;
-  background: linear-gradient(#e66465, #9198e5);
-  transition: all 1s ease;
-  transition-delay: 1s;
-  color: brown;
+  &__bar {
+    width: 0;
+    height: 20px;
+    background: linear-gradient(#e66465, #9198e5);
+    transition: all 1s ease;
+    transition-delay: 1s;
+    color: brown;
+  }
 }
 </style>

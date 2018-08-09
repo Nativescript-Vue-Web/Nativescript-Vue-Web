@@ -40,14 +40,13 @@ export default {
 <style scoped lang="scss">
 //TODO css will rebuild
 .nvw-img {
-}
+  &--fill {
+    width: inherit;
+    height: inherit;
+  }
 
-.nvw-img--fill {
-  width: inherit;
-  height: inherit;
-}
-
-.nvw-img--aspect-fill {
-  width: inherit;
+  &--aspect-fill {
+    width: inherit;
+  }
 }
 </style>

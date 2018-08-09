@@ -1,31 +1,81 @@
 <template>
-    <div :style="style" class="container">
+    <div
+        v-common-directive
+        class="nvw-flexbox-layout"
+        :style="{
+         flexDirection: flexDirection,
+         flexWrap: flexWrap,
+         justifyContent: justifyContent,
+         alignItems: alignItems,
+         alignContent: alignContent,
+        }">
         <slot></slot>
     </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'FlexboxLayout',
-  props: ['flexDirection', 'flexWrap', 'justifyContent', 'alignItems', 'alignContent'],
-  data() {
-    return {
-      style: '',
-    };
+  props: {
+    flexDirection: String,
+    flexWrap: String,
+    justifyContent: String,
+    alignItems: String,
+    alignContent: String,
   },
-  mounted() {
-    this.style = `flex-direction: ${this.flexDirection}; flex-wrap: ${this.flexWrap}; justify-content: ${this.justifyContent}; align-items: ${
-      this.alignItems
-    }; align-content: ${this.alignContent};`;
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
+.nvw-flexbox-layout {
   width: 50%;
   height: 500px;
   background-color: crimson;
-  display: inline-flex;
+  display: flex;
+}
+
+.nvw-flexbox-layout > {
+  // Deafult stretch.
+  [alignSelf=''] {
+    align-self: stretch;
+  }
+
+  [alignSelf='flex-start'] {
+    align-self: flex-start;
+  }
+
+  [alignSelf='flex-end'] {
+    align-self: flex-end;
+  }
+
+  [alignSelf='center'] {
+    align-self: center;
+  }
+
+  [alignSelf='baseline'] {
+    align-self: baseline;
+  }
+
+  [alignSelf='stretch'] {
+    align-self: stretch;
+  }
+
+  // Default value.
+  [flexWrapBefore=''] {
+    flex-wrap: nowrap;
+  }
+
+  [flexWrapBefore='true'] {
+    flex-wrap: wrap;
+  }
+
+  [flexWrapBefore='false'] {
+    flex-wrap: nowrap;
+  }
 }
 </style>
