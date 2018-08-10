@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     stretchClass: function() {
-      return `nvw-img nvw-img${this.stretch !== 'none' ? '--' + camelCaseToDash(this.stretch) : ''}`;
+      return `nvw-img ${this.stretch !== 'none' ? 'nvw-img--' + camelCaseToDash(this.stretch) : ''}`.trim();
     },
   },
 };
