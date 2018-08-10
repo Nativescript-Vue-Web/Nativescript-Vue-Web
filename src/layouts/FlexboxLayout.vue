@@ -41,7 +41,7 @@ export default {
 
 .nvw-flexbox-layout > {
   // Deafult stretch.
-  [alignSelf=''] {
+  [alignSelf=''] or [alignSelf='stretch'] {
     align-self: stretch;
   }
 
@@ -59,10 +59,6 @@ export default {
 
   [alignSelf='baseline'] {
     align-self: baseline;
-  }
-
-  [alignSelf='stretch'] {
-    align-self: stretch;
   }
 
   // Default value.

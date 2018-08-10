@@ -10,10 +10,18 @@ export default {
   props: ['tap', 'text', 'col', 'row'],
   computed: {
     colNumber: function() {
-      return parseInt(this.col) + 1;
+      try {
+        return parseInt(this.col) + 1;
+      } catch (e) {
+        throw new Error('col attribute must be number');
+      }
     },
     rowNumber: function() {
-      return parseInt(this.row) + 1;
+      try {
+        return parseInt(this.row) + 1;
+      } catch (e) {
+        throw new Error('row attribute must be number');
+      }
     },
   },
 };
