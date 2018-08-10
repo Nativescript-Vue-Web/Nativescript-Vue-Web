@@ -1,0 +1,112 @@
+{
+  "name": "nativescript-vue-web",
+  "description": "Web components for NativeScript-Vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "main": "src/main.js",
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.11",
+    "@vue/cli-plugin-eslint": "^3.0.0-rc.11",
+    "@vue/cli-plugin-unit-mocha": "^3.0.0-rc.11",
+    "@vue/cli-service": "^3.0.0-rc.11",
+    "@vue/eslint-config-airbnb": "^3.0.0-rc.11",
+    "@vue/eslint-config-prettier": "^3.0.0-rc.11",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "chai": "^4.1.2",
+    "lint-staged": "^7.2.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "prettier": "1.14.0"
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/airbnb",
+      "@vue/prettier"
+    ],
+    "rules": {
+      "import/extensions": 0,
+      "global-require": 0,
+      "eol-last": 0,
+      "no-param-reassign": 0,
+      "object-curly-newline": 0,
+      "no-plusplus": 0,
+      "max-len": [
+        2,
+        {
+          "code": 160
+        }
+      ],
+      "prefer-destructuring": [
+        2,
+        {
+          "object": true,
+          "array": false
+        }
+      ]
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 160,
+    "trailingComma": "all"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web.git"
+  },
+  "keywords": [
+    "nativescript",
+    "vue",
+    "web",
+    "components"
+  ],
+  "bugs": {
+    "url": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/issues"
+  },
+  "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme"
+}
