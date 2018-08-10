@@ -58,7 +58,7 @@ describe('TextField', () => {
     },
   });
 
-  describe('the component receives given props correctly.', async () => {
+  describe('the component receives given props correctly.', () => {
     it(`maxLength property is equal to: ${maxLength}.`, () => {
       expect(wrapper.props().maxLength).to.equal(maxLength);
     });
@@ -104,7 +104,7 @@ describe('TextField', () => {
     });
   });
 
-  describe('the input inside the component has attributes with correct values.', async () => {
+  describe('the input inside the component has attributes with correct values.', () => {
     it(`the maxlength attribute is equal to${maxLength}.`, () => {
       // The component returns the attribute as string so, the maxLength property is converted to string type.
       expect(wrapper.find('input').attributes().maxlength).to.equal(maxLength.toString());
@@ -132,7 +132,7 @@ describe('TextField', () => {
     });
   });
 
-  describe('the attributes of the component can be changed later on.', async () => {
+  describe('the attributes of the component can be changed later on.', () => {
     it('the disabled attribute of the component is changed to true from false ?', () => {
       wrapper.find('input').element.disabled = true;
       expect(wrapper.find('input').element.disabled).to.equal(true);
