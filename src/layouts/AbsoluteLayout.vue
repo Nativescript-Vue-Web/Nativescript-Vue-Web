@@ -16,33 +16,6 @@ export default {
     },
     backgroundColor: {},
   },
-  mounted() {
-    this.$slots.default.forEach(vnode => {
-      const { propsData } = vnode.componentOptions.propsData;
-
-      for (const prop in propsData) {
-        if (!propsData.hasOwnProperty(prop)) continue;
-
-        switch (prop) {
-          case 'backgroundColor':
-            vnode.elm.style.backgroundColor = propsData[prop];
-            break;
-          case 'top':
-            vnode.elm.style.top = this.convertPxStyle(propsData[prop]);
-            break;
-          case 'left':
-            vnode.elm.style.left = this.convertPxStyle(propsData[prop]);
-            break;
-          case 'width':
-            vnode.elm.style.width = this.convertPxStyle(propsData[prop]);
-            break;
-          case 'height':
-            vnode.elm.style.height = this.convertPxStyle(propsData[prop]);
-            break;
-        }
-      }
-    });
-  },
   methods: {
     convertPxStyle: function(value) {
       return value.toString().includes('%') ? value : value + 'px';

@@ -2,7 +2,6 @@
     <input
         v-common-directive
         class="nvw-textfield"
-        ref="textfield"
         :placeholder="hint"
         :disabled="!editable"
         :maxlength="maxLength"

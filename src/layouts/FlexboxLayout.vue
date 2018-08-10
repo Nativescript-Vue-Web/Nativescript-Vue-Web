@@ -33,45 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .nvw-flexbox-layout {
-  width: 50%;
   height: 500px;
   background-color: crimson;
   display: flex;
-}
-
-.nvw-flexbox-layout > {
-  // Deafult stretch.
-  [alignSelf=''] or [alignSelf='stretch'] {
-    align-self: stretch;
-  }
-
-  [alignSelf='flex-start'] {
-    align-self: flex-start;
-  }
-
-  [alignSelf='flex-end'] {
-    align-self: flex-end;
-  }
-
-  [alignSelf='center'] {
-    align-self: center;
-  }
-
-  [alignSelf='baseline'] {
-    align-self: baseline;
-  }
-
-  // Default value.
-  [flexWrapBefore=''] {
-    flex-wrap: nowrap;
-  }
-
-  [flexWrapBefore='true'] {
-    flex-wrap: wrap;
-  }
-
-  [flexWrapBefore='false'] {
-    flex-wrap: nowrap;
-  }
 }
 </style>
