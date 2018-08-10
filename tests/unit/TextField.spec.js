@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
 import sinon from 'sinon';
-import { TextField } from '../../../Nativescript-Vue-Web/src/main';
+import { TextField } from '../../src/main';
 
 describe('TextField', () => {
   // Mock up values.
