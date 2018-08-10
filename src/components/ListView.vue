@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="listItem" @click="onItemTap(item)" v-for="item in items" v-bind:key="item[valueProp]">
-            <Label :text="item[labelProp]" />
+        <div class="nvw-listview" @click="onItemTap(item)" v-for="item in items" v-bind:key="item">
+            <slot :props="item"></slot>
             <hr :style="separatorStyle" />
         </div>
     </div>
@@ -10,7 +10,11 @@
 <script>
 export default {
   name: 'ListView',
-  props: ['items', 'separatorColor', 'valueProp', 'labelProp', 'itemTap'],
+  props: {
+    items: Array,
+    separatorColor: String,
+    for: String, // TODO
+  },
   data() {
     return {
       separatorStyle: '',

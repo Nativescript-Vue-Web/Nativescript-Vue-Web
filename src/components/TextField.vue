@@ -1,39 +1,52 @@
 <template>
     <input
-        ref="textfield" 
+        v-common-directive
+        class="nvw-textfield"
         :placeholder="hint"
         :disabled="!editable"
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
-        :value="value"
+        :value="text"
         :spellcheck="autoCorrect"
-        @blur="onBlur($event)"
-        @focus="onFocus($event)"
-        @keyup.enter="onReturnPress($event)"
-        @change="onTextChange($event)"
-        @input="updateValue()"
+        @blur="blur ? blur($event) : null"
+        @change="textChange"
+        @focus="focus ? focus($event) : null"
+        @keyup.enter="returnPress ? returnPress($event, text) : null"
+        @input="updateValue"
     />
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
+  model: {
+    event: 'input',
+    prop: 'text',
+  },
   name: 'TextField',
-  props: ['maxLength', 'keyboardType', 'secure', 'text', 'hint', 'editable', 'autoCorrect', 'blur', 'focus', 'returnPress', 'textChange', 'value'],
+  props: {
+    maxLength: Number,
+    keyboardType: String,
+    secure: {
+      type: Boolean,
+      default: false,
+    },
+    text: String,
+    hint: String,
+    editable: Boolean,
+    autoCorrect: Boolean,
+    textChange: Function,
+    returnPress: Function,
+    focus: Function,
+    blur: Function,
+  },
+  directives: {
+    'common-directive': CommonDirective,
+  },
   methods: {
-    updateValue: function() {
-      this.$emit('input', this.$refs.textfield.value);
-    },
-    onBlur: function(event) {
-      this.$emit('blur', event);
-    },
-    onFocus: function(event) {
-      this.$emit('focus', event);
-    },
-    onTextChange: function(event) {
-      this.$emit('textChange', event);
-    },
-    onReturnPress: function(event) {
-      this.$emit('returnPress', event);
+    updateValue: function($event) {
+      this.$emit('input', $event.target.value);
     },
   },
 };

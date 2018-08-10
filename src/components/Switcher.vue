@@ -1,97 +1,109 @@
 <template>
-    <label class="switch">
+    <label v-common-directive class="nvw-switch">
         <input
-          ref="switcher"
+          class="nvw-switch__input"
+          ref="switch"
           type="checkbox"
-          :checked="value"
-          @change="onCheckedChange($event)"
+          :checked="checked"
+          @change="checkedChange ? checkedChange($event) : null"
           @click="updateValue()"
         />
-        <span class="slider" />
+        <span class="nvw-switch__slider" />
     </label>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'Switcher',
-  props: ['checkedChange', 'value'],
+  model: {
+    event: 'input',
+    prop: 'checked',
+  },
+  props: {
+    checked: {
+      type: Boolean,
+      default: false,
+    },
+    checkedChange: Function,
+  },
   methods: {
     updateValue: function() {
-      this.$emit('input', this.$refs.switcher.checked);
+      this.$emit('input', this.$refs.switch.checked);
     },
-    onCheckedChange: function(event) {
-      this.$emit('checkedChange', event);
-    },
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.switch {
+.nvw-switch {
   position: relative;
   display: inline-block;
   width: 90px;
   height: 34px;
-}
 
-.switch input {
-  display: none;
-}
+  &__input {
+    display: none;
+  }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ca2222;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 34px;
-}
+  &__input:checked + &__slider {
+    background-color: #2ab934;
+  }
 
-.slider:before {
-  position: absolute;
-  content: '';
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
+  &__input:checked + &__slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(55px);
+  }
 
-input:checked + .slider {
-  background-color: #2ab934;
-}
+  &__input:checked + &__slider:after {
+    content: 'ON';
+  }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
-}
+  &__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #ca2222;
+    -webkit-transition: 0.5s;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(55px);
-}
+  &__slider:before {
+    position: absolute;
+    content: '';
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
 
-/*------ ADDED CSS ---------*/
-.slider:after {
-  content: 'OFF';
-  color: white;
-  display: block;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  font-size: 10px;
-  font-family: Verdana, sans-serif;
-}
+  &__input:focus + &__slider {
+    box-shadow: 0 0 1px #2196f3;
+  }
 
-input:checked + .slider:after {
-  content: 'ON';
+  &__slider:after {
+    content: 'OFF';
+    color: white;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+  }
 }
 </style>

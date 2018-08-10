@@ -19,6 +19,8 @@ export { default as Slider } from './components/Slider.vue';
 export { default as Switcher } from './components/Switcher.vue';
 export { default as TextField } from './components/TextField.vue';
 export { default as TextView } from './components/TextView.vue';
+export { default as Span } from './components/Span.vue';
+export { default as FormattedString } from './components/FormattedString.vue';
 export { default as TimePicker } from './components/TimePicker.vue';
 
 // Layouts

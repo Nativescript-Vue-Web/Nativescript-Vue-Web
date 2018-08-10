@@ -1,14 +1,13 @@
 <template>
-    <div class="slidecontainer">
+    <div class="nvw-slider">
         <input
-            ref="slider"
-            class="slider"
+            class="nvw-slider__scroll"
             type="range"
             :min="minValue"
             :max="maxValue"
             :value="value"
-            @input="updateValue()"
-            @change="onValueChange($event)"
+            @change="valueChange ? valueChange($event, value) : null"
+            @input="updateValue"
         />
     </div>
 </template>
@@ -16,56 +15,50 @@
 <script>
 export default {
   name: 'Slider',
-  props: [
-    'minValue',
-    'maxValue',
-    'valueChange', // an event.
-    'value',
-  ],
+  props: {
+    minValue: Number,
+    maxValue: Number,
+    value: Number,
+    valueChange: Function,
+  },
   methods: {
     updateValue: function() {
-      this.$emit('input', this.$refs.slider.value);
-    },
-    onValueChange: function(event) {
-      this.$emit('valueChange', event);
+      this.$emit('input', this.$event.target.value);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.slidecontainer {
+.nvw-slider {
   width: 100%;
-}
+  &__scroll {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
 
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-}
-
-.slider:hover {
-  opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4caf50;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4caf50;
-  cursor: pointer;
+    &:hover {
+      opacity: 2;
+    }
+    &::-webkit-slider-thumb {
+      width: 25px;
+      height: 25px;
+      background: #4caf50;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
+    &::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: #4caf50;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
+  }
 }
 </style>

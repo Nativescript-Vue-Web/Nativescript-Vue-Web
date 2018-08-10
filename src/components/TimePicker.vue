@@ -1,12 +1,12 @@
 <template>
     <input
-        ref="timepicker"
-        type="time"
-        :min="getMinTime"
-        :max="getMaxTime"
-        :value="value"
-        @change="onTimeChange($event)"
-        @input="updateValue()"
+            ref="timepicker"
+            type="time"
+            :min="getMinTime"
+            :max="getMaxTime"
+            :value="value"
+            @change="onTimeChange($event)"
+            @input="updateValue()"
     />
 </template>
 

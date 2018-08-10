@@ -1,4 +1,5 @@
 <template>
+
     <textarea
         ref="textview" 
         :disabled="!editable"
@@ -7,8 +8,8 @@
         :type="keyboardType"
         :value="value"
         :spellcheck="autoCorrect"
-        @blur="onBlur($event)"
-        @focus="onFocus($event)"
+        @blur="onBlur"
+        @focus="onFocus"
         @keyup.enter="onReturnPress($event)"
         @change="onTextChange($event)"
         @input="updateValue()"
@@ -18,22 +19,24 @@
 <script>
 export default {
   name: 'TextView',
-  props: ['text', 'hint', 'editable', 'maxLength', 'keyboardType', 'autoCorrect', 'blur', 'focus', 'returnPress', 'textChange', 'value'],
-  computed: {
-    replaceWithCarriageReturn: function() {
-      // do smt...
-      return this.text;
-    },
+  props: {
+    text: String,
+    hint: String,
+    editable: Boolean,
+    maxLength: Number,
+    keyboardType: String,
+    autoCorrect: Boolean,
+    value: String,
   },
   methods: {
     updateValue: function() {
       this.$emit('input', this.$refs.textview.value);
     },
-    onBlur: function(event) {
-      this.$emit('blur', event);
+    onBlur: function() {
+      this.$emit('blur');
     },
-    onFocus: function(event) {
-      this.$emit('focus', event);
+    onFocus: function() {
+      this.$emit('focus');
     },
     onTextChange: function(event) {
       this.$emit('textChange', event);
