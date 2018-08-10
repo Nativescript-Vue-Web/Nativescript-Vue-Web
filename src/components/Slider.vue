@@ -1,13 +1,13 @@
 <template>
     <div class="nvw-slider">
         <input
-            ref="slider"
             class="nvw-slider__scroll"
             type="range"
             :min="minValue"
             :max="maxValue"
             :value="value"
             @change="valueChange ? valueChange($event, value) : null"
+            @input="updateValue"
         />
     </div>
 </template>
@@ -20,6 +20,11 @@ export default {
     maxValue: Number,
     value: Number,
     valueChange: Function,
+  },
+  methods: {
+    updateValue: function() {
+      this.$emit('input', this.$event.target.value);
+    },
   },
 };
 </script>
