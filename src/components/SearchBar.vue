@@ -56,7 +56,7 @@ export default {
   padding: 0;
   padding-bottom: 4px;
 
-  .nvw-searchbar__searchInput {
+  &__searchInput {
     width: calc(100% - 98px);
     height: 30px;
     padding: 0px 40px 0px 40px;
@@ -66,7 +66,7 @@ export default {
     font-weight: bold;
   }
 
-  .nvw-searchbar__searchIcon {
+  &__searchIcon {
     background: url('https://image.flaticon.com/icons/png/128/61/61088.png');
     height: 24px;
     width: 24px;
@@ -76,7 +76,7 @@ export default {
     position: absolute;
   }
 
-  .nvw-searchbar__clearIcon {
+  &__clearIcon {
     background: url('https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png');
     position: absolute;
     height: 24px;
