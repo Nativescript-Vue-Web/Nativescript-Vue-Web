@@ -7,7 +7,7 @@ const CommonDirective = {
       let cssString = '';
 
       cssString += $attrs.backgroundColor ? `background-color : ${$attrs.backgroundColor};` : '';
-      cssString += $attrs.wdith ? `width: ${$attrs.width}px;` : '';
+      cssString += $attrs.width ? `width: ${$attrs.width}px;` : '';
       cssString += $attrs.height ? `height: ${$attrs.height}px;` : '';
       cssString += $attrs.flexShrink ? `flex-shrink: ${$attrs.flexShrink};` : '';
       cssString += $attrs.flexGrow ? `flex-grow: ${$attrs.flexGrow};` : '';
