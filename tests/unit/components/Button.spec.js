@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import Button from '../../src/components/Button.vue';
+import Button from '../../../src/components/Button.vue';
 
 describe('Button.vue', () => {
   const text = 'initial string';

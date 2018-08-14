@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { FlexboxLayout, TextField, Label } from '../../src/main';
+import { FlexboxLayout, TextField, Label } from '../../../src/main';
 
 describe('FlexboxLayout', () => {
   // FlexboxLayout Mock up values.

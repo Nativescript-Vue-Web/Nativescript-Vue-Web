@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { Img } from '../../src/main';
+import { Img } from '../../../src/main';
 
 describe('Image', () => {
   // Mock up values.
