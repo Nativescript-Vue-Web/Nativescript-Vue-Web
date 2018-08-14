@@ -8,10 +8,10 @@
         :type="secure ? 'password' : keyboardType"
         :value="text"
         :spellcheck="autoCorrect"
-        @blur="$listeners.blur ? $emit('blur', $event) : null"
-        @change="$listeners.textChange ? $emit('textChange', $event) : null"
-        @focus="$listeners.focus ? $emit('focus', $event) : null"
-        @keyup.enter="$listeners.returnPress ? $emit('returnPress', $event) : null"
+        @blur="$emit('blur', $event)"
+        @change="$emit('textChange', $event)"
+        @focus="$emit('focus', $event)"
+        @keyup.enter="$emit('returnPress', $event)"
         @input="updateValue"
     />
 </template>
