@@ -1,5 +1,7 @@
 <template>
-  <div v-common-directive class="nvw-label" :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
+  <div v-common-directive 
+   class="nvw-label" 
+   :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
     {{text}}
   </div>
 </template>
@@ -11,7 +13,10 @@ export default {
   name: 'Label',
   props: {
     text: String,
-    textWrap: Boolean,
+    textWrap: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     'common-directive': CommonDirective,
@@ -21,5 +26,8 @@ export default {
 
 <style scoped lang='scss'>
 .nvw-label {
+  overflow: hidden;
+  text-overflow: ellipses;
+  width: 60px;
 }
 </style>
