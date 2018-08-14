@@ -7,7 +7,7 @@
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
         :value="text"
-        :spellcheck="autoCorrect"
+        :spellcheck="autocorrect"
         @blur="$emit('blur', $event)"
         @change="$emit('textChange', $event)"
         @focus="$emit('focus', $event)"
@@ -35,7 +35,7 @@ export default {
     text: String,
     hint: String,
     editable: Boolean,
-    autoCorrect: Boolean,
+    autocorrect: Boolean,
   },
   directives: {
     'common-directive': CommonDirective,
