@@ -8,10 +8,10 @@
         :type="secure ? 'password' : keyboardType"
         :value="text"
         :spellcheck="autoCorrect"
-        @blur="blur ? blur($event) : null"
-        @change="textChange"
-        @focus="focus ? focus($event) : null"
-        @keyup.enter="returnPress ? returnPress($event, text) : null"
+        @blur="$emit('blur', $event)"
+        @change="$emit('textChange', $event)"
+        @focus="$emit('focus', $event)"
+        @keyup.enter="$emit('returnPress', $event)"
         @input="updateValue"
     />
 </template>
@@ -36,10 +36,6 @@ export default {
     hint: String,
     editable: Boolean,
     autoCorrect: Boolean,
-    textChange: Function,
-    returnPress: Function,
-    focus: Function,
-    blur: Function,
   },
   directives: {
     'common-directive': CommonDirective,

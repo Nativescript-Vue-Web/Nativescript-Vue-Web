@@ -1,8 +1,9 @@
 <template>
     <button v-common-directive
     class="nvw-button"  
-    @click="tap ? tap($event) : null" >
-    {{text}}
+    @click="$emit('tap',$event)" 
+    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
+     {{text}}
     </button>
 </template>
 
@@ -14,10 +15,9 @@ export default {
   props: {
     text: String,
     textWrap: {
-      type: Boolean,
+      Type: Boolean,
       default: false,
     },
-    tap: Function,
   },
   directives: {
     'common-directive': CommonDirective,
@@ -26,4 +26,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.nvw-button {
+  width: 60px;
+  overflow: hidden;
+  text-overflow: ellipses;
+}
 </style>
