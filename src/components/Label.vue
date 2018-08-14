@@ -27,7 +27,6 @@ export default {
 <style scoped lang='scss'>
 .nvw-label {
   overflow: hidden;
-  text-overflow: ellipses;
-  width: 60px;
+  text-overflow: ellipsis;
 }
 </style>
