@@ -38,10 +38,6 @@ describe('TextField', () => {
       hint: String,
       text: String,
       autoCorrect: Boolean,
-      blur: Function,
-      focus: Function,
-      returnpress: Function,
-      textChange: Function,
     },
     propsData: {
       maxLength,
@@ -51,6 +47,8 @@ describe('TextField', () => {
       hint,
       text,
       autoCorrect,
+    },
+    listeners: {
       blur,
       focus,
       returnPress,
@@ -163,6 +161,7 @@ describe('TextField', () => {
     it('the textfield component gets focused and the focus event handler gets thrown', () => {
       // Focus to the input field.
       wrapper.find('input').trigger('focus');
+      expect(wrapper.emitted().focus.length).to.equal(1);
       expect(focus.called).to.equal(true);
     });
 
@@ -175,16 +174,19 @@ describe('TextField', () => {
 
     it('the textfield loses its focus and throws blur event so, the blur event handler gets thrown', () => {
       wrapper.find('input').trigger('blur');
+      expect(wrapper.emitted().blur.length).to.equal(1);
       expect(blur.called).to.equal(true);
     });
 
     it('the textfield emits change event so, event handler named textChange gets thrown', () => {
       wrapper.find('input').trigger('change');
+      expect(wrapper.emitted().textChange.length).to.equal(1);
       expect(textChange.called).to.equal(true);
     });
 
     it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {
       wrapper.find('input').trigger('keyup.enter');
+      expect(wrapper.emitted().returnPress.length).to.equal(1);
       expect(returnPress.called).to.equal(true);
     });
   });
