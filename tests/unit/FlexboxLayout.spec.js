@@ -124,7 +124,7 @@ describe('FlexboxLayout', () => {
       it('label component displays the given text prop(`here is the label`) correctly inside the layout.', () => {
         const labelWrappers = flexboxLayoutWrapper.findAll(Label).wrappers;
         const label = labelWrappers[0].find('div');
-        expect(label.element.textContent).to.equal('here is the label');
+        expect(label.element.textContent.trim()).to.equal('here is the laabel');
       });
     });
   });
