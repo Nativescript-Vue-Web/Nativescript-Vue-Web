@@ -16,6 +16,8 @@ describe('Image', () => {
         type: String,
         default: 'none',
       },
+      width: [String, Number],
+      height: [String, Number],
     },
     propsData: {
       stretch,
@@ -45,6 +47,12 @@ describe('Image', () => {
     });
     it(`given width value(${width}) is correct in the style.`, () => {
       expect(wrapper.attributes().width).to.equal(width.toString());
+    });
+    it(`given src url${src} is correct.`, () => {
+      expect(wrapper.attributes().src).to.equal(src);
+    });
+    it(`class name for given stretch(${stretch}) property is equal to nvw-img--aspect-fit`, () => {
+      expect(wrapper.classes()).to.include('nvw-img--aspect-fit');
     });
   });
 });
