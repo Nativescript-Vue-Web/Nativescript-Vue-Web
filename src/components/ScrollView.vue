@@ -1,43 +1,40 @@
 <template>
-    <div @scroll="onScroll($event)" :class="scrollViewClass" :style="{ width: widthStyle, height: heightStyle}">
+    <div v-common-directive @scroll="onScroll($event)" :class="scrollViewClass">
         <slot></slot>
     </div>
 </template>
 
 <script>
-import { debounce, camelCaseToDash, addPx } from '../helpers/helpers';
+import { debounce, camelCaseToDash } from '../helpers/helpers';
+import CommonDirective from '../directives/CommonDirective';
 
 export default {
   name: 'ScrollView',
   props: {
     orientation: {
       type: String,
-      default: 'horizontal',
+      default: 'vertical',
       validator: value => ['horizontal', 'vertical'].indexOf(value) !== -1,
     },
     scrollBarIndicatorVisible: {
       type: Boolean,
       default: true,
     },
-    width: [Number, String],
-    height: [Number, String],
   },
   computed: {
-    widthStyle: function() {
-      return addPx(this.width);
-    },
-    heightStyle: function() {
-      return addPx(this.height);
-    },
     scrollViewClass: function() {
-      return `nvw-scrollview nvw-scrollview${this.orientation !== 'none' ? '--' + camelCaseToDash(this.orientation) : ''}
-      ${this.scrollBarIndicatorVisible ? '' : '--hide'}`;
+      return `nvw-scrollview nvw-scrollview${this.orientation !== 'none' ? '--' + camelCaseToDash(this.orientation) : ''}${
+        this.scrollBarIndicatorVisible ? '' : '--hide'
+      }`;
     },
   },
   methods: {
-    onScroll: debounce(function() {
+    onScroll: debounce(function(event) {
       this.$emit('scroll', event);
     }, 100),
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
@@ -45,14 +42,21 @@ export default {
 <style lang="scss" scoped>
 .nvw-scrollview {
   &--horizontal {
-    overflow: auto;
-    white-space: nowrap;
-  }
-  &--vertical {
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    // Child elements width must be same as parent width.
+    * {
+      white-space: nowrap !important;
+    }
   }
 
-  //TODO Web browsers not supported hidden scrollbar. If overflow set to hidden, scroll on disable. The solution will be found.
+  &--vertical {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  //TODO Web browsers not supported hidden scrollbar. If overflow set to hidden, scrolling will disable.
   &--horizontal,
   &--vertical {
     &--hide {
