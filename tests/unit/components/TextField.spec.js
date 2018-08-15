@@ -28,7 +28,7 @@ describe('TextField', () => {
     name: 'TextField',
     // This will converted to props.
     props: {
-      maxLength: String,
+      maxLength: Number,
       editable: Boolean,
       keyboardType: String,
       secure: {
