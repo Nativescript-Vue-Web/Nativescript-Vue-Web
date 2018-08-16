@@ -35,7 +35,7 @@ export default {
     text: String,
     hint: String,
     editable: Boolean,
-    autoCorrect: Boolean,
+    autocorrect: Boolean,
   },
   directives: {
     'common-directive': CommonDirective,
