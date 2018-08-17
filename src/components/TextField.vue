@@ -7,7 +7,7 @@
         :maxlength="maxLength"
         :type="secure ? 'password' : keyboardType"
         :value="text"
-        :spellcheck="autoCorrect"
+        :spellcheck="autocorrect"
         @blur="$emit('blur', $event)"
         @change="$emit('textChange', $event)"
         @focus="$emit('focus', $event)"

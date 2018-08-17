@@ -11,7 +11,7 @@ describe('TextField', () => {
   const maxLength = 10;
   const keyboardType = 'email';
   const hint = 'some placeholder';
-  const autoCorrect = false;
+  const autocorrect = false;
 
   // Spy events.
   const updateValueSpy = sinon.spy(TextField.methods, 'updateValue');
@@ -37,7 +37,7 @@ describe('TextField', () => {
       },
       hint: String,
       text: String,
-      autoCorrect: Boolean,
+      autocorrect: Boolean,
     },
     propsData: {
       maxLength,
@@ -46,7 +46,7 @@ describe('TextField', () => {
       secure,
       hint,
       text,
-      autoCorrect,
+      autocorrect,
     },
     listeners: {
       blur,
@@ -81,24 +81,24 @@ describe('TextField', () => {
       expect(wrapper.props().keyboardType).to.equal(keyboardType);
     });
 
-    it(`auto correct property is equal to: ${autoCorrect}.`, () => {
-      expect(wrapper.props().autoCorrect).to.equal(autoCorrect);
+    it(`auto correct property is equal to: ${autocorrect}.`, () => {
+      expect(wrapper.props().autocorrect).to.equal(autocorrect);
     });
 
     it('focus event property is passed to the component successfully.', () => {
-      expect(wrapper.props().focus).to.not.equal(null);
+      expect(wrapper.vm.$listeners.focus).to.not.equal(undefined);
     });
 
     it('change event property is passed to the component successfully.', () => {
-      expect(wrapper.props().change).to.not.equal(null);
+      expect(wrapper.vm.$listeners.textChange).to.not.equal(undefined);
     });
 
     it('blur event property is passed to the component successfully.', () => {
-      expect(wrapper.props().blur).to.not.equal(null);
+      expect(wrapper.vm.$listeners.blur).to.not.equal(undefined);
     });
 
     it('pressing return key event property is passed to the component successfully.', () => {
-      expect(wrapper.props().returnPress).to.not.equal(null);
+      expect(wrapper.vm.$listeners.returnPress).to.not.equal(undefined);
     });
   });
 
@@ -112,9 +112,9 @@ describe('TextField', () => {
       expect(wrapper.find('input').attributes().placeholder).to.equal(hint);
     });
 
-    it(`the spellCheck attribute which is equivalent of autoCorrect in Nativescript-Vue is equal to${autoCorrect}.`, () => {
-      // The component returns the attribute as string so, the autoCorrect property is converted to string type.
-      expect(wrapper.find('input').attributes().spellcheck).to.equal(autoCorrect.toString());
+    it(`the spellCheck attribute which is equivalent of autocorrect in Nativescript-Vue is equal to${autocorrect}.`, () => {
+      // The component returns the attribute as string so, the autocorrect property is converted to string type.
+      expect(wrapper.find('input').attributes().spellcheck).to.equal(autocorrect.toString());
     });
 
     it(`the disabled attribute which is equivalent of editable in Nativescript-Vue is equal to${editable}.`, () => {
@@ -146,7 +146,7 @@ describe('TextField', () => {
       expect(wrapper.find('input').attributes().placeholder).to.equal('new placeholder');
     });
 
-    it(`the spellCheck(autoCorrect) attribute of the component is changed to true from ${autoCorrect}.`, () => {
+    it(`the spellCheck(autocorrect) attribute of the component is changed to true from ${autocorrect}.`, () => {
       wrapper.find('input').element.setAttribute('spellCheck', true);
       expect(wrapper.find('input').attributes().spellcheck).to.equal('true');
     });
