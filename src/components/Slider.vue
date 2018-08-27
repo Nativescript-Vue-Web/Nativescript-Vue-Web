@@ -6,7 +6,7 @@
             :min="minValue"
             :max="maxValue"
             :value="value"
-            @change="valueChange ? valueChange($event, value) : null"
+            @change="$emit('valueChange', $event)"
             @input="updateValue"
         />
     </div>
@@ -16,14 +16,24 @@
 export default {
   name: 'Slider',
   props: {
-    minValue: Number,
-    maxValue: Number,
-    value: Number,
-    valueChange: Function,
+    value: {
+      type: Number,
+      default: 0,
+    },
+    minValue: {
+      type: Number,
+      default: 0,
+    },
+    maxValue: {
+      type: Number,
+      default: 100,
+    },
   },
   methods: {
-    updateValue: function() {
-      this.$emit('input', this.$event.target.value);
+    updateValue: function(event) {
+      // Since the value returned from DOM input element is in the type of String,
+      // we convert it to the integer so that we avoid the warning of mismatching of the prop type.
+      this.$emit('input', parseInt(event.target.value));
     },
   },
 };
