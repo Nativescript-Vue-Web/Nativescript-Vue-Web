@@ -8,6 +8,3 @@ export default {
   props: ['html'],
 };
 </script>
-
-<style lang="scss" scoped>
-</style>
