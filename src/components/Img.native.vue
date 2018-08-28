@@ -8,6 +8,3 @@ export default {
   props: ['src'],
 };
 </script>
-
-<style scoped lang="scss">
-</style>
