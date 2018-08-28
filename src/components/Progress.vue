@@ -26,8 +26,8 @@ export default {
     },
   },
   watch: {
-    value: function() {
-      this.$emit('valueChange', this.value);
+    value: function(newValue, oldValue) {
+      this.$emit('valueChange', newValue, oldValue);
     },
   },
 };
@@ -43,7 +43,7 @@ export default {
     height: 20px;
     background: linear-gradient(#e66465, #9198e5);
     transition: all 1s ease;
-    transition-delay: 1s;
+    transition-delay: 0.1s;
     color: brown;
   }
 }

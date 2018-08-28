@@ -1,9 +1,10 @@
 <template>
-  <img :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
+    <img v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
 </template>
 
 <script>
 import { camelCaseToDash } from '../helpers/helpers';
+import CommonDirective from '../directives/CommonDirective';
 
 export default {
   name: 'Img',
@@ -26,19 +27,34 @@ export default {
       return `nvw-img ${this.stretch !== 'none' ? 'nvw-img--' + camelCaseToDash(this.stretch) : ''}`.trim();
     },
   },
+  directives: {
+    'common-directive': CommonDirective,
+  },
 };
 </script>
 
 <style scoped lang="scss">
-//TODO css will rebuild
 .nvw-img {
+  align-self: flex-start;
+
   &--fill {
-    width: inherit;
-    height: inherit;
+    width: 100%;
+    height: 100%;
+    align-self: stretch;
   }
 
   &--aspect-fill {
-    width: inherit;
+    object-fit: cover;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+  }
+
+  &--aspect-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: top;
   }
 }
 </style>
