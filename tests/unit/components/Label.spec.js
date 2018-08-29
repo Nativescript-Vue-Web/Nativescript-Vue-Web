@@ -22,11 +22,14 @@ describe('Label.vue', () => {
   it(`textWrap property is equal to: ${textWrap}.`, () => {
     expect(wrapper.props().textWrap).to.equal(textWrap);
   });
-  it(`the type attribute which is equivalent of textWrap in Nativescript-vue is equal to: ${textWrap ? 'normal' : 'nowrap'}.`, () => {
-    if (textWrap) {
+
+  if (textWrap) {
+    it(`the type attribute which is equivalent of textWrap in Nativescript-vue is equal to: ${textWrap ? 'normal' : 'nowrap'}.`, () => {
       expect(wrapper.find('div').element.style.whiteSpace).to.equal('normal');
-    } else {
+    });
+  } else {
+    it(`the type attribute which is equivalent of textWrap in Nativescript-vue is equal to: ${textWrap ? 'normal' : 'nowrap'}.`, () => {
       expect(wrapper.find('div').element.style.whiteSpace).to.equal('nowrap');
-    }
-  });
+    });
+  }
 });
