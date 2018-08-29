@@ -1,7 +1,7 @@
 {
   "name": "nativescript-vue-web",
   "description": "Web components for NativeScript-Vue",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
