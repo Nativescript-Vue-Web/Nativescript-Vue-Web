@@ -1,21 +1,28 @@
 <template>
-    <div class="nvw-wrap-layout" :style="{flexDirection: orientation == 'horizontal' ? 'row' : 'column'}">
+    <div v-common-directive class="nvw-wrap-layout" :style="{flexDirection: orientation === 'vertical' ? 'column' : 'row'}">
         <slot></slot>
     </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'WrapLayout',
   props: {
-    orientation: String,
+    orientation: {
+      type: String,
+      default: 'horizontal',
+    },
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .nvw-wrap-layout {
-  height: 500px;
   background-color: crimson;
   display: flex;
   flex-wrap: wrap;
