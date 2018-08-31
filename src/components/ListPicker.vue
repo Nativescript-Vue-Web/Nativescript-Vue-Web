@@ -1,6 +1,9 @@
 <template>
-    <select @change="onSelectedIndexChange($event)" @input="updateValue($event)" class="nvw-list-picker">
-        <option v-for="(item, index) in items"
+    <select
+    class="nvw-list-picker"
+    @change="$emit('selectedIndexChange', $event)"
+    @input="updateValue">
+      <option v-for="(item, index) in items"
                 v-bind:item="item"
                 v-bind:index="index"
                 v-bind:key="index"
@@ -14,6 +17,10 @@
 <script>
 export default {
   name: 'ListPicker',
+  model: {
+    event: 'input',
+    prop: 'selectedIndex',
+  },
   props: {
     items: {
       type: Array,
@@ -24,11 +31,9 @@ export default {
     },
   },
   methods: {
-    updateValue: function(event) {
-      this.$emit('input', event.target.selectedIndex);
-    },
-    onSelectedIndexChange: function(event) {
-      this.$emit('selectedIndexChange', event);
+    updateValue: function($event) {
+      const index = this.items.findIndex(obj => obj === $event.target.value);
+      this.$emit('input', index);
     },
   },
 };
