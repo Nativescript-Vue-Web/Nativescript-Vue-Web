@@ -1,10 +1,12 @@
 <template>
-    <div :style="{gridTemplateColumns: formattedColumns, gridTemplateRows: formattedRows}" class="nvw-grid-layout">
+    <div v-common-directive :style="{gridTemplateColumns: formattedColumns, gridTemplateRows: formattedRows}" class="nvw-grid-layout">
         <slot></slot>
     </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'GridLayout',
   props: {
@@ -52,6 +54,9 @@ export default {
 
       return formattedRows.join(' ');
     },
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
