@@ -1,10 +1,12 @@
 <template>
-    <span v-html="html" />
+    <span :html="html" />
 </template>
 
 <script>
 export default {
   name: 'HtmlView',
-  props: ['html'],
+  props: {
+    html: String,
+  },
 };
 </script>
