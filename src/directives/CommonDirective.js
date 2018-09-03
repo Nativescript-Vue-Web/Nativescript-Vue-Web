@@ -16,6 +16,10 @@ const CommonDirective = {
       cssString += $attrs.left ? `left: ${$attrs.left}px;` : '';
       cssString += $attrs.alignSelf ? `align-self: ${$attrs.alignSelf};` : '';
       cssString += $attrs.flexWrapBefore ? `flex-wrap: wrap;` : '';
+      cssString += $attrs.row ? `grid-row:${parseInt($attrs.row) + 1};` : '';
+      cssString += $attrs.col ? `grid-column:${parseInt($attrs.col) + 1};` : '';
+      cssString += $attrs.rowSpan ? `grid-row-end: span ${$attrs.rowSpan};` : '';
+      cssString += $attrs.colSpan ? `grid-column-end: span ${$attrs.colSpan};` : '';
 
       el.style.cssText += ';' + cssString;
     }
