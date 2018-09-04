@@ -1,4 +1,15 @@
 # Nativescript-Vue-Web
+
+[![CircleCI branch](https://img.shields.io/circleci/project/github/Nativescript-Vue-Web/Nativescript-Vue-Web/master.svg)](https://circleci.com/gh/Nativescript-Vue-Web/Nativescript-Vue-Web/)
+[![npm](https://img.shields.io/npm/v/nativescript-vue-web.svg)](https://www.npmjs.com/package/nativescript-vue-web)
+[![NpmLicense](https://img.shields.io/npm/l/nativescript-vue-web.svg)](https://www.npmjs.com/package/nativescript-vue-web)
+[![GitHub contributors](https://img.shields.io/github/contributors/nativescript-vue-web/nativescript-vue-web.svg)](https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/graphs/contributors)
+[![npm](https://img.shields.io/npm/dt/nativescript-vue-web.svg)](https://www.npmjs.com/package/nativescript-vue-web)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/maintenance/yes/2018.svg)](https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/commits/master)
+[![David](https://img.shields.io/david/nativescript-vue-web/nativescript-vue-web.svg)](https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/blob/master/package.json)
+[![David](https://img.shields.io/david/dev/nativescript-vue-web/nativescript-vue-web.svg)](https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/blob/master/package.json)
+
 Web components for Nativescript-Vue
 
 WIP
