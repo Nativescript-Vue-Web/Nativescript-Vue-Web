@@ -6,6 +6,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watch",
+    "test:unit:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
     "coverage": "nyc npm run test:unit"
   },
