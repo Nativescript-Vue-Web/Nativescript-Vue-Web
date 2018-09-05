@@ -31,6 +31,8 @@ jobs:
       # run lint
       - run: npm run lint
       # run tests!
-      - run: npm run test:unit
+      - run: npm run report
+      # run codecov
+      - run: ./node_modules/.bin/codecov
 
 
