@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "scripts": {
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --require tests/unit/setup.js",
     "postversion": "git push --tags"
   },
   "main": "src/main.js",
