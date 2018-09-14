@@ -5,7 +5,11 @@
   "scripts": {
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit --require tests/unit/setup.js",
-    "postversion": "git push --tags"
+    "test:unit:watch": "vue-cli-service test:unit --watch",
+    "test:unit:inspect": "vue-cli-service test:unit --inspect-brk --watch",
+    "postversion": "git push --tags",
+    "coverage": "nyc npm run test:unit",
+    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test:unit"
   },
   "main": "src/main.js",
   "dependencies": {
@@ -19,18 +23,17 @@
     "@vue/eslint-config-airbnb": "3.0.1",
     "@vue/eslint-config-prettier": "3.0.1",
     "@vue/test-utils": "1.0.0-beta.24",
+    "babel-plugin-istanbul": "5.0.1",
     "chai": "4.1.2",
+    "codecov": "^3.1.0",
+    "jsdom": "12.0.0",
     "lint-staged": "7.2.2",
     "node-sass": "4.9.3",
+    "nyc": "13.0.1",
     "prettier": "1.14.0",
     "sass-loader": "7.1.0",
     "sinon": "6.1.5",
     "vue-template-compiler": "2.5.17"
-  },
-  "babel": {
-    "presets": [
-      "@vue/app"
-    ]
   },
   "eslintConfig": {
     "root": true,
@@ -109,5 +112,18 @@
   "bugs": {
     "url": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web/issues"
   },
-  "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme"
+  "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
+  "nyc": {
+    "include": [
+      "src/**/*.js",
+      "src/**/*.vue"
+    ],
+    "instrument": false,
+    "sourceMap": false,
+    "all": true,
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  }
 }
