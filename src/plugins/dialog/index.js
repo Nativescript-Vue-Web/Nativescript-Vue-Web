@@ -1,4 +1,4 @@
-import { LoginDialog, ActionDialog, AlertDialog } from '../../main';
+import { LoginDialog, ActionDialog, AlertDialog, ConfirmDialog } from '../../main';
 
 const DialogPlugin = {
     install: (Vue, options) => { // eslint-disable-line
@@ -62,6 +62,27 @@ const DialogPlugin = {
         loginDialog.$once('submit', value => {
           loginDialog.isModalVisible = false;
           resolve(value);
+        });
+      });
+    };
+
+    // Confirm Dialog
+    const Component = Vue.extend(ConfirmDialog);
+    const confirmDialog = new Component();
+    const confirmDialogDom = confirmDialog.$mount().$el;
+    document.body.appendChild(confirmDialogDom);
+
+    // Register confirm dialog to the window.
+    window.confirm = async function(title, message, okButtonText, cancelButtonText) {
+      return new Promise(resolve => {
+        confirmDialog.title = title;
+        confirmDialog.message = message;
+        confirmDialog.okButtonText = okButtonText;
+        confirmDialog.cancelButtonText = cancelButtonText;
+        confirmDialog.isModalVisible = true;
+        confirmDialog.$once('submit', val => {
+          confirmDialog.isModalVisible = false;
+          resolve(val);
         });
       });
     };
