@@ -52,7 +52,7 @@ describe('LoginDialog', () => {
       expect(wrapper.props().password).to.equal(password);
     });
   });
-  describe('the component contains exactly two NuButton, two TextField.', () => {
+  describe('the component contains exactly two Button, two TextField.', () => {
     it('there are two Button.', done => {
       expect(wrapper.contains(Button)).to.equal(true);
       expect(wrapper.findAll(Button).length).to.equal(2);
@@ -66,8 +66,8 @@ describe('LoginDialog', () => {
   });
 
   describe('Events testing', () => {
-    it('the click event of confirm Button is passed to the component successfully and the login dialog gets hidden.', () => {
-      const button = wrapper.find('.nvw-button.login-dialog__footer__confirm-button');
+    it('the click event of ok Button is passed to the component successfully and the login dialog gets hidden.', () => {
+      const button = wrapper.find('.login-dialog__footer__ok-button');
       button.trigger('click');
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
