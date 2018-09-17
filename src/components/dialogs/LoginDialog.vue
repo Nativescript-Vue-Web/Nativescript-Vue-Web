@@ -4,15 +4,15 @@
         <p>{{title}}</p>
       </div>
       <div class="login-dialog__body" slot="body">
-        <div class="login-dialog__body__message">
+        <div>
           {{message}}
         </div>
-        <TextField class="login-dialog__body__username-input" v-model="uname" :hint="userName" />
-        <TextField class="login-dialog__body__password-input" v-model="pw" :hint="password" :secure="true" />
+        <TextField class="login-dialog__body__username-input" v-model="uname" :hint="userName"  :editable="true" />
+        <TextField class="login-dialog__body__password-input" v-model="pw" :hint="password"  :editable="true" :secure="true" />
       </div>
       <div class="login-dialog__footer" slot="footer">
         <Button class="login-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" />
-        <Button class="login-dialog__footer__confirm-button" :text="okButtonText" @tap="login" />
+        <Button class="login-dialog__footer__ok-button" :text="okButtonText" @tap="login" />
       </div>
     </ModalDialog>
 </template>
@@ -44,7 +44,7 @@ export default {
     },
     login: function() {
       this.$emit('submit', {
-        username: this.uname,
+        userName: this.uname,
         password: this.pw,
       });
       this.isModalVisible = false;
@@ -61,26 +61,28 @@ export default {
 <style lang="scss" scoped>
 .login-dialog {
   &__body {
-    &__message {
-      margin-bottom: 10px;
-      text-align: center;
+    &__username-input {
+      display: block;
+      margin-bottom: 5px;
     }
   }
   &__footer {
-    &__confirm-button {
-      width: 96px;
+    &__cancel-button {
       margin: 0 5px;
+      font-size: 12px;
       background-color: #ffffff;
       color: #364fc7;
+
       &:hover {
         border: solid 1px #364fc7;
       }
     }
-    &__cancel-button {
-      width: 96px;
+    &__ok-button {
       margin: 0 5px;
+      font-size: 12px;
       background-color: #ffffff;
       color: #364fc7;
+
       &:hover {
         border: solid 1px #364fc7;
       }

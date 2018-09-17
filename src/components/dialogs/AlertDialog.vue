@@ -10,7 +10,7 @@
     </div>
 
     <div class="alert-dialog__footer" slot="footer">
-        <Button class="btn-alert" :text="okButtonText" @tap="close" :link="true"/>
+        <Button class="alert-dialog__footer__ok-button" :text="okButtonText" @tap="close" :link="true"/>
     </div>
 
 </ModalDialog>
@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 .nu-alert-dialog {
   &__footer {
-    .btn-alert {
+    &__ok-button {
       background-color: #ffffff;
       color: #364fc7;
       &:hover {

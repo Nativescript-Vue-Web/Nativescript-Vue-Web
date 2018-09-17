@@ -6,8 +6,8 @@ describe('Login Dialog Plugin Testing', () => {
   const localVue = createLocalVue();
   localVue.use(DialogPlugin);
 
-  const title = 'Nu-Login Dialog';
-  const message = 'Nu-Login Dialog Message';
+  const title = 'some title';
+  const message = 'some message';
   const cancelButtonText = 'Cancel';
   const okButtonText = 'Login';
   const userName = 'Username*';
@@ -50,7 +50,7 @@ describe('Login Dialog Plugin Testing', () => {
     it(`The message inside the body slot of the element equals to ${message}.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.login-dialog__body__message').textContent.trim()).to.equal(message);
+        expect(document.querySelector('.login-dialog__body').textContent.trim()).to.equal(message);
         done();
       }, 500);
     });

@@ -9,8 +9,8 @@
      </div>
 
     <div class="confirm-dialog__footer" slot="footer">
-        <Button class="btn btn-cancel" :text="cancelButtonText" @tap="close(false)" />
-        <Button class="btn btn-ok" :text="okButtonText" @tap="close(true)" /> 
+        <Button class="confirm-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close(false)" />
+        <Button class="confirm-dialog__footer__ok-button" :text="okButtonText" @tap="close(true)" /> 
       </div>     
 
 </ModalDialog> 
@@ -49,20 +49,20 @@ export default {
 <style lang="scss" scoped>
 .confirm-dialog {
   &__footer {
-    .btn {
-      width: 96px;
-      margin: 0 5px;
-    }
-    .btn-ok {
+    &__cancel-button {
       background-color: #ffffff;
       color: #364fc7;
+      width: 96px;
+      margin: 0 5px;
       &:hover {
         border: solid 1px #364fc7;
       }
     }
-    .btn-cancel {
+    &__ok-button {
       background-color: #ffffff;
       color: #364fc7;
+      width: 96px;
+      margin: 0 5px;
       &:hover {
         border: solid 1px #364fc7;
       }

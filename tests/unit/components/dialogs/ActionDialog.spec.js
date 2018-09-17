@@ -65,8 +65,8 @@ describe('ActionDialog', () => {
     });
   });
   describe('Events testing', () => {
-    it('the click event of Button element with btn-action class is passed to the component successfully and the action dialog gets hidden.', () => {
-      const button = wrapper.find('.nvw-button.btn-action');
+    it('the click event of Button element with cancel-button class is passed to the component successfully and the action dialog gets hidden.', () => {
+      const button = wrapper.find('.action-dialog__footer__cancel-button');
       button.trigger('click');
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
