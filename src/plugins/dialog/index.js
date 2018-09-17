@@ -67,8 +67,8 @@ const DialogPlugin = {
     };
 
     // Confirm Dialog
-    const Component = Vue.extend(ConfirmDialog);
-    const confirmDialog = new Component();
+    const ConfirmDialogComponent = Vue.extend(ConfirmDialog);
+    const confirmDialog = new ConfirmDialogComponent();
     const confirmDialogDom = confirmDialog.$mount().$el;
     document.body.appendChild(confirmDialogDom);
 

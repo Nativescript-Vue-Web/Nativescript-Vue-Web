@@ -44,8 +44,8 @@ describe('ConfirmDialog', () => {
       expect(wrapper.vm.isModalVisible).to.equal(isModalVisible);
     });
   });
-  describe('the component contains exactly two NuButton.', () => {
-    it('there is two NuButton.', () => {
+  describe('the component contains exactly two Button.', () => {
+    it('there is two Button.', () => {
       expect(wrapper.contains(Button)).to.equal(true);
       expect(wrapper.findAll(Button).length).to.equal(2);
     });

@@ -28,6 +28,7 @@ export { default as ModalDialog } from './components/ModalDialog';
 export { default as LoginDialog } from './components/dialogs/LoginDialog';
 export { default as ActionDialog } from './components/dialogs/ActionDialog';
 export { default as AlertDialog } from './components/dialogs/AlertDialog';
+export { default as ConfirmDialog } from './components/dialogs/ConfirmDialog';
 
 // Plugins
 export { default as DialogPlugin } from './plugins/dialog';

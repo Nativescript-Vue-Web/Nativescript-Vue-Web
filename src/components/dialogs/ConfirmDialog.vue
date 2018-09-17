@@ -1,14 +1,14 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="nu-confirm-dialog" @close="close(false)">
-    <span class="nu-confirm-dialog__header" slot="header">  
+<ModalDialog v-if="isModalVisible" class="confirm-dialog" @close="close(false)">
+    <span class="confirm-dialog__header" slot="header">  
          <h4>{{ title }}</h4>
     </span>
     
-    <div class="nu-confirm-dialog__body" slot="body">
-            <p>{{ message }}</p>
+    <div v-if="message" class="confirm-dialog__body" slot="body">
+      <p>{{ message }}</p>
      </div>
 
-    <div class="nu-confirm-dialog__footer" slot="footer">
+    <div class="confirm-dialog__footer" slot="footer">
         <Button class="btn btn-cancel" :text="cancelButtonText" @tap="close(false)" />
         <Button class="btn btn-ok" :text="okButtonText" @tap="close(true)" /> 
       </div>     
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nu-confirm-dialog {
+.confirm-dialog {
   &__footer {
     .btn {
       width: 96px;
