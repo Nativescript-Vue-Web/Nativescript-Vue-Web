@@ -1,8 +1,7 @@
-import { LoginDialog, ActionDialog, AlertDialog, ConfirmDialog } from '../../main';
+import { LoginDialog, ActionDialog, AlertDialog, ConfirmDialog, PromptDialog } from '../../main';
 
 const DialogPlugin = {
-    install: (Vue, options) => { // eslint-disable-line
-
+  install: Vue => {
     // Action Dialog
     const ActionDialogComponent = Vue.extend(ActionDialog);
     const actionDialog = new ActionDialogComponent();
@@ -86,7 +85,30 @@ const DialogPlugin = {
         });
       });
     };
+
+    // Prompt Dialog
+    const PromptDialogComponent = Vue.extend(PromptDialog);
+    const promptDialog = new PromptDialogComponent();
+    const promptDialogDom = promptDialog.$mount().$el;
+    document.body.appendChild(promptDialogDom);
+
+    // Register prompt dialog to the window.
+    window.prompt = async function(title, message, okButtonText, cancelButtonText, defaultText, inputType, value) {
+      return new Promise(resolve => {
+        promptDialog.title = title;
+        promptDialog.message = message;
+        promptDialog.okButtonText = okButtonText;
+        promptDialog.cancelButtonText = cancelButtonText;
+        promptDialog.defaultText = defaultText;
+        promptDialog.inputType = inputType;
+        promptDialog.value = value;
+        promptDialog.isModalVisible = true;
+        promptDialog.$once('submit', val => {
+          promptDialog.isModalVisible = false;
+          resolve(val);
+        });
+      });
+    };
   },
 };
-
 export default DialogPlugin;

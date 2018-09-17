@@ -29,6 +29,7 @@ export { default as LoginDialog } from './components/dialogs/LoginDialog';
 export { default as ActionDialog } from './components/dialogs/ActionDialog';
 export { default as AlertDialog } from './components/dialogs/AlertDialog';
 export { default as ConfirmDialog } from './components/dialogs/ConfirmDialog';
+export { default as PromptDialog } from './components/dialogs/PromptDialog';
 
 // Plugins
 export { default as DialogPlugin } from './plugins/dialog';
