@@ -1,4 +1,4 @@
-import { LoginDialog, ActionDialog, AlertDialog } from '../../main';
+import { LoginDialog, ActionDialog, AlertDialog, PromptDialog } from '../../main';
 
 const DialogPlugin = {
     install: (Vue, options) => { // eslint-disable-line
@@ -65,7 +65,28 @@ const DialogPlugin = {
         });
       });
     };
+    // Prompt Dialog
+    const PromptDialogComponent = Vue.extend(PromptDialog);
+    const promptDialog = new PromptDialogComponent();
+    const promptDialogDom = promptDialog.$mount().$el;
+    document.body.appendChild(promptDialogDom);
+
+    window.prompt = async function(title, message, okButtonText, cancelButtonText, defaultText, inputType, val) {
+      return new Promise(resolve => {
+        promptDialog.title = title;
+        promptDialog.message = message;
+        promptDialog.okButtonText = okButtonText;
+        promptDialog.cancelButtonText = cancelButtonText;
+        promptDialog.defaultText = defaultText;
+        promptDialog.inputType = inputType;
+        promptDialog.value = val;
+        promptDialog.isModalVisible = true;
+        promptDialog.$once('submit', value => {
+          promptDialog.isModalVisible = false;
+          resolve(value);
+        });
+      });
+    };
   },
 };
-
 export default DialogPlugin;
