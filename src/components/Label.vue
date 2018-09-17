@@ -1,9 +1,10 @@
 <template>
-  <div v-common-directive 
-   class="nvw-label" 
+  <span v-common-directive
+   class="nvw-label"
+   :class="fontClass"
    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
-    {{text}}
-  </div>
+    {{textValue}}
+  </span>
 </template>
 
 <script>
@@ -21,11 +22,22 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  computed: {
+    fontClass() {
+      if (this.text.includes(' | fonticon')) {
+        return this.text.replace(' | fonticon', '');
+      }
+    },
+    textValue() {
+      return this.text.includes(' | fonticon') ? '' : this.text;
+    },
+  },
 };
 </script>
 
 <style scoped lang='scss'>
 .nvw-label {
+  display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
 }
