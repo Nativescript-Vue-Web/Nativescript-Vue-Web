@@ -18,7 +18,7 @@
         </div>
 
     <div class="action-dialog__footer" slot="footer">
-        <Button class="btn-action" :text="cancelButtonText" @tap="close" :link="true" />
+        <Button class="action-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
     </div>
 
 </ModalDialog>
@@ -57,31 +57,36 @@ export default {
 
 <style lang="scss" scoped>
 .action-dialog {
-  section:after {
-    display: table;
-    clear: both;
-  }
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  nav li {
-    text-align: left;
-    margin-top: 15px;
-  }
-  a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    &:hover {
-      opacity: 0.6;
+  &__body {
+    section:after {
+      display: table;
+      clear: both;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav li {
+      text-align: left;
+      margin-top: 15px;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      color: black;
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
-  .btn-action {
-    background-color: #ffffff;
-    color: #364fc7;
-    &:hover {
-      border: solid 1px #364fc7;
+  &__footer {
+    &__cancel-button {
+      background-color: #ffffff;
+      color: #364fc7;
+      font-size: 12px;
+      &:hover {
+        border: solid 1px #364fc7;
+      }
     }
   }
 }
