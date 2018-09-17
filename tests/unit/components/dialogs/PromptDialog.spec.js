@@ -63,9 +63,14 @@ describe('PromptDialog', () => {
     });
   });
   describe('the component contains exactly two Button and one TextField.', () => {
-    it('there is two Button.', () => {
+    it('there are two Button.', () => {
       expect(wrapper.contains(Button)).to.equal(true);
       expect(wrapper.findAll(Button).length).to.equal(2);
+    });
+    it('there are one TextField.', done => {
+      expect(wrapper.contains(TextField)).to.equal(true);
+      expect(wrapper.findAll(TextField).length).to.equal(1);
+      done();
     });
   });
 
@@ -91,6 +96,21 @@ describe('PromptDialog', () => {
       const p = wrapper.find('p');
       p.element.value = 'new message';
       expect(p.element.value).to.equal('new message');
+    });
+  });
+  describe('Events testing.', () => {
+    it('Changing the val of the value fields.', done => {
+      wrapper.find(TextField).setValue('new value');
+      wrapper.setData({ val: 'new value' });
+      expect(wrapper.find(TextField).element.value).to.equal('new value');
+      done();
+      it('the click event of prompt Button is passed to component successfully and the prompt dialog gets hidden.', () => {
+        const button = wrapper.find('.prompt-dialog__footer__ok-button');
+        button.trigger('click');
+        expect(wrapper.emitted().submit.length).to.equal(1);
+        expect(wrapper.emitted().submit.value).to.equal('new value');
+        expect(wrapper.vm.isModalVisible).to.equal(false);
+      });
     });
   });
 });

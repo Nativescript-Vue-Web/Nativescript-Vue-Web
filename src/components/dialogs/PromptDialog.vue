@@ -5,13 +5,13 @@
     </span>
     <div class="prompt-dialog__body" slot="body">
             <p>{{ message }}</p>
-            <TextField v-model="value" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
+            <TextField v-model="val" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
          </div>
 
     <div class="prompt-dialog__footer" slot="footer">
         <Button class="prompt-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
         <Button class="prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />      
-    </div>
+    </div> 
 </ModalDialog> 
 
 </template>
@@ -21,6 +21,12 @@ import { ModalDialog, Button, TextField } from '../../main';
 
 export default {
   name: 'PromptDialog',
+  data() {
+    return {
+      isModalVisible: false,
+      val: '',
+    };
+  },
   props: {
     title: String,
     message: String,
@@ -28,23 +34,19 @@ export default {
     cancelButtonText: String,
     defaultText: String,
     inputType: String,
-    value: '',
-  },
-  data() {
-    return {
-      isModalVisible: false,
-    };
+    value: String,
   },
   methods: {
     close: function() {
-      this.isModalVisible = false;
       this.$emit('submit', null);
+      this.isModalVisible = false;
     },
     submit: function() {
       this.$emit('submit', {
-        val: this.value,
+        value: this.val,
       });
       this.isModalVisible = false;
+      this.val = '';
     },
   },
   components: {
