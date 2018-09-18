@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import { DialogPlugin } from '../../../../src/main';
+import { Nvw } from '../../../../src/main';
 
 describe('Action Dialog Plugin Testing', () => {
   const localVue = createLocalVue();
-  localVue.use(DialogPlugin);
+  localVue.use(Nvw);
 
   const title = 'Some title.';
   const cancelButtonText = 'cancel';

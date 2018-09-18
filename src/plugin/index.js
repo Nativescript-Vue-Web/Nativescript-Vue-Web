@@ -1,11 +1,11 @@
-import LoginDialog from '../../components/dialogs/LoginDialog';
-import ActionDialog from '../../components/dialogs/ActionDialog';
-import AlertDialog from '../../components/dialogs/AlertDialog';
-import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
-import PromptDialog from '../../components/dialogs/PromptDialog';
-import Modal from '../../components/Modal';
+import LoginDialog from '../components/dialogs/LoginDialog';
+import ActionDialog from '../components/dialogs/ActionDialog';
+import AlertDialog from '../components/dialogs/AlertDialog';
+import ConfirmDialog from '../components/dialogs/ConfirmDialog';
+import PromptDialog from '../components/dialogs/PromptDialog';
+import Modal from '../components/Modal';
 
-const DialogPlugin = {
+const NvwPlugin = {
   install: Vue => {
     // Show Modal
     Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) { // eslint-disable-line
@@ -139,4 +139,4 @@ const DialogPlugin = {
     });
   },
 };
-export default DialogPlugin;
+export default NvwPlugin;
