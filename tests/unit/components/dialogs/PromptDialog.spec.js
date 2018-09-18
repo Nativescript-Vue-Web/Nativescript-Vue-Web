@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { PromptDialog, Button, TextField } from '../../../../src/main';
+import PromptDialog from '../../../../src/components/dialogs/PromptDialog';
+import Button from '../../../../src/components/Button';
+import TextField from '../../../../src/components/TextField';
 
 describe('PromptDialog', () => {
   // PromptDialog mock up values.

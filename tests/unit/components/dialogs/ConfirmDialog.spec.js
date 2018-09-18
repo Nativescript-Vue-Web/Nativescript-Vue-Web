@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { ConfirmDialog, Button } from '../../../../src/main';
+import ConfirmDialog from '../../../../src/components/dialogs/ConfirmDialog';
+import Button from '../../../../src/components/Button';
 
 describe('ConfirmDialog', () => {
   // ConfirmDialog mock up values.

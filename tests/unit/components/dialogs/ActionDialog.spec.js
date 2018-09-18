@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { ActionDialog, Button } from '../../../../src/main';
+import ActionDialog from '../../../../src/components/dialogs/ActionDialog';
+import Button from '../../../../src/components/Button';
 
 describe('ActionDialog', () => {
   // ActionDialog mock up values.

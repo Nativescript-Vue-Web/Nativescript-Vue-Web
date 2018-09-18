@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import { ModalDialog, Button, TextField } from '../../main';
+import Button from '../Button';
+import ModalDialog from '../ModalDialog';
+import TextField from '../TextField';
 
 export default {
   name: 'PromptDialog',
