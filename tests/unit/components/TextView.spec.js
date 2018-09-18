@@ -163,6 +163,11 @@ describe('TextView', () => {
     });
 
     it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {
+      wrapper.find('textarea').trigger('keyup', {
+        ctrlKey: true,
+        keyCode: 13,
+      });
+      expect(wrapper.emitted().returnPress.length).to.equal(1);
       wrapper.find('textarea').trigger('keyup.enter');
       expect(wrapper.emitted().returnPress.length).to.equal(1);
       expect(returnPress.called).to.equal(true);
