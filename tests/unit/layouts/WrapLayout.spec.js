@@ -117,13 +117,13 @@ describe('WrapLayout', () => {
 
     it('label component displays the given text prop(`First`) correctly inside the layout.', () => {
       const labelWrappers = wrapLayoutWrapper.findAll(Label).wrappers;
-      const label = labelWrappers[0].find('div');
+      const label = labelWrappers[0].find(Label);
       expect(label.element.textContent.trim()).to.equal('First');
     });
 
     it('label component displays the given text prop(`Second`) correctly inside the layout.', () => {
       const labelWrappers = wrapLayoutWrapper.findAll(Label).wrappers;
-      const label = labelWrappers[1].find('div');
+      const label = labelWrappers[1].find(Label);
       expect(label.element.textContent.trim()).to.equal('Second');
     });
   });

@@ -134,6 +134,10 @@ const DialogPlugin = {
         });
       });
     };
+
+    Vue.filter('fonticon', function(value) {
+      return value + ' | fonticon';
+    });
   },
 };
 export default DialogPlugin;
