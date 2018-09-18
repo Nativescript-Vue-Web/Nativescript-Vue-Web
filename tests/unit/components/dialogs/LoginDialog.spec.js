@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import LoginDialog from '../../../../src/components/dialogs/LoginDialog';
 import Button from '../../../../src/components/Button';
 import TextField from '../../../../src/components/TextField';
@@ -12,6 +13,9 @@ describe('LoginDialog', () => {
   const okButtonText = 'Login';
   const userName = 'Username*';
   const password = 'Password*';
+
+  const close = sinon.spy(LoginDialog.methods, 'close');
+  const login = sinon.spy(LoginDialog.methods, 'login');
 
   // Initializing the component.
   const wrapper = mount(LoginDialog, {
@@ -54,7 +58,14 @@ describe('LoginDialog', () => {
       expect(wrapper.props().password).to.equal(password);
     });
   });
-  describe('the component contains exactly two Button, two TextField.', () => {
+  describe('Change props and watch the respond.', () => {
+    it('Change the prop of title.', done => {
+      wrapper.setProps({ title: 'New Title' });
+      expect(wrapper.props().title).to.equal('New Title');
+      done();
+    });
+  });
+  describe('the component contains exactly two NuButton, two TextField.', () => {
     it('there are two Button.', done => {
       expect(wrapper.contains(Button)).to.equal(true);
       expect(wrapper.findAll(Button).length).to.equal(2);
@@ -68,10 +79,40 @@ describe('LoginDialog', () => {
   });
 
   describe('Events testing', () => {
-    it('the click event of ok Button is passed to the component successfully and the login dialog gets hidden.', () => {
-      const button = wrapper.find('.login-dialog__footer__ok-button');
+    it('Changing the value of the username and password fields.', done => {
+      wrapper
+        .findAll(TextField)
+        .at(0)
+        .setValue('ozercevikaslan');
+      wrapper.setData({ uname: 'ozercevikaslan' });
+      expect(wrapper.findAll(TextField).at(0).element.value).to.equal('ozercevikaslan');
+      wrapper
+        .findAll(TextField)
+        .at(1)
+        .setValue('123ozer123');
+      wrapper.setData({ pw: '123ozer123' });
+      expect(wrapper.findAll(TextField).at(1).element.value).to.equal('123ozer123');
+      done();
+    });
+    it('the click event of confirm Button is passed to the component successfully and the login dialog gets hidden.', () => {
+      const button = wrapper.find('.nvw-login-dialog__footer__ok-button');
       button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0].userName).to.equal('ozercevikaslan');
+      expect(wrapper.emitted().submit[0][0].password).to.equal('123ozer123');
+      expect(login.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
+    it('Show the dialog by changing the given v-if value and test the close method of the login dialog.', done => {
+      wrapper.setData({ isModalVisible: true });
+      expect(wrapper.vm.isModalVisible).to.equal(true);
+      const button = wrapper.find('.nvw-login-dialog__footer__cancel-button');
+      button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(2);
+      expect(wrapper.emitted().submit[1][0]).to.equal(null);
+      expect(close.called).to.equal(true);
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+      done();
     });
   });
 });

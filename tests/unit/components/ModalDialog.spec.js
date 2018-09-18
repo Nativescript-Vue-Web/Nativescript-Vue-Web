@@ -4,22 +4,18 @@ import sinon from 'sinon';
 import { ModalDialog } from '../../../src/main';
 
 describe('ModalDialog', () => {
-  const close = sinon.spy();
+  const close = sinon.spy(ModalDialog.methods, 'close');
   // Initializing the component.
   const wrapper = mount(ModalDialog, {
     name: 'ModalDialog',
     slots: {
       header: '<span>My Header</span>',
     },
-    listeners: {
-      close,
-    },
   });
 
   describe('click testing of the top div tag.', () => {
     it('the div at top gets clicked and close event is emitted.', () => {
-      const div = wrapper.find('.nu-modal');
-      div.trigger('click');
+      wrapper.find('.nvw-modal').trigger('click');
       expect(wrapper.emitted().close.length).to.equal(1);
       expect(close.called).to.equal(true);
     });

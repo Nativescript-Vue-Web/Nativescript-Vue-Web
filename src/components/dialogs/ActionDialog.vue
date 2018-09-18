@@ -1,11 +1,11 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="action-dialog" @close="close">
+<ModalDialog v-if="isModalVisible" class="nvw-action-dialog" @close="close">
 
-  <span class="action-dialog__header" slot="header">  
+  <span class="nvw-action-dialog__header" slot="header">  
     <p>{{ title }}</p>
   </span>
 
-    <div class="action-dialog__body" slot="body">
+    <div class="nvw-action-dialog__body" slot="body">
            <section>
                <nav>
               <ul>
@@ -17,8 +17,8 @@
            </section>
         </div>
 
-    <div class="action-dialog__footer" slot="footer">
-        <Button class="action-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
+    <div class="nvw-action-dialog__footer" slot="footer">
+        <Button class="nvw-action-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
     </div>
 
 </ModalDialog>
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.action-dialog {
+.nvw-action-dialog {
   &__body {
     section:after {
       display: table;

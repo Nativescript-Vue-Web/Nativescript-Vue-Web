@@ -1,16 +1,16 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="confirm-dialog" @close="close(false)">
-    <span class="confirm-dialog__header" slot="header">  
+<ModalDialog v-if="isModalVisible" class="nvw-confirm-dialog" @close="close(false)">
+    <span class="nvw-confirm-dialog__header" slot="header">  
          <h4>{{ title }}</h4>
     </span>
     
-    <div v-if="message" class="confirm-dialog__body" slot="body">
+    <div v-if="message" class="nvw-confirm-dialog__body" slot="body">
       <p>{{ message }}</p>
      </div>
 
-    <div class="confirm-dialog__footer" slot="footer">
-        <Button class="confirm-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close(false)" />
-        <Button class="confirm-dialog__footer__ok-button" :text="okButtonText" @tap="close(true)" /> 
+    <div class="nvw-confirm-dialog__footer" slot="footer">
+        <Button class="nvw-confirm-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close(false)" />
+        <Button class="nvw-confirm-dialog__footer__ok-button" :text="okButtonText" @tap="close(true)" /> 
       </div>     
 
 </ModalDialog> 
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.confirm-dialog {
+.nvw-confirm-dialog {
   &__footer {
     &__cancel-button {
       background-color: #ffffff;

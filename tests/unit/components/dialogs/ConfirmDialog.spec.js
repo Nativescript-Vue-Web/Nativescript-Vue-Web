@@ -73,4 +73,11 @@ describe('ConfirmDialog', () => {
       expect(p.element.value).to.equal('new message');
     });
   });
+  describe('Events testing', () => {
+    it('the click event of Button element with ok-button class is passed to the component successfully.', () => {
+      const button = wrapper.find('.nvw-confirm-dialog__footer__ok-button');
+      button.trigger('click');
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
+  });
 });

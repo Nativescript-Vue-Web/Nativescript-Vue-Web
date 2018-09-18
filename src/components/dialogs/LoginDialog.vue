@@ -1,18 +1,18 @@
 <template>
-    <ModalDialog v-if="isModalVisible" class="login-dialog" @close="close">
-      <div class="login-dialog__header" slot="header">  
+    <ModalDialog v-if="isModalVisible" class="nvw-login-dialog" @close="close">
+      <div class="nvw-login-dialog__header" slot="header">  
         <p>{{title}}</p>
       </div>
-      <div class="login-dialog__body" slot="body">
+      <div class="nvw-login-dialog__body" slot="body">
         <div>
           {{message}}
         </div>
-        <TextField class="login-dialog__body__username-input" v-model="uname" :hint="userName"  :editable="true" />
-        <TextField class="login-dialog__body__password-input" v-model="pw" :hint="password"  :editable="true" :secure="true" />
+        <TextField class="nvw-login-dialog__body__username-input" v-model="uname" :hint="userName"  :editable="true" />
+        <TextField class="nvw-login-dialog__body__password-input" v-model="pw" :hint="password"  :editable="true" :secure="true" />
       </div>
-      <div class="login-dialog__footer" slot="footer">
-        <Button class="login-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" />
-        <Button class="login-dialog__footer__ok-button" :text="okButtonText" @tap="login" />
+      <div class="nvw-login-dialog__footer" slot="footer">
+        <Button class="nvw-login-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" />
+        <Button class="nvw-login-dialog__footer__ok-button" :text="okButtonText" @tap="login" />
       </div>
     </ModalDialog>
 </template>
@@ -52,6 +52,12 @@ export default {
       this.isModalVisible = false;
     },
   },
+  watch: {
+    isModalVisible: function() {
+      this.uname = '';
+      this.pw = '';
+    },
+  },
   components: {
     ModalDialog,
     TextField,
@@ -61,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-dialog {
+.nvw-login-dialog {
   &__body {
     &__username-input {
       display: block;

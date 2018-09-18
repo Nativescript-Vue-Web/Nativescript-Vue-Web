@@ -34,21 +34,21 @@ describe('Confirm Dialog Plugin Testing', () => {
     it(`The ConfirmDialog is shown on the document.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.confirm-dialog')).to.not.be.null;
+        expect(document.querySelector('.nvw-confirm-dialog')).to.not.be.null;
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.confirm-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        expect(document.querySelector('.nvw-confirm-dialog__header').firstChild.textContent.trim()).to.equal(title);
         done();
       }, 500);
     });
     it(`The message inside the header slot of the element equals to ${message}.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.confirm-dialog__body').firstChild.textContent.trim()).to.equal(message);
+        expect(document.querySelector('.nvw-confirm-dialog__body').firstChild.textContent.trim()).to.equal(message);
         done();
       }, 500);
     });

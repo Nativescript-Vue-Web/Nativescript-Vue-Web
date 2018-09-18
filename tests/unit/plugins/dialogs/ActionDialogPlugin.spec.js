@@ -33,14 +33,14 @@ describe('Action Dialog Plugin Testing', () => {
     it(`The ActionDialog is shown on the document.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.action-dialog')).to.not.be.null;
+        expect(document.querySelector('.nvw-action-dialog')).to.not.be.null;
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
       wrapper.find('button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.action-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        expect(document.querySelector('.nvw-action-dialog__header').firstChild.textContent.trim()).to.equal(title);
         done();
       }, 500);
     });
