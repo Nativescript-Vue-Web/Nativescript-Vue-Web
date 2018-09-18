@@ -32,7 +32,7 @@ export { default as ConfirmDialog } from './components/dialogs/ConfirmDialog';
 export { default as PromptDialog } from './components/dialogs/PromptDialog';
 
 // Plugins
-export { default as DialogPlugin } from './plugins/dialog';
+export { default as Nvw } from './plugin';
 
 // Layouts
 export { default as AbsoluteLayout } from './layouts/AbsoluteLayout.vue';
