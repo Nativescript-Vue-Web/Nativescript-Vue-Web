@@ -9,7 +9,6 @@ const DialogPlugin = {
   install: Vue => {
     // Show Modal
     Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) { // eslint-disable-line
-      console.log(Modal); // eslint-disable-line
       const ContentComponent = Vue.extend(component);
       const ModalComponent = Vue.extend(Modal);
       const ModalInstance = new ModalComponent();
