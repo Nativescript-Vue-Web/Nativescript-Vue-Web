@@ -69,7 +69,7 @@ describe('AlertDialog', () => {
 
   describe('Events testing', () => {
     it('the click event of Button element with ok-button class is passed to the component successfully.', () => {
-      const button = wrapper.find('.alert-dialog__footer__ok-button');
+      const button = wrapper.find('.nvw-alert-dialog__footer__ok-button');
       button.trigger('click');
       expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);

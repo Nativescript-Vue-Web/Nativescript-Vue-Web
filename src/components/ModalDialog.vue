@@ -1,25 +1,25 @@
 <template>
   <transition name="modal-fade">
-    <div @click="$emit('close', $event)" class="nu-modal">
+    <div @click="close" class="nvw-modal">
       <div 
         @click.stop
-        class="nu-modal--backdrop"
+        class="nvw-modal__backdrop"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
         <header
-          class="nu-modal--header"
+          class="nvw-modal__header"
           id="modalTitle"
         >
           <slot name="header">
           </slot>
         </header>
-        <section class="nu-modal--body" id="modalDescription">
+        <section class="nvw-modal__body" id="modalDescription">
           <slot name="body"> 
           </slot>
         </section>
-        <footer class="nu-modal--footer">
+        <footer class="nvw-modal__footer">
           <slot name="footer">
           </slot>
         </footer>
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nu-modal {
+.nvw-modal {
   position: fixed;
   top: 0;
   border-radius: 6px;
@@ -53,7 +53,7 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  &--backdrop {
+  &__backdrop {
     background: #ffffff;
     box-shadow: 1px 1px 10px 0px;
     overflow-x: auto;
@@ -61,7 +61,7 @@ export default {
     flex-direction: column;
     border-radius: 5px;
   }
-  &--header {
+  &__header {
     padding: 24px;
     display: flex;
     border-bottom: 1px solid #eeeeee;
@@ -71,11 +71,11 @@ export default {
     color: black;
     justify-content: space-between;
   }
-  &--body {
+  &__body {
     position: relative;
     padding: 20px 15px;
   }
-  &--footer {
+  &__footer {
     padding: 24px;
     display: flex;
     border-top: 1px solid #eeeeee;

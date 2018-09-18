@@ -1,16 +1,16 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="prompt-dialog" @close="close">
-    <span class="prompt-dialog__header" slot="header">  
+<ModalDialog v-if="isModalVisible" class="nvw-prompt-dialog" @close="close">
+    <span class="nvw-prompt-dialog__header" slot="header">  
          <h4>{{ title }}</h4>
     </span>
-    <div class="prompt-dialog__body" slot="body">
+    <div class="nvw-prompt-dialog__body" slot="body">
             <p>{{ message }}</p>
             <TextField v-model="val" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
          </div>
 
-    <div class="prompt-dialog__footer" slot="footer">
-        <Button class="prompt-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
-        <Button class="prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />      
+    <div class="nvw-prompt-dialog__footer" slot="footer">
+        <Button class="nvw-prompt-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
+        <Button class="nvw-prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />      
     </div> 
 </ModalDialog> 
 
@@ -48,6 +48,10 @@ export default {
         value: this.val,
       });
       this.isModalVisible = false;
+    },
+  },
+  watch: {
+    isModalVisible: function() {
       this.val = '';
     },
   },
@@ -60,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.prompt-dialog {
+.nvw-prompt-dialog {
   &__footer {
     &__cancel-button {
       margin: 0 5px;

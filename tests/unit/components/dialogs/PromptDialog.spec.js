@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import PromptDialog from '../../../../src/components/dialogs/PromptDialog';
 import Button from '../../../../src/components/Button';
 import TextField from '../../../../src/components/TextField';
@@ -14,6 +15,9 @@ describe('PromptDialog', () => {
   const inputType = 'inputType';
   const isModalVisible = true;
   const value = 'initial string';
+
+  const close = sinon.spy(PromptDialog.methods, 'close');
+  const submit = sinon.spy(PromptDialog.methods, 'submit');
 
   // Initializing the component.
   const wrapper = mount(PromptDialog, {
@@ -106,13 +110,26 @@ describe('PromptDialog', () => {
       wrapper.setData({ val: 'new value' });
       expect(wrapper.find(TextField).element.value).to.equal('new value');
       done();
-      it('the click event of prompt Button is passed to component successfully and the prompt dialog gets hidden.', () => {
-        const button = wrapper.find('.prompt-dialog__footer__ok-button');
-        button.trigger('click');
-        expect(wrapper.emitted().submit.length).to.equal(1);
-        expect(wrapper.emitted().submit.value).to.equal('new value');
-        expect(wrapper.vm.isModalVisible).to.equal(false);
-      });
+    });
+    it('the click event of ok Button is passed to component successfully and the prompt dialog gets hidden.', done => {
+      const button = wrapper.find('.nvw-prompt-dialog__footer__ok-button');
+      button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0].value).to.equal('new value');
+      expect(submit.called).to.equal(true);
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+      done();
+    });
+    it('Show the dialog by changing the given v-if value and test the close method of the prompt dialog.', done => {
+      wrapper.setData({ isModalVisible: true });
+      expect(wrapper.vm.isModalVisible).to.equal(true);
+      const button = wrapper.find('.nvw-prompt-dialog__footer__cancel-button');
+      button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(2);
+      expect(wrapper.emitted().submit[1][0]).to.equal(null);
+      expect(close.called).to.equal(true);
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+      done();
     });
   });
 });

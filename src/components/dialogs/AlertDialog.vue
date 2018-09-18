@@ -1,16 +1,16 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="alert-dialog" @close="close">
+<ModalDialog v-if="isModalVisible" class="nvw-alert-dialog" @close="close">
 
-    <span class="alert-dialog__header" slot="header">
+    <span class="nvw-alert-dialog__header" slot="header">
         <h4>{{ title }}</h4>
     </span>
 
-    <div class="alert-dialog__body" slot="body">
+    <div class="nvw-alert-dialog__body" slot="body">
         <p>{{ message }}</p>
     </div>
 
-    <div class="alert-dialog__footer" slot="footer">
-        <Button class="alert-dialog__footer__ok-button" :text="okButtonText" @tap="close" :link="true"/>
+    <div class="nvw-alert-dialog__footer" slot="footer">
+        <Button class="nvw-alert-dialog__footer__ok-button" :text="okButtonText" @tap="close" :link="true"/>
     </div>
 
 </ModalDialog>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nu-alert-dialog {
+.nvw-alert-dialog {
   &__footer {
     &__ok-button {
       background-color: #ffffff;
