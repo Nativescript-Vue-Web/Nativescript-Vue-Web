@@ -1,48 +1,47 @@
 <template>
-
-    <textarea
-        ref="textview" 
-        :disabled="!editable"
-        :placeholder="hint"
-        :maxlength="maxLength"
-        :type="keyboardType"
-        :value="value"
-        :spellcheck="autoCorrect"
-        @blur="onBlur"
-        @focus="onFocus"
-        @keyup.enter="onReturnPress($event)"
-        @change="onTextChange($event)"
-        @input="updateValue()"
-    />
+  <textarea
+    v-common-directive
+    class="nvw-textView"
+    :disabled="!editable"
+    :maxlength="maxLength"
+    :value="text"
+    :spellcheck="autocorrect"
+    @blur="$emit('blur', $event)"
+    @change="$emit('textChange', $event)"
+    @focus="$emit('focus', $event)"
+    @keyup.enter="returnPress"
+    @input="updateValue"
+  />
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'TextView',
+  model: {
+    event: 'input',
+    prop: 'text',
+  },
   props: {
     text: String,
     hint: String,
     editable: Boolean,
     maxLength: Number,
     keyboardType: String,
-    autoCorrect: Boolean,
-    value: String,
+    autocorrect: Boolean,
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
   methods: {
-    updateValue: function() {
-      this.$emit('input', this.$refs.textview.value);
+    updateValue: function($event) {
+      this.$emit('input', $event.target.value);
     },
-    onBlur: function() {
-      this.$emit('blur');
-    },
-    onFocus: function() {
-      this.$emit('focus');
-    },
-    onTextChange: function(event) {
-      this.$emit('textChange', event);
-    },
-    onReturnPress: function(event) {
-      this.$emit('returnPress', event);
+    returnPress: function($event) {
+      if ($event.ctrlKey && $event.keyCode === 13) {
+        this.$emit('returnPress', $event.target.value);
+      }
     },
   },
 };
