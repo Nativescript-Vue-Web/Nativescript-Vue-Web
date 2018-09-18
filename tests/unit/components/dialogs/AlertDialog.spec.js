@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
 import sinon from 'sinon';
-import { AlertDialog, Button } from '../../../../src/main';
+import AlertDialog from '../../../../src/components/dialogs/AlertDialog';
+import Button from '../../../../src/components/Button';
 
 describe('AlertDialog', () => {
   // AlertDialog mock up values.

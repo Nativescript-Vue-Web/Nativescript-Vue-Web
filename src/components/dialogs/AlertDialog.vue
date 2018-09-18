@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import { Button, ModalDialog } from '../../main';
+import Button from '../Button';
+import ModalDialog from '../ModalDialog';
 
 export default {
   name: 'AlertDialog',

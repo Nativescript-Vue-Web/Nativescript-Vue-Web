@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { ModalDialog, Button } from '../../main';
+import Button from '../Button';
+import ModalDialog from '../ModalDialog';
 
 export default {
   name: 'ConfirmDialog',

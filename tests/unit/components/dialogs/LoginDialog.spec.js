@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { LoginDialog, TextField, Button } from '../../../../src/main';
+import LoginDialog from '../../../../src/components/dialogs/LoginDialog';
+import Button from '../../../../src/components/Button';
+import TextField from '../../../../src/components/TextField';
 
 describe('LoginDialog', () => {
   // LoginDialog mock up values.

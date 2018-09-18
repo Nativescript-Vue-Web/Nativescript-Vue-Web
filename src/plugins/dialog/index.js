@@ -1,7 +1,31 @@
-import { LoginDialog, ActionDialog, AlertDialog, ConfirmDialog, PromptDialog } from '../../main';
+import LoginDialog from '../../components/dialogs/LoginDialog';
+import ActionDialog from '../../components/dialogs/ActionDialog';
+import AlertDialog from '../../components/dialogs/AlertDialog';
+import ConfirmDialog from '../../components/dialogs/ConfirmDialog';
+import PromptDialog from '../../components/dialogs/PromptDialog';
+import Modal from '../../components/Modal';
 
 const DialogPlugin = {
   install: Vue => {
+    // Show Modal
+    Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) { // eslint-disable-line
+      const ContentComponent = Vue.extend(component);
+      const ModalComponent = Vue.extend(Modal);
+      const ModalInstance = new ModalComponent();
+      ContentComponent.prototype.$modal = {
+        close() {
+          ModalInstance.closeModal();
+        },
+      };
+      const modalDom = ModalInstance.$mount();
+      document.body.appendChild(modalDom.$el);
+      ModalInstance.isModalVisible = true;
+      ModalInstance.contentComponent = ContentComponent;
+      if (options && options.fullscreen) {
+        ModalInstance.fullscreen = options.fullscreen;
+      }
+    };
+
     // Action Dialog
     const ActionDialogComponent = Vue.extend(ActionDialog);
     const actionDialog = new ActionDialogComponent();
