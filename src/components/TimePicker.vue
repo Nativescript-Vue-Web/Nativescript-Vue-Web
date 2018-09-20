@@ -1,12 +1,12 @@
 <template>
     <input
-            ref="timepicker"
-            type="time"
-            :min="getMinTime"
-            :max="getMaxTime"
-            :value="value"
-            @change="onTimeChange($event)"
-            @input="updateValue()"
+        class="nvw-timepicker"
+        type="time"
+        :min="getMinTime"
+        :max="getMaxTime"
+        :value="value"
+        @change="onTimeChange($event)"
+        @input="updateValue($event)"
     />
 </template>
 
@@ -38,8 +38,8 @@ export default {
     },
   },
   methods: {
-    updateValue: function() {
-      this.$emit('input', this.$refs.timepicker.value);
+    updateValue: function(event) {
+      this.$emit('input', event.target.value);
     },
     onTimeChange: function(event) {
       this.$emit('timeChange', event);
@@ -49,12 +49,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input {
+.nvw-timepicker {
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   background-color: #fff;
   padding: 3px 5px;
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-  width: 190px;
 }
 </style>
