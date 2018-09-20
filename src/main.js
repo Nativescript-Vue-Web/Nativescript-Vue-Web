@@ -12,6 +12,7 @@ export { default as Progress } from './components/Progress.vue';
 export { default as ScrollView } from './components/ScrollView.vue';
 export { default as HtmlView } from './components/HtmlView.vue';
 export { default as WebView } from './components/WebView.vue';
+export { default as Frame } from './components/Frame.vue';
 export { default as SearchBar } from './components/SearchBar.vue';
 export { default as SegmentedBar } from './components/SegmentedBar.vue';
 export { default as SegmentedBarItem } from './components/SegmentedBarItem.vue';
