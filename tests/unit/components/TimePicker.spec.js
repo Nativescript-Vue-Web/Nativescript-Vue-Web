@@ -65,4 +65,47 @@ describe('TimePicker', () => {
       expect(wrapper.emitted('input').length).to.equal(1);
     });
   });
+
+  describe('Default values checking', () => {
+    it(`Default value should be empty string value`, () => {
+      const wrapper = mount(TimePicker);
+      expect(wrapper.element.value).to.equal('');
+    });
+    it(`Date Value should date format`, () => {
+      const wrapper = mount(TimePicker, {
+        name: 'TimePicker',
+        props: {
+          value: [Date, String],
+        },
+        propsData: {
+          value: new Date(),
+        },
+      });
+      expect(wrapper.element.value).to.not.equal('');
+    });
+    it(`Date Value should string format`, () => {
+      const wrapper = mount(TimePicker, {
+        name: 'TimePicker',
+        props: {
+          value: [Date, String],
+        },
+        propsData: {
+          value: '12:10',
+        },
+      });
+      expect(wrapper.element.value).to.equal('12:10');
+    });
+    it(`Date Value should date format`, () => {
+      const wrapper = mount(TimePicker, {
+        name: 'TimePicker',
+        props: {
+          time: Date,
+        },
+        propsData: {
+          time: new Date(),
+        },
+      });
+      expect(wrapper.element.value).to.not.equal('');
+    });
+  });
 });
