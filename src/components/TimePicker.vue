@@ -4,7 +4,7 @@
         type="time"
         :min="getMinTime"
         :max="getMaxTime"
-        :value="value"
+        :value="timeValue"
         @change="onTimeChange($event)"
         @input="updateValue($event)"
     />
@@ -13,28 +13,43 @@
 <script>
 export default {
   name: 'TimePicker',
-  props: [
-    'hour',
-    'minute',
-    'minHour',
-    'maxHour',
-    'minMinute',
-    'maxMinute',
-    'minuteInterval', // Step, the equivalence of minuteInterval prop, has some strange effects across browsers, so is not completely reliable.
-    'timeChange',
-    'value',
-  ],
+  props: {
+    hour: Number,
+    minute: Number,
+    time: Date,
+    minHour: Number,
+    maxHour: Number,
+    minMinute: Number,
+    maxMinute: Number,
+    minuteInterval: Number, // Step, the equivalence of minuteInterval prop, has some strange effects across browsers, so is not completely reliable.
+    value: [Date, String],
+  },
   computed: {
     // Min and Max values are needed to be improved.
     getMinTime: function() {
       const minHour = this.minHour ? this.minHour : '00';
       const minMinute = this.minMinute ? this.minMinute : '00';
-      return minHour + ':' + minMinute;
+      return this.timeToString(minHour, minMinute);
     },
     getMaxTime: function() {
       const maxHour = this.maxHour ? this.maxHour : '23';
       const maxMinute = this.maxMinute ? this.maxMinute : '59';
-      return maxHour + ':' + maxMinute;
+      return this.timeToString(maxHour, maxMinute);
+    },
+    timeValue: function() {
+      if (this.time) {
+        const time = new Date(this.time);
+        return this.timeToString(time.getHours(), time.getMinutes());
+      } else if (this.hour != null && this.minute != null) {
+        return this.timeToString(this.hour, this.minute);
+      } else if (this.value) {
+        if (this.value instanceof Date) {
+          const time = new Date(this.value);
+          return this.timeToString(time.getHours(), time.getMinutes());
+        }
+        return this.value;
+      }
+      return '';
     },
   },
   methods: {
@@ -42,6 +57,14 @@ export default {
       this.$emit('input', event.target.value);
     },
     onTimeChange: function(event) {
+      this.$emit('timeChange', event);
+    },
+    timeToString: function(hour, minute) {
+      return hour.toString().padStart(2, '0') + ':' + minute.toString().padStart(2, '0');
+    },
+  },
+  watch: {
+    timeValue: function(event) {
       this.$emit('timeChange', event);
     },
   },
