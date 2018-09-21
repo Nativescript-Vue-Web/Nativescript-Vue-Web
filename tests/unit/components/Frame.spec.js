@@ -7,7 +7,7 @@ describe('Frame.vue', () => {
     render(h) {
       return h(Label, {
         props: {
-          text: 'here is the label',
+          text: 'label',
         },
         attrs: {
           height: 120,
@@ -35,10 +35,10 @@ describe('Frame.vue', () => {
       expect(labelWrappers.length).to.equal(1);
     });
 
-    it('label component displays the given text prop(`here is the label`) correctly inside the frame.', () => {
+    it('label component displays the given text prop(`label`) correctly inside the frame.', () => {
       const labelWrappers = wrapper.findAll(Label).wrappers;
       const label = labelWrappers[0].find(Label);
-      expect(label.element.textContent.trim()).to.equal('here is the label');
+      expect(label.element.textContent.trim()).to.equal('label');
     });
   });
 });
