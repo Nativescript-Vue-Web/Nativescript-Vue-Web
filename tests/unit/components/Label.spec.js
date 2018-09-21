@@ -3,6 +3,8 @@ import { mount } from '@vue/test-utils';
 import Label from '../../../src/components/Label.vue';
 
 describe('Label.vue', () => {
+  const emptyLabel = mount(Label);
+
   const text = 'initial string';
   const textWrap = false;
   const wrapper = mount(Label, {
@@ -28,6 +30,9 @@ describe('Label.vue', () => {
   it(`the type attribute which is equivalent of textWrap in Nativescript-vue is equal to: normal.`, () => {
     wrapper.setProps({ textWrap: true });
     expect(wrapper.find(Label).element.style.whiteSpace).to.equal('normal');
+  });
+  it(`Label default text value should be empty string.`, () => {
+    expect(emptyLabel.props().text).to.equal('');
   });
 });
 
