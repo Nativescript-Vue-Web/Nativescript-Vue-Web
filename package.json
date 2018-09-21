@@ -30,7 +30,6 @@
     "lint-staged": "7.3.0",
     "node-sass": "4.9.3",
     "nyc": "13.0.1",
-    "prettier": "^1.14.0",
     "sass-loader": "7.1.0",
     "sinon": "6.3.4",
     "vue-template-compiler": "2.5.17"
