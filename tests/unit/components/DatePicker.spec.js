@@ -94,4 +94,9 @@ describe('DatePicker Unit Test.', () => {
       done();
     });
   });
+  it('DateChange event is also emitted.', () => {
+    wrapper.find('input').trigger('change');
+    expect(wrapper.emitted().dateChange.length).to.equal(1);
+    expect(dateChange.called).to.equal(true);
+  });
 });
