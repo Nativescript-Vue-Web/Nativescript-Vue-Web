@@ -13,7 +13,10 @@ import CommonDirective from '../directives/CommonDirective';
 export default {
   name: 'Label',
   props: {
-    text: String,
+    text: {
+      type: String,
+      default: '',
+    },
     textWrap: {
       type: Boolean,
       default: false,

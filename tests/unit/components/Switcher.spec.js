@@ -31,7 +31,7 @@ describe('Switcher', () => {
       expect(wrapper.contains('input')).to.equal(true);
     });
     it('the type of the component is checkbox', () => {
-      expect(wrapper.find('input').attributes('type').type).to.equal('checkbox');
+      expect(wrapper.find('input').attributes().type).to.equal('checkbox');
     });
   });
 
