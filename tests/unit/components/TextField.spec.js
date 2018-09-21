@@ -155,6 +155,31 @@ describe('TextField', () => {
       wrapper.find('input').element.setAttribute('type', 'password');
       expect(wrapper.find('input').attributes().type).to.equal('password');
     });
+    it('the type(keyboardType) attribute of the component is changed to tel.', done => {
+      wrapper.setProps({ secure: false, keyboardType: 'phone' });
+      expect(wrapper.find('input').attributes().type).to.equal('tel');
+      done();
+    });
+    it('the type(keyboardType) attribute of the component is changed to datetime.', done => {
+      wrapper.setProps({ keyboardType: 'datetime' });
+      expect(wrapper.find('input').attributes().type).to.equal('datetime-local');
+      done();
+    });
+    it('the type(keyboardType) attribute of the component is changed to email.', done => {
+      wrapper.setProps({ keyboardType: 'email' });
+      expect(wrapper.find('input').attributes().type).to.equal('email');
+      done();
+    });
+    it('the type(keyboardType) attribute of the component is changed to url.', done => {
+      wrapper.setProps({ keyboardType: 'url' });
+      expect(wrapper.find('input').attributes().type).to.equal('url');
+      done();
+    });
+    it('the type(keyboardType) attribute of the component is changed to irrelevant value.', done => {
+      wrapper.setProps({ keyboardType: 'irrelevant' });
+      expect(wrapper.find('input').attributes().type).to.equal('text');
+      done();
+    });
   });
 
   describe('the textfield detects changes in the input and also throw appropriate events.', () => {
