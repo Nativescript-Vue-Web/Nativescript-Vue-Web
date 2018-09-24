@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-timepicker {
   border: 1px solid #c4c4c4;
   border-radius: 5px;

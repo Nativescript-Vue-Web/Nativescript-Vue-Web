@@ -13,7 +13,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-dock-layout {
   width: 500px;
   height: 500px;

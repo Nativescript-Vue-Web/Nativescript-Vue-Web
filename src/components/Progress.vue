@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-progress {
   width: 100%;
   background-color: #ddd;

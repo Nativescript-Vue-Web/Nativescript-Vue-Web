@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-flexbox-layout {
   height: 500px;
   background-color: crimson;
