@@ -20,6 +20,9 @@ const CommonDirective = {
       cssString += $attrs.col ? `grid-column:${parseInt($attrs.col) + 1};` : '';
       cssString += $attrs.rowSpan ? `grid-row-end: span ${$attrs.rowSpan};` : '';
       cssString += $attrs.colSpan ? `grid-column-end: span ${$attrs.colSpan};` : '';
+      cssString += $attrs.fontStyle ? `font-style: ${$attrs.fontStyle};` : '';
+      cssString += $attrs.fontWeight ? `font-weight: ${$attrs.fontWeight};` : '';
+      cssString += $attrs.color ? `color: ${$attrs.color};` : '';
 
       el.style.cssText += ';' + cssString;
     }

@@ -1,6 +1,7 @@
 <template>
     <span class="nvw-span">
         {{text}}
+        <slot />
     </span>
 </template>
 
