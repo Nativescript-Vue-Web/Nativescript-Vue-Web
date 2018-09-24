@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-activity-indicator {
   &__loader {
     border: 5px solid #f3f3f3;

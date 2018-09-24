@@ -1,6 +1,6 @@
 <template>
 <ModalDialog v-if="isModalVisible" class="nvw-prompt-dialog" @close="close">
-    <span class="nvw-prompt-dialog__header" slot="header">  
+    <span class="nvw-prompt-dialog__header" slot="header">
          <h4>{{ title }}</h4>
     </span>
     <div class="nvw-prompt-dialog__body" slot="body">
@@ -10,9 +10,9 @@
 
     <div class="nvw-prompt-dialog__footer" slot="footer">
         <Button class="nvw-prompt-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
-        <Button class="nvw-prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />      
-    </div> 
-</ModalDialog> 
+        <Button class="nvw-prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />
+    </div>
+</ModalDialog>
 
 </template>
 
@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .nvw-prompt-dialog {
   &__footer {
     &__cancel-button {

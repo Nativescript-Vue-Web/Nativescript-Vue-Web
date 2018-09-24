@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .nvw-slider {
   width: 100%;
   &__scroll {
