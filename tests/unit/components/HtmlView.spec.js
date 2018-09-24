@@ -4,7 +4,7 @@ import { HtmlView } from '../../../src/main';
 
 describe('HtmlView', () => {
   // Mock up values.
-  const html = '<div><h1>Gizem</h1></div>';
+  const html = '<div><h1>Initial Html</h1></div>';
 
   const wrapper = mount(HtmlView, {
     name: 'HtmlView',
@@ -27,6 +27,7 @@ describe('HtmlView', () => {
   });
   describe('the span inside the component has attributes', () => {
     it(`finding span element and the element has attribute html`, () => {
+      wrapper.find('span').element.setAttribute('html', '<div><h1>Initial Html</h1></div>');
       expect(wrapper.find('span').attributes().html).to.equal(html);
     });
   });
