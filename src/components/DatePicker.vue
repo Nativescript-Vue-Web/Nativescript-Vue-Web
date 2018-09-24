@@ -1,5 +1,5 @@
 <template>
-    <input 
+    <input
       class="nvw-datepicker"
       type="date"
       :max="maxDate"
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-datepicker {
   border: 1px solid #c4c4c4;
   border-radius: 5px;

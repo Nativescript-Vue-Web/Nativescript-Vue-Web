@@ -45,7 +45,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .nvw-alert-dialog {
   &__footer {
     &__ok-button {

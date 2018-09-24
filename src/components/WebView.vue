@@ -1,7 +1,7 @@
 <template>
   <iframe v-if="isURL"
         class="nvw-webview"
-        :src="src" 
+        :src="src"
         @load="$emit('loadFinished', $event)"
     />
     <div v-else v-html="src"></div>
@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-webview {
   display: flex;
 }
