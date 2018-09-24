@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-img {
   align-self: flex-start;
 

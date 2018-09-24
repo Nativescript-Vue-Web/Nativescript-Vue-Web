@@ -1,7 +1,7 @@
 <template>
 <ModalDialog v-if="isModalVisible" class="nvw-action-dialog" @close="close">
 
-  <span class="nvw-action-dialog__header" slot="header">  
+  <span class="nvw-action-dialog__header" slot="header">
     <p>{{ title }}</p>
   </span>
 
@@ -56,7 +56,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .nvw-action-dialog {
   &__body {
     section:after {

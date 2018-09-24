@@ -5,7 +5,7 @@
         :placeholder="hint"
         :disabled="!editable"
         :maxlength="maxLength"
-        :type="secure ? 'password' : keyboardType"
+        :type="secure ? 'password' : handleKeyboardType"
         :value="text"
         :spellcheck="autocorrect"
         @blur="$emit('blur', $event)"
@@ -27,14 +27,20 @@ export default {
   name: 'TextField',
   props: {
     maxLength: Number,
-    keyboardType: String,
+    keyboardType: {
+      type: String,
+      default: 'text',
+    },
     secure: {
       type: Boolean,
       default: false,
     },
     text: String,
     hint: String,
-    editable: Boolean,
+    editable: {
+      type: Boolean,
+      default: true,
+    },
     autocorrect: Boolean,
   },
   directives: {
@@ -43,6 +49,22 @@ export default {
   methods: {
     updateValue: function($event) {
       this.$emit('input', $event.target.value);
+    },
+  },
+  computed: {
+    handleKeyboardType: function() {
+      switch (this.keyboardType) {
+        case 'phone':
+          return 'tel';
+        case 'datetime':
+          return 'datetime-local';
+        case 'email':
+          return 'email';
+        case 'url':
+          return 'url';
+        default:
+          return 'text';
+      }
     },
   },
 };

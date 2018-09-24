@@ -1,7 +1,7 @@
 <template>
   <transition name="modal-fade">
     <div @click="close" class="nvw-modal">
-      <div 
+      <div
         @click.stop
         class="nvw-modal__backdrop"
         role="dialog"
@@ -16,7 +16,7 @@
           </slot>
         </header>
         <section class="nvw-modal__body" id="modalDescription">
-          <slot name="body"> 
+          <slot name="body">
           </slot>
         </section>
         <footer class="nvw-modal__footer">
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-modal {
   position: fixed;
   top: 0;
