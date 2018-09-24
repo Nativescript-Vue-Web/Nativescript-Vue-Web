@@ -4,6 +4,7 @@
    :class="fontClass"
    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
     {{textValue}}
+    <slot />
   </span>
 </template>
 
