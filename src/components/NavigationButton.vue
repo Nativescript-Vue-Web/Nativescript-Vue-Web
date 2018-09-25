@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-navigation-button {
   display: flex;
   order: -1;
