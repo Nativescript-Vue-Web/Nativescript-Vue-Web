@@ -41,7 +41,7 @@ export default {
   &__bar {
     width: 0;
     height: 20px;
-    background: linear-gradient(#e66465, #9198e5);
+    background-color: #9198e5;
     transition: all 1s ease;
     transition-delay: 0.1s;
     color: brown;

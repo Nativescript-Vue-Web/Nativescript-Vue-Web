@@ -23,6 +23,7 @@ export { default as TextView } from './components/TextView.vue';
 export { default as Span } from './components/Span.vue';
 export { default as FormattedString } from './components/FormattedString.vue';
 export { default as TimePicker } from './components/TimePicker.vue';
+export { default as ActionItem } from './components/ActionItem.vue';
 export { default as NavigationButton } from './components/NavigationButton.vue';
 
 // Dialogs
