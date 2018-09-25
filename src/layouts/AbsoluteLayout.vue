@@ -1,33 +1,25 @@
 <template>
-    <div class="nvw-absolute-layout" :style="{width: convertPxStyle(width), height: convertPxStyle(height), backgroundColor: backgroundColor}">
+    <div v-common-directive class="nvw-absolute-layout">
         <slot></slot>
     </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   name: 'AbsoluteLayout',
-  props: {
-    width: {
-      default: '100%',
-    },
-    height: {
-      default: '100%',
-    },
-    backgroundColor: {},
-  },
-  methods: {
-    convertPxStyle: function(value) {
-      return value.toString().includes('%') ? value : value + 'px';
-    },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-absolute-layout {
-  background-color: burlywood;
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .nvw-absolute-layout > * {

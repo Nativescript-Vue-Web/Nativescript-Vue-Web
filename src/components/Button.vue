@@ -1,7 +1,7 @@
 <template>
     <button v-common-directive
-    class="nvw-button"  
-    @click="$emit('tap',$event)" 
+    class="nvw-button"
+    @click="$emit('tap',$event)"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
      {{text}}
     </button>
@@ -25,10 +25,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-button {
-  width: 60px;
+  min-width: 60px;
   overflow: hidden;
-  text-overflow: ellipses;
+  text-overflow: ellipsis;
 }
 </style>

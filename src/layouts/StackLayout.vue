@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-stack-layout {
   display: flex;
   flex-direction: column;

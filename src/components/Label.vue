@@ -4,6 +4,7 @@
    :class="fontClass"
    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
     {{textValue}}
+    <slot />
   </span>
 </template>
 
@@ -13,7 +14,10 @@ import CommonDirective from '../directives/CommonDirective';
 export default {
   name: 'Label',
   props: {
-    text: String,
+    text: {
+      type: String,
+      default: '',
+    },
     textWrap: {
       type: Boolean,
       default: false,
@@ -35,7 +39,7 @@ export default {
 };
 </script>
 
-<style scoped lang='scss'>
+<style lang='scss'>
 .nvw-label {
   display: inline-block;
   overflow: hidden;

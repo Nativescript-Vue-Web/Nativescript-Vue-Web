@@ -1,21 +1,23 @@
 <template>
-    <div :style="{backgroundColor: textFieldBackgroundColor}" class="nvw-searchbar">
-        <span @click="onSubmit($event)" class="nvw-searchbar__searchIcon" />
-        <input
-            ref="searchbar"
-            class="nvw-searchbar__searchInput"
-            :placeholder="hint"
-            :type="keyboardType"
-            :value="text"
-            @keyup.enter="onSubmit($event)"
-            @input="updateValue()"
-            @change="onTextChange($event)"
-        />
-        <span @click="onClear($event)" class="nvw-searchbar__clearIcon" />
-    </div>
+  <div v-common-directive :style="{backgroundColor: textFieldBackgroundColor}" class="nvw-searchbar">
+    <span @click="$emit('submit')" class="nvw-searchbar__search-icon" />
+    <input
+      ref="searchbar"
+      class="nvw-searchbar__search-input"
+      :placeholder="hint"
+      :type="keyboardType"
+      :value="text"
+      @keyup.enter="$emit('submit')"
+      @input="updateValue"
+      @change="$emit('textChange')"
+    />
+    <span v-if="text" @click="onClear" class="nvw-searchbar__clear-icon" />
+  </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+
 export default {
   model: {
     event: 'input',
@@ -30,60 +32,61 @@ export default {
     textFieldHintColor: String, // TODO
   },
   methods: {
-    updateValue: function() {
-      this.$emit('input', this.$refs.searchbar.value);
-    },
-    onTextChange: function(event) {
-      this.$emit('textChange', event);
-    },
-    onSubmit: function(event) {
-      this.$emit('submit', event);
+    updateValue: function(event) {
+      this.$emit('input', event.target.value);
     },
     onClear: function(event) {
+      this.$emit('input', '');
       this.$emit('clear', event);
     },
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-searchbar {
-  flex-direction: row;
-  justify-content: flex-end;
-  position: relative;
-  width: 400px;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 4px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  min-width: 90px;
+  max-height: 75px;
+  min-height: 28px;
+  padding: 7px;
+  border-radius: 12px;
+  box-shadow: 2px 3px grey;
 
-  &__searchInput {
-    width: calc(100% - 98px);
-    height: 30px;
-    padding: 0px 40px 0px 40px;
-    margin: 4px 10px 0px 7px;
-    background-size: cover;
+  &__search-input {
+    margin: 0;
+    padding: 0;
     text-align: left;
-    font-weight: bold;
+    border: none;
+    border-right: solid 3px rgba(54, 79, 199, 0.5);
+    border-left: solid 3px rgba(54, 79, 199, 0.5);
+    box-shadow: 5px white;
+    flex: 1;
+    min-width: 30px;
+    &:focus {
+      box-shadow: 0 0 4px rgba(54, 79, 199, 0.5);
+    }
   }
 
-  &__searchIcon {
-    background: url('https://image.flaticon.com/icons/png/128/61/61088.png');
-    height: 24px;
-    width: 24px;
-    bottom: 10px;
-    background-size: cover;
-    left: 15px;
-    position: absolute;
+  &__search-icon {
+    background-image: url('../assets/icons/searchIcon.png');
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    flex: 0 0 30px;
   }
 
-  &__clearIcon {
-    background: url('https://cdn.iconscout.com/public/images/icon/premium/png-256/close-delete-remove-31c54d9a6e2c1e99-256x256.png');
-    position: absolute;
-    height: 24px;
-    background-size: cover;
-    width: 24px;
-    bottom: 10px;
-    right: 15px;
+  &__clear-icon {
+    background-image: url('../assets/icons/clearIcon.png');
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    flex: 0 0 30px;
   }
 }
 </style>

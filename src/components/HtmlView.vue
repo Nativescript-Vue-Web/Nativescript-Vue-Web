@@ -1,5 +1,5 @@
 <template>
-    <span :html="html" />
+    <span v-html="html" />
 </template>
 
 <script>

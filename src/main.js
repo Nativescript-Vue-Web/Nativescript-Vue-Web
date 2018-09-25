@@ -12,6 +12,7 @@ export { default as Progress } from './components/Progress.vue';
 export { default as ScrollView } from './components/ScrollView.vue';
 export { default as HtmlView } from './components/HtmlView.vue';
 export { default as WebView } from './components/WebView.vue';
+export { default as Frame } from './components/Frame.vue';
 export { default as SearchBar } from './components/SearchBar.vue';
 export { default as SegmentedBar } from './components/SegmentedBar.vue';
 export { default as SegmentedBarItem } from './components/SegmentedBarItem.vue';
@@ -22,6 +23,8 @@ export { default as TextView } from './components/TextView.vue';
 export { default as Span } from './components/Span.vue';
 export { default as FormattedString } from './components/FormattedString.vue';
 export { default as TimePicker } from './components/TimePicker.vue';
+export { default as ActionItem } from './components/ActionItem.vue';
+export { default as NavigationButton } from './components/NavigationButton.vue';
 
 // Dialogs
 export { default as ModalDialog } from './components/ModalDialog';

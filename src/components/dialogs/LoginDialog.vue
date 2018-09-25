@@ -1,6 +1,6 @@
 <template>
     <ModalDialog v-if="isModalVisible" class="nvw-login-dialog" @close="close">
-      <div class="nvw-login-dialog__header" slot="header">  
+      <div class="nvw-login-dialog__header" slot="header">
         <p>{{title}}</p>
       </div>
       <div class="nvw-login-dialog__body" slot="body">
@@ -66,7 +66,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .nvw-login-dialog {
   &__body {
     &__username-input {

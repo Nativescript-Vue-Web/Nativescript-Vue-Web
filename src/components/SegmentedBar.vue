@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nvw-segmentedBar {
   align-self: center;
   &__tabHeader {
