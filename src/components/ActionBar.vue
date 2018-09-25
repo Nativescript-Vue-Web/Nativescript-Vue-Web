@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-action-bar {
   display: flex;
   height: 40px;
