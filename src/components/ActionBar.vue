@@ -10,30 +10,36 @@ export default {
   name: 'ActionBar',
   data: function() {
     return {
-      showTitle: true,
       navigationButtonCreated: false,
     };
   },
   props: {
     title: String,
   },
-  created() {
-    this.$slots.default.forEach(slot => {
-      if (slot.componentOptions.tag !== 'ActionItem' && slot.componentOptions.tag !== 'NavigationButton') {
-        this.showTitle = false;
-      }
-    });
-  },
-  mounted() {
-    this.$slots.default.forEach(slot => {
-      if (slot.componentOptions.tag === 'NavigationButton') {
-        if (!this.navigationButtonCreated) {
-          this.navigationButtonCreated = true;
-        } else {
-          slot.elm.style.display = 'none';
+  computed: {
+    showTitle: function() {
+      if (this.$slots.default) {
+        for (let slot of this.$slots.default) {
+          if (!['ActionItem', 'NavigationButton'].includes(slot.componentOptions.tag)) return false;
         }
       }
-    });
+      return true;
+    },
+  },
+  mounted() {
+    // Only last navigation button will show
+    if (this.$slots.default) {
+      for (let i = this.$slots.default.length - 1; i >= 0; i--) {
+        let slot = this.$slots.default[i];
+        if (slot.componentOptions.tag === 'NavigationButton') {
+          if (!this.navigationButtonCreated) {
+            this.navigationButtonCreated = true;
+          } else {
+            slot.elm.style.display = 'none';
+          }
+        }
+      }
+    }
   },
 };
 </script>
@@ -49,7 +55,7 @@ export default {
   width: 100%;
   padding: 0 5px;
   align-items: center;
-  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 
   &__title {
     margin: 0 5px;

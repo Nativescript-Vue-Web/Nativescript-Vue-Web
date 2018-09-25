@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { ActionBar, ActionItem, NavigationButton } from '../../../src/main';
 
 describe('ActionItem', () => {
@@ -38,7 +38,7 @@ describe('ActionItem', () => {
     },
   };
 
-  const ActionBarWrapper = shallowMount(ActionBar, {
+  const ActionBarWrapper = mount(ActionBar, {
     name: 'ActionBar',
     props: {
       title: String,
@@ -64,8 +64,31 @@ describe('ActionItem', () => {
     expect(ActionBarWrapper.props().title).to.equal(newTitle);
   });
 
-  it(`find the navigationbutton and actionitem components in wrapper.`, () => {
+  it(`child component length equal to 3.`, () => {
+    expect(ActionBarWrapper.vm.$slots.default.length).to.equal(3);
+  });
+
+  it(`If it has not child component, show only title.`, () => {
+    const ActionBarWrapper2 = mount(ActionBar, {
+      name: 'ActionBar',
+      props: {
+        title: String,
+      },
+      propsData: {
+        title,
+      },
+    });
+    expect(Object.keys(ActionBarWrapper2.vm.$slots).length).to.equal(0);
+  });
+
+  //TODO component tag is undefined.
+  // https://github.com/vuejs/vue-test-utils/issues/784
+  xit(`find the navigationbutton and actionitem components in wrapper.`, done => {
     expect(ActionBarWrapper.findAll(NavigationButton).length).to.equal(2);
     expect(ActionBarWrapper.findAll(ActionItem).length).to.equal(1);
+    setTimeout(() => {
+      //ActionBarWrapper.vm.$slots;
+      done();
+    }, 500);
   });
 });
