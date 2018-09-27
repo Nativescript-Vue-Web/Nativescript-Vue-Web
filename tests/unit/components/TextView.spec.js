@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
 import sinon from 'sinon';
-import { TextView } from '../../../src/main';
+import { TextView, Label } from '../../../src/main';
 
 describe('TextView', () => {
   // Mock up values.
@@ -18,6 +18,20 @@ describe('TextView', () => {
   const focus = sinon.spy();
   const returnPress = sinon.spy();
   const textChange = sinon.spy();
+
+  const LabelWrapper = {
+    render(h) {
+      return h(Label, {
+        props: {
+          text: 'label',
+        },
+        attrs: {
+          height: 120,
+          alignSelf: 'flex-start',
+        },
+      });
+    },
+  };
 
   const wrapper = mount(TextView, {
     model: {
@@ -47,6 +61,9 @@ describe('TextView', () => {
       focus,
       returnPress,
       textChange,
+    },
+    slots: {
+      default: [LabelWrapper],
     },
   });
 
@@ -89,6 +106,19 @@ describe('TextView', () => {
 
     it('pressing return key event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.returnPress).to.not.equal(undefined);
+    });
+  });
+
+  describe('TextView component contains label component', () => {
+    it('there is one label component inside the textview.', () => {
+      const labelWrappers = wrapper.findAll(Label).wrappers;
+      expect(labelWrappers.length).to.equal(1);
+    });
+
+    it('label component displays the given text prop{`label`} correctly inside the textview.', () => {
+      const labelWrappers = wrapper.findAll(Label).wrappers;
+      const label = labelWrappers[0].find(Label);
+      expect(label.element.textContent.trim()).to.equal('label');
     });
   });
 

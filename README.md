@@ -15,18 +15,28 @@ Web components for Nativescript-Vue
 
 WIP
 
+### Remaining (In-Progress) Components & Directives
+- v-template
+- v-view
+- ListView
+- SegmentedBar
+- SegmentedBarItem
+- TabView
+- TabViewItem
+- DockLayout
 
-## Project setup
+
+##### Project setup
 ```
 npm install
 ```
 
-### Lints and fixes files
+##### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Run unit tests
+##### Run unit tests
 ```
 npm run test:unit
 ```
