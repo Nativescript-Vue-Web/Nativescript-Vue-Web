@@ -3,11 +3,8 @@
     <!-- List items as tab items if they were given -->
     <div ref="listItems" v-if="items && items.length > 0 && !haveSlots">
       <div class="nvw-segmentedBar__tabHeader" v-for="item in items" :key="item">
-        <button style="{tabButtonStyle(item)}" @click="chooseTab(item)">
-          <h5>
-            {{item}}
-          </h5>
-        </button>
+         <button :title="item" style="{tabButtonStyle(item)}"  @click="chooseTab(item)">
+         </button> 
       </div>
       <div class="nvw-segmentedBar__tabContent">
         {{renderChosenContent()}}
@@ -16,7 +13,7 @@
     <!-- Placing Items Manually -->
     <div v-else>
       <div class="nvw-segmentedBar__tabHeader">
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -49,12 +46,11 @@ export default {
       return item === this.chosenTab ? 'border-bottom-width: 5px; border-bottom-color: crimson;' : 'border: none;';
     },
     haveSlots: function() {
-      return this.$slots.default.length;
+      return this.$slots.default ? this.$slots.default.length : null;
     },
   },
   methods: {
     chooseTab: function(event, tab) {
-      this.$emit('selectedIndexChange', event);
       this.$emit('input', tab);
     },
     renderChosenContent: function() {
@@ -71,10 +67,10 @@ export default {
       margin-left: 30px;
       background-color: Transparent;
       background-repeat: no-repeat;
-      border: none;
       cursor: pointer;
       outline: none;
       text-transform: uppercase;
+      border: none;
     }
     & button :active {
       color: white;
