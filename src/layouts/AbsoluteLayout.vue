@@ -23,6 +23,6 @@ export default {
 }
 
 .nvw-absolute-layout > * {
-  position: absolute;
+  position: absolute !important;
 }
 </style>
