@@ -1,21 +1,12 @@
 <template>
   <div class="nvw-segmentedBar" ref="segmentedbar">
-    <!-- List items as tab items if they were given -->
-    <div ref="listItems" v-if="items && items.length > 0 && !haveSlots">
-      <div class="nvw-segmentedBar__tabHeader" v-for="item in items" :key="item">
-         <button :title="item" style="{tabButtonStyle(item)}"  @click="chooseTab(item)">
-         </button> 
+      <div class="nvw-segmentedBar__tabHeader" v-for="(item,index) in itemList" :key="item">
+         <SegmentedBarItem :class="{'nvw-segmentedBar__tabHeader--active': selectedIndex === index}" :title="item" @tap="chooseTab($event,index)"/>
       </div>
-      <div class="nvw-segmentedBar__tabContent">
-        {{renderChosenContent()}}
+    <div v-show="slotShow">
+     <slot></slot>
       </div>
-    </div>
-    <!-- Placing Items Manually -->
-    <div v-else>
-      <div class="nvw-segmentedBar__tabHeader">
-        <slot></slot>
-      </div>
-    </div>
+     
   </div>
 </template>
 
@@ -33,28 +24,41 @@ export default {
         return [];
       },
     },
-    selectedIndex: Number,
+    selectedIndex: {
+      type: Number,
+      default: 0,
+    },
     selectedBackgroundColor: String,
+  },
+  data() {
+    return {
+      slotShow: false,
+    };
   },
   mounted() {
     if (this.items && this.items.length) {
       this.chosenTab = this.value ? this.value : this.items[0];
     }
   },
-  computed: {
-    tabButtonStyle: function(item) {
-      return item === this.chosenTab ? 'border-bottom-width: 5px; border-bottom-color: crimson;' : 'border: none;';
-    },
-    haveSlots: function() {
-      return this.$slots.default ? this.$slots.default.length : null;
+  methods: {
+    chooseTab: function(event, selectedIndex) {
+      this.$emit('selectedIndexChange', event);
+      this.$emit('input', selectedIndex);
     },
   },
-  methods: {
-    chooseTab: function(event, tab) {
-      this.$emit('input', tab);
-    },
-    renderChosenContent: function() {
-      return `This tab content belongs to the ${this.chosenTab}.`;
+  computed: {
+    itemList: function() {
+      const itemList = [];
+      if (this.items && this.items.length) {
+        for (let item of this.items) {
+          itemList.push(item);
+        }
+      } else if (this.$slots.default && this.$slots.default.length) {
+        for (let item of this.$slots.default) {
+          if (item.componentOptions.tag === 'SegmentedBarItem') itemList.push(item.componentOptions.propsData.title);
+        }
+      }
+      return itemList;
     },
   },
 };
@@ -63,18 +67,11 @@ export default {
 <style lang="scss">
 .nvw-segmentedBar {
   &__tabHeader {
-    & button {
-      margin-left: 30px;
-      background-color: Transparent;
-      background-repeat: no-repeat;
-      cursor: pointer;
-      outline: none;
-      text-transform: uppercase;
-      border: none;
-    }
-    & button :active {
+    display: inline-block;
+    &--active {
       color: white;
-      transition: none;
+      text-decoration: none;
+      background-color: #00bfff;
     }
   }
 }

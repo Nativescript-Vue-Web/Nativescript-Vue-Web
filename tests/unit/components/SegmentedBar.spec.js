@@ -1,9 +1,17 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-//import sinon from 'sinon';
-import { SegmentedBar } from '../../../src/main.js';
+import { SegmentedBar, SegmentedBarItem, Button } from '../../../src/main.js';
 
 describe('SegmentedBar', () => {
+  const segmentedWrapper = {
+    render(h) {
+      return h(SegmentedBarItem, {
+        props: {
+          title: 'SegmentedBarItemTitle',
+        },
+      });
+    },
+  };
   // Mock up values.
   const items = ['Segment0', 'Segment1', 'Segment2', 'Segment3'];
   const selectedIndex = 0;
@@ -28,6 +36,13 @@ describe('SegmentedBar', () => {
       selectedIndex,
       selectedBackgroundColor,
     },
+    slots: {
+      default: [segmentedWrapper],
+    },
+    components: {
+      Button,
+      SegmentedBarItem,
+    },
   });
 
   describe('the component receives given props correctly.', () => {
@@ -41,20 +56,13 @@ describe('SegmentedBar', () => {
       expect(wrapper.props().selectedBackgroundColor).to.equal(selectedBackgroundColor);
     });
   });
-
-  describe('SegmentedBar contains button element', () => {
-    it('there is one button element inside the SegmentedBar component.', () => {
-      const button = wrapper.find('.nvw-segmentedBar__tabHeader').findAll('button');
-      expect(button.length).to.equal(1);
-    });
-  });
-
-  describe('Event testing', () => {
-    it('button click event passed successfully.', () => {
-      wrapper
-        .findAll('button')
-        .at(0)
-        .trigger('click');
-    });
-  });
+  // TODO: to be done when the segmentedBarItem component is complete.
+  // describe('Event testing', () => {
+  //   it('button click event passed successfully.', () => {
+  //     wrapper
+  //       .findAll('button')
+  //       .at(0)
+  //       .trigger('click');
+  //   });
+  // });
 });
