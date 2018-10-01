@@ -1,11 +1,11 @@
 <template>
-    <transition name="switch">
-        <div v-common-directive class="nvw-tab-view-item">
-            <div v-show="active" class="nvw-tab-view-item__content" :class="{selected: active}" role="tabpanel" :aria-hidden="!active ? 'true' : null">
+    <div v-common-directive class="nvw-tab-view-item">
+        <transition name="switch">
+            <div :id="computedId" v-show="isActive" class="nvw-tab-view-item__content" :class="{selected: isActive}" role="tabpanel" :aria-hidden="!isActive">
                 <slot/>
             </div>
-        </div>
-    </transition>
+        </transition>
+    </div>
 </template>
 
 <script>
@@ -14,55 +14,25 @@ import CommonDirective from '../directives/CommonDirective';
 export default {
   name: 'TabViewItem',
   props: {
-    title: String,
+    id: { default: null },
+    title: { type: String, required: true },
     iconSource: String,
-  },
-  inject: ['nvwTabsDataPass', 'nvwTabs'],
-  created() {
-    const pass = (this.$_pass = {});
-    for (const key in this.$data) {
-      if (key.charAt(0) === '$' || key.charAt(0) === '_') continue;
-      Object.defineProperty(pass, key, {
-        enumerable: true,
-        configurable: false,
-        get: () => this.$data[key],
-      });
-    }
-    for (const key in this.$props) {
-      if (key.charAt(0) === '$' || key.charAt(0) === '_') continue;
-      Object.defineProperty(pass, key, {
-        enumerable: true,
-        configurable: false,
-        get: () => this.$props[key],
-      });
-    }
-    Object.defineProperty(pass, '$slots', {
-      enumerable: false,
-      configurable: false,
-      get: () => this.$slots,
-    });
-    this.nvwTabsDataPass.$_addToChild(pass);
   },
   data() {
     return {
-      showContent: false,
+      selectedId: null,
     };
   },
   computed: {
-    active() {
-      return this.nvwTabsDataPass.activeChild === this.$_pass;
+    isActive() {
+      return this.computedId === this.selectedId;
     },
-  },
-  watch: {
-    active(value, oldValue) {
-      // Lazy content creation
-      if (value && value !== oldValue && !this.showContent) {
-        this.showContent = true;
-      }
+    computedId() {
+      return this.id ? this.id : this.title.toLocaleLowerCase().replace(/ /g, '-');
     },
-  },
-  beforeDestroy() {
-    this.nvwTabsDataPass.$_removeFromChild(this.$_pass);
+    hash() {
+      return '#' + this.computedId;
+    },
   },
   directives: {
     'common-directive': CommonDirective,
@@ -74,7 +44,7 @@ export default {
 $offset: 50px;
 .switch-enter-active,
 .switch-leave-active {
-  transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .switch-leave-active {

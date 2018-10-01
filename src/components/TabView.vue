@@ -4,7 +4,7 @@
             <div class="nvw-tab-view__header__tab"
                  v-for="(tab,index) in children"
                  :key="index"
-                 :class="{'nvw-tab-view__header__tab-active':currentTabId === index}"
+                 :class="{'nvw-tab-view__header__tab-active':currentTabIndex === index}"
                  role="tab"
                  :aria-controls="`tab-${index}`"
                  @click="chooseTab(index)"
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="nvw-tab-view__content">
-            <slot/>
+            <slot v-bind:currentTabIndex="currentTabIndex"></slot>
         </div>
     </div>
 </template>
@@ -34,104 +34,55 @@ export default {
     selectedTabTextColor: String,
     textTransform: String,
   },
-  provide() {
-    const pass = {};
-    Object.defineProperty(pass, 'activeChild', {
-      get: () => this.activeChild,
-    });
-    pass.$_addToChild = this.$_addToChild.bind(this);
-    pass.$_removeFromChild = this.$_removeFromChild.bind(this);
-    return {
-      nvwTabsDataPass: pass,
-      nvwTabs: {
-        data: this.injectedData,
-      },
-    };
-  },
   data() {
     return {
-      currentTabId: this.selectedIndex || 0,
-      lastTabId: 0,
-      direction: 'to-right',
-      injectedData: {},
+      currentTabIndex: this.selectedIndex || 0,
+      lastTabIndex: 0,
       children: [],
     };
   },
-
+  created() {
+    if (this.$slots.default && this.$slots.default.length) {
+      this.$nextTick(() => {
+        for (let tab of this.$slots.default) {
+          if (tab.componentOptions.tag === 'TabViewItem') {
+            this.children.push({ title: tab.componentInstance.title, id: tab.componentInstance.computedId });
+          }
+        }
+        this.updateChild();
+      });
+    }
+  },
   computed: {
     activeChild() {
-      if (this.currentTabId < this.children.length) {
-        return this.children[this.currentTabId];
+      if (this.currentTabIndex < this.children.length) {
+        return this.children[this.currentTabIndex];
       }
+    },
+    direction() {
+      return this.currentTabIndex < this.lastTabIndex ? 'to-left' : 'to-right';
     },
   },
   methods: {
+    updateChild() {
+      for (let tab of this.$slots.default) {
+        if (tab.componentOptions.tag === 'TabViewItem') {
+          tab.componentInstance.selectedId = this.activeChild.id;
+        }
+      }
+    },
     chooseTab(index) {
-      if (this.currentTabId !== index) {
+      if (this.currentTabIndex !== index) {
+        this.lastTabIndex = this.currentTabIndex;
         if (index < 0) {
-          this.activateChild(index < 0 ? this.children.length - 1 : index);
+          this.currentTabIndex = index < 0 ? this.children.length - 1 : index;
         } else if (index >= this.children.length) {
-          this.activateChild(0);
+          this.currentTabIndex = 0;
         } else {
-          this.activateChild(index);
+          this.currentTabIndex = index;
         }
-      }
-    },
-    activateChild(index) {
-      const oldIndex = this.currentTabId;
-      this.currentTabId = index;
-      this.$emit('selectedIndexChanged', index);
-      if (index < 0) {
-        index = 0;
-      } else if (index >= this.children.length) {
-        index = this.children.length - 1;
-      }
-      this.childActivated(index, oldIndex);
-    },
-    childActivated(index, oldIndex) {
-      this.direction = index === oldIndex ? '' : index < oldIndex ? 'to-left' : 'to-right';
-    },
-
-    $_addToChild(vm) {
-      if (this.$slots && this.$slots.default) {
-        this.$nextTick(() => {
-          const childComponents = this.$slots.default.reduce((list, vnode) => {
-            if (vnode.child) {
-              list.push(vnode.child.$_pass);
-            }
-            return list;
-          }, []);
-          const index = childComponents.indexOf(vm);
-          if (index !== -1) {
-            this.children.splice(index, 0, vm);
-          }
-          this.$_updateChild('add', index, vm);
-        });
-      }
-    },
-
-    $_removeFromChild(vm) {
-      const index = this.children.indexOf(vm);
-      // Remove child
-      if (index !== -1) {
-        this.children.splice(index, 1);
-      }
-      // Hook
-      this.$_updateChild('remove', index, vm);
-    },
-
-    $_updateChild(operation, index) {
-      if (operation === 'add') {
-        if (index <= this.currentTabId) {
-          this.activateChild(this.currentTabId + 1);
-        }
-        if (this.children.length === 1) {
-          this.activateChild(0);
-        }
-      } else if (operation === 'remove') {
-        if (index <= this.currentTabId) {
-          this.activateChild(this.currentTabId - 1);
-        }
+        this.$emit('selectedIndexChanged', this.activeChild.title);
+        this.updateChild();
       }
     },
   },
@@ -139,8 +90,6 @@ export default {
     'common-directive': CommonDirective,
   },
 };
-
-// emit selectedIndexChanged
 </script>
 
 <style lang="scss">
