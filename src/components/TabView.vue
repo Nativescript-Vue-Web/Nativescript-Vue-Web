@@ -39,14 +39,16 @@ export default {
     };
   },
   mounted() {
-    if (this.$slots.default && this.$slots.default.length) {
+    if (this.$slots && this.$slots.default && this.$slots.default.length) {
       for (let tab of this.$slots.default) {
-        if (tab.componentOptions.tag === 'TabViewItem') {
+        if (tab.componentOptions && tab.componentOptions.tag === 'TabViewItem') {
           this.children.push({
             title: tab.componentInstance.title,
             icon: tab.componentInstance.webIcon,
             id: tab.componentInstance.computedId,
           });
+        } else {
+          console.warn('TabView component only accepts TabViewItem as child'); // eslint-disable-line
         }
       }
       this.updateChild();
@@ -65,7 +67,7 @@ export default {
   methods: {
     updateChild() {
       for (let tab of this.$slots.default) {
-        if (tab.componentOptions.tag === 'TabViewItem') {
+        if (tab.componentOptions && tab.componentOptions.tag === 'TabViewItem') {
           tab.componentInstance.selectedId = this.activeChild.id;
         }
       }
