@@ -1,18 +1,18 @@
 <template>
     <div v-common-directive class="nvw-tab-view" :class="[`direction-${direction}`]">
         <div class="nvw-tab-view__header">
-            <div class="nvw-tab-view__header__tab"
-                 v-for="(tab,index) in children"
-                 :key="index"
-                 :class="{'nvw-tab-view__header__tab-active':currentTabIndex === index}"
-                 role="tab"
-                 :aria-controls="`tab-${index}`"
-                 @click="chooseTab(index)"
-                 @keyup.left="chooseTab(index-1)"
-                 @keyup.right="chooseTab(index+1)">
+            <button class="nvw-tab-view__header__tab"
+                    v-for="(tab,index) in children"
+                    :key="index"
+                    :class="{'nvw-tab-view__header__tab-active':currentTabIndex === index}"
+                    role="tab"
+                    :aria-controls="`tab-${index}`"
+                    @click="chooseTab(index)"
+                    @keyup.enter="chooseTab(index)"
+                    @keyup.space="chooseTab(index)">
                 <span v-if="tab.icon" class="nvw-tab-view__header__tab__icon" :class="tab.icon"></span>
                 <span class="nvw-tab-view__header__tab__title">{{tab.title}}</span>
-            </div>
+            </button>
         </div>
         <div class="nvw-tab-view__content">
             <slot v-bind:currentTabIndex="currentTabIndex"></slot>
@@ -102,9 +102,9 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    outline: none;
     &__tab {
-      outline: none;
+      background: none;
+      border: none;
       display: flex;
       flex-grow: 1;
       justify-content: center;

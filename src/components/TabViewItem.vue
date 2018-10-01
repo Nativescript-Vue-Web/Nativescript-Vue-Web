@@ -30,9 +30,6 @@ export default {
     computedId() {
       return this.id ? this.id : this.title.toLocaleLowerCase().replace(/ /g, '-');
     },
-    hash() {
-      return '#' + this.computedId;
-    },
   },
   directives: {
     'common-directive': CommonDirective,
