@@ -16,7 +16,7 @@ export default {
   props: {
     id: { default: null },
     title: { type: String, required: true },
-    iconSource: String,
+    webIcon: String,
   },
   data() {
     return {

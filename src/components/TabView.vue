@@ -10,6 +10,7 @@
                  @click="chooseTab(index)"
                  @keyup.left="chooseTab(index-1)"
                  @keyup.right="chooseTab(index+1)">
+                <span v-if="tab.icon" class="nvw-tab-view__header__tab__icon" :class="tab.icon"></span>
                 <span class="nvw-tab-view__header__tab__title">{{tab.title}}</span>
             </div>
         </div>
@@ -46,7 +47,11 @@ export default {
       this.$nextTick(() => {
         for (let tab of this.$slots.default) {
           if (tab.componentOptions.tag === 'TabViewItem') {
-            this.children.push({ title: tab.componentInstance.title, id: tab.componentInstance.computedId });
+            this.children.push({
+              title: tab.componentInstance.title,
+              icon: tab.componentInstance.webIcon,
+              id: tab.componentInstance.computedId,
+            });
           }
         }
         this.updateChild();
@@ -109,7 +114,8 @@ export default {
       outline: none;
       display: flex;
       flex-grow: 1;
-      justify-content: space-around;
+      justify-content: center;
+      align-self: center;
       cursor: pointer;
       &:hover {
         background-color: aliceblue;
@@ -117,8 +123,9 @@ export default {
       &-active {
         border-bottom: 5px solid crimson;
       }
+      &__icon,
       &__title {
-        padding: 10px;
+        padding: 10px 2px 10px 2px;
       }
     }
   }
