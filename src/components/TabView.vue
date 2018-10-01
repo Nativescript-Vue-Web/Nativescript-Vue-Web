@@ -30,10 +30,6 @@ export default {
       type: Number,
       default: 0,
     },
-    tabTextColor: String,
-    tabBackgroundColor: String,
-    selectedTabTextColor: String,
-    textTransform: String,
   },
   data() {
     return {
@@ -42,20 +38,18 @@ export default {
       children: [],
     };
   },
-  created() {
+  mounted() {
     if (this.$slots.default && this.$slots.default.length) {
-      this.$nextTick(() => {
-        for (let tab of this.$slots.default) {
-          if (tab.componentOptions.tag === 'TabViewItem') {
-            this.children.push({
-              title: tab.componentInstance.title,
-              icon: tab.componentInstance.webIcon,
-              id: tab.componentInstance.computedId,
-            });
-          }
+      for (let tab of this.$slots.default) {
+        if (tab.componentOptions.tag === 'TabViewItem') {
+          this.children.push({
+            title: tab.componentInstance.title,
+            icon: tab.componentInstance.webIcon,
+            id: tab.componentInstance.computedId,
+          });
         }
-        this.updateChild();
-      });
+      }
+      this.updateChild();
     }
   },
   computed: {
@@ -101,9 +95,6 @@ export default {
 .nvw-tab-view {
   display: flex;
   flex-direction: column;
-  & > * {
-    flex: auto 0 0;
-  }
 
   &__header {
     display: flex;
