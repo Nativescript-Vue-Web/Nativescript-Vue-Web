@@ -10,6 +10,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'Label',
@@ -36,6 +37,7 @@ export default {
       return this.text.includes(' | fonticon') ? '' : this.text;
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

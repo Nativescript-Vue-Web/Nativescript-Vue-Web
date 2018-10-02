@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'SegmentedBar',
   props: ['items', 'value'],
@@ -45,6 +47,7 @@ export default {
       return `This tab content belongs to the ${this.chosenTab}.`;
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

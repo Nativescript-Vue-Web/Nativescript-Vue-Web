@@ -7,6 +7,7 @@
 <script>
 import { debounce, camelCaseToDash } from '../helpers/helpers';
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'ScrollView',
@@ -36,6 +37,7 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 
