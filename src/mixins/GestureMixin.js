@@ -2,16 +2,28 @@ const Gestures = {
   mounted() {
     const { $listeners, $el } = this;
     if ($listeners.tap) {
-      $el.addEventListener('click', event => (event.detail === 1 ? this.$emit('tap', event) : null));
+      $el.addEventListener('click', event => {
+        event.stopImmediatePropagation();
+        event.detail === 1 ? this.$emit('tap', event) : null;
+      });
     }
     if ($listeners.longPress) {
-      $el.addEventListener('contextmenu', event => this.$emit('longPress', event));
+      $el.addEventListener('contextmenu', event => {
+        event.stopImmediatePropagation();
+        this.$emit('longPress', event);
+      });
     }
     if ($listeners.touch) {
-      $el.addEventListener('mousedown', event => this.$emit('touch', event));
+      $el.addEventListener('mousedown', event => {
+        event.stopImmediatePropagation();
+        this.$emit('touch', event);
+      });
     }
     if ($listeners.doubleTap) {
-      $el.addEventListener('dblclick', event => this.$emit('doubleTap', event));
+      $el.addEventListener('dblclick', event => {
+        event.stopImmediatePropagation();
+        this.$emit('doubleTap', event);
+      });
     }
   },
   beforeDestroy() {
