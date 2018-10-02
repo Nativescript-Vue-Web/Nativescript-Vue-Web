@@ -7,13 +7,12 @@ describe('SegmentedBar', () => {
   const items = ['Segment0', 'Segment1', 'Segment2', 'Segment3'];
   const selectedIndex = 0;
   const selectedBackgroundColor = '';
-  //const buttonText = 'button'; //tODO
 
   const ButtonWrapper = {
     render(h) {
       return h(Button, {
         props: {
-          text: 'buttonText',
+          text: 'Button Text',
         },
       });
     },
@@ -81,11 +80,11 @@ describe('SegmentedBar', () => {
       const segmentedBarItemWrappers = wrapper.find('.nvw-segmentedBar__slots').findAll(Button).wrappers;
       expect(segmentedBarItemWrappers.length).to.equal(1);
     });
-    //TODO
-    // it('Button component displays the given title prop{`buttonText`} correctly inside the segmentedBar.', () => {
-    //   const buttonWrappers = wrapper.find('.nvw-segmentedBar__slots').findAll(Button).wrappers;
-    //   expect(buttonWrappers.element.textContent.includes(buttonText)).to.equal(true);
-    // });
+    it('button component displays the given text prop{`Button Text`} correctly inside the segmentedBar.', () => {
+      const buttonWrappers = wrapper.find('.nvw-segmentedBar__slots').findAll(Button).wrappers;
+      const button = buttonWrappers[0].find(Button);
+      expect(button.element.textContent.trim()).to.equal('Button Text');
+    });
   });
   describe('Event testing', () => {
     it('button click event passed successfully.', () => {
