@@ -1,12 +1,11 @@
 <template>
   <div class="nvw-segmentedBar" ref="segmentedbar">
-      <div class="nvw-segmentedBar__tabHeader" v-for="(item,index) in itemList" :key="item">
-         <SegmentedBarItem :class="selectedIndexLocal === index ? 'active' : 'inactive'" :title="item" @tap="chooseTab($event,index)"/>
+      <div class="nvw-segmentedBar__items" v-if="items.length > 0" v-for="(item,index) in items" :key="item" :index="index">
+         <SegmentedBarItem :class="{'active' : selectedIndex === index }" :title="item"/>
       </div>
-    <div class="nvw-segmentedBar__slots" v-show="slotShow">
-     <slot></slot>
-      </div>
-     
+    <div class="nvw-segmentedBar__items" v-if="items.length === 0">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -14,7 +13,7 @@
 export default {
   name: 'SegmentedBar',
   model: {
-    event: 'input',
+    event: 'selectedIndexChange',
     prop: 'selectedIndex',
   },
   props: {
@@ -30,53 +29,37 @@ export default {
     },
     selectedBackgroundColor: String,
   },
-  data() {
-    return {
-      slotShow: false,
-      selectedIndexLocal: null,
-    };
-  },
-  mounted() {
-    if (this.items && this.items.length) {
-      this.chosenTab = this.value ? this.value : this.items[0];
-    }
-  },
   methods: {
-    chooseTab: function(event, selectedIndex) {
-      this.selectedIndexLocal = selectedIndex;
-      this.$emit('selectedIndexChange', event);
-      this.$emit('input', this.selectedIndexLocal);
-    },
-  },
-  computed: {
-    itemList: function() {
-      const itemList = [];
-      if (this.items && this.items.length) {
-        for (let item of this.items) {
-          itemList.push(item);
-        }
-      } else if (this.$slots.default && this.$slots.default.length) {
-        for (let item of this.$slots.default) {
-          if (item.componentOptions.tag === 'SegmentedBarItem') itemList.push(item.componentOptions.propsData.title);
+    updateSegmentedBarItemIndexes() {
+      if (this.items.length) {
+        return;
+      }
+      if (this.$slots.default && this.$slots.default.length) {
+        for (let i = 0, length = this.$slots.default.length; i < length; i++) {
+          const item = this.$slots.default[i];
+          if (item.componentOptions.tag === 'SegmentedBarItem') {
+            item.componentOptions.propsData.index = i;
+            this.$set(this.$slots.default, i, item);
+          }
         }
       }
-      return itemList;
     },
   },
   created() {
-    this.selectedIndexLocal = this.selectedIndex;
+    this.updateSegmentedBarItemIndexes();
+    this.$on('segmentedBarItemSelected', selectedIndex => {
+      this.$emit('selectedIndexChange', selectedIndex);
+    });
   },
-  watch: {
-    selectedIndex: function() {
-      this.selectedIndexLocal = this.selectedIndex;
-    },
+  updated() {
+    this.updateSegmentedBarItemIndexes();
   },
 };
 </script>
 
 <style lang="scss">
 .nvw-segmentedBar {
-  &__tabHeader {
+  &__items {
     display: inline-block;
   }
 }

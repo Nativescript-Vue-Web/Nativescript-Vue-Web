@@ -1,5 +1,5 @@
 <template>
-    <Button class="nvw-segmentedBarItem" :text="title" @tap="onButtonTap" />
+    <Button class="nvw-segmentedBarItem" :text="title" @tap="onSelected($event)" />
 </template>
 
 <script>
@@ -10,10 +10,13 @@ export default {
       type: String,
       default: '',
     },
+    index: Number,
   },
   methods: {
-    onButtonTap: function() {
-      this.$emit('tap', this.title);
+    onSelected($event) {
+      $event.stopPropagation();
+      $event.preventDefault();
+      this.$parent.$emit('segmentedBarItemSelected', this.index);
     },
   },
 };
@@ -29,12 +32,10 @@ export default {
   text-decoration: none;
   font-size: 14px;
   line-height: 120%;
+  background-color: transparent;
 }
 .active {
   background-color: #1a8cff;
   color: white;
-}
-.inactive {
-  background-color: transparent;
 }
 </style>
