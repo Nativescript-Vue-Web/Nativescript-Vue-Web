@@ -23,7 +23,7 @@ const Gestures = {
       $el.removeEventListener('contextmenu', $listeners.longPress);
     }
     if ($listeners.touch) {
-      $el.removeEventListener('mouseover', $listeners.touch);
+      $el.removeEventListener('mousedown', $listeners.touch);
     }
     if ($listeners.doubleTap) {
       $el.removeEventListener('dblclick', $listeners.doubleTap);
