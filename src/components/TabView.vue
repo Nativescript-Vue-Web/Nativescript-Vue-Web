@@ -15,7 +15,7 @@
             </button>
         </div>
         <div class="nvw-tab-view__content">
-            <slot v-bind:currentTabIndex="currentTabIndex"></slot>
+            <slot />
         </div>
     </div>
 </template>
