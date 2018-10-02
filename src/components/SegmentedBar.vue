@@ -1,9 +1,9 @@
 <template>
   <div class="nvw-segmentedBar" ref="segmentedbar">
       <div class="nvw-segmentedBar__tabHeader" v-for="(item,index) in itemList" :key="item">
-         <SegmentedBarItem :class="{'nvw-segmentedBar__tabHeader--active': selectedIndex === index}" :title="item" @tap="chooseTab($event,index)"/>
+         <SegmentedBarItem :class="selectedIndexLocal === index ? 'active' : 'inactive'" :title="item" @tap="chooseTab($event,index)"/>
       </div>
-    <div v-show="slotShow">
+    <div class="nvw-segmentedBar__slots" v-show="slotShow">
      <slot></slot>
       </div>
      
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       slotShow: false,
+      selectedIndexLocal: null,
     };
   },
   mounted() {
@@ -42,8 +43,9 @@ export default {
   },
   methods: {
     chooseTab: function(event, selectedIndex) {
+      this.selectedIndexLocal = selectedIndex;
       this.$emit('selectedIndexChange', event);
-      this.$emit('input', selectedIndex);
+      this.$emit('input', this.selectedIndexLocal);
     },
   },
   computed: {
@@ -61,6 +63,14 @@ export default {
       return itemList;
     },
   },
+  created() {
+    this.selectedIndexLocal = this.selectedIndex;
+  },
+  watch: {
+    selectedIndex: function() {
+      this.selectedIndexLocal = this.selectedIndex;
+    },
+  },
 };
 </script>
 
@@ -68,11 +78,6 @@ export default {
 .nvw-segmentedBar {
   &__tabHeader {
     display: inline-block;
-    &--active {
-      color: white;
-      text-decoration: none;
-      background-color: #00bfff;
-    }
   }
 }
 </style>
