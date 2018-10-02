@@ -1,15 +1,33 @@
 const Gestures = {
   mounted() {
-    this.$el.addEventListener('click', event => (event.detail === 1 ? this.$emit('tap', event) : null));
-    this.$el.addEventListener('contextmenu', event => this.$emit('longPress', event));
-    this.$el.addEventListener('mousedown', event => this.$emit('touch', event));
-    this.$el.addEventListener('dblclick', event => this.$emit('doubleTap', event));
+    const { $listeners, $el } = this;
+    if ($listeners.tap) {
+      $el.addEventListener('click', event => (event.detail === 1 ? this.$emit('tap', event) : null));
+    }
+    if ($listeners.longPress) {
+      $el.addEventListener('contextmenu', event => this.$emit('longPress', event));
+    }
+    if ($listeners.touch) {
+      $el.addEventListener('mousedown', event => this.$emit('touch', event));
+    }
+    if ($listeners.doubleTap) {
+      $el.addEventListener('dblclick', event => this.$emit('doubleTap', event));
+    }
   },
   beforeDestroy() {
-    this.$el.removeEventListener('click', this.$listeners.tap);
-    this.$el.removeEventListener('contextmenu', this.$listeners.longPress);
-    this.$el.removeEventListener('mousedown', this.$listeners.touch);
-    this.$el.removeEventListener('dblclick', this.$listeners.doubleTap);
+    const { $listeners, $el } = this;
+    if ($listeners.tap) {
+      $el.removeEventListener('click', $listeners.tap);
+    }
+    if ($listeners.longPress) {
+      $el.removeEventListener('contextmenu', $listeners.longPress);
+    }
+    if ($listeners.touch) {
+      $el.removeEventListener('mouseover', $listeners.touch);
+    }
+    if ($listeners.doubleTap) {
+      $el.removeEventListener('dblclick', $listeners.doubleTap);
+    }
   },
 };
 
