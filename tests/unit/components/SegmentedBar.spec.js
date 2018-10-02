@@ -1,97 +1,115 @@
 import { expect } from 'chai';
-import { mount } from '@vue/test-utils';
-import { SegmentedBar, SegmentedBarItem, Button } from '../../../src/main.js';
+import { mount, shallowMount } from '@vue/test-utils';
+import { SegmentedBar, SegmentedBarItem } from '../../../src/main.js';
 
 describe('SegmentedBar', () => {
   // Mock up values.
-  const items = ['Segment0', 'Segment1', 'Segment2', 'Segment3'];
+  const items = [{ title: 'Segment0' }, { title: 'Segment1' }, { title: 'Segment2' }, { title: 'Segment3' }];
   const selectedIndex = 0;
-  const selectedBackgroundColor = '';
-
-  const ButtonWrapper = {
-    render(h) {
-      return h(Button, {
-        props: {
-          text: 'Button Text',
-        },
-      });
-    },
-  };
-  const wrapper = mount(SegmentedBar, {
-    model: {
-      event: 'input',
-      prop: 'selectedIndex',
-    },
-    name: 'SegmentedBar',
-    // This will converted to props.
-    props: {
-      items: {
-        type: Array,
-      },
-      selectedIndex: Number,
-      selectedBackgroundColor: String,
-    },
-    propsData: {
-      items,
-      selectedIndex,
-      selectedBackgroundColor,
-    },
-    slots: {
-      default: [ButtonWrapper],
-    },
-    components: {
-      Button,
-      SegmentedBarItem,
-    },
-  });
 
   describe('the component receives given props correctly.', () => {
-    it(`items property is equal to: ${items}.`, () => {
-      expect(wrapper.props().items).to.equal(items);
+    const wrapper = shallowMount(SegmentedBar, {
+      model: {
+        event: 'input',
+        prop: 'selectedIndex',
+      },
+      name: 'SegmentedBar',
+      props: {
+        items: {
+          type: Array,
+        },
+        selectedIndex: Number,
+      },
+      propsData: {
+        items,
+        selectedIndex,
+      },
     });
+
     it(`selectedIndex property is equal to: ${selectedIndex}.`, () => {
       expect(wrapper.props().selectedIndex).to.equal(selectedIndex);
     });
-    it(`selectedBackgroundColor property is equal to: ${selectedBackgroundColor}.`, () => {
-      expect(wrapper.props().selectedBackgroundColor).to.equal(selectedBackgroundColor);
+    it(`items property is equal to: ${JSON.stringify(items)}.`, () => {
+      expect(wrapper.props().items).to.equal(items);
     });
-  });
-  describe('segmentedBar component contains div element and SegmentedBarItem component.', () => {
-    it('there is div element inside the segmentedBar.', () => {
-      expect(wrapper.contains('div')).to.equal(true);
+    it(`currentTabIndex is equal to: ${selectedIndex}.`, () => {
+      expect(wrapper.vm.currentTabIndex).to.equal(selectedIndex);
     });
-    it('there is segmentedBarItem component inside the segmentedBar.', () => {
-      expect(wrapper.contains(SegmentedBarItem)).to.equal(true);
-    });
-  });
-  describe('Style testing of the SegmentedBar.', () => {
-    it('items are valid so the class must be "nvw-segmentedBar__tabHeader".', done => {
-      expect(wrapper.find('.nvw-segmentedBar__tabHeader').exists()).to.equal(true);
-      done();
-    });
-    it('items are null so the class must be "nvw-segmentedBar__slots".', done => {
-      expect(wrapper.find('.nvw-segmentedBar__slots').exists()).to.equal(true);
-      done();
+    it(`childrens size is equal to: ${items.length}.`, () => {
+      expect(wrapper.vm.children.length).to.equal(items.length);
+      expect(wrapper.vm.childrenFromSlots.length).to.equal(0);
     });
   });
 
-  describe('segmentedBar component contains Button component', () => {
-    it('there is Button component inside the segmentedBar.', () => {
-      const segmentedBarItemWrappers = wrapper.find('.nvw-segmentedBar__slots').findAll(Button).wrappers;
-      expect(segmentedBarItemWrappers.length).to.equal(1);
+  describe('segmentedBar component contains button component', () => {
+    const wrapper = shallowMount(SegmentedBar, {
+      model: {
+        event: 'input',
+        prop: 'selectedIndex',
+      },
+      name: 'SegmentedBar',
+      props: {
+        items: {
+          type: Array,
+        },
+        selectedIndex: Number,
+      },
+      propsData: {
+        items,
+        selectedIndex,
+      },
     });
-    it('button component displays the given text prop{`Button Text`} correctly inside the segmentedBar.', () => {
-      const buttonWrappers = wrapper.find('.nvw-segmentedBar__slots').findAll(Button).wrappers;
-      const button = buttonWrappers[0].find(Button);
-      expect(button.element.textContent.trim()).to.equal('Button Text');
+
+    it(`segmentedBar component contains ${items.length} buttons.`, () => {
+      expect(wrapper.findAll('button').length).to.equal(items.length);
     });
-  });
-  describe('Event testing', () => {
-    it('button click event passed successfully.', () => {
+    it(`segmentedBar component click last button.`, () => {
       wrapper
         .findAll('button')
-        .at(0)
-        .trigger('click');
+        .at(3)
+        .element.click();
+      expect(wrapper.emitted().selectedIndexChanged[0][0]).to.equal(3);
+    });
+  });
+
+  describe('segmentedBar component contains Slot component', () => {
+    const tab1Title = 'Tab 1';
+    const tab2Title = 'Tab 2';
+    const tab1 = {
+      render(h) {
+        return h(SegmentedBarItem, {
+          props: {
+            title: tab1Title,
+          },
+        });
+      },
+    };
+    const tab2 = {
+      render(h) {
+        return h(SegmentedBarItem, {
+          props: {
+            title: tab2Title,
+          },
+        });
+      },
+    };
+    const wrapper = mount(SegmentedBar, {
+      model: {
+        event: 'input',
+        prop: 'selectedIndex',
+      },
+      name: 'SegmentedBar',
+      props: {
+        selectedIndex: Number,
+      },
+      slots: {
+        default: [tab1, tab2],
+      },
+    });
+
+    xit(`children's size is equal to: 2.`, () => {
+      expect(wrapper.vm.children.length).to.equal(2);
+      expect(wrapper.vm.childrenFromSlots.length).to.equal(2);
     });
   });
 });
