@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import { TabView, TabViewItem } from '../../../src/main';
 
 describe('TabView', () => {
@@ -28,7 +28,7 @@ describe('TabView', () => {
 });
 
 describe('TabView+TabViewItem', () => {
-  // const Vue = createLocalVue();
+  const Vue = createLocalVue();
   const tab1Title = 'Tab 1';
   const tab2Title = 'Tab 2';
   const tab1 = {
@@ -72,19 +72,16 @@ describe('TabView+TabViewItem', () => {
     expect(wrapper.vm.$slots.default.length).to.equal(2);
   });
 
-  /*
-  it(`children length equal to 2.`, () => {
+  xit(`children length equal to 2.`, () => {
     Vue.nextTick(() => {
       expect(wrapper.vm.children.length).to.equal(2);
     });
   });
-
-  it(`Tab titles are correct.`, done => {
+  xit(`Tab titles are correct.`, done => {
     Vue.nextTick(() => {
-      console.log('wrapper.html()', wrapper.html()); // eslint-disable-line
-      console.log('wrapper.find.text()', wrapper.find('#tab-1').html()); // eslint-disable-line
       expect(wrapper.find('#tab-1').text()).to.equal(tab1Title);
+      expect(wrapper.find('#tab-2').text()).to.equal(tab1Title);
       done();
     });
-  });*/
+  });
 });
