@@ -52,22 +52,6 @@ export default {
     }
   },
   computed: {
-    test() {
-      const chi = [];
-      if (this.$slots && this.$slots.default && this.$slots.default.length) {
-        for (let tab of this.$slots.default) {
-          if (tab.componentOptions && tab.componentOptions.tag === 'SegmentedBarItem') {
-            chi.push({
-              title: tab.componentOptions.propsData.title,
-              webIcon: tab.componentOptions.propsData.webIcon,
-            });
-          } else {
-            console.warn('SegmentedBar component only accepts SegmentedBarItem as child'); // eslint-disable-line
-          }
-        }
-      }
-      return chi;
-    },
     children() {
       if (this.items && this.items.length) {
         return this.items;
