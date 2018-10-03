@@ -7,6 +7,7 @@ export { default as ImgNative } from './components/Img.native';
 export { default as Label } from './components/Label';
 export { default as ListPicker } from './components/ListPicker';
 export { default as ListView } from './components/ListView';
+export { default as VTemplate } from './components/VTemplate';
 export { default as Page } from './components/Page';
 export { default as Progress } from './components/Progress';
 export { default as ScrollView } from './components/ScrollView';
