@@ -29,8 +29,7 @@ export default {
     stretchLastChild: Boolean,
   },
   mounted() {
-    for (let key in this.$slots.default) {
-      let slot = this.$slots.default[key];
+    for (let slot of this.$slots.default) {
       if (slot.data && slot.data.attrs) {
         let parent;
         const dock = slot.data.attrs.dock ? slot.data.attrs.dock : '';
@@ -47,7 +46,8 @@ export default {
         }
         parent.appendChild(slot.elm);
 
-        if (key == this.$slots.default.length - 1 && this.stretchLastChild) {
+        let [last] = this.$slots.default.slice(-1);
+        if (slot === last && this.stretchLastChild) {
           if (parent.previousSibling) {
             parent.previousSibling.classList.add('nvw-dock-layout__nonFlexible');
           } else if (parent.nextSibling) {
