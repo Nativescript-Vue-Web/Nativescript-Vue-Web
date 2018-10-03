@@ -1,4 +1,5 @@
 <template>
+ <div>  
   <textarea
     v-common-directive
     class="nvw-textView"
@@ -12,6 +13,9 @@
     @keyup.enter="returnPress"
     @input="updateValue"
   />
+   <slot />
+  </div>
+  
 </template>
 
 <script>

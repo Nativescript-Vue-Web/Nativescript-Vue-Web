@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-action-item {
   display: flex;
   order: 100;

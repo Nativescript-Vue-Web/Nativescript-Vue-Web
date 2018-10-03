@@ -27,8 +27,8 @@ export default {
 
 <style lang="scss">
 .nvw-button {
-  width: 60px;
+  min-width: 60px;
   overflow: hidden;
-  text-overflow: ellipses;
+  text-overflow: ellipsis;
 }
 </style>
