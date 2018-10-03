@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'Modal',
   data() {
@@ -43,6 +45,7 @@ export default {
       return `${this.fullscreen ? 'nvw-modal--fullscreen' : ''}`;
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

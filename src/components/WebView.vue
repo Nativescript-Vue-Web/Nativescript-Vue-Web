@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'WebView',
   props: {
@@ -27,6 +29,7 @@ export default {
       return this.src.startsWith('~') ? this.src.replace('~', '') : this.src;
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

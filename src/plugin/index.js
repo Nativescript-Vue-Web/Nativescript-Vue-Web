@@ -4,6 +4,7 @@ import AlertDialog from '../components/dialogs/AlertDialog';
 import ConfirmDialog from '../components/dialogs/ConfirmDialog';
 import PromptDialog from '../components/dialogs/PromptDialog';
 import Modal from '../components/Modal';
+import ViewDirective from '../directives/ViewDirective';
 
 const NvwPlugin = {
   install: Vue => {
@@ -137,6 +138,8 @@ const NvwPlugin = {
     Vue.filter('fonticon', function(value) {
       return value + ' | fonticon';
     });
+
+    Vue.directive('view', ViewDirective);
   },
 };
 export default NvwPlugin;
