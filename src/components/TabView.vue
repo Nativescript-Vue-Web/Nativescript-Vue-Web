@@ -15,7 +15,7 @@
             </button>
         </div>
         <div class="nvw-tab-view__content">
-            <slot />
+            <slot/>
         </div>
     </div>
 </template>
@@ -49,7 +49,7 @@ export default {
             id: tab.componentInstance.computedId,
           });
         } else {
-          console.warn('TabView component only accepts TabViewItem as child'); // eslint-disable-line
+          console.warn(`TabView component only accepts TabViewItem as child not [${tab.componentOptions.tag}]`); // eslint-disable-line
         }
       }
       this.updateChild();
