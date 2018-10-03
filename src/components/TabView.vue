@@ -22,6 +22,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'TabView',
@@ -87,6 +88,7 @@ export default {
       }
     },
   },
+  mixins: [Gestures],
   directives: {
     'common-directive': CommonDirective,
   },
