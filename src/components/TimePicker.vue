@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'TimePicker',
   props: {
@@ -68,6 +70,7 @@ export default {
       this.$emit('timeChange', event);
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

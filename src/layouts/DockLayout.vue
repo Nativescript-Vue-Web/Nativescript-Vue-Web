@@ -23,11 +23,14 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'DockLayout',
   props: {
     stretchLastChild: Boolean,
   },
+  mixins: [Gestures],
   mounted() {
     for (let slot of this.$slots.default) {
       if (slot.data && slot.data.attrs) {

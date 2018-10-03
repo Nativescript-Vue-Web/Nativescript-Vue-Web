@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'ModalDialog',
   methods: {
@@ -36,6 +38,7 @@ export default {
       this.$emit('close');
     },
   },
+  mixins: [Gestures],
 };
 </script>
 
