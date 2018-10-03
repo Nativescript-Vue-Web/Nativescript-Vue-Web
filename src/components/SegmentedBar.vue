@@ -3,13 +3,12 @@
         <button class="nvw-segmentedBar__button"
                 v-for="(tab,index) in children"
                 :key="index"
-                :class="{'nvw-segmentedBar__button-active':currentTabIndex === index}"
+                :class="{'nvw-segmentedBar__button--active':currentIndex === index}"
                 role="tab"
                 :aria-controls="`tab-${index}`"
-                @click="chooseTab(index)"
-                @keyup.enter="chooseTab(index)"
-                @keyup.space="chooseTab(index)">
-            <span v-if="tab.webIcon" class="nvw-segmentedBar__button__icon" :class="tab.webIcon"></span>
+                @click="updateSegmentedBarIndexes(index)"
+                @keyup.enter="updateSegmentedBarIndexes(index)"
+                @keyup.space="updateSegmentedBarIIndexes(index)">
             <span class="nvw-segmentedBar__button__title">{{tab.title}}</span>
         </button>
     </div>
@@ -33,7 +32,7 @@ export default {
   },
   data() {
     return {
-      currentTabIndex: this.selectedIndex || 0,
+      currentIndex: this.selectedIndex || 0,
       childrenFromSlots: [],
     };
   },
@@ -60,16 +59,16 @@ export default {
     },
   },
   methods: {
-    chooseTab(index) {
-      if (this.currentTabIndex !== index) {
+    updateSegmentedBarIndexes(index) {
+      if (this.currentIndex !== index) {
         if (index < 0) {
-          this.currentTabIndex = index < 0 ? this.children.length - 1 : index;
+          this.currentIndex = index < 0 ? this.children.length - 1 : index;
         } else if (index >= this.children.length) {
-          this.currentTabIndex = 0;
+          this.currentIndex = 0;
         } else {
-          this.currentTabIndex = index;
+          this.currentIndex = index;
         }
-        this.$emit('selectedIndexChanged', this.currentTabIndex);
+        this.$emit('selectedIndexChanged', this.currentIndex);
       }
     },
   },
@@ -94,14 +93,21 @@ export default {
     align-self: center;
     cursor: pointer;
     color: dodgerblue;
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
     &:hover {
       background-color: aliceblue;
     }
-    &-active {
+    &--active {
       background-color: dodgerblue;
       color: #fff;
     }
-    &__icon,
     &__title {
       padding: 10px 2px 10px 2px;
     }

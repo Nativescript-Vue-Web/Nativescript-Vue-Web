@@ -7,7 +7,7 @@ describe('SegmentedBar', () => {
   const items = [{ title: 'Segment0' }, { title: 'Segment1' }, { title: 'Segment2' }, { title: 'Segment3' }];
   const selectedIndex = 0;
 
-  describe('the component receives given props correctly.', () => {
+  describe('SegmentedBar component receives given props correctly.', () => {
     const wrapper = shallowMount(SegmentedBar, {
       model: {
         event: 'input',
@@ -33,7 +33,7 @@ describe('SegmentedBar', () => {
       expect(wrapper.props().items).to.equal(items);
     });
     it(`currentTabIndex is equal to: ${selectedIndex}.`, () => {
-      expect(wrapper.vm.currentTabIndex).to.equal(selectedIndex);
+      expect(wrapper.vm.currentIndex).to.equal(selectedIndex);
     });
     it(`childrens size is equal to: ${items.length}.`, () => {
       expect(wrapper.vm.children.length).to.equal(items.length);
@@ -41,7 +41,7 @@ describe('SegmentedBar', () => {
     });
   });
 
-  describe('segmentedBar component contains button component', () => {
+  describe('Style testing of the SegmentedBar.', () => {
     const wrapper = shallowMount(SegmentedBar, {
       model: {
         event: 'input',
@@ -60,7 +60,34 @@ describe('SegmentedBar', () => {
       },
     });
 
-    it(`segmentedBar component contains ${items.length} buttons.`, () => {
+    it(`when the button is active must be class "nvw-segmentedBar__button--active" `, () => {
+      expect(wrapper.find('.nvw-segmentedBar__button--active').exists()).to.equal(true);
+    });
+    it(`when the button is inactive must be class "nvw-segmentedBar__button" `, () => {
+      expect(wrapper.find('.nvw-segmentedBar__button').exists()).to.equal(true);
+    });
+  });
+
+  describe('SegmentedBar component contains button component', () => {
+    const wrapper = shallowMount(SegmentedBar, {
+      model: {
+        event: 'input',
+        prop: 'selectedIndex',
+      },
+      name: 'SegmentedBar',
+      props: {
+        items: {
+          type: Array,
+        },
+        selectedIndex: Number,
+      },
+      propsData: {
+        items,
+        selectedIndex,
+      },
+    });
+
+    it(`SegmentedBar component contains ${items.length} buttons.`, () => {
       expect(wrapper.findAll('button').length).to.equal(items.length);
     });
     it(`segmentedBar component click last button.`, () => {
@@ -72,7 +99,7 @@ describe('SegmentedBar', () => {
     });
   });
 
-  describe('segmentedBar component contains Slot component', () => {
+  describe('SegmentedBar component contains Slot component', () => {
     const tab1Title = 'Tab 1';
     const tab2Title = 'Tab 2';
     const tab1 = {
