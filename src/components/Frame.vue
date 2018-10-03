@@ -5,7 +5,10 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'Frame',
+  mixins: [Gestures],
 };
 </script>

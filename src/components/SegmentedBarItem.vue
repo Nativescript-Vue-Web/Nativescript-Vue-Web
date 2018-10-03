@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'SegmentedBarItem',
   props: {
@@ -12,5 +14,6 @@ export default {
     },
     webIcon: String,
   },
+  mixins: [Gestures],
 };
 </script>

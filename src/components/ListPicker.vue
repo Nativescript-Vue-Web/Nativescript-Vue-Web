@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'ListPicker',
   model: {
@@ -36,5 +38,6 @@ export default {
       this.$emit('input', index);
     },
   },
+  mixins: [Gestures],
 };
 </script>
