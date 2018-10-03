@@ -9,6 +9,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'Button',
@@ -22,6 +23,7 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 

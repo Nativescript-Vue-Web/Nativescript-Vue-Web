@@ -18,6 +18,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   model: {
@@ -67,5 +68,6 @@ export default {
       }
     },
   },
+  mixins: [Gestures],
 };
 </script>

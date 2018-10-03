@@ -5,11 +5,14 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'DockLayout',
   props: {
     stretchLastChild: Boolean,
   },
+  mixins: [Gestures],
 };
 </script>
 

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'ActionBar',
   data: function() {
@@ -41,6 +43,7 @@ export default {
       }
     }
   },
+  mixins: [Gestures],
 };
 </script>
 

@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'Slider',
   props: {
@@ -36,6 +38,7 @@ export default {
       this.$emit('input', parseInt(event.target.value));
     },
   },
+  mixins: [Gestures],
 };
 </script>
 
