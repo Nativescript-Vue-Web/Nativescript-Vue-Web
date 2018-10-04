@@ -28,7 +28,24 @@ export default {
   },
 
   mounted() {
+    if (this.$listeners.itemTap) {
+      this.$el.addEventListener('click', function(event) {
+        this.$emit('itemTap', event);
+      });
+    }
     this.hasTemplates = !!this.$templates;
+  },
+
+  beforeDestroy() {
+    if (this.$listeners.itemTap) {
+      this.$el.removeEventListener('click', this.$listeners.itemTap);
+    }
+  },
+
+  methods: {
+    onItemTap: function(event) {
+      this.$emit('itemTap', event);
+    },
   },
 
   render(h) {
