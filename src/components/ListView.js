@@ -28,10 +28,10 @@ export default {
   },
 
   mounted() {
-    if (this.$listeners.itemTap) {
-      this.$el.addEventListener('click', this.onItemTap);
-    }
     this.hasTemplates = !!this.$templates;
+    this.$nextTick(() => {
+      this.$el.addEventListener('click', this.onItemTap);
+    });
   },
 
   beforeDestroy() {
