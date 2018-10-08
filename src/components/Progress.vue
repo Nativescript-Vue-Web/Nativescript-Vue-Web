@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'Progress',
   props: {
@@ -30,6 +32,7 @@ export default {
       this.$emit('valueChange', newValue, oldValue);
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

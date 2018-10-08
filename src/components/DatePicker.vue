@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'DatePicker',
   model: {
@@ -30,6 +32,7 @@ export default {
       this.$emit('input', new Date(event.target.value).toISOString().split('T', 1)[0]);
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

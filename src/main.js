@@ -1,31 +1,34 @@
 // Components
-export { default as ActivityIndicator } from './components/ActivityIndicator.vue';
-export { default as Button } from './components/Button.vue';
-export { default as DatePicker } from './components/DatePicker.vue';
-export { default as Img } from './components/Img.vue';
-export { default as ImgNative } from './components/Img.native.vue';
-export { default as Label } from './components/Label.vue';
-export { default as ListPicker } from './components/ListPicker.vue';
-export { default as ListView } from './components/ListView.vue';
-export { default as Page } from './components/Page.vue';
-export { default as Progress } from './components/Progress.vue';
-export { default as ScrollView } from './components/ScrollView.vue';
-export { default as HtmlView } from './components/HtmlView.vue';
-export { default as WebView } from './components/WebView.vue';
-export { default as Frame } from './components/Frame.vue';
-export { default as SearchBar } from './components/SearchBar.vue';
-export { default as SegmentedBar } from './components/SegmentedBar.vue';
-export { default as SegmentedBarItem } from './components/SegmentedBarItem.vue';
-export { default as Slider } from './components/Slider.vue';
-export { default as Switcher } from './components/Switcher.vue';
-export { default as TextField } from './components/TextField.vue';
-export { default as TextView } from './components/TextView.vue';
-export { default as Span } from './components/Span.vue';
-export { default as FormattedString } from './components/FormattedString.vue';
-export { default as TimePicker } from './components/TimePicker.vue';
-export { default as ActionItem } from './components/ActionItem.vue';
-export { default as NavigationButton } from './components/NavigationButton.vue';
-export { default as ActionBar } from './components/ActionBar.vue';
+export { default as ActivityIndicator } from './components/ActivityIndicator';
+export { default as Button } from './components/Button';
+export { default as DatePicker } from './components/DatePicker';
+export { default as Img } from './components/Img';
+export { default as ImgNative } from './components/Img.native';
+export { default as Label } from './components/Label';
+export { default as ListPicker } from './components/ListPicker';
+export { default as ListView } from './components/ListView';
+export { default as VTemplate } from './components/VTemplate';
+export { default as Page } from './components/Page';
+export { default as Progress } from './components/Progress';
+export { default as ScrollView } from './components/ScrollView';
+export { default as HtmlView } from './components/HtmlView';
+export { default as WebView } from './components/WebView';
+export { default as Frame } from './components/Frame';
+export { default as SearchBar } from './components/SearchBar';
+export { default as SegmentedBar } from './components/SegmentedBar';
+export { default as SegmentedBarItem } from './components/SegmentedBarItem';
+export { default as Slider } from './components/Slider';
+export { default as Switcher } from './components/Switcher';
+export { default as TextField } from './components/TextField';
+export { default as TextView } from './components/TextView';
+export { default as Span } from './components/Span';
+export { default as FormattedString } from './components/FormattedString';
+export { default as TimePicker } from './components/TimePicker';
+export { default as ActionItem } from './components/ActionItem';
+export { default as NavigationButton } from './components/NavigationButton';
+export { default as ActionBar } from './components/ActionBar';
+export { default as TabView } from './components/TabView';
+export { default as TabViewItem } from './components/TabViewItem';
 
 // Dialogs
 export { default as ModalDialog } from './components/ModalDialog';
@@ -39,31 +42,9 @@ export { default as PromptDialog } from './components/dialogs/PromptDialog';
 export { default as Nvw } from './plugin';
 
 // Layouts
-export { default as AbsoluteLayout } from './layouts/AbsoluteLayout.vue';
-export { default as StackLayout } from './layouts/StackLayout.vue';
-export { default as DockLayout } from './layouts/DockLayout.vue';
-export { default as FlexboxLayout } from './layouts/FlexboxLayout.vue';
-export { default as GridLayout } from './layouts/GridLayout.vue';
-export { default as WrapLayout } from './layouts/WrapLayout.vue';
-
-/*
-export default {
-    components: {
-        ActivityIndicator,
-        Button,
-        Img,
-        ImgNative,
-        Label,
-        ListPicker,
-        ListView,
-        Page,
-        ScrollView,
-        Slider,
-        Switch,
-        TextField,
-    },
-    layouts: {
-        StackLayout,
-    },
-};
-*/
+export { default as AbsoluteLayout } from './layouts/AbsoluteLayout';
+export { default as StackLayout } from './layouts/StackLayout';
+export { default as DockLayout } from './layouts/DockLayout';
+export { default as FlexboxLayout } from './layouts/FlexboxLayout';
+export { default as GridLayout } from './layouts/GridLayout';
+export { default as WrapLayout } from './layouts/WrapLayout';

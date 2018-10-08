@@ -1,83 +1,118 @@
 <template>
-  <div class="nvw-segmentedBar" ref="segmentedbar">
-    <!-- List items as tab items if they were given -->
-    <div ref="listItems" v-if="items && items.length > 0">
-      <div class="nvw-segmentedBar__tabHeader" v-for="item in items" :key="item">
-        <button style="{tabButtonStyle(item)}" @click="chooseTab(item)">
-          <h5>
-            {{item}}
-          </h5>
+    <div class="nvw-segmentedBar">
+        <button class="nvw-segmentedBar__button"
+                v-for="(tab,index) in children"
+                :key="index"
+                :class="{'nvw-segmentedBar__button--active':currentIndex === index}"
+                role="tab"
+                :aria-controls="`tab-${index}`"
+                @click="updateSegmentedBarIndexes(index)"
+                @keyup.enter="updateSegmentedBarIndexes(index)"
+                @keyup.space="updateSegmentedBarIIndexes(index)">
+            <span class="nvw-segmentedBar__button__title">{{tab.title}}</span>
         </button>
-      </div>
-      <div class="nvw-segmentedBar__tabContent">
-        {{renderChosenContent()}}
-      </div>
     </div>
-    <!-- Placing Items Manually -->
-    <div ref="listManual" v-else>
-       <slot></slot>
-    </div>
-  </div>
 </template>
 
 <script>
+import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'SegmentedBar',
-  props: ['items', 'value'],
+  model: {
+    event: 'selectedIndexChanged',
+    prop: 'selectedIndex',
+  },
+  props: {
+    items: Array,
+    selectedIndex: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
-      chosenTab: '',
+      currentIndex: this.selectedIndex || 0,
+      childrenFromSlots: [],
     };
   },
   mounted() {
-    this.chosenTab = this.value ? this.value : this.items[0];
+    if (this.$slots && this.$slots.default && this.$slots.default.length) {
+      for (let tab of this.$slots.default) {
+        if (tab.componentOptions && tab.componentOptions.tag === 'SegmentedBarItem') {
+          this.childrenFromSlots.push({
+            title: tab.componentOptions.propsData.title,
+            webIcon: tab.componentOptions.propsData.webIcon,
+          });
+        } else {
+          console.warn('SegmentedBar component only accepts SegmentedBarItem as child'); // eslint-disable-line
+        }
+      }
+    }
   },
   computed: {
-    tabButtonStyle: function(item) {
-      return item === this.chosenTab ? 'border-bottom-width: 5px; border-bottom-color: crimson;' : 'border: none;';
+    children() {
+      if (this.items && this.items.length) {
+        return this.items;
+      }
+      return this.childrenFromSlots;
     },
   },
   methods: {
-    chooseTab: function(tab) {
-      this.chosenTab = tab;
-    },
-    renderChosenContent: function() {
-      return `This tab content belongs to the ${this.chosenTab}.`;
+    updateSegmentedBarIndexes(index) {
+      if (this.currentIndex !== index) {
+        if (index < 0) {
+          this.currentIndex = index < 0 ? this.children.length - 1 : index;
+        } else if (index >= this.children.length) {
+          this.currentIndex = 0;
+        } else {
+          this.currentIndex = index;
+        }
+        this.$emit('selectedIndexChanged', this.currentIndex);
+      }
     },
   },
+  directives: {
+    'common-directive': CommonDirective,
+  },
+  mixins: [Gestures],
 };
 </script>
 
 <style lang="scss">
 .nvw-segmentedBar {
-  align-self: center;
-  &__tabHeader {
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    flex-direction: row;
-    display: inline-block;
-    width: 200px;
-    & button {
-      border-left: none;
-      border-top: none;
-      border-right: none;
-      border-bottom-width: 5px;
-      border-bottom-color: crimson;
-      background: transparent;
-      cursor: pointer;
-      outline: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__button {
+    background: none;
+    border: solid 1px dodgerblue;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-self: center;
+    cursor: pointer;
+    color: dodgerblue;
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
     }
-    & button :hover {
-      border-bottom-color: crimson;
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
-    & h5 {
-      color: crimson;
+    &:hover {
+      background-color: aliceblue;
     }
-  }
-  &__tabContent {
-    justify-content: flex-start;
-    margin: 20px;
+    &--active {
+      background-color: dodgerblue;
+      color: #fff;
+    }
+    &__title {
+      padding: 10px 2px 10px 2px;
+    }
   }
 }
 </style>
