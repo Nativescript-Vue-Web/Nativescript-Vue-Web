@@ -10,6 +10,10 @@ describe('ListView & v-template components Unit Test.', () => {
   const items = ['özer', 'tümay', 'yiğit', 'muammer', 'gizem'];
   const itemTap = sinon.spy();
   const MockUpEvents = {
+    $templates: true,
+    $nextTick: function() {
+      this.$el.addEventListener('click', this.$listeners.itemTap);
+    },
     $listeners: {
       itemTap,
     },
