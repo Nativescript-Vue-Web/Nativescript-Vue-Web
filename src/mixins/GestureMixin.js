@@ -4,7 +4,7 @@ const Gestures = {
     if ($listeners.tap) {
       $el.addEventListener('click', event => {
         event.stopImmediatePropagation();
-        event.detail === 1 ? this.$emit('tap', event) : null;
+        this.$emit('tap', event);
       });
     }
     if ($listeners.longPress) {
