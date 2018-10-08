@@ -1,7 +1,6 @@
 <template>
     <button v-common-directive
     class="nvw-button"
-    @click="$emit('tap',$event)"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
      {{text}}
     </button>
