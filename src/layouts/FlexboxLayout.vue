@@ -35,8 +35,6 @@ export default {
 
 <style lang="scss">
 .nvw-flexbox-layout {
-  height: 500px;
-  background-color: crimson;
   display: flex;
 }
 </style>

@@ -25,7 +25,6 @@ export default {
 
 <style lang="scss">
 .nvw-wrap-layout {
-  background-color: crimson;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
