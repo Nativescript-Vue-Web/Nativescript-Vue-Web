@@ -55,14 +55,15 @@ describe('Image', () => {
       expect(wrapper.classes()).to.include('nvw-img--aspect-fit');
     });
   });
-  describe('', () => {
-    it(`class name for given stretch(${stretch}) property is equal to nvw-img--aspect-fit`, () => {
+  describe('stretch none default test', () => {
+    it(`class name for given stretch none, class is equal to default class`, () => {
       const wrapper = mount(Img, {
         propsData: {
           src,
         },
       });
       wrapper.setProps({ stretch: 'none' });
+      expect(wrapper.classes().length).to.equal(1);
     });
   });
 });
