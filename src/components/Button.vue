@@ -1,6 +1,6 @@
 <template>
     <button v-common-directive
-    class="nvw-button"
+    class="nvw-button" :type="type"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
      {{text}}
     </button>
@@ -17,6 +17,11 @@ export default {
     textWrap: {
       Type: Boolean,
       default: false,
+    },
+    type: {
+      Type: String,
+      default: 'button',
+      validator: val => ['button', 'reset', 'submit'].includes(val),
     },
   },
   directives: {

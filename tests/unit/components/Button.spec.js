@@ -5,6 +5,7 @@ import Button from '../../../src/components/Button.vue';
 
 describe('Button.vue', () => {
   const text = 'initial string';
+  const type = 'button';
   const textWrap = false;
   const tap = sinon.spy();
   const wrapper = mount(Button, {
@@ -12,9 +13,11 @@ describe('Button.vue', () => {
     props: {
       text: String,
       textWrap: Boolean,
+      type: String,
     },
     propsData: {
       text,
+      type,
       textWrap,
     },
     listeners: {
