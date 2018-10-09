@@ -85,4 +85,18 @@ describe('StackLayout', () => {
       expect(label.attributes().verticalalignment).to.equal('top');
     });
   });
+
+  describe('Changing Props', () => {
+    it(`Orientation prop change to undefined value`, () => {
+      const wrapper = mount(StackLayout, {
+        name: 'StackLayout',
+        propsData: {
+          orientation: 'cross',
+        },
+      });
+
+      expect(wrapper.classes()).to.not.include('nvw-stack-layout--vertical');
+      expect(wrapper.classes()).to.not.include('nvw-stack-layout--horizontal');
+    });
+  });
 });

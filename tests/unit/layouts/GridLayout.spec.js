@@ -6,8 +6,8 @@ describe('GridLayout', () => {
   // StackLayout Mock up values.
 
   // Props
-  const columns = '3';
-  const rows = '2';
+  const columns = '*, 3*, auto, 100';
+  const rows = '*, 2*, auto, 200';
 
   const FirstLabel = {
     render(h) {
