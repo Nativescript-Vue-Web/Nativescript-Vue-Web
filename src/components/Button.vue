@@ -1,7 +1,6 @@
 <template>
     <button v-common-directive
-    class="nvw-button"
-    @click="$emit('tap',$event)"
+    class="nvw-button" :type="type"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
      {{text}}
     </button>
@@ -9,6 +8,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'Button',
@@ -18,10 +18,16 @@ export default {
       Type: Boolean,
       default: false,
     },
+    type: {
+      Type: String,
+      default: 'button',
+      validator: val => ['button', 'reset', 'submit'].includes(val),
+    },
   },
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 

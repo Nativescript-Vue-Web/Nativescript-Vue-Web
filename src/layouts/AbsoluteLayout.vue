@@ -6,12 +6,14 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'AbsoluteLayout',
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 
@@ -23,6 +25,6 @@ export default {
 }
 
 .nvw-absolute-layout > * {
-  position: absolute;
+  position: absolute !important;
 }
 </style>

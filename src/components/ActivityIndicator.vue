@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'ActivityIndicator',
   props: {
@@ -18,6 +20,7 @@ export default {
       this.$emit('busyChange');
     },
   },
+  mixins: [Gestures],
 };
 </script>
 

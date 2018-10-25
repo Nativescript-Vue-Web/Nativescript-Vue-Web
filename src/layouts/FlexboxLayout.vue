@@ -15,6 +15,7 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'FlexboxLayout',
@@ -28,13 +29,12 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 
 <style lang="scss">
 .nvw-flexbox-layout {
-  height: 500px;
-  background-color: crimson;
   display: flex;
 }
 </style>

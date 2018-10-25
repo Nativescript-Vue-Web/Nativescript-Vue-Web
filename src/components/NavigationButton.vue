@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'NavigationButton',
   props: {
@@ -19,10 +21,11 @@ export default {
       this.$emit('tap', event);
     },
   },
+  mixins: [Gestures],
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-navigation-button {
   display: flex;
   order: -1;

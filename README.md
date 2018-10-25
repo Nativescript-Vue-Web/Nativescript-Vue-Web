@@ -15,18 +15,23 @@ Web components for Nativescript-Vue
 
 WIP
 
+### Remaining (In-Progress) Components & Directives
+- SegmentedBar
+- SegmentedBarItem
 
-## Project setup
+- NativeScript-Vue 3.x plugin supporting NativeScript-Vue-Web add-on
+
+##### Project setup
 ```
 npm install
 ```
 
-### Lints and fixes files
+##### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Run unit tests
+##### Run unit tests
 ```
 npm run test:unit
 ```

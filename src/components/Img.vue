@@ -1,10 +1,11 @@
 <template>
-    <img v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
+    <img @error="$emit('onLoadError', $event)" v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
 </template>
 
 <script>
 import { camelCaseToDash } from '../helpers/helpers';
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'Img',
@@ -30,6 +31,7 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 

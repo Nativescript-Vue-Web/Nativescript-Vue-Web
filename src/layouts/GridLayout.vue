@@ -6,18 +6,17 @@
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'GridLayout',
   props: {
     columns: {
       type: String,
-      required: true,
       default: '',
     },
     rows: {
       type: String,
-      required: true,
       default: '',
     },
   },
@@ -58,6 +57,7 @@ export default {
   directives: {
     'common-directive': CommonDirective,
   },
+  mixins: [Gestures],
 };
 </script>
 

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import Gestures from '../mixins/GestureMixin';
+
 export default {
   name: 'ActionItem',
   props: {
@@ -19,10 +21,11 @@ export default {
       this.$emit('tap', event);
     },
   },
+  mixins: [Gestures],
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .nvw-action-item {
   display: flex;
   order: 100;

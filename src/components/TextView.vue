@@ -1,4 +1,5 @@
 <template>
+ <div>  
   <textarea
     v-common-directive
     class="nvw-textView"
@@ -12,10 +13,14 @@
     @keyup.enter="returnPress"
     @input="updateValue"
   />
+   <slot />
+  </div>
+  
 </template>
 
 <script>
 import CommonDirective from '../directives/CommonDirective';
+import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'TextView',
@@ -44,5 +49,6 @@ export default {
       }
     },
   },
+  mixins: [Gestures],
 };
 </script>
