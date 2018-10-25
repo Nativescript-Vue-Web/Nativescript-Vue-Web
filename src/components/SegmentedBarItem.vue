@@ -7,12 +7,13 @@ import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'SegmentedBarItem',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    webIcon: String,
+  data() {
+    return {
+      title: {
+        type: String,
+        default: '',
+      },
+    };
   },
   mixins: [Gestures],
 };
