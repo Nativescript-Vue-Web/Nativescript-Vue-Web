@@ -28,37 +28,38 @@ import Gestures from '../mixins/GestureMixin';
 export default {
   name: 'DockLayout',
   props: {
-    stretchLastChild: Boolean,
+    stretchLastChild: {
+      type: Boolean,
+      default: true,
+    },
   },
   mixins: [Gestures],
   mounted() {
     for (let slot of this.$slots.default) {
-      if (slot.data && slot.data.attrs) {
-        let parent;
-        const dock = slot.data.attrs.dock ? slot.data.attrs.dock : '';
-        switch (dock) {
-          case 'left':
-          case 'top':
-          case 'right':
-          case 'bottom':
-            parent = this.$refs[dock];
-            break;
-          default:
-            parent = this.$refs.center;
-            break;
-        }
-        parent.appendChild(slot.elm);
+      let parent;
+      const dock = slot.data && slot.data.attrs && slot.data.attrs.dock ? slot.data.attrs.dock : '';
+      switch (dock) {
+        case 'left':
+        case 'top':
+        case 'right':
+        case 'bottom':
+          parent = this.$refs[dock];
+          break;
+        default:
+          parent = this.$refs.center;
+          break;
+      }
+      parent.appendChild(slot.elm);
 
-        let [last] = this.$slots.default.slice(-1);
-        if (slot === last && this.stretchLastChild) {
-          if (parent.previousSibling) {
-            parent.previousSibling.classList.add('nvw-dock-layout__nonFlexible');
-          } else if (parent.nextSibling) {
-            parent.nextSibling.classList.add('nvw-dock-layout__nonFlexible');
-          }
-          slot.elm.parentElement.classList.add('nvw-dock-layout__stretchLastChild');
-          slot.elm.classList.add('nvw-dock-layout__stretchLastChild');
+      let [last] = this.$slots.default.slice(-1);
+      if (slot === last && this.stretchLastChild) {
+        if (parent.previousSibling) {
+          parent.previousSibling.classList.add('nvw-dock-layout__nonFlexible');
+        } else if (parent.nextSibling) {
+          parent.nextSibling.classList.add('nvw-dock-layout__nonFlexible');
         }
+        slot.elm.parentElement.classList.add('nvw-dock-layout__stretchLastChild');
+        slot.elm.classList.add('nvw-dock-layout__stretchLastChild');
       }
     }
   },

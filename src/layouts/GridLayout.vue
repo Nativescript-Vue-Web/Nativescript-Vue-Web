@@ -13,12 +13,10 @@ export default {
   props: {
     columns: {
       type: String,
-      required: true,
       default: '',
     },
     rows: {
       type: String,
-      required: true,
       default: '',
     },
   },
