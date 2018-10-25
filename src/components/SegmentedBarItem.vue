@@ -1,5 +1,5 @@
 <template>
-    <Button :text="title" @tap="onButtonTap" />
+    <span :text="title"></span>
 </template>
 
 <script>
@@ -7,16 +7,13 @@ import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'SegmentedBarItem',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
-  methods: {
-    onButtonTap: function() {
-      this.$emit('tap', this.title);
-    },
+  data() {
+    return {
+      title: {
+        type: String,
+        default: '',
+      },
+    };
   },
   mixins: [Gestures],
 };
