@@ -4,12 +4,12 @@
   "version": "0.8.0",
   "scripts": {
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit --require tests/unit/setup.js",
-    "test:unit:watch": "vue-cli-service test:unit --watch",
-    "test:unit:inspect": "vue-cli-service test:unit --inspect-brk --watch",
+    "test": "vue-cli-service test:unit --require tests/unit/setup.js",
+    "test:watch": "vue-cli-service test:unit --watch",
+    "test:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
-    "coverage": "nyc npm run test:unit",
-    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test:unit"
+    "coverage": "nyc npm run test",
+    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test"
   },
   "main": "src/main.js",
   "dependencies": {
@@ -80,7 +80,7 @@
     "not ie <= 8"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged && npm run test:unit"
+    "pre-commit": "lint-staged && npm run test"
   },
   "lint-staged": {
     "*.js": [
