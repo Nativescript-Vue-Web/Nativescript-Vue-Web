@@ -1,37 +1,37 @@
 {
   "name": "nativescript-vue-web",
   "description": "Web components for NativeScript-Vue",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "scripts": {
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit --require tests/unit/setup.js",
-    "test:unit:watch": "vue-cli-service test:unit --watch",
-    "test:unit:inspect": "vue-cli-service test:unit --inspect-brk --watch",
+    "test": "vue-cli-service test:unit --require tests/unit/setup.js",
+    "test:watch": "vue-cli-service test:unit --watch",
+    "test:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
-    "coverage": "nyc npm run test:unit",
-    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test:unit"
+    "coverage": "nyc npm run test",
+    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test"
   },
   "main": "src/main.js",
   "dependencies": {
     "vue": "2.5.17"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.0.3",
-    "@vue/cli-plugin-eslint": "3.0.3",
-    "@vue/cli-plugin-unit-mocha": "3.0.3",
-    "@vue/cli-service": "3.0.3",
-    "@vue/eslint-config-airbnb": "3.0.3",
-    "@vue/eslint-config-prettier": "3.0.3",
+    "@vue/cli-plugin-babel": "3.0.5",
+    "@vue/cli-plugin-eslint": "3.0.5",
+    "@vue/cli-plugin-unit-mocha": "3.0.5",
+    "@vue/cli-service": "3.0.5",
+    "@vue/eslint-config-airbnb": "3.0.5",
+    "@vue/eslint-config-prettier": "3.0.5",
     "@vue/test-utils": "1.0.0-beta.25",
-    "babel-plugin-istanbul": "5.0.1",
-    "chai": "4.1.2",
+    "babel-plugin-istanbul": "5.1.0",
+    "chai": "4.2.0",
     "codecov": "3.1.0",
-    "jsdom": "12.0.0",
+    "jsdom": "12.2.0",
     "lint-staged": "7.3.0",
-    "node-sass": "4.9.3",
-    "nyc": "13.0.1",
+    "node-sass": "4.9.4",
+    "nyc": "13.1.0",
     "sass-loader": "7.1.0",
-    "sinon": "6.3.4",
+    "sinon": "7.0.0",
     "vue-template-compiler": "2.5.17"
   },
   "eslintConfig": {
@@ -80,7 +80,7 @@
     "not ie <= 8"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged && npm run test:unit"
+    "pre-commit": "lint-staged && npm run test"
   },
   "lint-staged": {
     "*.js": [
