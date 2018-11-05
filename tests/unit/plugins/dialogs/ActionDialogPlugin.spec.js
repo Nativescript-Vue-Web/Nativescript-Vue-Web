@@ -11,14 +11,19 @@ describe('Action Dialog Plugin Testing', () => {
   const options = ['First Option', 'Second Option'];
   const { action } = window;
   const tap = () => action(title, cancelButtonText, options);
+  const tapWithDefaultButtonText = () => action({ title, options });
   const component = {
     methods: {
       tap,
+      tapWithDefaultButtonText,
     },
     template: `
           <div>
-            <button @click="tap">
-              Click to show toast
+            <button class="first_button" @click="tap">
+              Click to show ActionDialog
+            </button>
+            <button class="second_button" @click="tapWithDefaultButtonText">
+              Click to show ActionDialog
             </button>
           </div>
         `,
@@ -31,15 +36,33 @@ describe('Action Dialog Plugin Testing', () => {
 
   describe('ActionDialog is visible in the document.', () => {
     it(`The ActionDialog is shown on the document.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-action-dialog')).to.not.be.null;
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
+        expect(document.querySelector('.nvw-action-dialog__footer__cancel-button').textContent.trim()).to.equal(cancelButtonText);
+        expect(document.querySelector('.nvw-action-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        done();
+      }, 500);
+    });
+  });
+  describe('ActionDialog with DEFAULT PARAMS is visible in the document.', () => {
+    it(`The ActionDialog is shown on the document.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-action-dialog')).to.not.be.null;
+        done();
+      }, 500);
+    });
+    it(`The title inside the header slot of the element equals to ${title}.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-action-dialog__footer__cancel-button').textContent.trim()).to.equal('Cancel');
         expect(document.querySelector('.nvw-action-dialog__header').firstChild.textContent.trim()).to.equal(title);
         done();
       }, 500);

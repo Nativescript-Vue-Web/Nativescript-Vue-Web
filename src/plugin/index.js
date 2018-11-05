@@ -36,9 +36,15 @@ const NvwPlugin = {
     // Register action dialog to the window.
     window.action = async function(title, cancelButtonText, options) {
       return new Promise(resolve => {
-        actionDialog.title = title;
-        actionDialog.cancelButtonText = cancelButtonText;
-        actionDialog.options = options;
+        if (typeof title === 'object') {
+          actionDialog.title = title.title;
+          actionDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
+          actionDialog.options = title.options;
+        } else {
+          actionDialog.title = title;
+          actionDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          actionDialog.options = options;
+        }
         actionDialog.isModalVisible = true;
         actionDialog.$once('submit', value => {
           actionDialog.isModalVisible = false;
@@ -56,9 +62,15 @@ const NvwPlugin = {
     // Register alert dialog to the window.
     window.alert = function(title, message, okButtonText) {
       return new Promise(resolve => {
-        alertDialog.title = title;
-        alertDialog.message = message;
-        alertDialog.okButtonText = okButtonText;
+        if (typeof title === 'object') {
+          alertDialog.title = title.title;
+          alertDialog.message = title.message;
+          alertDialog.okButtonText = title.okButtonText || 'OK';
+        } else {
+          alertDialog.title = title;
+          alertDialog.message = message;
+          alertDialog.okButtonText = okButtonText || 'OK';
+        }
         alertDialog.isModalVisible = true;
         alertDialog.$once('submit', $event => {
           alertDialog.isModalVisible = false;
@@ -74,14 +86,23 @@ const NvwPlugin = {
     document.body.appendChild(loginDialogDom);
 
     // Register login dialog to the window.
-    window.login = async function({ title, message, okButtonText, cancelButtonText, userName, password }) {
+    window.login = async function(title, message, okButtonText, cancelButtonText, userName, password) {
       return new Promise(resolve => {
-        loginDialog.title = title;
-        loginDialog.message = message;
-        loginDialog.okButtonText = okButtonText;
-        loginDialog.cancelButtonText = cancelButtonText;
-        loginDialog.userName = userName;
-        loginDialog.password = password;
+        if (typeof title === 'object') {
+          loginDialog.title = title.title;
+          loginDialog.message = title.message;
+          loginDialog.okButtonText = title.okButtonText || 'OK';
+          loginDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
+          loginDialog.userName = title.userName;
+          loginDialog.password = title.password;
+        } else {
+          loginDialog.title = title;
+          loginDialog.message = message;
+          loginDialog.okButtonText = okButtonText || 'OK';
+          loginDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          loginDialog.userName = userName;
+          loginDialog.password = password;
+        }
         loginDialog.isModalVisible = true;
         loginDialog.$once('submit', value => {
           loginDialog.isModalVisible = false;
@@ -99,10 +120,17 @@ const NvwPlugin = {
     // Register confirm dialog to the window.
     window.confirm = async function(title, message, okButtonText, cancelButtonText) {
       return new Promise(resolve => {
-        confirmDialog.title = title;
-        confirmDialog.message = message;
-        confirmDialog.okButtonText = okButtonText;
-        confirmDialog.cancelButtonText = cancelButtonText;
+        if (typeof title === 'object') {
+          confirmDialog.title = title.title;
+          confirmDialog.message = title.message;
+          confirmDialog.okButtonText = title.okButtonText || 'OK';
+          confirmDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
+        } else {
+          confirmDialog.title = title;
+          confirmDialog.message = message;
+          confirmDialog.okButtonText = okButtonText || 'OK';
+          confirmDialog.cancelButtonText = cancelButtonText || 'Cancel';
+        }
         confirmDialog.isModalVisible = true;
         confirmDialog.$once('submit', val => {
           confirmDialog.isModalVisible = false;
@@ -120,13 +148,23 @@ const NvwPlugin = {
     // Register prompt dialog to the window.
     window.prompt = async function(title, message, okButtonText, cancelButtonText, defaultText, inputType, value) {
       return new Promise(resolve => {
-        promptDialog.title = title;
-        promptDialog.message = message;
-        promptDialog.okButtonText = okButtonText;
-        promptDialog.cancelButtonText = cancelButtonText;
-        promptDialog.defaultText = defaultText;
-        promptDialog.inputType = inputType;
-        promptDialog.value = value;
+        if (typeof title === 'object') {
+          promptDialog.title = title.title;
+          promptDialog.message = title.message;
+          promptDialog.okButtonText = title.okButtonText || 'OK';
+          promptDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
+          promptDialog.defaultText = title.defaultText;
+          promptDialog.inputType = title.inputType;
+          promptDialog.value = title.value;
+        } else {
+          promptDialog.title = title;
+          promptDialog.message = message;
+          promptDialog.okButtonText = okButtonText || 'OK';
+          promptDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          promptDialog.defaultText = defaultText;
+          promptDialog.inputType = inputType;
+          promptDialog.value = value;
+        }
         promptDialog.isModalVisible = true;
         promptDialog.$once('submit', val => {
           promptDialog.isModalVisible = false;
