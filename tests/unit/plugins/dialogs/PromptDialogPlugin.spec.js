@@ -8,20 +8,25 @@ describe('Prompt Dialog Plugin Testing', () => {
 
   const title = 'some title';
   const message = 'some message';
-  const cancelButtonText = 'Cancel';
+  const cancelButtonText = 'cancel';
   const okButtonText = 'Submit';
   const defaultText = 'some text*';
   const inputType = 'text';
   const value = 'some value';
   const { prompt } = window;
   const tap = () => prompt(title, message, okButtonText, cancelButtonText, defaultText, inputType, value).then(msg => msg);
+  const tapWithDefaultButtonText = () => prompt({ title, message, defaultText, inputType, value }).then(msg => msg);
   const component = {
     methods: {
       tap,
+      tapWithDefaultButtonText,
     },
     template: `
           <div>
-            <button @click="tap">
+            <button class="first_button" @click="tap">
+              Click to show toast
+            </button>
+            <button class="second_button" @click="tapWithDefaultButtonText">
               Click to show toast
             </button>
           </div>
@@ -35,23 +40,50 @@ describe('Prompt Dialog Plugin Testing', () => {
 
   describe('Prompt Dialog Component is visible in the document.', () => {
     it(`The Prompt Dialog is shown on the document.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog')).to.not.be.null;
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog__header').firstChild.textContent.trim()).to.equal(title);
         done();
       }, 500);
     });
     it(`The message inside the body slot of the element equals to ${message}.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog__body').textContent.trim()).to.equal(message);
+        expect(document.querySelector('.nvw-prompt-dialog__footer__cancel-button').textContent.trim()).to.equal(cancelButtonText);
+        expect(document.querySelector('.nvw-prompt-dialog__footer__ok-button').textContent.trim()).to.equal(okButtonText);
+        done();
+      }, 500);
+    });
+  });
+  describe('Prompt Dialog Component with DEFAULT PARAMS is visible in the document.', () => {
+    it(`The Prompt Dialog is shown on the document.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-prompt-dialog')).to.not.be.null;
+        done();
+      }, 500);
+    });
+    it(`The title inside the header slot of the element equals to ${title}.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-prompt-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        done();
+      }, 500);
+    });
+    it(`The message inside the body slot of the element equals to ${message}.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-prompt-dialog__body').textContent.trim()).to.equal(message);
+        expect(document.querySelector('.nvw-prompt-dialog__footer__cancel-button').textContent.trim()).to.equal('Cancel');
+        expect(document.querySelector('.nvw-prompt-dialog__footer__ok-button').textContent.trim()).to.equal('OK');
         done();
       }, 500);
     });
