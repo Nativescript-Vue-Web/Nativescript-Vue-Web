@@ -38,11 +38,11 @@ const NvwPlugin = {
       return new Promise(resolve => {
         if (typeof title === 'object') {
           actionDialog.title = title.title;
-          actionDialog.cancelButtonText = title.cancelButtonText;
+          actionDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
           actionDialog.options = title.options;
         } else {
           actionDialog.title = title;
-          actionDialog.cancelButtonText = cancelButtonText;
+          actionDialog.cancelButtonText = cancelButtonText || 'Cancel';
           actionDialog.options = options;
         }
         actionDialog.isModalVisible = true;
@@ -65,11 +65,11 @@ const NvwPlugin = {
         if (typeof title === 'object') {
           alertDialog.title = title.title;
           alertDialog.message = title.message;
-          alertDialog.okButtonText = title.okButtonText;
+          alertDialog.okButtonText = title.okButtonText || 'OK';
         } else {
           alertDialog.title = title;
           alertDialog.message = message;
-          alertDialog.okButtonText = okButtonText;
+          alertDialog.okButtonText = okButtonText || 'OK';
         }
         alertDialog.isModalVisible = true;
         alertDialog.$once('submit', $event => {
@@ -91,15 +91,15 @@ const NvwPlugin = {
         if (typeof title === 'object') {
           loginDialog.title = title.title;
           loginDialog.message = title.message;
-          loginDialog.okButtonText = title.okButtonText;
-          loginDialog.cancelButtonText = title.cancelButtonText;
+          loginDialog.okButtonText = title.okButtonText || 'OK';
+          loginDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
           loginDialog.userName = title.userName;
           loginDialog.password = title.password;
         } else {
           loginDialog.title = title;
           loginDialog.message = message;
-          loginDialog.okButtonText = okButtonText;
-          loginDialog.cancelButtonText = cancelButtonText;
+          loginDialog.okButtonText = okButtonText || 'OK';
+          loginDialog.cancelButtonText = cancelButtonText || 'Cancel';
           loginDialog.userName = userName;
           loginDialog.password = password;
         }
@@ -123,13 +123,13 @@ const NvwPlugin = {
         if (typeof title === 'object') {
           confirmDialog.title = title.title;
           confirmDialog.message = title.message;
-          confirmDialog.okButtonText = title.okButtonText;
-          confirmDialog.cancelButtonText = title.cancelButtonText;
+          confirmDialog.okButtonText = title.okButtonText || 'OK';
+          confirmDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
         } else {
           confirmDialog.title = title;
           confirmDialog.message = message;
-          confirmDialog.okButtonText = okButtonText;
-          confirmDialog.cancelButtonText = cancelButtonText;
+          confirmDialog.okButtonText = okButtonText || 'OK';
+          confirmDialog.cancelButtonText = cancelButtonText || 'Cancel';
         }
         confirmDialog.isModalVisible = true;
         confirmDialog.$once('submit', val => {
@@ -151,16 +151,16 @@ const NvwPlugin = {
         if (typeof title === 'object') {
           promptDialog.title = title.title;
           promptDialog.message = title.message;
-          promptDialog.okButtonText = title.okButtonText;
-          promptDialog.cancelButtonText = title.cancelButtonText;
+          promptDialog.okButtonText = title.okButtonText || 'OK';
+          promptDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
           promptDialog.defaultText = title.defaultText;
           promptDialog.inputType = title.inputType;
           promptDialog.value = title.value;
         } else {
           promptDialog.title = title;
           promptDialog.message = message;
-          promptDialog.okButtonText = okButtonText;
-          promptDialog.cancelButtonText = cancelButtonText;
+          promptDialog.okButtonText = okButtonText || 'OK';
+          promptDialog.cancelButtonText = cancelButtonText || 'Cancel';
           promptDialog.defaultText = defaultText;
           promptDialog.inputType = inputType;
           promptDialog.value = value;
