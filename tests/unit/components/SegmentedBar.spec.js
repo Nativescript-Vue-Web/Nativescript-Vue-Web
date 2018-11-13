@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount, mount } from '@vue/test-utils';
 import { SegmentedBar, SegmentedBarItem } from '../../../src/main.js';
@@ -193,9 +192,14 @@ describe('SegmentedBar', () => {
 
 describe('SegmentedBarItem', () => {
   it(`should update when title is changed.`, () => {
-    const Constructor = Vue.extend(SegmentedBarItem);
-    const comp = new Constructor().$mount();
-    comp.title = 'newTitle';
-    expect(comp._data.title).to.equal('newTitle');
+    const wrapper = mount(SegmentedBarItem, {
+      name: 'SegmentedBarItem',
+      propsData: {
+        title: 'Nativescript-Vue-Web',
+      },
+    });
+
+    wrapper.setProps({ title: 'newTitle' });
+    expect(wrapper.props().title).to.equal('newTitle');
   });
 });
