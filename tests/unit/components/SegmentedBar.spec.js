@@ -187,6 +187,28 @@ describe('SegmentedBar', () => {
       });
       expect(Object.keys(wrapper2.vm.$slots).length).to.equal(0);
     });
+
+    it('Change item to out of list', done => {
+      const Wrapper = {
+        name: 'Wrapper',
+        template: '<SegmentedBar ref="myBar"><SegmentedBarItem title="Item 1" /></SegmentedBar>',
+        components: {
+          SegmentedBar,
+          SegmentedBarItem,
+        },
+      };
+
+      const mountedWrapper = mount(Wrapper);
+
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(10);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(0);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(-5);
+
+      mountedWrapper.vm.$nextTick(() => {
+        expect(mountedWrapper.findAll('button').length).to.equal(1);
+        done();
+      });
+    });
   });
 });
 
