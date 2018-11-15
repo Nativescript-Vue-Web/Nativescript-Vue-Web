@@ -92,3 +92,48 @@ describe('TabView+TabViewItem', () => {
     expect(wrapper.emitted().selectedIndexChanged[0][0]).to.equal(1);
   });
 });
+
+describe('Tab view item change case', () => {
+  it('Change item to out of list', done => {
+    const Wrapper = {
+      name: 'Wrapper',
+      template: '<TabView ref="tabview"><TabViewItem title="Tab 1" /></TabView>',
+      components: {
+        TabView,
+        TabViewItem,
+      },
+    };
+
+    const mountedWrapper = mount(Wrapper);
+
+    mountedWrapper.vm.$refs['tabview'].chooseTab(10);
+    mountedWrapper.vm.$refs['tabview'].chooseTab(0);
+    mountedWrapper.vm.$refs['tabview'].chooseTab(-5);
+
+    mountedWrapper.vm.$nextTick(() => {
+      expect(mountedWrapper.findAll('button').length).to.equal(1);
+      done();
+    });
+  });
+
+  it('Change item', done => {
+    const Wrapper = {
+      name: 'Wrapper',
+      template: '<TabView ref="tabview"><TabViewItem title="Tab 1" /><TabViewItem title="Tab 2" /></TabView>',
+      components: {
+        TabView,
+        TabViewItem,
+      },
+    };
+
+    const mountedWrapper = mount(Wrapper);
+
+    mountedWrapper.vm.$refs['tabview'].chooseTab(1);
+    mountedWrapper.vm.$refs['tabview'].chooseTab(0);
+
+    mountedWrapper.vm.$nextTick(() => {
+      expect(mountedWrapper.findAll('button').length).to.equal(2);
+      done();
+    });
+  });
+});

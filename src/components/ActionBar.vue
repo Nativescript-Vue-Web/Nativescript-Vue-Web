@@ -22,7 +22,7 @@ export default {
     showTitle: function() {
       if (this.$slots.default) {
         for (let slot of this.$slots.default) {
-          if (!['ActionItem', 'NavigationButton'].includes(slot.componentOptions.tag)) return false;
+          if (slot.componentOptions && slot.componentOptions.tag && !['ActionItem', 'NavigationButton'].includes(slot.componentOptions.tag)) return false;
         }
       }
       return true;
@@ -33,7 +33,7 @@ export default {
     if (this.$slots.default) {
       for (let i = this.$slots.default.length - 1; i >= 0; i--) {
         let slot = this.$slots.default[i];
-        if (slot.componentOptions.tag === 'NavigationButton') {
+        if (slot.componentOptions && slot.componentOptions.tag && slot.componentOptions.tag === 'NavigationButton') {
           if (!this.navigationButtonCreated) {
             this.navigationButtonCreated = true;
           } else {
