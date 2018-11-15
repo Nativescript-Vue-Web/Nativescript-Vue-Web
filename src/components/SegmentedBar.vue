@@ -63,7 +63,7 @@ export default {
     updateSegmentedBarIndexes(index) {
       if (this.currentIndex !== index) {
         if (index < 0) {
-          this.currentIndex = index < 0 ? this.children.length - 1 : index;
+          this.currentIndex = this.children.length - 1;
         } else if (index >= this.children.length) {
           this.currentIndex = 0;
         } else {

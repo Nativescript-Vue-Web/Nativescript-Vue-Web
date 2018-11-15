@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { expect } from 'chai';
 import { shallowMount, mount } from '@vue/test-utils';
 import { SegmentedBar, SegmentedBarItem } from '../../../src/main.js';
@@ -188,14 +187,41 @@ describe('SegmentedBar', () => {
       });
       expect(Object.keys(wrapper2.vm.$slots).length).to.equal(0);
     });
+
+    it('Change item to out of list', done => {
+      const Wrapper = {
+        name: 'Wrapper',
+        template: '<SegmentedBar ref="myBar"><SegmentedBarItem title="Item 1" /></SegmentedBar>',
+        components: {
+          SegmentedBar,
+          SegmentedBarItem,
+        },
+      };
+
+      const mountedWrapper = mount(Wrapper);
+
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(10);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(0);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(-5);
+
+      mountedWrapper.vm.$nextTick(() => {
+        expect(mountedWrapper.findAll('button').length).to.equal(1);
+        done();
+      });
+    });
   });
 });
 
 describe('SegmentedBarItem', () => {
   it(`should update when title is changed.`, () => {
-    const Constructor = Vue.extend(SegmentedBarItem);
-    const comp = new Constructor().$mount();
-    comp.title = 'newTitle';
-    expect(comp._data.title).to.equal('newTitle');
+    const wrapper = mount(SegmentedBarItem, {
+      name: 'SegmentedBarItem',
+      propsData: {
+        title: 'Nativescript-Vue-Web',
+      },
+    });
+
+    wrapper.setProps({ title: 'newTitle' });
+    expect(wrapper.props().title).to.equal('newTitle');
   });
 });
