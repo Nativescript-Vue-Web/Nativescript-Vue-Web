@@ -49,7 +49,7 @@ export default {
             id: tab.componentInstance.computedId,
           });
         } else {
-          console.warn(`TabView component only accepts TabViewItem as child not [${tab.componentOptions.tag}]`); // eslint-disable-line
+          console.warn(`TabView component only accepts TabViewItem as child`); // eslint-disable-line
         }
       }
       this.updateChild();
@@ -77,7 +77,7 @@ export default {
       if (this.currentTabIndex !== index) {
         this.lastTabIndex = this.currentTabIndex;
         if (index < 0) {
-          this.currentTabIndex = index < 0 ? this.children.length - 1 : index;
+          this.currentTabIndex = this.children.length - 1;
         } else if (index >= this.children.length) {
           this.currentTabIndex = 0;
         } else {

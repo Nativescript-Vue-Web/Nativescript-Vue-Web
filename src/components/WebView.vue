@@ -1,7 +1,7 @@
 <template>
   <iframe v-if="isURL"
         class="nvw-webview"
-        :src="src"
+        :src="srcValue"
         @load="$emit('loadFinished', $event)"
     />
     <div v-else v-html="src"></div>
