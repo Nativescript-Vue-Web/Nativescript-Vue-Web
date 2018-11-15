@@ -80,7 +80,8 @@
     "not ie <= 8"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged && npm run test"
+    "pre-commit": "lint-staged && npm run test",
+    "pre-push": "npm run coverage"
   },
   "lint-staged": {
     "*.js": [
@@ -113,6 +114,11 @@
   },
   "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
   "nyc": {
+    "check-coverage": true,
+    "lines": 77,
+    "statements": 77,
+    "functions": 77,
+    "branches": 70,
     "include": [
       "src/**/*.js",
       "src/**/*.vue"
@@ -122,7 +128,8 @@
     "all": true,
     "reporter": [
       "text",
-      "lcov"
+      "lcov",
+      "html"
     ]
   }
 }
