@@ -81,14 +81,44 @@ describe('ActionItem', () => {
     expect(Object.keys(ActionBarWrapper2.vm.$slots).length).to.equal(0);
   });
 
-  //TODO component tag is undefined.
-  // https://github.com/vuejs/vue-test-utils/issues/784
-  xit(`find the navigationbutton and actionitem components in wrapper.`, done => {
-    expect(ActionBarWrapper.findAll(NavigationButton).length).to.equal(2);
-    expect(ActionBarWrapper.findAll(ActionItem).length).to.equal(1);
-    setTimeout(() => {
-      //ActionBarWrapper.vm.$slots;
+  it('find the navigationbutton components in wrapper.', done => {
+    const Wrapper = {
+      name: 'Wrapper',
+      template: '<ActionBar><NavigationButton text="Bar Item 1" /><NavigationButton text="Bar Item 2" /></ActionBar>',
+      components: {
+        ActionBar,
+        NavigationButton,
+      },
+    };
+
+    const mountedWrapper = mount(Wrapper);
+
+    mountedWrapper.vm.$nextTick(() => {
+      const style1 = window.getComputedStyle(mountedWrapper.findAll('.nvw-navigation-button').at(0).element);
+      const style2 = window.getComputedStyle(mountedWrapper.findAll('.nvw-navigation-button').at(1).element);
+
+      expect(style1._values.display).to.equal('none');
+      expect(style2._values.display).to.not.equal('none');
+      expect(mountedWrapper.findAll('.nvw-navigation-button').length).to.equal(2);
       done();
-    }, 500);
+    });
+  });
+
+  it('find the actionitem components in wrapper.', done => {
+    const Wrapper = {
+      name: 'Wrapper',
+      template: '<ActionBar><ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar>',
+      components: {
+        ActionBar,
+        ActionItem,
+      },
+    };
+
+    const mountedWrapper = mount(Wrapper);
+
+    mountedWrapper.vm.$nextTick(() => {
+      expect(mountedWrapper.findAll('.nvw-action-item').length).to.equal(2);
+      done();
+    });
   });
 });
