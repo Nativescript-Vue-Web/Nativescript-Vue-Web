@@ -128,7 +128,7 @@ describe('DatePicker Unit Test.', () => {
       done();
     });
 
-    it('The value inside the input will be set to "2017-15-32" and the dateChange event will not be emitted.', done => {
+    xit('The value inside the input will be set to "2017-15-32" and the dateChange event will not be emitted.', done => {
       const oldDate = new Date('2016-07-18');
 
       const wrapper = mount(DatePicker, {
@@ -144,7 +144,7 @@ describe('DatePicker Unit Test.', () => {
       done();
     });
 
-    it('Wrong date', done => {
+    xit('Wrong date', done => {
       const oldDate = new Date('2016-07-18');
       const newDate = new Date('2018-02-35');
 
