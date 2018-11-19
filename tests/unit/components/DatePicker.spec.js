@@ -91,7 +91,7 @@ describe('DatePicker Unit Test.', () => {
     });
   });
 
-  xdescribe('the input inside the component has attributes with correct values.', () => {
+  describe('the input inside the component has attributes with correct values.', () => {
     it(`the maxDate attribute is equal to${maxDate}.`, done => {
       const maxDateAttr = wrapper.find('input').attributes().max;
       expect(new Date(maxDateAttr).toLocaleDateString()).to.equal(maxDate.toLocaleDateString());
