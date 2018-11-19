@@ -104,7 +104,7 @@ describe('DatePicker Unit Test.', () => {
     });
   });
 
-  xdescribe('Changing the prop and then check the value inside the input element.', () => {
+  describe('Changing the prop and then check the value inside the input element.', () => {
     it('Changing the maxDate property.', done => {
       wrapper.setProps({ maxDate: new Date('2018-08-22') });
       const maxDateProp = wrapper.props().maxDate.toLocaleDateString();
