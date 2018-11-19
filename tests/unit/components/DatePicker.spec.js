@@ -120,6 +120,16 @@ describe('DatePicker Unit Test.', () => {
   });
   describe('Change the value inside input element and check the emitted events.', () => {
     it('The value inside the input will be set to "2017-08-22" and the dateChange event will be emitted.', done => {
+      const date1 = new Date('2017-08-22');
+      const dateStr = date1.toISOString();
+      expect(dateStr).to.be.a.string(dateStr);
+      const dateArr = dateStr.split('T', 1);
+      expect(dateArr).to.be.an('array');
+      wrapper.find('input').setValue(dateArr[0]);
+      expect(updateValueSpy.called).to.equal(true);
+      expect(wrapper.emitted().input.length).to.equal(1);
+      const newDate = new Date(wrapper.emitted().input[0][0]).toISOString().split('T', 1)[0];
+      expect(newDate).to.equal(new Date('2017-08-22').toISOString().split('T', 1)[0]);
       done();
     });
 
