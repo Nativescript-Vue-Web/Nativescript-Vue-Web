@@ -124,8 +124,6 @@ describe('DatePicker Unit Test.', () => {
       expect(updateValueSpy.called).to.equal(true);
       expect(wrapper.emitted().input.length).to.equal(1);
 
-      console.log(wrapper.emitted().input[0][0])
-
       const newDate = new Date(wrapper.emitted().input[0][0]).toISOString().split('T', 1)[0];
       expect(newDate).to.equal(new Date('2017-08-22').toISOString().split('T', 1)[0]);
       done();
