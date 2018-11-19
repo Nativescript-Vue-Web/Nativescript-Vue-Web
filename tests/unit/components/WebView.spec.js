@@ -59,6 +59,9 @@ describe('WebView.vue', () => {
     it(`changing src prop.`, () => {
       wrapper.setProps({ src: '<div><h1>gizem</h1></div>' });
       wrapper.vm.src = '<div><h1>gizem</h1></div>';
+      expect(wrapper.find('div').element.innerHTML).to.equal('<div><h1>gizem</h1></div>');
+      expect(wrapper.find('div').exists()).to.equal(true);
+      expect(wrapper.find('iframe').exists()).to.equal(false);
       expect(wrapper.props().src).to.equal('<div><h1>gizem</h1></div>');
     });
   });
