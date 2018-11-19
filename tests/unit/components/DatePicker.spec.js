@@ -118,7 +118,7 @@ describe('DatePicker Unit Test.', () => {
       done();
     });
   });
-  xdescribe('Change the value inside input element and check the emitted events.', () => {
+  describe('Change the value inside input element and check the emitted events.', () => {
     it('The value inside the input will be set to "2017-08-22" and the dateChange event will be emitted.', done => {
       wrapper.find('input').setValue(new Date('2017-08-22').toISOString().split('T', 1)[0]);
       expect(updateValueSpy.called).to.equal(true);
