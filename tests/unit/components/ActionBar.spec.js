@@ -107,7 +107,8 @@ describe('ActionItem', () => {
   it('find the actionitem components in wrapper.', done => {
     const Wrapper = {
       name: 'Wrapper',
-      template: '<ActionBar><ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar>',
+      template:
+        '<StackLayout><ActionBar title="title"><StackLayout></StackLayout></ActionBar><ActionBar><ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar></StackLayout>', //eslint-disable-line
       components: {
         ActionBar,
         ActionItem,
