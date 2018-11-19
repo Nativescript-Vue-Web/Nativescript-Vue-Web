@@ -25,7 +25,7 @@ describe('DatePicker Unit Test.', () => {
     },
   });
 
-  xdescribe('the component receives given props correctly.', () => {
+  describe('the component receives given props correctly.', () => {
     it(`initial value taken from v-model is equal to: ${date}.`, done => {
       expect(wrapper.props().date).to.equal(date);
       done();
