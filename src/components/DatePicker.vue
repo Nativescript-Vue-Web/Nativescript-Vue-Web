@@ -2,8 +2,8 @@
     <input
         class="nvw-datepicker"
         type="date"
-        :max="maxDate"
-        :min="minDate"
+        :max="maxDateValue"
+        :min="minDateValue"
         :value="dateValue"
         @change="$emit('dateChange', $event)"
         @input="updateValue($event)"
@@ -16,28 +16,42 @@ import Gestures from '../mixins/GestureMixin';
 export default {
   name: 'DatePicker',
   props: {
-    date: [Date, String],
+    date: Date,
     minDate: Date,
     maxDate: Date,
     day: Number,
     month: Number,
     year: Number,
+    value: [Date, String],
+  },
+  data() {
+    return {
+      dayValue: Number,
+      monthValue: Number,
+      yearValue: Number,
+    };
   },
   computed: {
+    minDateValue: function() {
+      return this.minDate ? this.dateToString(this.minDate) : '';
+    },
+    maxDateValue: function() {
+      return this.maxDate ? this.dateToString(this.maxDate) : '';
+    },
     dateValue: function() {
       if (this.date) {
-        const day = this.dateToString(this.date.getUTCDate());
-        const month = this.dateToString(this.date.getUTCMonth() + 1);
-        const year = this.date.getUTCFullYear();
-
-        //this.$emit('input', new Date(day, month, year));
-        return `${year}-${month}-${day}`;
+        const date = new Date(Date.parse(this.date));
+        return this.dateToString(date);
+      } else if (this.value) {
+        if (this.value instanceof Date) {
+          const date = new Date(Date.parse(this.value));
+          return this.dateToString(date);
+        }
+        return this.value;
       } else {
-        const day = this.day ? this.dateToString(this.day) : this.dateToString(new Date().getUTCDate());
-        const month = this.month ? this.dateToString(this.month) : this.dateToString(new Date().getUTCMonth() + 1);
+        const day = this.day ? this.addZero(this.day) : this.addZero(new Date().getUTCDate());
+        const month = this.month ? this.addZero(this.month) : this.addZero(new Date().getUTCMonth() + 1);
         const year = this.year ? this.year : new Date().getUTCFullYear();
-
-        //this.$emit('input', new Date(day, month, year));
         return `${year}-${month}-${day}`;
       }
     },
@@ -45,10 +59,21 @@ export default {
   methods: {
     updateValue: function(event) {
       const splitDate = event.target.value.split('-');
-      this.$emit('input', new Date(splitDate[0], parseInt(splitDate[1]) - 1, parseInt(splitDate[2]) + 1));
+      if (splitDate.length === 3) {
+        this.$emit('input', new Date(splitDate[0], parseInt(splitDate[1]) - 1, parseInt(splitDate[2]) + 1));
+      }
     },
-    dateToString: function(value) {
+    addZero: function(value) {
       return value.toString().padStart(2, '0');
+    },
+    dateToString(dateValue) {
+      const date = new Date(Date.parse(dateValue));
+      return `${date.getUTCFullYear()}-${this.addZero(date.getUTCMonth() + 1)}-${this.addZero(date.getUTCDate())}`;
+    },
+  },
+  watch: {
+    dateValue: function(event) {
+      this.$emit('dateChange', event);
     },
   },
   mixins: [Gestures],
