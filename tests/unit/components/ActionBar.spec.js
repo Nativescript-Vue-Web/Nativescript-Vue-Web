@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { ActionBar, ActionItem, NavigationButton } from '../../../src/main';
+import { ActionBar, ActionItem, NavigationButton, StackLayout } from '../../../src/main';
 
 describe('ActionItem', () => {
   const title = 'Main Page';
@@ -108,10 +108,12 @@ describe('ActionItem', () => {
     const Wrapper = {
       name: 'Wrapper',
       template:
-        '<StackLayout><ActionBar title="title"><StackLayout></StackLayout></ActionBar><ActionBar><ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar></StackLayout>', //eslint-disable-line
+        '<StackLayout><ActionBar title="title"><StackLayout></StackLayout></ActionBar><ActionBar>' +
+        '<ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar></StackLayout>',
       components: {
         ActionBar,
         ActionItem,
+        StackLayout,
       },
     };
 
