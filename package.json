@@ -115,10 +115,10 @@
   "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
   "nyc": {
     "check-coverage": true,
-    "lines": 82,
-    "statements": 81,
-    "functions": 79,
-    "branches": 78,
+    "lines": 83,
+    "statements": 82,
+    "functions": 80,
+    "branches": 79,
     "include": [
       "src/**/*.js",
       "src/**/*.vue"
