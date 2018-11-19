@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
-import { ActionBar, ActionItem, NavigationButton } from '../../../src/main';
+import { ActionBar, ActionItem, NavigationButton, StackLayout } from '../../../src/main';
 
 describe('ActionItem', () => {
   const title = 'Main Page';
@@ -107,10 +107,13 @@ describe('ActionItem', () => {
   it('find the actionitem components in wrapper.', done => {
     const Wrapper = {
       name: 'Wrapper',
-      template: '<ActionBar><ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar>',
+      template:
+        '<StackLayout><ActionBar title="title"><StackLayout></StackLayout></ActionBar><ActionBar>' +
+        '<ActionItem text="Bar Item 1" /><ActionItem text="Bar Item 2" /></ActionBar></StackLayout>',
       components: {
         ActionBar,
         ActionItem,
+        StackLayout,
       },
     };
 
