@@ -126,7 +126,9 @@ describe('DatePicker Unit Test.', () => {
       console.log(wrapper.emitted().input) // eslint-disable-line
 
       const newDate = new Date(wrapper.emitted().input[0][0]).toISOString().split('T', 1)[0];
+      console.log(newDate) // eslint-disable-line
       expect(newDate).to.equal(new Date('2017-08-22').toISOString().split('T', 1)[0]);
+      console.log("2") // eslint-disable-line
       done();
     });
 
