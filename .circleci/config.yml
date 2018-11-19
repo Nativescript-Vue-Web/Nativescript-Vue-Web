@@ -11,7 +11,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: npm ci
+      - run: npm install
       # run lint
       - run: npm run lint
       # run tests!
