@@ -119,17 +119,19 @@ describe('DatePicker Unit Test.', () => {
     });
   });
   describe('Change the value inside input element and check the emitted events.', () => {
-    it('The value inside the input will be set to "2017-08-22" and the dateChange event will be emitted.', done => {
+    xit('The value inside the input will be set to "2017-08-22" and the dateChange event will be emitted.', done => {
       wrapper.find('input').setValue(new Date('2017-08-22').toISOString().split('T', 1)[0]);
       expect(updateValueSpy.called).to.equal(true);
       expect(wrapper.emitted().input.length).to.equal(1);
-      /*
+
+      console.log(wrapper.emitted().input[0][0])
+
       const newDate = new Date(wrapper.emitted().input[0][0]).toISOString().split('T', 1)[0];
-      expect(newDate).to.equal(new Date('2017-08-22').toISOString().split('T', 1)[0]);*/
+      expect(newDate).to.equal(new Date('2017-08-22').toISOString().split('T', 1)[0]);
       done();
     });
 
-    xit('The value inside the input will be set to "2017-15-32" and the dateChange event will not be emitted.', done => {
+    it('The value inside the input will be set to "2017-15-32" and the dateChange event will not be emitted.', done => {
       const oldDate = new Date('2016-07-18');
 
       const wrapper = mount(DatePicker, {
@@ -145,7 +147,7 @@ describe('DatePicker Unit Test.', () => {
       done();
     });
 
-    xit('Wrong date', done => {
+    it('Wrong date', done => {
       const oldDate = new Date('2016-07-18');
       const newDate = new Date('2018-02-35');
 
