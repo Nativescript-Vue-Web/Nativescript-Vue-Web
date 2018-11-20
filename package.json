@@ -9,7 +9,7 @@
     "test:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
     "coverage": "nyc npm run test",
-    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test --loglevel info"
+    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test"
   },
   "main": "src/main.js",
   "dependencies": {
@@ -79,6 +79,10 @@
     "last 2 versions",
     "not ie <= 8"
   ],
+  "gitHooks": {
+    "pre-commit": "lint-staged && npm run test",
+    "pre-push": "npm run coverage"
+  },
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",
@@ -110,7 +114,7 @@
   },
   "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
   "nyc": {
-    "check-coverage": false,
+    "check-coverage": true,
     "lines": 82,
     "statements": 81,
     "functions": 79,
