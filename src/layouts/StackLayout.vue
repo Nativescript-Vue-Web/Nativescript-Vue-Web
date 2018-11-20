@@ -20,9 +20,7 @@ export default {
   },
   computed: {
     stackLayoutClass: function() {
-      return `nvw-stack-layout nvw-stack-layout${
-        this.orientation === 'horizontal' || this.orientation === 'vertical' ? '--' + camelCaseToDash(this.orientation) : ''
-      }`;
+      return `nvw-stack-layout nvw-stack-layout--${camelCaseToDash(this.orientation)}`;
     },
   },
   directives: {

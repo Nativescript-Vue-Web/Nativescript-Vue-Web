@@ -9,7 +9,7 @@
     "test:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
     "coverage": "nyc npm run test",
-    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test"
+    "report": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov"
   },
   "main": "src/main.js",
   "dependencies": {
