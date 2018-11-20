@@ -5,7 +5,6 @@
         :max="maxDateValue"
         :min="minDateValue"
         :value="dateValue"
-        @change="$emit('dateChange', $event)"
         @input="updateValue($event)"
     />
 </template>
@@ -15,6 +14,10 @@ import Gestures from '../mixins/GestureMixin';
 
 export default {
   name: 'DatePicker',
+  model: {
+    event: 'dateChange',
+    prop: 'value',
+  },
   props: {
     date: Date,
     minDate: Date,
@@ -22,7 +25,7 @@ export default {
     day: Number,
     month: Number,
     year: Number,
-    value: [Date, String],
+    value: Date,
   },
   data() {
     return {
@@ -43,11 +46,8 @@ export default {
         const date = new Date(Date.parse(this.date));
         return this.dateToString(date);
       } else if (this.value) {
-        if (this.value instanceof Date) {
-          const date = new Date(Date.parse(this.value));
-          return this.dateToString(date);
-        }
-        return this.value;
+        const date = new Date(Date.parse(this.value));
+        return this.dateToString(date);
       } else {
         const day = this.day ? this.addZero(this.day) : this.addZero(new Date().getUTCDate());
         const month = this.month ? this.addZero(this.month) : this.addZero(new Date().getUTCMonth() + 1);
@@ -58,10 +58,7 @@ export default {
   },
   methods: {
     updateValue: function(event) {
-      const splitDate = event.target.value.split('-');
-      if (splitDate.length === 3) {
-        this.$emit('input', new Date(splitDate[0], parseInt(splitDate[1]) - 1, parseInt(splitDate[2]) + 1));
-      }
+      this.dateChange(event.target.value);
     },
     addZero: function(value) {
       return value.toString().padStart(2, '0');
@@ -70,10 +67,16 @@ export default {
       const date = new Date(Date.parse(dateValue));
       return `${date.getUTCFullYear()}-${this.addZero(date.getUTCMonth() + 1)}-${this.addZero(date.getUTCDate())}`;
     },
+    dateChange(date) {
+      const splitDate = date.split('-');
+      if (splitDate.length === 3) {
+        this.$emit('dateChange', new Date(splitDate[0], parseInt(splitDate[1]) - 1, parseInt(splitDate[2]) + 1));
+      }
+    },
   },
   watch: {
     dateValue: function(event) {
-      this.$emit('dateChange', event);
+      this.dateChange(event);
     },
   },
   mixins: [Gestures],
