@@ -110,6 +110,15 @@ describe('Tab view item change case', () => {
     mountedWrapper.vm.$refs['tabview'].chooseTab(0);
     mountedWrapper.vm.$refs['tabview'].chooseTab(-5);
 
+    mountedWrapper.find(TabView).setData({ currentTabIndex: 20 });
+    expect(mountedWrapper.vm.$refs['tabview'].activeChild).to.equal(undefined);
+
+    mountedWrapper.find(TabView).setData({ currentTabIndex: 1 });
+    expect(mountedWrapper.vm.$refs['tabview'].activeChild).to.equal(undefined);
+
+    mountedWrapper.find(TabView).setData({ currentTabIndex: 0 });
+    expect(mountedWrapper.vm.$refs['tabview'].activeChild).to.not.equal(undefined);
+
     mountedWrapper.vm.$nextTick(() => {
       expect(mountedWrapper.findAll('button').length).to.equal(1);
       done();
