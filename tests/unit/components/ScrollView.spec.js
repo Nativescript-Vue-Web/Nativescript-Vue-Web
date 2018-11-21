@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
 import { ScrollView, Label } from '../../../src/main';
@@ -46,18 +45,16 @@ describe('ScrollView', () => {
     });
   });
 
-  //TODO scroll event not working. It will be check again.
-  //TODO ScrollView:orientation=horizontal>StackLayout:orientation=vertical>Label:textWrap=true will be check. It's different result with Native Vue Playground.
-  xdescribe('Listen to events', () => {
-    it('Scroll event check', () => {
-      const onScrollEvent = sinon.spy(ScrollView.methods, 'onScroll');
-      const scrollWrapper = wrapper.findAll('div').at(0).element;
+  describe('Listen to events', () => {
+    it('Scroll event check', done => {
+      // Scroll event can't trigger with vue-test-util so triggered manually.
+      wrapper.trigger('scroll');
 
-      scrollWrapper.scrollLeft = 100;
-      scrollWrapper.scrollTop = 100;
-
-      expect(wrapper.emitted().onScroll.length).to.equal(1);
-      expect(onScrollEvent.called).to.equal(true);
+      // waiting debounce
+      setTimeout(() => {
+        expect(wrapper.emitted().scroll.length).to.equal(1);
+        done();
+      }, 200);
     });
   });
 
@@ -70,6 +67,11 @@ describe('ScrollView', () => {
       wrapper.setProps({ orientation: 'vertical' });
       expect(wrapper.classes()).to.include('nvw-scrollview--vertical');
       expect(wrapper.classes()).to.not.include('nvw-scrollview--horizontal');
+    });
+
+    it(`Changing scrollBarIndicatorVisible property`, () => {
+      wrapper.setProps({ scrollBarIndicatorVisible: !scrollBarIndicatorVisible });
+      expect(wrapper.props().scrollBarIndicatorVisible).to.equal(!scrollBarIndicatorVisible);
     });
   });
 });

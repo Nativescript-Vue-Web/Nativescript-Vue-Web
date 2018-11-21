@@ -8,7 +8,7 @@ describe('TimePicker', () => {
   const minute = 17;
   const minHour = 1;
   const maxHour = 7;
-  const minMinute = 0;
+  const minMinute = 3;
   const maxMinute = 45;
 
   const wrapper = mount(TimePicker, {
@@ -55,8 +55,17 @@ describe('TimePicker', () => {
 
   describe('Listen to events', () => {
     it(`assert event has been emitted one time on timeChange`, () => {
+      const wrapper = mount(TimePicker, {
+        name: 'TimePicker',
+        propsData: {
+          hour,
+          minute,
+        },
+      });
+
       wrapper.destroy();
       wrapper.setProps({ minute: 20 });
+      wrapper.trigger('change');
       expect(wrapper.emitted('timeChange').length).to.equal(1);
     });
     it(`assert event has been emitted one time on input`, () => {

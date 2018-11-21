@@ -24,9 +24,7 @@ export default {
   },
   computed: {
     scrollViewClass: function() {
-      return `nvw-scrollview nvw-scrollview${this.orientation !== 'none' ? '--' + camelCaseToDash(this.orientation) : ''}${
-        this.scrollBarIndicatorVisible ? '' : '--hide'
-      }`;
+      return `nvw-scrollview nvw-scrollview--${camelCaseToDash(this.orientation)}${this.scrollBarIndicatorVisible ? '' : '--hide'}`;
     },
   },
   methods: {
