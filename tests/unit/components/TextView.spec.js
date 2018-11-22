@@ -198,14 +198,28 @@ describe('TextView', () => {
     });
 
     it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {
-      wrapper.find('textarea').trigger('keyup', {
+      wrapper.find('textarea').trigger('keyup.enter', {
         ctrlKey: true,
         keyCode: 13,
       });
       expect(wrapper.emitted().returnPress.length).to.equal(1);
-      wrapper.find('textarea').trigger('keyup.enter');
-      expect(wrapper.emitted().returnPress.length).to.equal(1);
       expect(returnPress.called).to.equal(true);
+    });
+
+    it('setting listeners to null of the component so that it will not throw appropriate events.', () => {
+      wrapper.vm.$listeners.input = null;
+      wrapper.vm.$listeners.textChange = null;
+      wrapper.vm.$listeners.returnPress = null;
+      wrapper.find('textarea').setValue('newest value');
+      expect(wrapper.emitted().input.length).to.equal(1);
+      expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.calledTwice).to.equal(false);
+      expect(textChange.calledTwice).to.equal(false);
+      wrapper.find('textarea').trigger('keyup.enter', {
+        ctrlKey: true,
+        keyCode: 13,
+      });
+      expect(returnPress.calledTwice).to.equal(false);
     });
   });
 });

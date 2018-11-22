@@ -33,12 +33,23 @@ export default {
   },
   methods: {
     updateValue: function($event) {
-      this.$emit('input', $event.target.value);
-      this.$emit('textChange', $event.target.value);
+      if (this.$listeners.input) {
+        this.$emit('input', $event.target.value);
+      }
+      if (this.$listeners.textChange) {
+        this.$emit('textChange', $event.target.value);
+      }
     },
     onClear: function(event) {
-      this.$emit('input', '');
-      this.$emit('clear', event);
+      if (this.$listeners.input) {
+        this.$emit('input', '');
+      }
+      if (this.$listeners.textChange) {
+        this.$emit('textChange', '');
+      }
+      if (this.$listeners.clear) {
+        this.$emit('clear', event);
+      }
     },
   },
   directives: {

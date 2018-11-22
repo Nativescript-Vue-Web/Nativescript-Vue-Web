@@ -43,11 +43,15 @@ export default {
   },
   methods: {
     updateValue: function($event) {
-      this.$emit('input', $event.target.value);
-      this.$emit('textChange', $event.target.value);
+      if (this.$listeners.input) {
+        this.$emit('input', $event.target.value);
+      }
+      if (this.$listeners.textChange) {
+        this.$emit('textChange', $event.target.value);
+      }
     },
     returnPress: function($event) {
-      if ($event.ctrlKey && $event.keyCode === 13) {
+      if ($event.ctrlKey && $event.keyCode === 13 && this.$listeners.returnPress) {
         this.$emit('returnPress', $event.target.value);
       }
     },
