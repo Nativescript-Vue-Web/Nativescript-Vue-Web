@@ -16,6 +16,7 @@ describe('SearchBar Test.', () => {
   const clear = sinon.spy();
   const submit = sinon.spy();
   const textChange = sinon.spy();
+  const input = sinon.spy();
 
   const wrapper = mount(SearchBar, {
     name: 'SearchBar',
@@ -39,6 +40,7 @@ describe('SearchBar Test.', () => {
       clear,
       submit,
       textChange,
+      input,
     },
   });
 
@@ -48,6 +50,9 @@ describe('SearchBar Test.', () => {
     });
     it(`hint property is equal to: ${hint}.`, () => {
       expect(wrapper.props().hint).to.equal(hint);
+    });
+    it('input event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.input).to.not.equal(undefined);
     });
     it('change event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.textChange).to.not.equal(undefined);
@@ -83,10 +88,9 @@ describe('SearchBar Test.', () => {
       wrapper.find('input').setValue('new value');
       expect(wrapper.find('input').element.value).to.equal('new value');
       expect(updateValueSpy.called).to.equal(true);
-    });
-    it('the input emits change event so, event handler named textChange gets thrown', () => {
-      wrapper.find('input').trigger('change');
+      expect(wrapper.emitted().input.length).to.equal(1);
       expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.called).to.equal(true);
       expect(textChange.called).to.equal(true);
     });
     it('the clearIcon gets clicked, the event is emitted and text becomes an empty string.', () => {

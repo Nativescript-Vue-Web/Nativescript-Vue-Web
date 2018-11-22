@@ -9,7 +9,6 @@
       :value="text"
       @keyup.enter="$emit('submit')"
       @input="updateValue"
-      @change="$emit('textChange')"
     />
     <span v-if="text" @click="onClear" class="nvw-searchbar__clear-icon" />
   </div>
@@ -33,8 +32,9 @@ export default {
     textFieldHintColor: String, // TODO
   },
   methods: {
-    updateValue: function(event) {
-      this.$emit('input', event.target.value);
+    updateValue: function($event) {
+      this.$emit('input', $event.target.value);
+      this.$emit('textChange', $event.target.value);
     },
     onClear: function(event) {
       this.$emit('input', '');
