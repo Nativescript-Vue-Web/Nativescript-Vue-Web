@@ -117,12 +117,14 @@ describe('SearchBar Test.', () => {
       wrapper.vm.$listeners.input = null;
       wrapper.vm.$listeners.textChange = null;
       wrapper.vm.$listeners.clear = null;
-      wrapper.find('.nvw-searchbar__search-icon').trigger('click');
-      expect(wrapper.emitted().input.length).to.equal(3);
-      expect(wrapper.emitted().textChange.length).to.equal(3);
-      expect(input.callCount).to.equal(3);
-      expect(textChange.callCount).to.equal(3);
-      expect(clear.calledTwice).to.equal(false);
+      wrapper.find('.nvw-searchbar__clear-icon').trigger('click');
+      expect(input.callCount).to.not.equal(4);
+      expect(textChange.callCount).to.not.equal(4);
+      expect(clear.callCount).to.not.equal(2);
+    });
+    it('setting listeners to null of the component so that it will not throw appropriate events.', () => {
+      wrapper.vm.$listeners.input = null;
+      wrapper.vm.$listeners.textChange = null;
       wrapper.find('input').setValue('tnewest value');
       expect(wrapper.emitted().input.length).to.equal(3);
       expect(wrapper.emitted().textChange.length).to.equal(3);
