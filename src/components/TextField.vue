@@ -9,7 +9,6 @@
         :value="text"
         :spellcheck="autocorrect"
         @blur="$emit('blur', $event)"
-        @change="$emit('textChange', $event)"
         @focus="$emit('focus', $event)"
         @keyup.enter="$emit('returnPress', $event)"
         @input="updateValue"
@@ -49,7 +48,12 @@ export default {
   },
   methods: {
     updateValue: function($event) {
-      this.$emit('input', $event.target.value);
+      if (this.$listeners.input) {
+        this.$emit('input', $event.target.value);
+      }
+      if (this.$listeners.textChange) {
+        this.$emit('textChange', $event.target.value);
+      }
     },
   },
   computed: {

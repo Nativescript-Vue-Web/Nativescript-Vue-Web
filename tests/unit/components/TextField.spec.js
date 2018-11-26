@@ -19,6 +19,7 @@ describe('TextField', () => {
   const focus = sinon.spy();
   const returnPress = sinon.spy();
   const textChange = sinon.spy();
+  const input = sinon.spy();
 
   const wrapper = mount(TextField, {
     model: {
@@ -53,6 +54,7 @@ describe('TextField', () => {
       focus,
       returnPress,
       textChange,
+      input,
     },
   });
 
@@ -91,6 +93,10 @@ describe('TextField', () => {
 
     it('change event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.textChange).to.not.equal(undefined);
+    });
+
+    it('input event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.input).to.not.equal(undefined);
     });
 
     it('blur event property is passed to the component successfully.', () => {
@@ -190,10 +196,14 @@ describe('TextField', () => {
       expect(focus.called).to.equal(true);
     });
 
-    it('the value of the textfield component change to new value', () => {
+    it('the value of the textfield component change to new value, textfield throws input and also textChange.', () => {
       // Change the value of the input field.
       wrapper.find('input').setValue('new value');
       expect(wrapper.find('input').element.value).to.equal('new value');
+      expect(wrapper.emitted().input.length).to.equal(1);
+      expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.called).to.equal(true);
+      expect(textChange.called).to.equal(true);
       expect(updateValueSpy.called).to.equal(true);
     });
 
@@ -201,12 +211,6 @@ describe('TextField', () => {
       wrapper.find('input').trigger('blur');
       expect(wrapper.emitted().blur.length).to.equal(1);
       expect(blur.called).to.equal(true);
-    });
-
-    it('the textfield emits change event so, event handler named textChange gets thrown', () => {
-      wrapper.find('input').trigger('change');
-      expect(wrapper.emitted().textChange.length).to.equal(1);
-      expect(textChange.called).to.equal(true);
     });
 
     it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {

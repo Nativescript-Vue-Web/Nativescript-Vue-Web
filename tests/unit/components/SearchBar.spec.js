@@ -16,6 +16,7 @@ describe('SearchBar Test.', () => {
   const clear = sinon.spy();
   const submit = sinon.spy();
   const textChange = sinon.spy();
+  const input = sinon.spy();
 
   const wrapper = mount(SearchBar, {
     name: 'SearchBar',
@@ -39,6 +40,7 @@ describe('SearchBar Test.', () => {
       clear,
       submit,
       textChange,
+      input,
     },
   });
 
@@ -48,6 +50,9 @@ describe('SearchBar Test.', () => {
     });
     it(`hint property is equal to: ${hint}.`, () => {
       expect(wrapper.props().hint).to.equal(hint);
+    });
+    it('input event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.input).to.not.equal(undefined);
     });
     it('change event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.textChange).to.not.equal(undefined);
@@ -83,10 +88,9 @@ describe('SearchBar Test.', () => {
       wrapper.find('input').setValue('new value');
       expect(wrapper.find('input').element.value).to.equal('new value');
       expect(updateValueSpy.called).to.equal(true);
-    });
-    it('the input emits change event so, event handler named textChange gets thrown', () => {
-      wrapper.find('input').trigger('change');
+      expect(wrapper.emitted().input.length).to.equal(1);
       expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.called).to.equal(true);
       expect(textChange.called).to.equal(true);
     });
     it('the clearIcon gets clicked, the event is emitted and text becomes an empty string.', () => {
@@ -108,6 +112,24 @@ describe('SearchBar Test.', () => {
       wrapper.find('input').trigger('keyup.enter');
       expect(wrapper.emitted().submit.length).to.equal(2);
       expect(submit.called).to.equal(true);
+    });
+    it('setting listeners to null of the component so that it will not throw appropriate events.', () => {
+      wrapper.vm.$listeners.input = null;
+      wrapper.vm.$listeners.textChange = null;
+      wrapper.vm.$listeners.clear = null;
+      wrapper.find('.nvw-searchbar__clear-icon').trigger('click');
+      expect(input.callCount).to.not.equal(4);
+      expect(textChange.callCount).to.not.equal(4);
+      expect(clear.callCount).to.not.equal(2);
+    });
+    it('setting listeners to null of the component so that it will not throw appropriate events.', () => {
+      wrapper.vm.$listeners.input = null;
+      wrapper.vm.$listeners.textChange = null;
+      wrapper.find('input').setValue('tnewest value');
+      expect(wrapper.emitted().input.length).to.equal(3);
+      expect(wrapper.emitted().textChange.length).to.equal(3);
+      expect(input.callCount).to.equal(3);
+      expect(textChange.callCount).to.equal(3);
     });
   });
 });

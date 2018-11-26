@@ -8,7 +8,6 @@
     :value="text"
     :spellcheck="autocorrect"
     @blur="$emit('blur', $event)"
-    @change="$emit('textChange', $event)"
     @focus="$emit('focus', $event)"
     @keyup.enter="returnPress"
     @input="updateValue"
@@ -31,7 +30,10 @@ export default {
   props: {
     text: String,
     hint: String,
-    editable: Boolean,
+    editable: {
+      type: Boolean,
+      default: true,
+    },
     maxLength: Number,
     keyboardType: String,
     autocorrect: Boolean,
@@ -41,10 +43,15 @@ export default {
   },
   methods: {
     updateValue: function($event) {
-      this.$emit('input', $event.target.value);
+      if (this.$listeners.input) {
+        this.$emit('input', $event.target.value);
+      }
+      if (this.$listeners.textChange) {
+        this.$emit('textChange', $event.target.value);
+      }
     },
     returnPress: function($event) {
-      if ($event.ctrlKey && $event.keyCode === 13) {
+      if ($event.ctrlKey && $event.keyCode === 13 && this.$listeners.returnPress) {
         this.$emit('returnPress', $event.target.value);
       }
     },
