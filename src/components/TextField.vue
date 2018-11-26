@@ -67,6 +67,8 @@ export default {
           return 'email';
         case 'url':
           return 'url';
+        case 'number':
+          return 'number';
         default:
           return 'text';
       }
