@@ -1,7 +1,7 @@
 <template>
-    <div class="nvw-progress">
-        <div class="nvw-progress__bar" :style="{width: this.progressValuePercentage}"></div>
-    </div>
+  <div class="nvw-progress">
+    <div class="nvw-progress__bar" :style="{width: this.progressValuePercentage}"></div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +29,11 @@ export default {
   },
   watch: {
     value: function(newValue, oldValue) {
-      this.$emit('valueChange', newValue, oldValue);
+      this.$emit('valueChange', {
+        value: newValue,
+        oldValue,
+        eventName: 'valueChange',
+      });
     },
   },
   mixins: [Gestures],
