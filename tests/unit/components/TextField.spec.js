@@ -181,6 +181,11 @@ describe('TextField', () => {
       expect(wrapper.find('input').attributes().type).to.equal('url');
       done();
     });
+    it('the type(keyboardType) attribute of the component is changed to number.', done => {
+      wrapper.setProps({ keyboardType: 'number' });
+      expect(wrapper.find('input').attributes().type).to.equal('number');
+      done();
+    });
     it('the type(keyboardType) attribute of the component is changed to irrelevant value.', done => {
       wrapper.setProps({ keyboardType: 'irrelevant' });
       expect(wrapper.find('input').attributes().type).to.equal('text');
