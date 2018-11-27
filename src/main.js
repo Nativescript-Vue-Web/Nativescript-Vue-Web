@@ -40,6 +40,7 @@ export { default as PromptDialog } from './components/dialogs/PromptDialog';
 
 // Plugins
 export { default as Nvw } from './plugin';
+export { default as NvwRouter } from './plugin/router';
 
 // Layouts
 export { default as AbsoluteLayout } from './layouts/AbsoluteLayout';
