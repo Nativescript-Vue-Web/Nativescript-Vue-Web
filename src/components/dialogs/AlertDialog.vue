@@ -1,19 +1,22 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="nvw-alert-dialog" @close="close">
-
+  <ModalDialog v-if="isModalVisible" class="nvw-alert-dialog" @close="close">
     <span class="nvw-alert-dialog__header" slot="header">
-        <h4>{{ title }}</h4>
+      <h4>{{ title }}</h4>
     </span>
 
     <div class="nvw-alert-dialog__body" slot="body">
-        <p>{{ message }}</p>
+      <p>{{ message }}</p>
     </div>
 
     <div class="nvw-alert-dialog__footer" slot="footer">
-        <Button class="nvw-alert-dialog__footer__ok-button" :text="okButtonText" @tap="close" :link="true"/>
+      <Button
+        class="nvw-alert-dialog__footer__ok-button"
+        :text="okButtonText"
+        @tap="close"
+        :link="true"
+      />
     </div>
-
-</ModalDialog>
+  </ModalDialog>
 </template>
 
 <script>
@@ -52,7 +55,8 @@ export default {
       background-color: #ffffff;
       color: #364fc7;
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }

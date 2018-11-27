@@ -97,7 +97,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
     &__ok-button {
@@ -107,7 +108,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }
