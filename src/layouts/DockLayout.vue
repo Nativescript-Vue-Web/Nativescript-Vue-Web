@@ -1,5 +1,5 @@
 <template>
-    <div class="nvw-dock-layout">
+    <div v-common-directive class="nvw-dock-layout">
         <div class="nvw-dock-layout__left" data-area="left" ref="left">
         </div>
         <div class="nvw-dock-layout__right">
@@ -24,6 +24,7 @@
 
 <script>
 import Gestures from '../mixins/GestureMixin';
+import CommonDirective from '../directives/CommonDirective';
 
 export default {
   name: 'DockLayout',
@@ -62,6 +63,9 @@ export default {
         slot.elm.classList.add('nvw-dock-layout__stretchLastChild');
       }
     }
+  },
+  directives: {
+    'common-directive': CommonDirective,
   },
 };
 </script>
