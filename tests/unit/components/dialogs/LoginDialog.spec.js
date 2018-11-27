@@ -115,4 +115,29 @@ describe('LoginDialog', () => {
       done();
     });
   });
+  const wrapper2 = mount(LoginDialog, {
+    name: 'LoginDialog',
+    props: {
+      title: String,
+      message: String,
+      okButtonText: String,
+      cancelButtonText: String,
+      userName: String,
+      password: String,
+    },
+    propsData: {
+      title,
+      message,
+      okButtonText,
+      cancelButtonText,
+    },
+  });
+  describe('Default Prop value Check', () => {
+    it('Username and Pasword prop is undefined', done => {
+      expect(wrapper2.props().password).to.equal(undefined);
+      expect(wrapper2.props().userName).to.equal(undefined);
+      wrapper2.setData({ isModalVisible: true });
+      done();
+    });
+  });
 });
