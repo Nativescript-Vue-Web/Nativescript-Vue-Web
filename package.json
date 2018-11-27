@@ -81,7 +81,7 @@
   ],
   "gitHooks": {
     "pre-commit": "lint-staged && npm run test",
-    "pre-push": "npm run coverage"
+    "pre-push": "npm audit && npm run coverage"
   },
   "lint-staged": {
     "*.js": [
