@@ -1,20 +1,26 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="nvw-confirm-dialog" @close="close(false)">
+  <ModalDialog v-if="isModalVisible" class="nvw-confirm-dialog" @close="close(false)">
     <span class="nvw-confirm-dialog__header" slot="header">
-         <h4>{{ title }}</h4>
+      <h4>{{ title }}</h4>
     </span>
 
     <div v-if="message" class="nvw-confirm-dialog__body" slot="body">
       <p>{{ message }}</p>
-     </div>
+    </div>
 
     <div class="nvw-confirm-dialog__footer" slot="footer">
-        <Button class="nvw-confirm-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close(false)" />
-        <Button class="nvw-confirm-dialog__footer__ok-button" :text="okButtonText" @tap="close(true)" />
-      </div>
-
-</ModalDialog>
-
+      <Button
+        class="nvw-confirm-dialog__footer__cancel-button"
+        :text="cancelButtonText"
+        @tap="close(false)"
+      />
+      <Button
+        class="nvw-confirm-dialog__footer__ok-button"
+        :text="okButtonText"
+        @tap="close(true)"
+      />
+    </div>
+  </ModalDialog>
 </template>
 
 <script>
@@ -56,7 +62,8 @@ export default {
       width: 96px;
       margin: 0 5px;
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
     &__ok-button {
@@ -65,7 +72,8 @@ export default {
       width: 96px;
       margin: 0 5px;
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }
