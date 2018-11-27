@@ -5,16 +5,10 @@
     </div>
     <div class="nvw-login-dialog__body" slot="body">
       <div>{{message}}</div>
-      <TextField
-        class="nvw-login-dialog__body__username-input"
-        v-model="uname"
-        :hint="userName"
-        :editable="true"
-      />
+      <TextField class="nvw-login-dialog__body__username-input" v-model="uname" :editable="true"/>
       <TextField
         class="nvw-login-dialog__body__password-input"
         v-model="pw"
-        :hint="password"
         :editable="true"
         :secure="true"
       />
@@ -67,8 +61,16 @@ export default {
   },
   watch: {
     isModalVisible: function() {
-      this.uname = '';
-      this.pw = '';
+      if (!this.userName) {
+        this.uname = this.userName;
+      } else {
+        this.uname = '';
+      }
+      if (!this.password) {
+        this.pw = this.password;
+      } else {
+        this.pw = '';
+      }
     },
   },
   components: {
