@@ -1,11 +1,9 @@
 <template>
   <ModalDialog v-if="isModalVisible" class="nvw-alert-dialog" @close="close">
-    <span class="nvw-alert-dialog__header" slot="header">
-      <h4>{{ title }}</h4>
-    </span>
+    <span class="nvw-alert-dialog__header" slot="header">{{ title }}</span>
 
     <div class="nvw-alert-dialog__body" slot="body">
-      <p>{{ message }}</p>
+      <div>{{ message }}</div>
     </div>
 
     <div class="nvw-alert-dialog__footer" slot="footer">
@@ -31,9 +29,15 @@ export default {
     };
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: 'Alert',
+    },
     message: String,
-    okButtonText: String,
+    okButtonText: {
+      type: String,
+      default: 'Ok',
+    },
   },
   methods: {
     close(event) {
@@ -54,9 +58,15 @@ export default {
     &__ok-button {
       background-color: #ffffff;
       color: #364fc7;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 6px;
+      text-transform: uppercase;
+
       &:hover {
-        border-style: solid;
-        border-color: #364fc7;
+        cursor: pointer;
       }
     }
   }

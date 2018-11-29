@@ -1,14 +1,13 @@
 <template>
   <ModalDialog v-if="isModalVisible" class="nvw-login-dialog" @close="close">
-    <div class="nvw-login-dialog__header" slot="header">
-      <p>{{title}}</p>
-    </div>
+    <span class="nvw-login-dialog__header" slot="header">{{title}}</span>
     <div class="nvw-login-dialog__body" slot="body">
-      <div>{{message}}</div>
-      <TextField class="nvw-login-dialog__body__username-input" v-model="uname" :editable="true"/>
+      <div class="nvw-login-dialog__body__message">{{message}}</div>
+      <TextField class="nvw-login-dialog__body__username-input" v-model="userName" hint="Username" :editable="true"/>
       <TextField
         class="nvw-login-dialog__body__password-input"
-        v-model="pw"
+        v-model="password"
+        hint="Password"
         :editable="true"
         :secure="true"
       />
@@ -34,43 +33,41 @@ export default {
   data() {
     return {
       isModalVisible: false,
-      uname: '',
-      pw: '',
     };
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: 'Login',
+    },
     message: String,
-    okButtonText: String,
-    cancelButtonText: String,
+    okButtonText: {
+      type: String,
+      default: 'Ok',
+    },
+    cancelButtonText: {
+      type: String,
+      default: 'Cancel',
+    },
     userName: String,
     password: String,
   },
   methods: {
     close: function() {
-      this.$emit('submit', null);
+      this.$emit('submit', {
+        result: false,
+        userName: this.userName,
+        password: this.password,
+      });
       this.isModalVisible = false;
     },
     login: function() {
       this.$emit('submit', {
-        userName: this.uname,
-        password: this.pw,
+        result: true,
+        userName: this.userName,
+        password: this.password,
       });
       this.isModalVisible = false;
-    },
-  },
-  watch: {
-    isModalVisible: function() {
-      if (!this.userName) {
-        this.uname = this.userName;
-      } else {
-        this.uname = '';
-      }
-      if (!this.password) {
-        this.pw = this.password;
-      } else {
-        this.pw = '';
-      }
     },
   },
   components: {
@@ -84,33 +81,45 @@ export default {
 <style lang="scss" >
 .nvw-login-dialog {
   &__body {
+    &__message {
+      margin-bottom: 15px;
+    }
     &__username-input {
       display: block;
       margin-bottom: 5px;
     }
+
+    &__username-input,
+    &__password-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 4px 3px;
+    }
   }
   &__footer {
-    &__cancel-button {
-      margin: 0 5px;
-      font-size: 12px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+
+    &__cancel-button,
+    &__ok-button {
       background-color: #ffffff;
       color: #364fc7;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 0;
+      min-width: auto;
+      text-transform: uppercase;
 
       &:hover {
-        border-style: solid;
-        border-color: #364fc7;
+        cursor: pointer;
       }
     }
-    &__ok-button {
-      margin: 0 5px;
-      font-size: 12px;
-      background-color: #ffffff;
-      color: #364fc7;
 
-      &:hover {
-        border-style: solid;
-        border-color: #364fc7;
-      }
+    &__ok-button {
+      margin-left: 20px;
     }
   }
 }

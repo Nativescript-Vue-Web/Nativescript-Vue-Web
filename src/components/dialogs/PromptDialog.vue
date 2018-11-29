@@ -1,11 +1,9 @@
 <template>
   <ModalDialog v-if="isModalVisible" class="nvw-prompt-dialog" @close="close">
-    <span class="nvw-prompt-dialog__header" slot="header">
-      <h4>{{ title }}</h4>
-    </span>
+    <span class="nvw-prompt-dialog__header" slot="header">{{ title }}</span>
     <div class="nvw-prompt-dialog__body" slot="body">
-      <p>{{ message }}</p>
-      <TextField v-model="val" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
+      <div class="nvw-prompt-dialog__message">{{ message }}</div>
+      <TextField class="nvw-prompt-dialog__input" v-model="defaultText" hint="Enter text.." :editable="true"/>
     </div>
 
     <div class="nvw-prompt-dialog__footer" slot="footer">
@@ -35,33 +33,38 @@ export default {
   data() {
     return {
       isModalVisible: false,
-      val: '',
     };
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: 'Prompt',
+    },
     message: String,
-    okButtonText: String,
-    cancelButtonText: String,
+    okButtonText: {
+      type: String,
+      default: 'Ok',
+    },
+    cancelButtonText: {
+      type: String,
+      default: 'Cancel',
+    },
     defaultText: String,
-    inputType: String,
-    value: String,
   },
   methods: {
     close: function() {
-      this.$emit('submit', null);
+      this.$emit('submit', {
+        result: false,
+        text: this.defaultText,
+      });
       this.isModalVisible = false;
     },
     submit: function() {
       this.$emit('submit', {
-        value: this.val,
+        result: true,
+        text: this.defaultText,
       });
       this.isModalVisible = false;
-    },
-  },
-  watch: {
-    isModalVisible: function() {
-      this.val = '';
     },
   },
   components: {
@@ -74,28 +77,38 @@ export default {
 
 <style lang="scss" >
 .nvw-prompt-dialog {
+  &__message {
+    margin-bottom: 20px;
+  }
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 3px;
+  }
   &__footer {
-    &__cancel-button {
-      margin: 0 5px;
-      font-size: 12px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+
+    &__cancel-button,
+    &__ok-button {
       background-color: #ffffff;
       color: #364fc7;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 0;
+      min-width: auto;
+      text-transform: uppercase;
 
       &:hover {
-        border-style: solid;
-        border-color: #364fc7;
+        cursor: pointer;
       }
     }
-    &__ok-button {
-      margin: 0 5px;
-      font-size: 12px;
-      background-color: #ffffff;
-      color: #364fc7;
 
-      &:hover {
-        border-style: solid;
-        border-color: #364fc7;
-      }
+    &__ok-button {
+      margin-left: 20px;
     }
   }
 }

@@ -41,15 +41,6 @@ describe('ActionDialog', () => {
   });
 
   describe('the component contains elemets.', () => {
-    it('the component contains one p element', () => {
-      expect(wrapper.contains('p')).to.equal(true);
-    });
-    it('the component contains one section element', () => {
-      expect(wrapper.contains('section')).to.equal(true);
-    });
-    it('the components contains one nav elemet', () => {
-      expect(wrapper.contains('nav')).to.equal(true);
-    });
     it('the component contains one lu element', () => {
       expect(wrapper.contains('ul')).to.equal(true);
     });
@@ -58,13 +49,6 @@ describe('ActionDialog', () => {
     });
   });
 
-  describe('changes a and p value.', () => {
-    it('set the p value', () => {
-      const p = wrapper.find('p');
-      p.element.value = 'new message';
-      expect(p.element.value).to.equal('new message');
-    });
-  });
   describe('Events testing', () => {
     it('the click event of Button element with cancel-button class is passed to the component successfully and the action dialog gets hidden.', () => {
       const button = wrapper.find('.nvw-action-dialog__footer__cancel-button');

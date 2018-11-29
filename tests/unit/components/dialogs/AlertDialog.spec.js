@@ -45,28 +45,6 @@ describe('AlertDialog', () => {
     });
   });
 
-  describe('the component contains elemets.', () => {
-    it('the component contains one p element', () => {
-      expect(wrapper.contains('p')).to.equal(true);
-    });
-    it('the component contains one h4 element.', () => {
-      expect(wrapper.contains('h4')).to.equal(true);
-    });
-  });
-
-  describe('changes h4 and p value.', () => {
-    it('set the h4 value', () => {
-      const h4 = wrapper.find('h4');
-      h4.element.value = 'new header';
-      expect(h4.element.value).to.equal('new header');
-    });
-    it('set the p value', () => {
-      const p = wrapper.find('p');
-      p.element.value = 'new message';
-      expect(p.element.value).to.equal('new message');
-    });
-  });
-
   describe('Events testing', () => {
     it('the click event of Button element with ok-button class is passed to the component successfully.', () => {
       const button = wrapper.find('.nvw-alert-dialog__footer__ok-button');

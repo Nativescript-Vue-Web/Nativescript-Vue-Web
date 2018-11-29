@@ -9,7 +9,8 @@ import ViewDirective from '../directives/ViewDirective';
 const NvwPlugin = {
   install: Vue => {
     // Show Modal
-    Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) { // eslint-disable-line
+    Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) {
+      // eslint-disable-line
       const ContentComponent = Vue.extend(component);
       const ModalComponent = Vue.extend(Modal);
       const ModalInstance = new ModalComponent();
@@ -29,22 +30,16 @@ const NvwPlugin = {
 
     // Action Dialog
     const ActionDialogComponent = Vue.extend(ActionDialog);
-    const actionDialog = new ActionDialogComponent();
-    const actionDialogDom = actionDialog.$mount().$el;
-    document.body.appendChild(actionDialogDom);
-
     // Register action dialog to the window.
     window.action = async function(title, cancelButtonText, options) {
+      const actionDialog = new ActionDialogComponent();
+      const actionDialogDom = actionDialog.$mount().$el;
+      document.body.appendChild(actionDialogDom);
+
       return new Promise(resolve => {
-        if (typeof title === 'object') {
-          actionDialog.title = title.title;
-          actionDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
-          actionDialog.options = title.options;
-        } else {
-          actionDialog.title = title;
-          actionDialog.cancelButtonText = cancelButtonText || 'Cancel';
-          actionDialog.options = options;
-        }
+        actionDialog.title = title;
+        actionDialog.cancelButtonText = cancelButtonText;
+        actionDialog.options = options;
         actionDialog.isModalVisible = true;
         actionDialog.$once('submit', value => {
           actionDialog.isModalVisible = false;
@@ -55,21 +50,20 @@ const NvwPlugin = {
 
     // Alert Dialog
     const AlertDialogComponent = Vue.extend(AlertDialog);
-    const alertDialog = new AlertDialogComponent();
-    const alertDialogDom = alertDialog.$mount().$el;
-    document.body.appendChild(alertDialogDom);
-
     // Register alert dialog to the window.
-    window.alert = function(title, message, okButtonText) {
+    window.alert = function(messageText) {
+      const alertDialog = new AlertDialogComponent();
+      const alertDialogDom = alertDialog.$mount().$el;
+      document.body.appendChild(alertDialogDom);
+
       return new Promise(resolve => {
-        if (typeof title === 'object') {
-          alertDialog.title = title.title;
-          alertDialog.message = title.message;
-          alertDialog.okButtonText = title.okButtonText || 'OK';
+        if (typeof messageText === 'string') {
+          alertDialog.message = messageText;
         } else {
+          const { title, message, okButtonText } = messageText;
           alertDialog.title = title;
           alertDialog.message = message;
-          alertDialog.okButtonText = okButtonText || 'OK';
+          alertDialog.okButtonText = okButtonText;
         }
         alertDialog.isModalVisible = true;
         alertDialog.$once('submit', $event => {
@@ -81,25 +75,23 @@ const NvwPlugin = {
 
     // Login Dialog
     const LoginDialogComponent = Vue.extend(LoginDialog);
-    const loginDialog = new LoginDialogComponent();
-    const loginDialogDom = loginDialog.$mount().$el;
-    document.body.appendChild(loginDialogDom);
-
     // Register login dialog to the window.
-    window.login = async function(title, message, okButtonText, cancelButtonText, userName, password) {
+    window.login = async function(messageText, userName, password) {
+      const loginDialog = new LoginDialogComponent();
+      const loginDialogDom = loginDialog.$mount().$el;
+      document.body.appendChild(loginDialogDom);
+
       return new Promise(resolve => {
-        if (typeof title === 'object') {
-          loginDialog.title = title.title;
-          loginDialog.message = title.message;
-          loginDialog.okButtonText = title.okButtonText || 'OK';
-          loginDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
-          loginDialog.userName = title.userName;
-          loginDialog.password = title.password;
+        if (typeof messageText === 'string') {
+          loginDialog.message = messageText;
+          loginDialog.userName = userName;
+          loginDialog.password = password;
         } else {
+          const { title, message, okButtonText, cancelButtonText, userName, password } = messageText;
           loginDialog.title = title;
           loginDialog.message = message;
-          loginDialog.okButtonText = okButtonText || 'OK';
-          loginDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          loginDialog.okButtonText = okButtonText;
+          loginDialog.cancelButtonText = cancelButtonText;
           loginDialog.userName = userName;
           loginDialog.password = password;
         }
@@ -113,23 +105,21 @@ const NvwPlugin = {
 
     // Confirm Dialog
     const ConfirmDialogComponent = Vue.extend(ConfirmDialog);
-    const confirmDialog = new ConfirmDialogComponent();
-    const confirmDialogDom = confirmDialog.$mount().$el;
-    document.body.appendChild(confirmDialogDom);
-
     // Register confirm dialog to the window.
-    window.confirm = async function(title, message, okButtonText, cancelButtonText) {
+    window.confirm = async function(messageText) {
+      const confirmDialog = new ConfirmDialogComponent();
+      const confirmDialogDom = confirmDialog.$mount().$el;
+      document.body.appendChild(confirmDialogDom);
+
       return new Promise(resolve => {
-        if (typeof title === 'object') {
-          confirmDialog.title = title.title;
-          confirmDialog.message = title.message;
-          confirmDialog.okButtonText = title.okButtonText || 'OK';
-          confirmDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
+        if (typeof messageText === 'string') {
+          confirmDialog.message = messageText;
         } else {
+          const { title, message, okButtonText, cancelButtonText } = messageText;
           confirmDialog.title = title;
           confirmDialog.message = message;
-          confirmDialog.okButtonText = okButtonText || 'OK';
-          confirmDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          confirmDialog.okButtonText = okButtonText;
+          confirmDialog.cancelButtonText = cancelButtonText;
         }
         confirmDialog.isModalVisible = true;
         confirmDialog.$once('submit', val => {
@@ -141,29 +131,23 @@ const NvwPlugin = {
 
     // Prompt Dialog
     const PromptDialogComponent = Vue.extend(PromptDialog);
-    const promptDialog = new PromptDialogComponent();
-    const promptDialogDom = promptDialog.$mount().$el;
-    document.body.appendChild(promptDialogDom);
-
     // Register prompt dialog to the window.
-    window.prompt = async function(title, message, okButtonText, cancelButtonText, defaultText, inputType, value) {
+    window.prompt = async function(messageText, defaultText) {
+      const promptDialog = new PromptDialogComponent();
+      const promptDialogDom = promptDialog.$mount().$el;
+      document.body.appendChild(promptDialogDom);
+
       return new Promise(resolve => {
-        if (typeof title === 'object') {
-          promptDialog.title = title.title;
-          promptDialog.message = title.message;
-          promptDialog.okButtonText = title.okButtonText || 'OK';
-          promptDialog.cancelButtonText = title.cancelButtonText || 'Cancel';
-          promptDialog.defaultText = title.defaultText;
-          promptDialog.inputType = title.inputType;
-          promptDialog.value = title.value;
+        if (typeof messageText === 'string') {
+          promptDialog.message = messageText;
+          promptDialog.defaultText = defaultText;
         } else {
+          const { title, message, okButtonText, cancelButtonText, defaultText } = messageText;
           promptDialog.title = title;
           promptDialog.message = message;
-          promptDialog.okButtonText = okButtonText || 'OK';
-          promptDialog.cancelButtonText = cancelButtonText || 'Cancel';
+          promptDialog.okButtonText = okButtonText;
+          promptDialog.cancelButtonText = cancelButtonText;
           promptDialog.defaultText = defaultText;
-          promptDialog.inputType = inputType;
-          promptDialog.value = value;
         }
         promptDialog.isModalVisible = true;
         promptDialog.$once('submit', val => {
