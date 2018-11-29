@@ -31,6 +31,9 @@ describe('ActionDialog', () => {
     it(`cancelButtonText property is equal to: ${cancelButtonText}.`, () => {
       expect(wrapper.props().cancelButtonText).to.equal(cancelButtonText);
     });
+    it(`options property is equal to: ${options.toString()}.`, () => {
+      expect(wrapper.props().options.toString()).to.equal(options.toString());
+    });
   });
   describe('the component contains exactly two Button.', () => {
     it('there is two Button.', done => {
