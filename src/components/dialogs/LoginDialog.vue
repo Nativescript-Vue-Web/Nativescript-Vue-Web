@@ -1,20 +1,27 @@
 <template>
-    <ModalDialog v-if="isModalVisible" class="nvw-login-dialog" @close="close">
-      <div class="nvw-login-dialog__header" slot="header">
-        <p>{{title}}</p>
-      </div>
-      <div class="nvw-login-dialog__body" slot="body">
-        <div>
-          {{message}}
-        </div>
-        <TextField class="nvw-login-dialog__body__username-input" v-model="uname" :hint="userName"  :editable="true" />
-        <TextField class="nvw-login-dialog__body__password-input" v-model="pw" :hint="password"  :editable="true" :secure="true" />
-      </div>
-      <div class="nvw-login-dialog__footer" slot="footer">
-        <Button class="nvw-login-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" />
-        <Button class="nvw-login-dialog__footer__ok-button" :text="okButtonText" @tap="login" />
-      </div>
-    </ModalDialog>
+  <ModalDialog v-if="isModalVisible" class="nvw-login-dialog" @close="close">
+    <div class="nvw-login-dialog__header" slot="header">
+      <p>{{title}}</p>
+    </div>
+    <div class="nvw-login-dialog__body" slot="body">
+      <div>{{message}}</div>
+      <TextField class="nvw-login-dialog__body__username-input" v-model="uname" :editable="true"/>
+      <TextField
+        class="nvw-login-dialog__body__password-input"
+        v-model="pw"
+        :editable="true"
+        :secure="true"
+      />
+    </div>
+    <div class="nvw-login-dialog__footer" slot="footer">
+      <Button
+        class="nvw-login-dialog__footer__cancel-button"
+        :text="cancelButtonText"
+        @tap="close"
+      />
+      <Button class="nvw-login-dialog__footer__ok-button" :text="okButtonText" @tap="login"/>
+    </div>
+  </ModalDialog>
 </template>
 
 <script>
@@ -54,8 +61,16 @@ export default {
   },
   watch: {
     isModalVisible: function() {
-      this.uname = '';
-      this.pw = '';
+      if (!this.userName) {
+        this.uname = this.userName;
+      } else {
+        this.uname = '';
+      }
+      if (!this.password) {
+        this.pw = this.password;
+      } else {
+        this.pw = '';
+      }
     },
   },
   components: {
@@ -82,7 +97,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
     &__ok-button {
@@ -92,7 +108,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }

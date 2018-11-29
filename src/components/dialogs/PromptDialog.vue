@@ -1,19 +1,28 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="nvw-prompt-dialog" @close="close">
+  <ModalDialog v-if="isModalVisible" class="nvw-prompt-dialog" @close="close">
     <span class="nvw-prompt-dialog__header" slot="header">
-         <h4>{{ title }}</h4>
+      <h4>{{ title }}</h4>
     </span>
     <div class="nvw-prompt-dialog__body" slot="body">
-            <p>{{ message }}</p>
-            <TextField v-model="val" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
-         </div>
+      <p>{{ message }}</p>
+      <TextField v-model="val" hint="Enter text.." :editable="true" :keyboardType="inputType"/>
+    </div>
 
     <div class="nvw-prompt-dialog__footer" slot="footer">
-        <Button class="nvw-prompt-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
-        <Button class="nvw-prompt-dialog__footer__ok-button" :text="okButtonText" @tap="submit" :link="true" />
+      <Button
+        class="nvw-prompt-dialog__footer__cancel-button"
+        :text="cancelButtonText"
+        @tap="close"
+        :link="true"
+      />
+      <Button
+        class="nvw-prompt-dialog__footer__ok-button"
+        :text="okButtonText"
+        @tap="submit"
+        :link="true"
+      />
     </div>
-</ModalDialog>
-
+  </ModalDialog>
 </template>
 
 <script>
@@ -73,7 +82,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
     &__ok-button {
@@ -83,7 +93,8 @@ export default {
       color: #364fc7;
 
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }

@@ -18,6 +18,7 @@ describe('TextView', () => {
   const focus = sinon.spy();
   const returnPress = sinon.spy();
   const textChange = sinon.spy();
+  const input = sinon.spy();
 
   const LabelWrapper = {
     render(h) {
@@ -61,6 +62,7 @@ describe('TextView', () => {
       focus,
       returnPress,
       textChange,
+      input,
     },
     slots: {
       default: [LabelWrapper],
@@ -94,6 +96,10 @@ describe('TextView', () => {
 
     it('focus event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.focus).to.not.equal(undefined);
+    });
+
+    it('input event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.input).to.not.equal(undefined);
     });
 
     it('change event property is passed to the component successfully.', () => {
@@ -142,6 +148,7 @@ describe('TextView', () => {
     it('the disabled attribute of the component is changed to true from false ?', () => {
       wrapper.find('textarea').element.disabled = true;
       expect(wrapper.find('textarea').element.disabled).to.equal(true);
+      wrapper.find('textarea').element.disabled = false;
     });
 
     it(`the maxlength attribute of the component is changed to 15 from ${maxLength}?`, () => {
@@ -173,10 +180,14 @@ describe('TextView', () => {
       expect(focus.called).to.equal(true);
     });
 
-    it('the value of the textView component change to new value', () => {
-      // Change the value of the textarea field.
+    it('the value of the textview component change to new value, textview throws input and also textChange.', () => {
+      // Change the value of the input field.
       wrapper.find('textarea').setValue('new value');
       expect(wrapper.find('textarea').element.value).to.equal('new value');
+      expect(wrapper.emitted().input.length).to.equal(1);
+      expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.called).to.equal(true);
+      expect(textChange.called).to.equal(true);
       expect(updateValueSpy.called).to.equal(true);
     });
 
@@ -186,21 +197,29 @@ describe('TextView', () => {
       expect(blur.called).to.equal(true);
     });
 
-    it('the textView emits change event so, event handler named textChange gets thrown', () => {
-      wrapper.find('textarea').trigger('change');
-      expect(wrapper.emitted().textChange.length).to.equal(1);
-      expect(textChange.called).to.equal(true);
-    });
-
     it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {
-      wrapper.find('textarea').trigger('keyup', {
+      wrapper.find('textarea').trigger('keyup.enter', {
         ctrlKey: true,
         keyCode: 13,
       });
       expect(wrapper.emitted().returnPress.length).to.equal(1);
-      wrapper.find('textarea').trigger('keyup.enter');
-      expect(wrapper.emitted().returnPress.length).to.equal(1);
       expect(returnPress.called).to.equal(true);
+    });
+
+    it('setting listeners to null of the component so that it will not throw appropriate events.', () => {
+      wrapper.vm.$listeners.input = null;
+      wrapper.vm.$listeners.textChange = null;
+      wrapper.vm.$listeners.returnPress = null;
+      wrapper.find('textarea').setValue('newest value');
+      expect(wrapper.emitted().input.length).to.equal(1);
+      expect(wrapper.emitted().textChange.length).to.equal(1);
+      expect(input.calledTwice).to.equal(false);
+      expect(textChange.calledTwice).to.equal(false);
+      wrapper.find('textarea').trigger('keyup.enter', {
+        ctrlKey: true,
+        keyCode: 13,
+      });
+      expect(returnPress.calledTwice).to.equal(false);
     });
   });
 });

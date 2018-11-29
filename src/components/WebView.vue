@@ -1,7 +1,7 @@
 <template>
   <iframe v-if="isURL"
         class="nvw-webview"
-        :src="src"
+        :src="srcValue"
         @load="$emit('loadFinished', $event)"
     />
     <div v-else v-html="src"></div>
@@ -17,7 +17,7 @@ export default {
   },
   // Event called @loadstart does not get fired in the iframe so, the below method is a temporarily workaround to the problem.
   created(event) {
-    if (this.loadStarted && navigator.onLine) {
+    if (navigator.onLine) {
       this.$emit('loadStarted', event);
     }
   },

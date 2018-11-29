@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import { SegmentedBar, SegmentedBarItem } from '../../../src/main.js';
 
 describe('SegmentedBar', () => {
@@ -99,44 +99,129 @@ describe('SegmentedBar', () => {
     });
   });
 
-  describe('SegmentedBar component contains Slot component', () => {
-    const tab1Title = 'Tab 1';
-    const tab2Title = 'Tab 2';
-    const tab1 = {
-      render(h) {
-        return h(SegmentedBarItem, {
-          props: {
-            title: tab1Title,
-          },
-        });
-      },
-    };
-    const tab2 = {
-      render(h) {
-        return h(SegmentedBarItem, {
-          props: {
-            title: tab2Title,
-          },
-        });
-      },
-    };
-    const wrapper = mount(SegmentedBar, {
+  describe('the component contains one div.', () => {
+    const wrapper = shallowMount(SegmentedBar, {
       model: {
         event: 'input',
         prop: 'selectedIndex',
       },
       name: 'SegmentedBar',
       props: {
+        items: {
+          type: Array,
+        },
         selectedIndex: Number,
       },
-      slots: {
-        default: [tab1, tab2],
+      propsData: {
+        items,
+        selectedIndex,
+      },
+    });
+    it('there is one div.', () => {
+      expect(wrapper.contains('div.nvw-segmentedBar')).to.equal(true);
+      expect(wrapper.findAll('div.nvw-segmentedBar').length).to.equal(1);
+    });
+  });
+
+  describe('SegmentedBar+SegmentedBarItem', () => {
+    const segmentedBarItemTitle = 'SegmentedBarItem 1';
+    const segmentedBarItem2Title = 'SegmentedBarItem 2';
+    let segmentedBarItem1, segmentedBarItem2, wrapper;
+    before(() => {
+      segmentedBarItem1 = {
+        render(h) {
+          return h(SegmentedBarItem, {
+            props: {
+              title: segmentedBarItemTitle,
+            },
+          });
+        },
+      };
+      segmentedBarItem2 = {
+        render(h) {
+          return h(SegmentedBarItem, {
+            props: {
+              title: segmentedBarItem2Title,
+            },
+          });
+        },
+      };
+
+      wrapper = mount(SegmentedBar, {
+        name: 'SegmentedBar',
+        props: {
+          items: Array,
+          selectedIndex: {
+            type: Number,
+            default: 0,
+          },
+        },
+        propsData: {
+          items,
+          selectedIndex,
+        },
+        slots: {
+          default: [segmentedBarItem1, segmentedBarItem2],
+        },
+      });
+    });
+
+    it(`child component length equal to 2.`, () => {
+      expect(wrapper.vm.$slots.default.length).to.equal(2);
+    });
+
+    xit(`children length equal to 2.`, () => {
+      expect(wrapper.vm.children.length).to.equal(2);
+    });
+
+    it(`If it has not child component, show items.`, () => {
+      const wrapper2 = mount(SegmentedBar, {
+        name: 'SegmentedBar',
+        props: {
+          items: Array,
+          selectedIndex: {
+            type: Number,
+            default: 0,
+          },
+        },
+      });
+      expect(Object.keys(wrapper2.vm.$slots).length).to.equal(0);
+    });
+
+    it('Change item to out of list', done => {
+      const Wrapper = {
+        name: 'Wrapper',
+        template: '<SegmentedBar ref="myBar"><SegmentedBarItem title="Item 1" /></SegmentedBar>',
+        components: {
+          SegmentedBar,
+          SegmentedBarItem,
+        },
+      };
+
+      const mountedWrapper = mount(Wrapper);
+
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(10);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(0);
+      mountedWrapper.vm.$refs['myBar'].updateSegmentedBarIndexes(-5);
+
+      mountedWrapper.vm.$nextTick(() => {
+        expect(mountedWrapper.findAll('button').length).to.equal(1);
+        done();
+      });
+    });
+  });
+});
+
+describe('SegmentedBarItem', () => {
+  it(`should update when title is changed.`, () => {
+    const wrapper = mount(SegmentedBarItem, {
+      name: 'SegmentedBarItem',
+      propsData: {
+        title: 'Nativescript-Vue-Web',
       },
     });
 
-    xit(`children's size is equal to: 2.`, () => {
-      expect(wrapper.vm.children.length).to.equal(2);
-      expect(wrapper.vm.childrenFromSlots.length).to.equal(2);
-    });
+    wrapper.setProps({ title: 'newTitle' });
+    expect(wrapper.props().title).to.equal('newTitle');
   });
 });

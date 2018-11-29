@@ -8,19 +8,24 @@ describe('Login Dialog Plugin Testing', () => {
 
   const title = 'some title';
   const message = 'some message';
-  const cancelButtonText = 'Cancel';
+  const cancelButtonText = 'cancel';
   const okButtonText = 'Login';
   const userName = 'Username*';
   const password = 'Password*';
   const { login } = window;
   const tap = () => login({ title, message, okButtonText, cancelButtonText, userName, password }).then(msg => msg);
+  const tapWithDefaultButtonText = () => login({ title, message, userName, password }).then(msg => msg);
   const component = {
     methods: {
       tap,
+      tapWithDefaultButtonText,
     },
     template: `
           <div>
-            <button @click="tap">
+            <button class="first_button" @click="tap">
+              Click to show toast
+            </button>
+            <button class="second_button" @click="tapWithDefaultButtonText">
               Click to show toast
             </button>
           </div>
@@ -34,23 +39,50 @@ describe('Login Dialog Plugin Testing', () => {
 
   describe('Login Dialog Component is visible in the document.', () => {
     it(`The Login Dialog is shown on the document.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-login-dialog')).to.not.be.null;
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-login-dialog__header').firstChild.textContent.trim()).to.equal(title);
         done();
       }, 500);
     });
     it(`The message inside the body slot of the element equals to ${message}.`, done => {
-      wrapper.find('button').trigger('click');
+      wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-login-dialog__body').textContent.trim()).to.equal(message);
+        expect(document.querySelector('.nvw-login-dialog__footer__cancel-button').textContent.trim()).to.equal(cancelButtonText);
+        expect(document.querySelector('.nvw-login-dialog__footer__ok-button').textContent.trim()).to.equal(okButtonText);
+        done();
+      }, 500);
+    });
+  });
+  describe('Login Dialog with DEFAULT PARAMS Component is visible in the document.', () => {
+    it(`The Login Dialog is shown on the document.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-login-dialog')).to.not.be.null;
+        done();
+      }, 500);
+    });
+    it(`The title inside the header slot of the element equals to ${title}.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-login-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        done();
+      }, 500);
+    });
+    it(`The message inside the body slot of the element equals to ${message}.`, done => {
+      wrapper.find('.second_button').trigger('click');
+      setTimeout(() => {
+        expect(document.querySelector('.nvw-login-dialog__body').textContent.trim()).to.equal(message);
+        expect(document.querySelector('.nvw-login-dialog__footer__cancel-button').textContent.trim()).to.equal('Cancel');
+        expect(document.querySelector('.nvw-login-dialog__footer__ok-button').textContent.trim()).to.equal('OK');
         done();
       }, 500);
     });

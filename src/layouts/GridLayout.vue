@@ -64,5 +64,6 @@ export default {
 <style lang="scss">
 .nvw-grid-layout {
   display: grid;
+  overflow: hidden;
 }
 </style>

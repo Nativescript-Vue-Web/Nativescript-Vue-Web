@@ -15,11 +15,9 @@ Web components for Nativescript-Vue
 
 WIP
 
-### Remaining (In-Progress) Components & Directives
-- SegmentedBar
-- SegmentedBarItem
+### Remaining Items
+- Vue CLI 3.x plugin supporting NativeScript-Vue-Web add-on
 
-- NativeScript-Vue 3.x plugin supporting NativeScript-Vue-Web add-on
 
 ##### Project setup
 ```

@@ -1,10 +1,12 @@
 <template>
-  <span v-common-directive
-   class="nvw-label"
-   :class="fontClass"
-   :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
+  <span
+    v-common-directive
+    class="nvw-label"
+    :class="fontClass"
+    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}"
+  >
     {{textValue}}
-    <slot />
+    <slot/>
   </span>
 </template>
 
@@ -16,7 +18,7 @@ export default {
   name: 'Label',
   props: {
     text: {
-      type: String,
+      type: [String, Number],
       default: '',
     },
     textWrap: {
@@ -29,12 +31,12 @@ export default {
   },
   computed: {
     fontClass() {
-      if (this.text.includes(' | fonticon')) {
+      if (typeof this.text === 'string' && this.text.includes(' | fonticon')) {
         return this.text.replace(' | fonticon', '');
       }
     },
     textValue() {
-      return this.text.includes(' | fonticon') ? '' : this.text;
+      return typeof this.text === 'string' && this.text.includes(' | fonticon') ? '' : this.text;
     },
   },
   mixins: [Gestures],

@@ -1,27 +1,30 @@
 <template>
-<ModalDialog v-if="isModalVisible" class="nvw-action-dialog" @close="close">
-
-  <span class="nvw-action-dialog__header" slot="header">
-    <p>{{ title }}</p>
-  </span>
+  <ModalDialog v-if="isModalVisible" class="nvw-action-dialog" @close="close">
+    <span class="nvw-action-dialog__header" slot="header">
+      <p>{{ title }}</p>
+    </span>
 
     <div class="nvw-action-dialog__body" slot="body">
-           <section>
-               <nav>
-              <ul>
-                  <li v-for="(option, index) in options" :key="index">
-                    <Button @tap="$emit('submit', option)" :text="option" :link="true"/>
-                  </li>
-              </ul>
-               </nav>
-           </section>
-        </div>
-
-    <div class="nvw-action-dialog__footer" slot="footer">
-        <Button class="nvw-action-dialog__footer__cancel-button" :text="cancelButtonText" @tap="close" :link="true" />
+      <section>
+        <nav>
+          <ul>
+            <li v-for="(option, index) in options" :key="index">
+              <Button @tap="$emit('submit', option)" :text="option" :link="true"/>
+            </li>
+          </ul>
+        </nav>
+      </section>
     </div>
 
-</ModalDialog>
+    <div class="nvw-action-dialog__footer" slot="footer">
+      <Button
+        class="nvw-action-dialog__footer__cancel-button"
+        :text="cancelButtonText"
+        @tap="close"
+        :link="true"
+      />
+    </div>
+  </ModalDialog>
 </template>
 
 <script>
@@ -86,7 +89,8 @@ export default {
       color: #364fc7;
       font-size: 12px;
       &:hover {
-        border: solid 1px #364fc7;
+        border-style: solid;
+        border-color: #364fc7;
       }
     }
   }

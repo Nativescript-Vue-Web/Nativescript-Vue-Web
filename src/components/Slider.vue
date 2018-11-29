@@ -19,15 +19,15 @@ export default {
   name: 'Slider',
   props: {
     value: {
-      type: Number,
+      type: [String, Number],
       default: 0,
     },
     minValue: {
-      type: Number,
+      type: [String, Number],
       default: 0,
     },
     maxValue: {
-      type: Number,
+      type: [String, Number],
       default: 100,
     },
   },

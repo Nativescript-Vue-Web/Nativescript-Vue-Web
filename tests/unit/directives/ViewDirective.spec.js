@@ -6,41 +6,56 @@ describe('Action Dialog Plugin Testing', () => {
   const localVue = createLocalVue();
   localVue.use(Nvw);
 
-  const ViewComponent = {
-    name: 'ViewComponent',
+  const SideDrawer = {
+    name: 'SideDrawer',
     template:
-      '<div class="view-component-container"><div ref="leftContent" class="left-content"></div>' +
-      '<div ref="rightContent" class="right-content"></div><slot /></div>',
+      '<StackLayout class="sidedrawer"><StackLayout ref="drawerContent" class="drawer-content"></StackLayout>' +
+      '<StackLayout ref="mainContent" class="main-content"></StackLayout><slot /></StackLayout>',
     components: {
+      StackLayout,
+    },
+  };
+
+  localVue.component('SideDrawer', SideDrawer);
+
+  const Wrapper = {
+    name: 'Wrapper',
+    template:
+      '<SideDrawer ref="drawer">\n' +
+      '    <StackLayout v-view:drawerContent class="sideStackLayout">\n' +
+      '        <Label text="left" />\n' +
+      '    </StackLayout>\n' +
+      '    <StackLayout v-view:mainContent>\n' +
+      '        <Label text="right" />\n' +
+      '    </StackLayout>\n' +
+      '    <StackLayout v-view:another>\n' +
+      '        <Label text="another" />\n' +
+      '    </StackLayout>\n' +
+      '</SideDrawer>',
+    components: {
+      SideDrawer,
       StackLayout,
       Label,
     },
   };
 
-  const Wrapper = {
-    name: 'Wrapper',
-    template:
-      '<ViewComponent id="viewComponent"><div v-view:leftContent id="leftContentStack"><div>Left Content</div>' +
-      '</div><div v-view:rightContent><div>Right Content</div></div></ViewComponent>',
-    components: {
-      ViewComponent,
-    },
-  };
-
-  //TODO vnode.componentInstance is null on VueTest. It will be check again
   it(`The ViewComponent is shown on the document.`, () => {
-    mount(Wrapper, {
+    const mountedWrapper = mount(Wrapper, {
       localVue,
     });
-  });
 
-  xit(`The ViewComponent is shown on the document.`, done => {
-    const newWrapper = mount(Wrapper, {
-      localVue,
-    });
-    setTimeout(() => {
-      expect(newWrapper.props().length).to.equal(0);
-      done();
-    }, 1000);
+    expect(mountedWrapper.contains('div')).to.equal(true);
+    expect(
+      mountedWrapper
+        .findAll('.drawer-content')
+        .at(0)
+        .text(),
+    ).to.not.equal('');
+    expect(
+      mountedWrapper
+        .findAll('.main-content')
+        .at(0)
+        .text(),
+    ).to.not.equal('');
   });
 });

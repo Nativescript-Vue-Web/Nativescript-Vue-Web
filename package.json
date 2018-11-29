@@ -1,37 +1,37 @@
 {
   "name": "nativescript-vue-web",
   "description": "Web components for NativeScript-Vue",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "scripts": {
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit --require tests/unit/setup.js",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:inspect": "vue-cli-service test:unit --inspect-brk --watch",
     "postversion": "git push --tags",
-    "coverage": "nyc npm run test",
-    "report": "nyc --reporter=text-lcov > coverage.lcov npm run test"
+    "coverage": "nyc npm test",
+    "report": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov"
   },
   "main": "src/main.js",
   "dependencies": {
     "vue": "2.5.17"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.0.5",
-    "@vue/cli-plugin-eslint": "3.0.5",
-    "@vue/cli-plugin-unit-mocha": "3.0.5",
-    "@vue/cli-service": "3.0.5",
-    "@vue/eslint-config-airbnb": "3.0.5",
-    "@vue/eslint-config-prettier": "3.0.5",
-    "@vue/test-utils": "1.0.0-beta.25",
+    "@vue/cli-plugin-babel": "3.2.0",
+    "@vue/cli-plugin-eslint": "3.2.1",
+    "@vue/cli-plugin-unit-mocha": "3.2.0",
+    "@vue/cli-service": "3.2.0",
+    "@vue/eslint-config-airbnb": "4.0.0",
+    "@vue/eslint-config-prettier": "4.0.1",
+    "@vue/test-utils": "1.0.0-beta.26",
     "babel-plugin-istanbul": "5.1.0",
     "chai": "4.2.0",
     "codecov": "3.1.0",
-    "jsdom": "12.2.0",
-    "lint-staged": "7.3.0",
-    "node-sass": "4.9.4",
+    "jsdom": "13.0.0",
+    "lint-staged": "8.1.0",
+    "node-sass": "4.10.0",
     "nyc": "13.1.0",
     "sass-loader": "7.1.0",
-    "sinon": "7.0.0",
+    "sinon": "7.1.1",
     "vue-template-compiler": "2.5.17"
   },
   "eslintConfig": {
@@ -80,7 +80,8 @@
     "not ie <= 8"
   ],
   "gitHooks": {
-    "pre-commit": "lint-staged && npm run test"
+    "pre-commit": "lint-staged",
+    "pre-push": "npm audit && npm run coverage"
   },
   "lint-staged": {
     "*.js": [
@@ -113,6 +114,11 @@
   },
   "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
   "nyc": {
+    "check-coverage": true,
+    "lines": 85,
+    "statements": 85,
+    "functions": 81,
+    "branches": 87,
     "include": [
       "src/**/*.js",
       "src/**/*.vue"
@@ -122,7 +128,8 @@
     "all": true,
     "reporter": [
       "text",
-      "lcov"
+      "lcov",
+      "html"
     ]
   }
 }
