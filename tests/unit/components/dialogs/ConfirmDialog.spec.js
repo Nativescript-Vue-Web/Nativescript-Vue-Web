@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import ConfirmDialog from '../../../../src/components/dialogs/ConfirmDialog';
 import Button from '../../../../src/components/Button';
 
@@ -10,6 +11,8 @@ describe('ConfirmDialog', () => {
   const okButtonText = 'okButtonText';
   const cancelButtonText = 'cancelButtonText';
   const isModalVisible = true;
+
+  const close = sinon.spy(ConfirmDialog.methods, 'close');
 
   // Initializing the component.
   const wrapper = mount(ConfirmDialog, {
@@ -56,6 +59,9 @@ describe('ConfirmDialog', () => {
     it('the click event of Button element with ok-button class is passed to the component successfully.', () => {
       const button = wrapper.find('.nvw-confirm-dialog__footer__ok-button');
       button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0]).to.equal(true);
+      expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
   });

@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import ActionDialog from '../../../../src/components/dialogs/ActionDialog';
 import Button from '../../../../src/components/Button';
 
@@ -8,6 +9,8 @@ describe('ActionDialog', () => {
   const title = 'initial string';
   const cancelButtonText = 'cancelButtonText';
   const options = ['option0', 'option1'];
+
+  const close = sinon.spy(ActionDialog.methods, 'close');
 
   // Initializing the component.
   const wrapper = mount(ActionDialog, {
@@ -56,6 +59,9 @@ describe('ActionDialog', () => {
     it('the click event of Button element with cancel-button class is passed to the component successfully and the action dialog gets hidden.', () => {
       const button = wrapper.find('.nvw-action-dialog__footer__cancel-button');
       button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0]).to.equal('cancelButtonText');
+      expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
   });
