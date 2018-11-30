@@ -63,29 +63,30 @@ export default {
 .nvw-searchbar {
   display: flex;
   align-items: stretch;
-  background-color: #908f8f;
+  background-color: #ebebeb75;
   justify-content: space-between;
   min-width: 90px;
   max-height: 75px;
   min-height: 28px;
   padding: 7px;
-  border-radius: 12px;
+  border: solid 1px rgba(0, 0, 0, 0.1);
 
   &__search-input {
     margin: 0;
-    padding: 0;
+    padding: 0 5px;
     text-align: left;
     flex: 1;
     min-width: 30px;
+    border: solid 1px rgba(0, 0, 0, 0.1);
     &:focus {
-      box-shadow: 1px 1px rgba(54, 79, 199, 0.5);
+      outline: solid 1px rgba(0, 0, 0, 0.2);
     }
   }
 
   &__search-icon {
     cursor: pointer;
     background-image: url('../assets/icons/searchIcon.png');
-    background-size: 75%;
+    background-size: 60%;
     background-repeat: no-repeat;
     background-position: center center;
     flex: 0 0 30px;

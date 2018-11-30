@@ -85,7 +85,6 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
   &__button {
     background: none;
     border: solid 1px dodgerblue;
@@ -109,6 +108,9 @@ export default {
     &--active {
       background-color: dodgerblue;
       color: #fff;
+      &:hover {
+        background-color: #1b81e5;
+      }
     }
     &__title {
       padding: 10px 2px 10px 2px;
