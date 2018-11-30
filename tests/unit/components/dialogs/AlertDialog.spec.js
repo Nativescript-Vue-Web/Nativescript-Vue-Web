@@ -53,5 +53,14 @@ describe('AlertDialog', () => {
       expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
+
+    it('triggered close event on alert-dialog close', () => {
+      wrapper.setData({ isModalVisible: true });
+      const modal = wrapper.find('.nvw-alert-dialog');
+      modal.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(2);
+      expect(close.called).to.equal(true);
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
   });
 });

@@ -57,12 +57,26 @@ describe('ActionDialog', () => {
 
   describe('Events testing', () => {
     it('the click event of Button element with cancel-button class is passed to the component successfully and the action dialog gets hidden.', () => {
+      wrapper.setData({ isModalVisible: true });
       const button = wrapper.find('.nvw-action-dialog__footer__cancel-button');
       button.trigger('click');
       expect(wrapper.emitted().submit.length).to.equal(1);
-      expect(wrapper.emitted().submit[0][0]).to.equal('cancelButtonText');
+      expect(wrapper.emitted().submit[0][0]).to.equal(cancelButtonText);
       expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
+
+    it('Event triggered on selected item', () => {
+      wrapper.setData({ isModalVisible: true });
+      const emittedCount = wrapper.emitted().submit.length;
+      wrapper
+        .findAll('li')
+        .at(1)
+        .find('button')
+        .trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(emittedCount + 1);
+      const result = wrapper.emitted().submit.pop();
+      expect(result[0]).to.equal(options[1]);
     });
   });
 });
