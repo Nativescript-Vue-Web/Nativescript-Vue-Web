@@ -79,6 +79,8 @@ export default {
 </script>
 
 <style lang="scss" >
+@import '../../assets/styles/components/dialogs';
+
 .nvw-login-dialog {
   &__body {
     &__message {
@@ -103,19 +105,7 @@ export default {
 
     &__cancel-button,
     &__ok-button {
-      background-color: #ffffff;
-      color: #364fc7;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 8px 0;
-      min-width: auto;
-      text-transform: uppercase;
-
-      &:hover {
-        cursor: pointer;
-      }
+      @include nvw-dialog-button;
     }
 
     &__ok-button {

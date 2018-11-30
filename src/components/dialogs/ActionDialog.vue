@@ -54,44 +54,36 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../assets/styles/components/dialogs';
+
 .nvw-action-dialog {
   &__body {
     ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
-    }
-    ul li {
-      .nvw-button {
-        width: 100%;
-        text-align: left;
-        background-color: #fff;
-        border: none;
-        outline: none;
-        padding: 8px 6px;
-        margin: 2px 0;
 
-        &:hover {
-          cursor: pointer;
-          background-color: #ebebeb;
+      li {
+        .nvw-button {
+          width: 100%;
+          text-align: left;
+          background-color: #fff;
+          border: none;
+          outline: none;
+          padding: 8px 6px;
+          margin: 2px 0;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #ebebeb;
+          }
         }
       }
     }
   }
   &__footer {
     &__cancel-button {
-      background-color: #ffffff;
-      color: #364fc7;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 8px 6px;
-      text-transform: uppercase;
-
-      &:hover {
-        cursor: pointer;
-      }
+      @include nvw-dialog-button;
     }
   }
 }
