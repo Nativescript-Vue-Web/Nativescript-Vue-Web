@@ -7,8 +7,12 @@
   font-weight: 600;
   padding: 8px 6px;
   text-transform: uppercase;
+  box-shadow: none;
 
-  &:hover {
+  &:hover,
+  &:active {
     cursor: pointer;
+    box-shadow: none;
+    background-color: #ffffff;
   }
 }
