@@ -99,30 +99,44 @@ export default {
 .nvw-tab-view {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   &__header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     &__tab {
       background: none;
-      border: none;
       display: flex;
       flex-grow: 1;
       justify-content: center;
       align-self: center;
       cursor: pointer;
+      border-top: none;
+      border-right: none;
+      border-bottom: 5px solid transparent;
+      border-left: none;
+      &:focus {
+        outline: none;
+      }
+
       &:hover {
         background-color: aliceblue;
       }
       &-active {
-        border-bottom: 5px solid crimson;
+        border-bottom: 5px solid dodgerblue;
       }
       &__icon,
       &__title {
         padding: 10px 2px 10px 2px;
       }
     }
+  }
+
+  &__content {
+    padding-top: 5px;
   }
 }
 </style>

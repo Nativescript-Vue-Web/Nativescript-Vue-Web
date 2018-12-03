@@ -77,3 +77,15 @@ export default {
   mixins: [Gestures],
 };
 </script>
+
+<style scoped lang="scss">
+.nvw-textfield {
+  padding: 2px 5px 2px 2px;
+  border: 0;
+  border-bottom: 1px solid #959595;
+  &:focus {
+    outline: 0 !important;
+    border-bottom: 1px solid dodgerblue;
+  }
+}
+</style>
