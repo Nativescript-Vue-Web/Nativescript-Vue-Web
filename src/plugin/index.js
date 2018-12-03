@@ -10,22 +10,25 @@ const NvwPlugin = {
   install: Vue => {
     // Show Modal
     Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) {
-      // eslint-disable-line
-      const ContentComponent = Vue.extend(component);
-      const ModalComponent = Vue.extend(Modal);
-      const ModalInstance = new ModalComponent();
-      ContentComponent.prototype.$modal = {
-        close() {
-          ModalInstance.closeModal();
-        },
-      };
-      const modalDom = ModalInstance.$mount();
-      document.body.appendChild(modalDom.$el);
-      ModalInstance.isModalVisible = true;
-      ModalInstance.contentComponent = ContentComponent;
-      if (options && options.fullscreen) {
-        ModalInstance.fullscreen = options.fullscreen;
-      }
+      return new Promise(resolve => {
+        // eslint-disable-line
+        const ContentComponent = Vue.extend(component);
+        const ModalComponent = Vue.extend(Modal);
+        const ModalInstance = new ModalComponent();
+        ContentComponent.prototype.$modal = {
+          close(data) {
+            ModalInstance.closeModal();
+            resolve(data);
+          },
+        };
+        const modalDom = ModalInstance.$mount();
+        document.body.appendChild(modalDom.$el);
+        ModalInstance.isModalVisible = true;
+        ModalInstance.contentComponent = ContentComponent;
+        if (options && options.fullscreen) {
+          ModalInstance.fullscreen = options.fullscreen;
+        }
+      });
     };
 
     // Action Dialog
