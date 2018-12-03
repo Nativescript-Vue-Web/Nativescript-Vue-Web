@@ -83,11 +83,14 @@ describe('DatePicker Unit Test.', () => {
     it(`day, month, year props empty`, () => {
       const dateWrapper = mount(DatePicker);
       const date = new Date();
-      const day = date.getUTCDate();
-      const month = date.getUTCMonth();
+      const day = date
+        .getUTCDate()
+        .toString()
+        .padStart(2, '0');
+      const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
       const year = date.getFullYear();
 
-      expect(dateWrapper.element.value).to.equal(`${year}-${month + 1}-${day}`);
+      expect(dateWrapper.element.value).to.equal(`${year}-${month}-${day}`);
     });
   });
 

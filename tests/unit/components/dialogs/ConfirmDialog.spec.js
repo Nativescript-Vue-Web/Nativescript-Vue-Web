@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import ConfirmDialog from '../../../../src/components/dialogs/ConfirmDialog';
 import Button from '../../../../src/components/Button';
 
@@ -10,6 +11,8 @@ describe('ConfirmDialog', () => {
   const okButtonText = 'okButtonText';
   const cancelButtonText = 'cancelButtonText';
   const isModalVisible = true;
+
+  const close = sinon.spy(ConfirmDialog.methods, 'close');
 
   // Initializing the component.
   const wrapper = mount(ConfirmDialog, {
@@ -52,31 +55,23 @@ describe('ConfirmDialog', () => {
     });
   });
 
-  describe('the component contains elemets.', () => {
-    it('the component contains one p element', () => {
-      expect(wrapper.contains('p')).to.equal(true);
-    });
-    it('the component contains one h4 element.', () => {
-      expect(wrapper.contains('h4')).to.equal(true);
-    });
-  });
-
-  describe('changes h4 and p value.', () => {
-    it('set the h4 value', () => {
-      const h4 = wrapper.find('h4');
-      h4.element.value = 'new header';
-      expect(h4.element.value).to.equal('new header');
-    });
-    it('set the p value', () => {
-      const p = wrapper.find('p');
-      p.element.value = 'new message';
-      expect(p.element.value).to.equal('new message');
-    });
-  });
   describe('Events testing', () => {
     it('the click event of Button element with ok-button class is passed to the component successfully.', () => {
       const button = wrapper.find('.nvw-confirm-dialog__footer__ok-button');
       button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0]).to.equal(true);
+      expect(close.called).to.equal(true);
+      expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
+
+    it('the click event of Button element with cancel-button class is passed to the component successfully.', () => {
+      wrapper.setData({ isModalVisible: true });
+      const button = wrapper.find('.nvw-confirm-dialog__footer__cancel-button');
+      button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(2);
+      expect(wrapper.emitted().submit[1][0]).to.equal(false);
+      expect(close.callCount).to.equal(2);
       expect(wrapper.vm.isModalVisible).to.equal(false);
     });
   });

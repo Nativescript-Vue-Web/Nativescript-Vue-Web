@@ -1,19 +1,13 @@
 <template>
   <ModalDialog v-if="isModalVisible" class="nvw-action-dialog" @close="close">
-    <span class="nvw-action-dialog__header" slot="header">
-      <p>{{ title }}</p>
-    </span>
+    <span class="nvw-action-dialog__header" slot="header">{{ title }}</span>
 
     <div class="nvw-action-dialog__body" slot="body">
-      <section>
-        <nav>
-          <ul>
-            <li v-for="(option, index) in options" :key="index">
-              <Button @tap="$emit('submit', option)" :text="option" :link="true"/>
-            </li>
-          </ul>
-        </nav>
-      </section>
+      <ul>
+        <li v-for="(option, index) in options" :key="index">
+          <Button @tap="$emit('submit', option)" :text="option" :link="true"/>
+        </li>
+      </ul>
     </div>
 
     <div class="nvw-action-dialog__footer" slot="footer">
@@ -49,7 +43,7 @@ export default {
   methods: {
     close() {
       this.isModalVisible = false;
-      this.$emit('submit', null);
+      this.$emit('submit', this.cancelButtonText);
     },
   },
   components: {
@@ -59,39 +53,37 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
+@import '../../assets/styles/components/dialogs';
+
 .nvw-action-dialog {
   &__body {
-    section:after {
-      display: table;
-      clear: both;
-    }
-    nav ul {
+    ul {
       list-style-type: none;
       padding: 0;
-    }
-    nav li {
-      text-align: left;
-      margin-top: 15px;
-    }
-    a {
-      display: block;
-      text-decoration: none;
-      color: black;
-      &:hover {
-        opacity: 0.6;
+      margin: 0;
+
+      li {
+        .nvw-button {
+          width: 100%;
+          text-align: left;
+          background-color: #fff;
+          border: none;
+          outline: none;
+          padding: 8px 6px;
+          margin: 2px 0;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #ebebeb;
+          }
+        }
       }
     }
   }
   &__footer {
     &__cancel-button {
-      background-color: #ffffff;
-      color: #364fc7;
-      font-size: 12px;
-      &:hover {
-        border-style: solid;
-        border-color: #364fc7;
-      }
+      @include nvw-dialog-button;
     }
   }
 }

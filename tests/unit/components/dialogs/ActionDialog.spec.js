@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount } from '@vue/test-utils';
+import sinon from 'sinon';
 import ActionDialog from '../../../../src/components/dialogs/ActionDialog';
 import Button from '../../../../src/components/Button';
 
@@ -8,6 +9,8 @@ describe('ActionDialog', () => {
   const title = 'initial string';
   const cancelButtonText = 'cancelButtonText';
   const options = ['option0', 'option1'];
+
+  const close = sinon.spy(ActionDialog.methods, 'close');
 
   // Initializing the component.
   const wrapper = mount(ActionDialog, {
@@ -31,6 +34,9 @@ describe('ActionDialog', () => {
     it(`cancelButtonText property is equal to: ${cancelButtonText}.`, () => {
       expect(wrapper.props().cancelButtonText).to.equal(cancelButtonText);
     });
+    it(`options property is equal to: ${options.toString()}.`, () => {
+      expect(wrapper.props().options.toString()).to.equal(options.toString());
+    });
   });
   describe('the component contains exactly two Button.', () => {
     it('there is two Button.', done => {
@@ -41,15 +47,6 @@ describe('ActionDialog', () => {
   });
 
   describe('the component contains elemets.', () => {
-    it('the component contains one p element', () => {
-      expect(wrapper.contains('p')).to.equal(true);
-    });
-    it('the component contains one section element', () => {
-      expect(wrapper.contains('section')).to.equal(true);
-    });
-    it('the components contains one nav elemet', () => {
-      expect(wrapper.contains('nav')).to.equal(true);
-    });
     it('the component contains one lu element', () => {
       expect(wrapper.contains('ul')).to.equal(true);
     });
@@ -58,18 +55,28 @@ describe('ActionDialog', () => {
     });
   });
 
-  describe('changes a and p value.', () => {
-    it('set the p value', () => {
-      const p = wrapper.find('p');
-      p.element.value = 'new message';
-      expect(p.element.value).to.equal('new message');
-    });
-  });
   describe('Events testing', () => {
     it('the click event of Button element with cancel-button class is passed to the component successfully and the action dialog gets hidden.', () => {
+      wrapper.setData({ isModalVisible: true });
       const button = wrapper.find('.nvw-action-dialog__footer__cancel-button');
       button.trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(1);
+      expect(wrapper.emitted().submit[0][0]).to.equal(cancelButtonText);
+      expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
+    });
+
+    it('Event triggered on selected item', () => {
+      wrapper.setData({ isModalVisible: true });
+      const emittedCount = wrapper.emitted().submit.length;
+      wrapper
+        .findAll('li')
+        .at(1)
+        .find('button')
+        .trigger('click');
+      expect(wrapper.emitted().submit.length).to.equal(emittedCount + 1);
+      const result = wrapper.emitted().submit.pop();
+      expect(result[0]).to.equal(options[1]);
     });
   });
 });

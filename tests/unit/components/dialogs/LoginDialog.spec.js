@@ -109,7 +109,7 @@ describe('LoginDialog', () => {
       const button = wrapper.find('.nvw-login-dialog__footer__cancel-button');
       button.trigger('click');
       expect(wrapper.emitted().submit.length).to.equal(2);
-      expect(wrapper.emitted().submit[1][0]).to.equal(null);
+      expect(wrapper.emitted().submit[1][0].result).to.equal(false);
       expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
       done();

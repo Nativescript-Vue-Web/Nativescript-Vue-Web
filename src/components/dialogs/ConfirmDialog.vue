@@ -1,11 +1,9 @@
 <template>
   <ModalDialog v-if="isModalVisible" class="nvw-confirm-dialog" @close="close(false)">
-    <span class="nvw-confirm-dialog__header" slot="header">
-      <h4>{{ title }}</h4>
-    </span>
+    <span class="nvw-confirm-dialog__header" slot="header">{{ title }}</span>
 
     <div v-if="message" class="nvw-confirm-dialog__body" slot="body">
-      <p>{{ message }}</p>
+      <div>{{ message }}</div>
     </div>
 
     <div class="nvw-confirm-dialog__footer" slot="footer">
@@ -35,10 +33,19 @@ export default {
     };
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: 'Confirm',
+    },
     message: String,
-    okButtonText: String,
-    cancelButtonText: String,
+    okButtonText: {
+      type: String,
+      default: 'Ok',
+    },
+    cancelButtonText: {
+      type: String,
+      default: 'Cancel',
+    },
   },
   methods: {
     close(val) {
@@ -54,27 +61,21 @@ export default {
 </script>
 
 <style lang="scss" >
+@import '../../assets/styles/components/dialogs';
+
 .nvw-confirm-dialog {
   &__footer {
-    &__cancel-button {
-      background-color: #ffffff;
-      color: #364fc7;
-      width: 96px;
-      margin: 0 5px;
-      &:hover {
-        border-style: solid;
-        border-color: #364fc7;
-      }
-    }
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+
+    &__cancel-button,
     &__ok-button {
-      background-color: #ffffff;
-      color: #364fc7;
-      width: 96px;
-      margin: 0 5px;
-      &:hover {
-        border-style: solid;
-        border-color: #364fc7;
-      }
+      @include nvw-dialog-button;
+    }
+
+    &__ok-button {
+      margin-left: 20px;
     }
   }
 }

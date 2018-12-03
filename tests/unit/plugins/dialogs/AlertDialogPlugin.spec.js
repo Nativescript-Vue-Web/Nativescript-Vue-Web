@@ -10,8 +10,8 @@ describe('Alert Dialog Plugin Testing', () => {
   const message = 'Some message';
   const okButtonText = 'ok';
   const { alert } = window;
-  const tap = () => alert(title, message, okButtonText);
-  const tapWithDefaultButtonText = () => alert({ title, message });
+  const tap = () => alert(message);
+  const tapWithDefaultButtonText = () => alert({ title, message, okButtonText });
 
   const component = {
     methods: {
@@ -40,13 +40,15 @@ describe('Alert Dialog Plugin Testing', () => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-alert-dialog')).to.not.be.null;
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
-    it(`The title inside the header slot of the element equals to ${title}.`, done => {
+    it(`The title inside the header slot of the element equals to ${message}.`, done => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.nvw-alert-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        expect(document.querySelector('.nvw-alert-dialog__body').firstChild.textContent.trim()).to.equal(message);
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -54,7 +56,14 @@ describe('Alert Dialog Plugin Testing', () => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-alert-dialog__body').firstChild.textContent.trim()).to.equal(message);
-        expect(document.querySelector('.nvw-alert-dialog__footer__ok-button').textContent.trim()).to.equal('ok');
+        expect(
+          document
+            .querySelector('.nvw-alert-dialog__footer__ok-button')
+            .textContent.trim()
+            .toLowerCase()
+            .toLowerCase(),
+        ).to.equal('ok');
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -64,6 +73,7 @@ describe('Alert Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-alert-dialog')).to.not.be.null;
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -71,6 +81,7 @@ describe('Alert Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-alert-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -78,7 +89,8 @@ describe('Alert Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-alert-dialog__body').firstChild.textContent.trim()).to.equal(message);
-        expect(document.querySelector('.nvw-alert-dialog__footer__ok-button').textContent.trim()).to.equal('OK');
+        expect(document.querySelector('.nvw-alert-dialog__footer__ok-button').textContent.trim()).to.equal('ok');
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
