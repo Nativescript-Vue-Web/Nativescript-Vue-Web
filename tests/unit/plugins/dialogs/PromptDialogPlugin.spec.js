@@ -11,11 +11,9 @@ describe('Prompt Dialog Plugin Testing', () => {
   const cancelButtonText = 'cancel';
   const okButtonText = 'Submit';
   const defaultText = 'some text*';
-  const inputType = 'text';
-  const value = 'some value';
   const { prompt } = window;
-  const tap = () => prompt(title, message, okButtonText, cancelButtonText, defaultText, inputType, value).then(msg => msg);
-  const tapWithDefaultButtonText = () => prompt({ title, message, defaultText, inputType, value }).then(msg => msg);
+  const tap = () => prompt(message, defaultText).then(msg => msg);
+  const tapWithDefaultButtonText = () => prompt({ title, message, okButtonText, cancelButtonText, defaultText }).then(msg => msg);
   const component = {
     methods: {
       tap,
@@ -43,13 +41,20 @@ describe('Prompt Dialog Plugin Testing', () => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog')).to.not.be.null;
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
     it(`The title inside the header slot of the element equals to ${title}.`, done => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
-        expect(document.querySelector('.nvw-prompt-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        expect(
+          document
+            .querySelector('.nvw-prompt-dialog__header')
+            .firstChild.textContent.trim()
+            .toLowerCase(),
+        ).to.equal('prompt');
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -57,8 +62,19 @@ describe('Prompt Dialog Plugin Testing', () => {
       wrapper.find('.first_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog__body').textContent.trim()).to.equal(message);
-        expect(document.querySelector('.nvw-prompt-dialog__footer__cancel-button').textContent.trim()).to.equal(cancelButtonText);
-        expect(document.querySelector('.nvw-prompt-dialog__footer__ok-button').textContent.trim()).to.equal(okButtonText);
+        expect(
+          document
+            .querySelector('.nvw-prompt-dialog__footer__cancel-button')
+            .textContent.trim()
+            .toLowerCase(),
+        ).to.equal('cancel');
+        expect(
+          document
+            .querySelector('.nvw-prompt-dialog__footer__ok-button')
+            .textContent.trim()
+            .toLowerCase(),
+        ).to.equal('ok');
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -68,6 +84,7 @@ describe('Prompt Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog')).to.not.be.null;
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -75,6 +92,7 @@ describe('Prompt Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog__header').firstChild.textContent.trim()).to.equal(title);
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });
@@ -82,8 +100,10 @@ describe('Prompt Dialog Plugin Testing', () => {
       wrapper.find('.second_button').trigger('click');
       setTimeout(() => {
         expect(document.querySelector('.nvw-prompt-dialog__body').textContent.trim()).to.equal(message);
-        expect(document.querySelector('.nvw-prompt-dialog__footer__cancel-button').textContent.trim()).to.equal('Cancel');
-        expect(document.querySelector('.nvw-prompt-dialog__footer__ok-button').textContent.trim()).to.equal('OK');
+        expect(document.querySelector('.nvw-prompt-dialog__footer__cancel-button').textContent.trim()).to.equal(cancelButtonText);
+        expect(document.querySelector('.nvw-prompt-dialog__footer__ok-button').textContent.trim()).to.equal(okButtonText);
+        expect(document.querySelector('.nvw-prompt-dialog__input').value.trim()).to.equal(defaultText);
+        document.querySelector('.nvw-modal-dialog').click();
         done();
       }, 500);
     });

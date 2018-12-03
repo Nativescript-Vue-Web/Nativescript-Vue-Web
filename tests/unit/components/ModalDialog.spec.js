@@ -15,7 +15,7 @@ describe('ModalDialog', () => {
 
   describe('click testing of the top div tag.', () => {
     it('the div at top gets clicked and close event is emitted.', () => {
-      wrapper.find('.nvw-modal').trigger('click');
+      wrapper.find('.nvw-modal-dialog').trigger('click');
       expect(wrapper.emitted().close.length).to.equal(1);
       expect(close.called).to.equal(true);
     });

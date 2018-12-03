@@ -45,7 +45,7 @@ export default {
 
   &:hover {
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.1) radial-gradient(circle, transparent 1%, rgba(255, 255, 255, 0.1) 1%) center/15000%;
+    background: rgba(0, 0, 0, 0.1) radial-gradient(circle, transparent 1%, rgba(255, 255, 255, 0.1) 1%) center/15000%;
   }
 
   &:active {

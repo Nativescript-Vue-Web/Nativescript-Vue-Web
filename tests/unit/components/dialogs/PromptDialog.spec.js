@@ -81,33 +81,14 @@ describe('PromptDialog', () => {
   });
 
   describe('the component contains elemets.', () => {
-    it('the component contains one p element', () => {
-      expect(wrapper.contains('p')).to.equal(true);
-    });
-    it('the component contains one h4 element.', () => {
-      expect(wrapper.contains('h4')).to.equal(true);
-    });
     it('the component contains one TextField.', () => {
       expect(wrapper.contains(TextField)).to.equal(true);
     });
   });
 
-  describe('changes h4 and p value.', () => {
-    it('set the h4 value', () => {
-      const h4 = wrapper.find('h4');
-      h4.element.value = 'new header';
-      expect(h4.element.value).to.equal('new header');
-    });
-    it('set the p value', () => {
-      const p = wrapper.find('p');
-      p.element.value = 'new message';
-      expect(p.element.value).to.equal('new message');
-    });
-  });
   describe('Events testing.', () => {
     it('Changing the val of the value fields.', done => {
       wrapper.find(TextField).setValue('new value');
-      wrapper.setData({ val: 'new value' });
       expect(wrapper.find(TextField).element.value).to.equal('new value');
       done();
     });
@@ -115,7 +96,7 @@ describe('PromptDialog', () => {
       const button = wrapper.find('.nvw-prompt-dialog__footer__ok-button');
       button.trigger('click');
       expect(wrapper.emitted().submit.length).to.equal(1);
-      expect(wrapper.emitted().submit[0][0].value).to.equal('new value');
+      expect(wrapper.emitted().submit[0][0].text).to.equal('new value');
       expect(submit.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
       done();
@@ -126,7 +107,7 @@ describe('PromptDialog', () => {
       const button = wrapper.find('.nvw-prompt-dialog__footer__cancel-button');
       button.trigger('click');
       expect(wrapper.emitted().submit.length).to.equal(2);
-      expect(wrapper.emitted().submit[1][0]).to.equal(null);
+      expect(wrapper.emitted().submit[1][0].result).to.equal(false);
       expect(close.called).to.equal(true);
       expect(wrapper.vm.isModalVisible).to.equal(false);
       done();

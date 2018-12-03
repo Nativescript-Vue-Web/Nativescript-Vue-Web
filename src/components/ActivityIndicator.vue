@@ -26,13 +26,16 @@ export default {
 
 <style lang="scss">
 .nvw-activity-indicator {
+  width: 40px;
+  height: 40px;
   &__loader {
-    border: 5px solid #f3f3f3;
+    border: 4px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 5px solid #3498db;
-    width: 40px;
-    height: 40px;
-    animation: nwv-spin 1s linear infinite;
+    border-top: 4px solid #3498db;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    animation: nwv-spin 0.7s linear infinite;
   }
 }
 

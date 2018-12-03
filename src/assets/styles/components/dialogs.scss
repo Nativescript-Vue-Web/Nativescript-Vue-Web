@@ -1,0 +1,18 @@
+@mixin nvw-dialog-button {
+  background-color: #ffffff;
+  color: #364fc7;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 6px;
+  text-transform: uppercase;
+  box-shadow: none;
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    box-shadow: none;
+    background-color: #ffffff;
+  }
+}

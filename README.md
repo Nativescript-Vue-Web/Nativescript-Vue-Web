@@ -17,6 +17,7 @@ WIP
 
 ### Remaining Items
 - Vue CLI 3.x plugin supporting NativeScript-Vue-Web add-on
+- NativeScript-Vue Manual Routing mapping to vue-router for Web
 
 
 ##### Project setup

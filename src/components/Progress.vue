@@ -47,8 +47,8 @@ export default {
 
   &__bar {
     width: 0;
-    height: 20px;
-    background-color: #9198e5;
+    height: 8px;
+    background-color: dodgerblue;
     transition: all 1s ease;
     transition-delay: 0.1s;
     color: brown;

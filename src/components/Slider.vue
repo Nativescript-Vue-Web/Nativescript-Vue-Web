@@ -48,29 +48,30 @@ export default {
   &__scroll {
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
+    height: 2px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
-
     &:hover {
       opacity: 2;
     }
     &::-webkit-slider-thumb {
-      width: 25px;
-      height: 25px;
-      background: #4caf50;
+      width: 15px;
+      height: 15px;
+      background: dodgerblue;
       cursor: pointer;
       -webkit-appearance: none;
+      border-radius: 50%;
     }
     &::-moz-range-thumb {
-      width: 25px;
-      height: 25px;
-      background: #4caf50;
+      width: 15px;
+      height: 15px;
+      background: dodgerblue;
       cursor: pointer;
       -webkit-appearance: none;
+      border-radius: 50%;
     }
   }
 }

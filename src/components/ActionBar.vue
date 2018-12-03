@@ -51,12 +51,12 @@ export default {
 .nvw-action-bar {
   display: flex;
   height: 40px;
-  background-color: #3f51b5;
-  color: #ffffff;
+  background-color: #f5f5f5;
+  color: #333333;
   box-sizing: border-box;
   flex-direction: row;
   width: 100%;
-  padding: 0 5px;
+  padding: 0 5px 0px 10px;
   align-items: center;
   box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 
