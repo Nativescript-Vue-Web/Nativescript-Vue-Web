@@ -1,9 +1,11 @@
 <template>
-    <button v-common-directive
-    class="nvw-button" :type="type"
-    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}">
-     {{text}}
-    </button>
+  <button
+    v-common-directive
+    class="nvw-button"
+    :type="type"
+    :style="{'white-space': textWrap ? 'normal' : 'nowrap'}"
+    :disabled="!isEnabled"
+  >{{text}}</button>
 </template>
 
 <script>
@@ -15,13 +17,17 @@ export default {
   props: {
     text: String,
     textWrap: {
-      Type: Boolean,
+      type: Boolean,
       default: false,
     },
     type: {
-      Type: String,
+      type: String,
       default: 'button',
       validator: val => ['button', 'reset', 'submit'].includes(val),
+    },
+    isEnabled: {
+      type: Boolean,
+      default: true,
     },
   },
   directives: {
