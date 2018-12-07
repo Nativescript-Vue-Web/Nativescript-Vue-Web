@@ -48,7 +48,6 @@ export default {
   border-radius: 2px;
   font-weight: bolder;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
   transition-delay: 0.3s;
   transition: box-shadow 0.2s, background-color 0.2s, transform 1s;
   &:hover {
