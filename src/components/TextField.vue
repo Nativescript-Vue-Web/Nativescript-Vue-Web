@@ -48,12 +48,8 @@ export default {
   },
   methods: {
     updateValue: function($event) {
-      if (this.$listeners.input) {
-        this.$emit('input', $event.target.value);
-      }
-      if (this.$listeners.textChange) {
-        this.$emit('textChange', $event.target.value);
-      }
+      this.$emit('textChange', $event);
+      this.$emit('input', $event.target.value);
     },
   },
   computed: {
