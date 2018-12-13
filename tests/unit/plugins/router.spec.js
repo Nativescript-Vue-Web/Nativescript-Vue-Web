@@ -17,8 +17,8 @@ describe('NvwRouter Testing', () => {
 
     localVue.use(NvwRouter, { router: mockRouter });
 
-    expect(localVue.$navigateTo).to.be.a('function');
-    expect(localVue.$navigateBack).to.be.a('function');
+    expect(localVue.prototype.$navigateTo).to.be.a('function');
+    expect(localVue.prototype.$navigateBack).to.be.a('function');
   });
 
   it('check plugin navigateTo', () => {
@@ -34,7 +34,7 @@ describe('NvwRouter Testing', () => {
 
     let myDummyComponent = new Object();
     localVue.prototype.$navigateTo(myDummyComponent);
-    expect(mockRouter.lastPushedComponent).to.be(myDummyComponent);
+    expect(mockRouter.lastPushedComponent).to.equal(myDummyComponent);
   });
 
   it('check plugin navigateBack', () => {
@@ -48,6 +48,6 @@ describe('NvwRouter Testing', () => {
 
     localVue.use(NvwRouter, { router: mockRouter });
     localVue.prototype.$navigateBack();
-    expect(mockRouter.lastGoParameter).to.be(-1);
+    expect(mockRouter.lastGoParameter).to.equal(-1);
   });
 });
