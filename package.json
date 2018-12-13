@@ -114,7 +114,7 @@
   },
   "homepage": "https://github.com/Nativescript-Vue-Web/Nativescript-Vue-Web#readme",
   "nyc": {
-    "check-coverage": false,
+    "check-coverage": true,
     "lines": 85,
     "statements": 85,
     "functions": 81,
