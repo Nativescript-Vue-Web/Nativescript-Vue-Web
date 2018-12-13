@@ -11,7 +11,7 @@
         @blur="$emit('blur', $event)"
         @focus="$emit('focus', $event)"
         @keyup.enter="$emit('returnPress', $event)"
-        @input="updateValue"
+        @input="updateValue($event)"
     />
 </template>
 
