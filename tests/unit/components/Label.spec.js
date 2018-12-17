@@ -7,6 +7,7 @@ describe('Label.vue', () => {
   const emptyLabel = mount(Label);
 
   const text = 'initial string';
+  const number = 3;
   const textWrap = false;
   const childSpanText = 'hey, this is the child span.';
 
@@ -60,6 +61,12 @@ describe('Label.vue', () => {
     it(`the text inside the Label component is equal to.${text}`, done => {
       const parentSpan = wrapper.findAll('span').at(0);
       expect(parentSpan.element.textContent.includes(text)).to.equal(true);
+      done();
+    });
+    it(`the text inside the Label component is equal to a number.${number}`, done => {
+      wrapper.setProps({ text: number });
+      const childSpan = wrapper.findAll('span').at(1);
+      expect(childSpan.element.textContent.trim()).to.equal(number);
       done();
     });
     it(`the child span which is the slot in the parent(Label) displays the ${childSpanText}.`, done => {
