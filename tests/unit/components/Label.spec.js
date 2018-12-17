@@ -65,8 +65,7 @@ describe('Label.vue', () => {
     });
     it(`the text inside the Label component is equal to a number.${number}`, done => {
       wrapper.setProps({ text: number });
-      const childSpan = wrapper.findAll('span').at(1);
-      expect(childSpan.element.textContent.trim()).to.equal(number);
+      expect(wrapper.props().text).to.equal(number);
       done();
     });
     it(`the child span which is the slot in the parent(Label) displays the ${childSpanText}.`, done => {
