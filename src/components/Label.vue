@@ -36,7 +36,11 @@ export default {
       }
     },
     textValue() {
-      return typeof this.text === 'string' && this.text.includes(' | fonticon') ? '' : this.text;
+      if (typeof this.text === 'string') {
+        return this.text.includes(' | fonticon') ? '' : this.text;
+      } else {
+        return this.text;
+      }
     },
   },
   mixins: [Gestures],
