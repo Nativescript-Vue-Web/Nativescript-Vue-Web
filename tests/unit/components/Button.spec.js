@@ -80,7 +80,7 @@ describe('the shows icon correctly.', () => {
   it(`Icon components text should be empty`, () => {
     expect(
       wrapper
-        .find('span')
+        .find('button')
         .text()
         .replace(/\n/g, '')
         .trim(),
