@@ -8,6 +8,7 @@ describe('Button.vue', () => {
   const type = 'button';
   const textWrap = false;
   const isEnabled = true;
+  const number = 3;
   const tap = sinon.spy();
   const wrapper = mount(Button, {
     name: 'Button',
@@ -54,5 +55,35 @@ describe('Button.vue', () => {
     } else {
       expect(wrapper.find('button').element.style.whiteSpace).to.equal('nowrap');
     }
+  });
+  it(`the text inside the Label component is equal to a number.${number}`, done => {
+    wrapper.setProps({ text: number });
+    expect(wrapper.props().text).to.equal(number);
+    done();
+  });
+});
+
+describe('the shows icon correctly.', () => {
+  const text = 'bell | fonticon';
+  const wrapper = mount(Button, {
+    name: 'Label',
+    props: {
+      text: String,
+    },
+    propsData: {
+      text,
+    },
+  });
+  it(`Icon component given \`bell\` class`, () => {
+    expect(wrapper.find(Button).classes()).to.includes('bell');
+  });
+  it(`Icon components text should be empty`, () => {
+    expect(
+      wrapper
+        .find('span')
+        .text()
+        .replace(/\n/g, '')
+        .trim(),
+    ).to.equal('');
   });
 });
