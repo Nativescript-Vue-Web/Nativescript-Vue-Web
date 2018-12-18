@@ -2,10 +2,11 @@
   <button
     v-common-directive
     class="nvw-button"
+    :class="fontClass"
     :type="type"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}"
     :disabled="!isEnabled"
-  >{{text}}</button>
+  >{{textValue}}</button>
 </template>
 
 <script>
@@ -28,6 +29,22 @@ export default {
     isEnabled: {
       type: Boolean,
       default: true,
+    },
+  },
+  computed: {
+    //adds icon classes to button
+    fontClass() {
+      if (typeof this.text === 'string' && this.text.includes(' | fonticon')) {
+        return this.text.replace(' | fonticon', '');
+      }
+    },
+    //removes text when fonticon filter is present
+    textValue() {
+      if (typeof this.text === 'string') {
+        return this.text.includes(' | fonticon') ? '' : this.text;
+      } else {
+        return this.text;
+      }
     },
   },
   directives: {
