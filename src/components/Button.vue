@@ -32,11 +32,13 @@ export default {
     },
   },
   computed: {
+    //adds icon classes to button
     fontClass() {
       if (typeof this.text === 'string' && this.text.includes(' | fonticon')) {
         return this.text.replace(' | fonticon', '');
       }
     },
+    //removes text when fonticon filter is present
     textValue() {
       if (typeof this.text === 'string') {
         return this.text.includes(' | fonticon') ? '' : this.text;
