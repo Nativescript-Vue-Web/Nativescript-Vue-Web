@@ -56,7 +56,7 @@ describe('Button.vue', () => {
       expect(wrapper.find('button').element.style.whiteSpace).to.equal('nowrap');
     }
   });
-  it(`the text inside the Label component is equal to a number.${number}`, done => {
+  it(`the text inside the Button component is equal to a number.${number}`, done => {
     wrapper.setProps({ text: number });
     expect(wrapper.props().text).to.equal(number);
     done();
