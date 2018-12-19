@@ -31,10 +31,10 @@ const NvwPlugin = {
       });
     };
 
-    // Action Dialog
-    const ActionDialogComponent = Vue.extend(ActionDialog);
-    // Register action dialog to the window.
     if (typeof window !== 'undefined') {
+      // Action Dialog
+      const ActionDialogComponent = Vue.extend(ActionDialog);
+      // Register action dialog to the window.
       window.action = async function(title, cancelButtonText, options) {
         const actionDialog = new ActionDialogComponent();
         const actionDialogDom = actionDialog.$mount().$el;
@@ -51,12 +51,10 @@ const NvwPlugin = {
           });
         });
       };
-    }
 
-    // Alert Dialog
-    const AlertDialogComponent = Vue.extend(AlertDialog);
-    // Register alert dialog to the window.
-    if (typeof window !== 'undefined') {
+      // Alert Dialog
+      const AlertDialogComponent = Vue.extend(AlertDialog);
+      // Register alert dialog to the window.
       window.alert = function(messageText) {
         const alertDialog = new AlertDialogComponent();
         const alertDialogDom = alertDialog.$mount().$el;
@@ -78,12 +76,10 @@ const NvwPlugin = {
           });
         });
       };
-    }
 
-    // Login Dialog
-    const LoginDialogComponent = Vue.extend(LoginDialog);
-    // Register login dialog to the window.
-    if (typeof window !== 'undefined') {
+      // Login Dialog
+      const LoginDialogComponent = Vue.extend(LoginDialog);
+      // Register login dialog to the window.
       window.login = async function(messageText, userName, password) {
         const loginDialog = new LoginDialogComponent();
         const loginDialogDom = loginDialog.$mount().$el;
@@ -110,12 +106,10 @@ const NvwPlugin = {
           });
         });
       };
-    }
 
-    // Confirm Dialog
-    const ConfirmDialogComponent = Vue.extend(ConfirmDialog);
-    // Register confirm dialog to the window.
-    if (typeof window !== 'undefined') {
+      // Confirm Dialog
+      const ConfirmDialogComponent = Vue.extend(ConfirmDialog);
+      // Register confirm dialog to the window.
       window.confirm = async function(messageText) {
         const confirmDialog = new ConfirmDialogComponent();
         const confirmDialogDom = confirmDialog.$mount().$el;
@@ -138,12 +132,10 @@ const NvwPlugin = {
           });
         });
       };
-    }
 
-    // Prompt Dialog
-    const PromptDialogComponent = Vue.extend(PromptDialog);
-    // Register prompt dialog to the window.
-    if (typeof window !== 'undefined') {
+      // Prompt Dialog
+      const PromptDialogComponent = Vue.extend(PromptDialog);
+      // Register prompt dialog to the window.
       window.prompt = async function(messageText, defaultText) {
         const promptDialog = new PromptDialogComponent();
         const promptDialogDom = promptDialog.$mount().$el;
