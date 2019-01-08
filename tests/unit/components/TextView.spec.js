@@ -11,6 +11,7 @@ describe('TextView', () => {
   const keyboardType = 'email';
   const hint = 'some placeholder';
   const autocorrect = false;
+  const preventNextLine = true;
 
   // Spy events.
   const updateValueSpy = sinon.spy(TextView.methods, 'updateValue');
@@ -42,6 +43,7 @@ describe('TextView', () => {
     name: 'TextView',
     // This will converted to props.
     props: {
+      preventNextLine: Boolean,
       maxLength: Number,
       editable: Boolean,
       keyboardType: String,
@@ -56,6 +58,7 @@ describe('TextView', () => {
       hint,
       text,
       autocorrect,
+      preventNextLine,
     },
     listeners: {
       blur,
@@ -80,6 +83,10 @@ describe('TextView', () => {
 
     it(`hint property is equal to: ${hint}.`, () => {
       expect(wrapper.props().hint).to.equal(hint);
+    });
+
+    it(`preventNextLine is equal to: ${preventNextLine}.`, () => {
+      expect(wrapper.props().preventNextLine).to.equal(preventNextLine);
     });
 
     it(`editable property is equal to: ${editable}.`, () => {
@@ -134,9 +141,13 @@ describe('TextView', () => {
       expect(wrapper.find('textarea').attributes().maxlength).to.equal(maxLength.toString());
     });
 
-    it(`the spellCheck attribute which is equivalent of autocorrect in Nativescript-Vue is equal to${autocorrect}.`, () => {
+    it(`the spellCheck attribute which is equivalent of autocorrect in Nativescript-Vue is equal to ${autocorrect}.`, () => {
       // The component returns the attribute as string so, the autocorrect property is converted to string type.
       expect(wrapper.find('textarea').attributes().spellcheck).to.equal(autocorrect.toString());
+    });
+
+    it(`the placeholder attribute which is equivalent of hint in NativeScript-Vue is equal to ${hint}.`, () => {
+      expect(wrapper.find('textarea').attributes().placeholder).to.equal(hint.toString());
     });
 
     it(`the disabled attribute which is equivalent of editable in Nativescript-Vue is equal to${editable}.`, () => {
@@ -197,12 +208,38 @@ describe('TextView', () => {
       expect(blur.called).to.equal(true);
     });
 
-    it('the user pushes the enter button to return a value so, event handler named returnPress gets thrown', () => {
+    it(`the user pushes the enter button to return a value so while the input field prevents next line,
+      only the event handler named returnPress gets thrown.`, () => {
+      wrapper.find('textarea').trigger('keydown', {
+        shiftKey: false,
+        which: 13,
+      });
       wrapper.find('textarea').trigger('keyup.enter', {
-        ctrlKey: true,
-        keyCode: 13,
+        shiftKey: false,
+        which: 13,
       });
       expect(wrapper.emitted().returnPress.length).to.equal(1);
+      expect(returnPress.called).to.equal(true);
+    });
+
+    it(`the user pushes the shift+enter buttons to return a value so while the input field does not prevent next line,
+      the input gets next line but does not throw returnpress.`, () => {
+      wrapper.find('textarea').trigger('keyup.enter', {
+        shiftKey: true,
+        which: 13,
+      });
+      expect(wrapper.emitted().returnPress.length).to.equal(1);
+      expect(returnPress.called).to.equal(true);
+    });
+
+    it(`the user pushes the enter button to return a value so while the input field does not prevent next line,
+      the input gets next line but does not throw returnpress.`, () => {
+      wrapper.setProps({ preventNextLine: false });
+      wrapper.find('textarea').trigger('keyup.enter', {
+        shiftKey: false,
+        which: 13,
+      });
+      expect(wrapper.emitted().returnPress.length).to.equal(2);
       expect(returnPress.called).to.equal(true);
     });
 
@@ -215,11 +252,6 @@ describe('TextView', () => {
       expect(wrapper.emitted().textChange.length).to.equal(1);
       expect(input.calledTwice).to.equal(false);
       expect(textChange.calledTwice).to.equal(false);
-      wrapper.find('textarea').trigger('keyup.enter', {
-        ctrlKey: true,
-        keyCode: 13,
-      });
-      expect(returnPress.calledTwice).to.equal(false);
     });
   });
 });
