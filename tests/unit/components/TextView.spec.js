@@ -20,7 +20,6 @@ describe('TextView', () => {
   const returnPress = sinon.spy();
   const textChange = sinon.spy();
   const input = sinon.spy();
-  const preventDefaultSpy = sinon.spy();
 
   const LabelWrapper = {
     render(h) {
@@ -213,36 +212,33 @@ describe('TextView', () => {
       only the event handler named returnPress gets thrown.`, () => {
       wrapper.find('textarea').trigger('keydown', {
         shiftKey: false,
-        keyCode: 13,
-        preventDefault: preventDefaultSpy,
+        which: 13,
       });
       wrapper.find('textarea').trigger('keyup.enter', {
-        keyCode: 13,
+        shiftKey: false,
+        which: 13,
       });
-      expect(preventDefaultSpy.callCount).to.equal(1);
       expect(wrapper.emitted().returnPress.length).to.equal(1);
-      expect(returnPress.called).to.equal(true);
-    });
-
-    it(`the user pushes the enter button to return a value so while the input field does not prevent next line,
-      only the event handler named returnPress gets thrown.`, () => {
-      wrapper.setProps({ preventNextLine: false });
-      wrapper.find('textarea').trigger('keyup.enter', {
-        keyCode: 13,
-      });
-      expect(preventDefaultSpy.callCount).to.equal(1);
-      expect(wrapper.emitted().returnPress.length).to.equal(2);
       expect(returnPress.called).to.equal(true);
     });
 
     it(`the user pushes the shift+enter buttons to return a value so while the input field does not prevent next line,
       the input gets next line but does not throw returnpress.`, () => {
-      wrapper.setProps({ preventNextLine: false });
       wrapper.find('textarea').trigger('keyup.enter', {
         shiftKey: true,
-        keyCode: 13,
+        which: 13,
       });
-      expect(preventDefaultSpy.callCount).to.equal(1);
+      expect(wrapper.emitted().returnPress.length).to.equal(1);
+      expect(returnPress.called).to.equal(true);
+    });
+
+    it(`the user pushes the enter button to return a value so while the input field does not prevent next line,
+      the input gets next line but does not throw returnpress.`, () => {
+      wrapper.setProps({ preventNextLine: false });
+      wrapper.find('textarea').trigger('keyup.enter', {
+        shiftKey: false,
+        which: 13,
+      });
       expect(wrapper.emitted().returnPress.length).to.equal(2);
       expect(returnPress.called).to.equal(true);
     });

@@ -48,11 +48,11 @@ export default {
   },
   methods: {
     onKeyDown($event) {
-      if (!$event.shiftKey && $event.keyCode === 13 && this.preventNextLine) {
+      if (!$event.shiftKey && $event.which === 13 && this.preventNextLine) {
         $event.preventDefault();
       }
     },
-    updateValue: function($event) {
+    updateValue($event) {
       if (this.$listeners.input) {
         this.$emit('input', $event.target.value);
       }
@@ -60,8 +60,8 @@ export default {
         this.$emit('textChange', $event.target.value);
       }
     },
-    returnPress: function($event) {
-      if (!$event.shiftKey && $event.keyCode === 13 && this.$listeners.returnPress) {
+    returnPress($event) {
+      if (!$event.shiftKey && $event.which === 13 && this.$listeners.returnPress) {
         this.$emit('returnPress', $event.target.value);
       }
     },
