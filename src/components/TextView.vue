@@ -1,20 +1,21 @@
 <template>
- <div>  
-  <textarea
-    v-common-directive
-    class="nvw-textView"
-    :disabled="!editable"
-    :maxlength="maxLength"
-    :value="text"
-    :spellcheck="autocorrect"
-    @blur="$emit('blur', $event)"
-    @focus="$emit('focus', $event)"
-    @keyup.enter="returnPress"
-    @input="updateValue"
-  />
-   <slot />
+  <div class="nvw-textview-container">
+    <textarea
+      v-common-directive
+      class="nvw-textview-container__textview"
+      :disabled="!editable"
+      :maxlength="maxLength"
+      :value="text"
+      :placeholder="hint"
+      :spellcheck="autocorrect"
+      @blur="$emit('blur', $event)"
+      @focus="$emit('focus', $event)"
+      @keyup.enter="returnPress"
+      @input="updateValue"
+      @keydown="onKeyDown"
+    />
+    <slot/>
   </div>
-  
 </template>
 
 <script>
@@ -28,6 +29,10 @@ export default {
     prop: 'text',
   },
   props: {
+    preventNextLine: {
+      type: Boolean,
+      default: false,
+    },
     text: String,
     hint: String,
     editable: {
@@ -42,6 +47,11 @@ export default {
     'common-directive': CommonDirective,
   },
   methods: {
+    onKeyDown($event) {
+      if (!$event.shiftKey && $event.keyCode === 13 && this.preventNextLine) {
+        $event.preventDefault();
+      }
+    },
     updateValue: function($event) {
       if (this.$listeners.input) {
         this.$emit('input', $event.target.value);
@@ -51,7 +61,7 @@ export default {
       }
     },
     returnPress: function($event) {
-      if ($event.ctrlKey && $event.keyCode === 13 && this.$listeners.returnPress) {
+      if (!$event.shiftKey && $event.keyCode === 13 && this.$listeners.returnPress) {
         this.$emit('returnPress', $event.target.value);
       }
     },
