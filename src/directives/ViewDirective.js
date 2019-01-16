@@ -1,5 +1,5 @@
 const ViewDirective = {
-  bind(el, binding, vnode) {
+  inserted(el, binding, vnode) {
     // If it has a parent element
     let refs;
     if (vnode && vnode.componentInstance && vnode.componentInstance.$parent && vnode.componentInstance.$parent.$refs.constructor === Object) {

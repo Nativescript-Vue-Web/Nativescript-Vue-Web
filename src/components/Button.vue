@@ -2,10 +2,11 @@
   <button
     v-common-directive
     class="nvw-button"
+    :class="fontClass"
     :type="type"
     :style="{'white-space': textWrap ? 'normal' : 'nowrap'}"
     :disabled="!isEnabled"
-  >{{text}}</button>
+  >{{textValue}}</button>
 </template>
 
 <script>
@@ -30,6 +31,22 @@ export default {
       default: true,
     },
   },
+  computed: {
+    //adds icon classes to button
+    fontClass() {
+      if (typeof this.text === 'string' && this.text.includes(' | fonticon')) {
+        return this.text.replace(' | fonticon', '');
+      }
+    },
+    //removes text when fonticon filter is present
+    textValue() {
+      if (typeof this.text === 'string') {
+        return this.text.includes(' | fonticon') ? '' : this.text;
+      } else {
+        return this.text;
+      }
+    },
+  },
   directives: {
     'common-directive': CommonDirective,
   },
@@ -48,7 +65,6 @@ export default {
   border-radius: 2px;
   font-weight: bolder;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
   transition-delay: 0.3s;
   transition: box-shadow 0.2s, background-color 0.2s, transform 1s;
   &:hover {
