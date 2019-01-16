@@ -1,7 +1,7 @@
 {
   "name": "nativescript-vue-web",
   "description": "Web components for NativeScript-Vue",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "scripts": {
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit --require tests/unit/setup.js",
@@ -13,26 +13,26 @@
   },
   "main": "src/main.js",
   "dependencies": {
-    "vue": "2.5.17"
+    "vue": "2.5.22"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.2.0",
-    "@vue/cli-plugin-eslint": "3.2.1",
-    "@vue/cli-plugin-unit-mocha": "3.2.0",
-    "@vue/cli-service": "3.2.0",
+    "@vue/cli-plugin-babel": "3.3.0",
+    "@vue/cli-plugin-eslint": "3.3.0",
+    "@vue/cli-plugin-unit-mocha": "3.3.0",
+    "@vue/cli-service": "3.3.0",
     "@vue/eslint-config-airbnb": "4.0.0",
     "@vue/eslint-config-prettier": "4.0.1",
     "@vue/test-utils": "1.0.0-beta.26",
     "babel-plugin-istanbul": "5.1.0",
     "chai": "4.2.0",
     "codecov": "3.1.0",
-    "jsdom": "13.0.0",
+    "jsdom": "13.1.0",
     "lint-staged": "8.1.0",
-    "node-sass": "4.10.0",
+    "node-sass": "4.11.0",
     "nyc": "13.1.0",
     "sass-loader": "7.1.0",
-    "sinon": "7.1.1",
-    "vue-template-compiler": "2.5.17"
+    "sinon": "7.2.2",
+    "vue-template-compiler": "2.5.22"
   },
   "eslintConfig": {
     "root": true,
