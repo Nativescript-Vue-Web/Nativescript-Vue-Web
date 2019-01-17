@@ -1,13 +1,13 @@
 <template>
-    <div v-common-directive class="nvw-dock-layout">
+    <div v-common-directive class="nvw-dock-layout nvw-dock-layout--flexible">
         <div class="nvw-dock-layout__left" data-area="left" ref="left">
         </div>
-        <div class="nvw-dock-layout__right">
+        <div class="nvw-dock-layout__right nvw-dock-layout--flexible">
             <div class="nvw-dock-layout__right__top" data-area="top" ref="top">
             </div>
-            <div class="nvw-dock-layout__right__bottom">
-                <div class="nvw-dock-layout__right__bottom__left">
-                    <div class="nvw-dock-layout__right__bottom__left__top">
+            <div class="nvw-dock-layout__right__bottom nvw-dock-layout--flexible">
+                <div class="nvw-dock-layout__right__bottom__left nvw-dock-layout--flexible">
+                    <div class="nvw-dock-layout__right__bottom__left__top nvw-dock-layout--flexible">
                         <div class="nvw-dock-layout__right__bottom__left__top_center" data-area="center" ref="center">
                         </div>
                     </div>
@@ -76,14 +76,15 @@ export default {
   width: 100%;
   height: 100%;
 
+  &--flexible {
+    display: flex;
+  }
+
   .nvw-dock-layout__nonFlexible {
     flex: 0;
   }
   .nvw-dock-layout__stretchLastChild {
     flex: 1;
-  }
-  * {
-    display: flex;
   }
 
   &__right {
