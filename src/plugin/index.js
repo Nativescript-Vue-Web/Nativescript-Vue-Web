@@ -7,14 +7,15 @@ import Modal from '../components/Modal';
 import ViewDirective from '../directives/ViewDirective';
 
 const NvwPlugin = {
-  install: Vue => {
+  install: (Vue, pluginOptions) => {
     // Show Modal
     Vue.prototype.$showModal = function(component, options = { context: null, fullscreen: false }) {
       return new Promise(resolve => {
         // eslint-disable-line
         const ContentComponent = Vue.extend(component);
         const ModalComponent = Vue.extend(Modal);
-        const ModalInstance = new ModalComponent();
+        const globalContext = typeof pluginOptions === 'object' && typeof pluginOptions.context === 'object' ? pluginOptions.context : null;
+        const ModalInstance = new ModalComponent(globalContext);
         ContentComponent.prototype.$modal = {
           close(data) {
             ModalInstance.closeModal();
