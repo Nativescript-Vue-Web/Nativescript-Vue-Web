@@ -1,11 +1,11 @@
 <template>
-    <div v-common-directive class="nvw-tab-view-item">
-        <transition name="switch">
-            <div :id="computedId" v-show="isActive" class="nvw-tab-view-item__content" :class="{selected: isActive}" role="tabpanel" :aria-hidden="!isActive">
-                <slot/>
-            </div>
-        </transition>
-    </div>
+  <div v-common-directive class="nvw-tab-view-item" :class="{ 'nvw-tab-view-item--active': isActive }">
+    <transition name="switch">
+      <div :id="computedId" v-show="isActive" class="nvw-tab-view-item__content" :class="{ selected: isActive }" role="tabpanel" :aria-hidden="!isActive">
+        <slot />
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -76,10 +76,14 @@ $offset: 50px;
 }
 
 .nvw-tab-view-item {
-  display: flex;
+  display: none;
   flex-direction: column;
   flex: 100% 1 1;
   position: relative;
   outline: none;
+
+  &--active {
+    display: flex;
+  }
 }
 </style>
