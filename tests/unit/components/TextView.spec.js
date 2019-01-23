@@ -20,6 +20,7 @@ describe('TextView', () => {
   const returnPress = sinon.spy();
   const textChange = sinon.spy();
   const input = sinon.spy();
+  const onKeyDown = sinon.spy();
 
   const LabelWrapper = {
     render(h) {
@@ -66,6 +67,7 @@ describe('TextView', () => {
       returnPress,
       textChange,
       input,
+      onKeyDown,
     },
     slots: {
       default: [LabelWrapper],
@@ -115,6 +117,10 @@ describe('TextView', () => {
 
     it('blur event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.blur).to.not.equal(undefined);
+    });
+
+    it('onKeyDown key event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.onKeyDown).to.not.equal(undefined);
     });
 
     it('pressing return key event property is passed to the component successfully.', () => {
@@ -251,6 +257,8 @@ describe('TextView', () => {
       expect(wrapper.emitted().input.length).to.equal(1);
       expect(wrapper.emitted().textChange.length).to.equal(1);
       expect(input.calledTwice).to.equal(false);
+      expect(onKeyDown.called).to.equal(true);
+      expect(wrapper.emitted().onKeyDown.length).to.equal(1);
       expect(textChange.calledTwice).to.equal(false);
     });
   });

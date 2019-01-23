@@ -8,6 +8,7 @@
       :value="text"
       :placeholder="hint"
       :spellcheck="autocorrect"
+      ref="textView"
       @blur="$emit('blur', $event)"
       @focus="$emit('focus', $event)"
       @keyup.enter="returnPress"
@@ -48,6 +49,9 @@ export default {
   },
   methods: {
     onKeyDown($event) {
+      if (this.$listeners.onKeyDown) {
+        this.$emit('onKeyDown', $event);
+      }
       if (!$event.shiftKey && $event.which === 13 && this.preventNextLine) {
         $event.preventDefault();
       }
