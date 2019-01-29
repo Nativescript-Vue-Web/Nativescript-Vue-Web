@@ -1,25 +1,20 @@
 <template>
-    <div v-common-directive class="nvw-dock-layout nvw-dock-layout--flexible">
-        <div class="nvw-dock-layout__left" data-area="left" ref="left">
+  <div v-common-directive class="nvw-dock-layout nvw-dock-layout--flexible">
+    <div class="nvw-dock-layout__left nvw-dock-layout--flexible" data-area="left" ref="left"></div>
+    <div class="nvw-dock-layout__right nvw-dock-layout--flexible">
+      <div class="nvw-dock-layout__right__top nvw-dock-layout--flexible" data-area="top" ref="top"></div>
+      <div class="nvw-dock-layout__right__bottom nvw-dock-layout--flexible">
+        <div class="nvw-dock-layout__right__bottom__left nvw-dock-layout--flexible">
+          <div class="nvw-dock-layout__right__bottom__left__top nvw-dock-layout--flexible">
+            <div class="nvw-dock-layout__right__bottom__left__top_center nvw-dock-layout--flexible" data-area="center" ref="center"></div>
+          </div>
+          <div class="nvw-dock-layout__right__bottom__left__bottom nvw-dock-layout--flexible" data-area="bottom" ref="bottom"></div>
         </div>
-        <div class="nvw-dock-layout__right nvw-dock-layout--flexible">
-            <div class="nvw-dock-layout__right__top" data-area="top" ref="top">
-            </div>
-            <div class="nvw-dock-layout__right__bottom nvw-dock-layout--flexible">
-                <div class="nvw-dock-layout__right__bottom__left nvw-dock-layout--flexible">
-                    <div class="nvw-dock-layout__right__bottom__left__top nvw-dock-layout--flexible">
-                        <div class="nvw-dock-layout__right__bottom__left__top_center" data-area="center" ref="center">
-                        </div>
-                    </div>
-                    <div class="nvw-dock-layout__right__bottom__left__bottom" data-area="bottom" ref="bottom">
-                    </div>
-                </div>
-                <div class="nvw-dock-layout__right__bottom__right" data-area="right" ref="right">
-                </div>
-            </div>
-        </div>
-        <slot></slot>
+        <div class="nvw-dock-layout__right__bottom__right nvw-dock-layout--flexible" data-area="right" ref="right"></div>
+      </div>
     </div>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
