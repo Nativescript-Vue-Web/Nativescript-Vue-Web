@@ -14,6 +14,7 @@
       @keyup.enter="returnPress"
       @input="updateValue"
       @keydown="onKeyDown"
+      @paste="onPaste"
     />
     <slot/>
   </div>
@@ -54,6 +55,11 @@ export default {
       }
       if (!$event.shiftKey && $event.which === 13 && this.preventNextLine) {
         $event.preventDefault();
+      }
+    },
+    onPaste($event) {
+      if (this.$listeners.onPaste) {
+        this.$emit('onPaste', $event);
       }
     },
     updateValue($event) {

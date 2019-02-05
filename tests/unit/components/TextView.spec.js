@@ -21,6 +21,7 @@ describe('TextView', () => {
   const textChange = sinon.spy();
   const input = sinon.spy();
   const onKeyDown = sinon.spy();
+  const onPaste = sinon.spy();
 
   const LabelWrapper = {
     render(h) {
@@ -68,6 +69,7 @@ describe('TextView', () => {
       textChange,
       input,
       onKeyDown,
+      onPaste,
     },
     slots: {
       default: [LabelWrapper],
@@ -121,6 +123,10 @@ describe('TextView', () => {
 
     it('onKeyDown key event property is passed to the component successfully.', () => {
       expect(wrapper.vm.$listeners.onKeyDown).to.not.equal(undefined);
+    });
+
+    it('onPaste key event property is passed to the component successfully.', () => {
+      expect(wrapper.vm.$listeners.onPaste).to.not.equal(undefined);
     });
 
     it('pressing return key event property is passed to the component successfully.', () => {
@@ -257,9 +263,23 @@ describe('TextView', () => {
       expect(wrapper.emitted().input.length).to.equal(1);
       expect(wrapper.emitted().textChange.length).to.equal(1);
       expect(input.calledTwice).to.equal(false);
+
       expect(onKeyDown.called).to.equal(true);
       expect(wrapper.emitted().onKeyDown.length).to.equal(1);
       expect(textChange.calledTwice).to.equal(false);
+
+      wrapper.vm.$listeners.onKeyDown = null;
+      wrapper.find('textarea').trigger('keydown');
+      expect(wrapper.emitted().onKeyDown.length).to.equal(1);
+
+      expect(onPaste.called).to.equal(false);
+      wrapper.find('textarea').trigger('paste', { type: 'paste', isTrusted: true, clipboardData: {} });
+      expect(onPaste.called).to.equal(true);
+      expect(wrapper.emitted().onPaste.length).to.equal(1);
+
+      wrapper.vm.$listeners.onPaste = null;
+      wrapper.find('textarea').trigger('paste', { type: 'paste', isTrusted: true, clipboardData: {} });
+      expect(wrapper.emitted().onPaste.length).to.equal(1);
     });
   });
 });
