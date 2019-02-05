@@ -263,14 +263,22 @@ describe('TextView', () => {
       expect(wrapper.emitted().input.length).to.equal(1);
       expect(wrapper.emitted().textChange.length).to.equal(1);
       expect(input.calledTwice).to.equal(false);
+
       expect(onKeyDown.called).to.equal(true);
       expect(wrapper.emitted().onKeyDown.length).to.equal(1);
       expect(textChange.calledTwice).to.equal(false);
 
+      wrapper.vm.$listeners.onKeyDown = null;
+      wrapper.find('textarea').trigger('keydown');
+      expect(wrapper.emitted().onKeyDown.length).to.equal(1);
+
       expect(onPaste.called).to.equal(false);
-      //wrapper.onPaste();
       wrapper.find('textarea').trigger('paste', { type: 'paste', isTrusted: true, clipboardData: {} });
       expect(onPaste.called).to.equal(true);
+      expect(wrapper.emitted().onPaste.length).to.equal(1);
+
+      wrapper.vm.$listeners.onPaste = null;
+      wrapper.find('textarea').trigger('paste', { type: 'paste', isTrusted: true, clipboardData: {} });
       expect(wrapper.emitted().onPaste.length).to.equal(1);
     });
   });
