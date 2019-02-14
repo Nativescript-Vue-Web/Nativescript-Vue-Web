@@ -1,5 +1,5 @@
 <template>
-    <img @error="$emit('onLoadError', $event)" v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
+  <img @error="$emit('onLoadError', $event)" v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
 </template>
 
 <script>
@@ -18,12 +18,10 @@ export default {
     width: [String, Number],
     height: [String, Number],
   },
-  data() {
-    return {
-      imageSrc: `${this.src.replace('~', '')}`,
-    };
-  },
   computed: {
+    imageSrc: function() {
+      return this.src.replace('~', '');
+    },
     stretchClass: function() {
       return `nvw-img ${this.stretch !== 'none' ? 'nvw-img--' + camelCaseToDash(this.stretch) : ''}`.trim();
     },
