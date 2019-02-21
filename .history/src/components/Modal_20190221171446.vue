@@ -9,7 +9,7 @@
         aria-describedby="modalDescription"
       >
       <section class="nvw-modal__body">
-          <component :is="contentComponent" v-bind="childProps"/>
+          <component :is="contentComponent" />
       </section>
       </div>
     </div>
@@ -33,10 +33,6 @@ export default {
     },
     contentComponent: {
       type: Object,
-    },
-    childProps: {
-      type: Object,
-      default: () => ({}),
     },
   },
   methods: {
