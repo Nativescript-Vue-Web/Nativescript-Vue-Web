@@ -45,6 +45,7 @@ describe('$showModal testing', () => {
 
   it('Font class checking', () => {
     localVue.prototype.$showModal(component, { fullscreen: true });
+    localVue.prototype.$showModal(component, { fullscreen: true, props: { title: 'nvw' } });
 
     expect(typeof localVue.prototype.$showModal).to.equal('function');
   });

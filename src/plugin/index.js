@@ -29,6 +29,9 @@ const NvwPlugin = {
         if (options && options.fullscreen) {
           ModalInstance.fullscreen = options.fullscreen;
         }
+        if (options && options.props) {
+          ModalInstance.childProps = options.props;
+        }
       });
     };
 
