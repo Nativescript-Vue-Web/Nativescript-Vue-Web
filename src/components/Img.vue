@@ -1,5 +1,13 @@
 <template>
-  <img @error="$emit('onLoadError', $event)" v-common-directive :src="imageSrc" :class="stretchClass" :width="width" :height="height" />
+  <img
+    @error="$emit('onLoadError', $event)"
+    @load="$emit('onLoad', $event)"
+    v-common-directive
+    :src="imageSrc"
+    :class="stretchClass"
+    :width="width"
+    :height="height"
+  >
 </template>
 
 <script>
