@@ -73,6 +73,7 @@ export default {
 
   &--flexible {
     display: flex;
+    flex-direction: inherit;
   }
 
   .nvw-dock-layout__nonFlexible {
