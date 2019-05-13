@@ -8,6 +8,7 @@
 
     <div class="nvw-alert-dialog__footer" slot="footer">
       <Button
+        ref="okButton"
         class="nvw-alert-dialog__footer__ok-button"
         :text="okButtonText"
         @tap="close"
@@ -44,6 +45,11 @@ export default {
       this.isModalVisible = false;
       this.$emit('submit', event);
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.okButton.$el.focus();
+    });
   },
   components: {
     ModalDialog,
